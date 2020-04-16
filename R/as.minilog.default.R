@@ -1,0 +1,1 @@
+as.minilog.default <- function(x, ...) return(x)
