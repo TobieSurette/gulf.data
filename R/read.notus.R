@@ -1,6 +1,17 @@
+#' Read Trawl Monitoring Data
+#'
+#' @description Read trawl acoustic monitoring data files. Acoustic sensors are attached to bottom trawls to measure
+#' various aspects of the trawl, such as the door spread, wing spread, water depth and temperature.
+#' 
+#' @param file Data file name.
+#' 
+#' @export read.notus
+#' 
+#' @seealso read.scanmar read.netmind read.esonar
+#' 
+
 read.notus <- function(file){
-  # Read each line separately:
-  x <- readLines(file)
+  x <- readLines(file) # Read each line separately:
  
   # Parse variable field names:
   i <- min(grep("^Code", x))

@@ -1,5 +1,14 @@
+#' Lobster Larvae Collector Data
+#' 
+#' @description Larvae collectors are used to provide recruitment indices for lobster and rock crab. 
+#' This function provides access to these data.
+#' 
+#' @examples 
+#' x <- read.collector(year = 2010, species = 2550)
+#' 
+#' @export read.collector
+#'   
 read.collector <- function(year, site, species, type, ...){
-
    # Parse input arguments:
    if (!missing(type)){
       type <- pmatch(tolower(type), c("site", "collector", "biological"))
@@ -9,7 +18,7 @@ read.collector <- function(year, site, species, type, ...){
    }
 
    # Set file loading flags:
-   tab <- c(site = FALSE, , col = FALSE, biological = FALSE)
+   tab <- c(site = FALSE, col = FALSE, biological = FALSE)
    if (length(type) > 0) tab[type] <- TRUE else return(NULL)
 
    # Upload files:

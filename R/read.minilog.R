@@ -1,6 +1,182 @@
-#' Read Minilog Data
+#' Read and Write Minilog Data
 #'
 #' @param x Minilog data file
+#' @param year Numeric value specifying the survey or project year(s).
+#' @param survey,project Character string specifying the survey or project name. 
+#'    The survey may refer to the September multi-species survey (\code{survey = "rv"},
+#'    \code{survey = "sep"} or \code{survey = "September"}), the  Northumberland Strait 
+#'    survey (\code{= "ns"}), the mobile Sentinel survey (\code{= "sen"} or \code{= "sentinel"}),
+#'    or the snow crab survey (\code{= "sc"} or \code{= "snow crab"}). 
+#' @param set.number,tow.id Numeric value or strings specifying the survey set number or tow ID.
+#' @param set.card Data frame containing the survey tows which specify the Minilog data to be loaded.
+#' @param path Logical value specifying whether to include the path in the Minilog files.
+#' 
+#' @examples 
+#' # Minilog files for the 2000 September RV survey:
+#' minilog.file(survey = "rv", year = 2000)
+#'
+#' # Use a set card extract for the first ten sets of 2012:
+#' x <- read.gulf(year = 2012, survey = "sc")
+#' minilog.file(x[1:10, ])
+#' 
+#' # Use a tow ID to extract file names for the snow crab survey 2006-2012:
+#' minilog.file("GP001", year = 2006:2012)
+#' 
+#' x <- read.minilog(tow.id = "GP001F", year = 2010)
+#' x <- read.minilog(survey = "rv", year = 2010)
+#' 
+#' @seealso minilog
+#' 
+#' @export minilog.path
+#' @export minilog.file
+#' @export read.minilog
+#' @export write.minilog
+#' 
+#' @describeIn read.minilog Retrieve the root directory of a Minilog dataset. 
+minilog.path <- function(year, project, survey, ...){
+   # MINILOG.PATH - Return the path of a minilog directory.
+   
+   # Check input arguments:
+   if (missing(project) & missing(survey)) stop("Specify 'project' or 'survey'.")
+   if (!missing(project) & !missing(survey)) stop("Specify 'project' or 'survey', but not both.")
+   
+   # Parse 'survey' argument:
+   if (!missing(survey)) project <- survey
+
+   # Parse project string:
+   project <- gsub("[. _-]", "", tolower(project), fixed = TRUE)
+   project <- match.arg(survey, c("azmp", "collector", "alsi", "rvs", "september", "nss", "northumberlandstrait", "scs", "snowcrab"))
+   project <- gsub("collector", "alsi", project)
+   project <- gsub("september", "rvs", project)
+   project <- gsub("snowcrabs", "scs", project)
+   project <- gsub("northumberlandstrait", "nss", project)
+   if (length(project) == 0) stop("'project' not defined.")
+
+   
+   # Turn off warnings:
+   warning <- options("warn")[[1]]  
+   options(warn = -1)
+   
+   # Atlantic Lobster Settlement Index project:
+   if (project == "alsi"){
+      
+   }
+   
+   # September and NS surveys:
+   if (project %in% c("rvs", "nss")){
+      if (missing(year)){
+         command <- paste('dir/ad/b "', str, '"\\????', sep = "")
+         res <- shell(command, intern = TRUE)
+         str <- paste(str, res, "/", sep = "")
+      }else{
+         str <- paste(str, year, "/",  sep = "")
+      }
+   }
+   
+   # Snow crab survey:
+   if (project == "scs"){
+      # Append year to path:
+      if (missing(year)) str <- paste0(str, list.files(path = str, pattern = "^Fishing Year [0-9]+$")) else str <- paste(str, "Fishing Year ", year, "/", sep = "")   
+      str <- paste0(str, "/Trawl Data/South Western Gulf/Minilog/ASCII")
+      str <- str[file.exists(str)]
+   
+      # Remove irrelevant errors:
+      index <- which(str == "File Not Found")
+      index <- grep("File Not Found", str)
+      if (length(index) > 0) str <- str[-index]
+   }
+
+   # Restore warnings:
+   options(warn = warning)
+   
+   # Remove pure path entries:
+   index <- which(substr(str, nchar(str), nchar(str)) != "/")
+   if (length(index) > 0) str[index] <- paste0(str[index], "/")
+     
+   return(str)
+}
+
+#' @describeIn read.minilog Retrieve file name of a Minilog dataset. 
+minilog.file <- function(x, year, set.number, tow.id, set.card, path = TRUE, survey = "sc", project, ...){
+   # Parse 'x' argument:
+   if (!missing(x)){
+      if (is.numeric(x)) year <- x
+      if (is.character(x)){
+         index <- file.exists(x)
+         if (any(index)) return(x[index])
+         if ((length(grep(".", x, fixed = TRUE)) > 0) | (length(grep("/", x, fixed = TRUE)) > 0)) return(x)
+         tow.id <- x 
+      }
+      if ("gulf.set" %in% class(x)) set.card <- x
+   }
+  
+   # If 'file' is a set card, define proper parameters:
+   if (!missing(set.card)){
+      tow.id <- set.card$tow.id
+      tow.id <- tow.id[!is.na(tow.id)]
+      year   <- unique(set.card$year)   
+   }  
+   
+   # Set 'survey' to snow crab survey if tow ID is specified:
+   if (!missing(tow.id)) survey <- "sc"
+   
+   # Get minilog path directories:
+   if (!missing(year)){
+      path.str <- minilog.path.str(survey = survey, year = year, ...)
+   }else{
+      path.str <- minilog.path.str(survey = survey, ...)
+   }
+ 
+   # Parse 'survey' argument:
+   survey <- tolower(survey)
+   survey <- gsub(" ", "", survey, fixed = TRUE)
+   survey <- gsub(".", "", survey, fixed = TRUE)
+   survey <- match.arg(survey, c("rv", "september", "ns", "northumberlandstrait", "sc", "snowcrab"))
+
+   # Define file string:
+   if (survey %in% c("ns", "northumberlandstrait")){
+      str <- shell(paste('dir/b "', path.str, '"\\*.txt', sep = ""), intern = TRUE)
+   }
+   if (survey %in% c("sc", "snowcrab", "rv", "september")){
+      command <- paste('dir/b "', path.str, '"\\Asc-*', sep = "")
+      str <- NULL
+      for (i in 1:length(path.str)){
+         str <- c(str, list.files(path = path.str[i], pattern = "*.csv", recursive = TRUE, full.names = path, ignore.case = TRUE))
+         str <- c(str, list.files(path = path.str[i], pattern = "Asc-*", recursive = TRUE, full.names = path, ignore.case = TRUE))
+      }   
+   }
+               
+   # Remove invalid results:
+   str <- str[setdiff(1:length(str), grep("File Not Found", str))]
+   str <- str[setdiff(1:length(str), grep("deleted", tolower(str)))]
+   
+   # Extract subset using tow ID:
+   if (!missing(tow.id)){
+      if (year <= 2016){
+         index <- rep(FALSE, length(str))
+         for (i in 1:length(str)){
+            tmp <- readLines(str[i], n = 10)
+            tmp <- tmp[grep("GP[0-9][0-9][0-9]", tmp)]
+            tmp <- strsplit(tmp, "GP")[[1]]
+            tmp <- tmp[length(tmp)]
+            tmp <- paste0("GP", tmp)
+            tmp <- toupper(gsub(" +$", "", tmp))
+            if (tmp %in% tow.id) index[i] <- TRUE
+         }
+         if (!any(index)) str <- NULL else str <- str[index] 
+      }else{
+         temp <- unlist(lapply(strsplit(str, "_", fixed = TRUE), function(x) x[length(x)]))
+         temp <- toupper(gsub(".csv", "", tolower(temp)))
+         index <- which(temp %in% tow.id)
+         if (length(index) == 0) str <- NULL else str <- str[index]
+      }
+   }
+   
+   # Remove path:
+   if (!path) str <- unlist(lapply(strsplit(str, "/", fixed = TRUE), function(x) x[length(x)]))
+   
+   return(str)
+}
 
 read.minilog <- function(x, project, offset = 0, file, ...){
    # Define list of files to be read:
@@ -164,4 +340,56 @@ read.minilog <- function(x, project, offset = 0, file, ...){
    x <- minilog(x, header)
 
    return(x)
+}
+
+#' @describeIn read.minilog Write a \code{minilog} object to a file.
+write.minilog <- function(x, file = NULL){
+   # Write header information to file:
+   info <- header(x)
+   
+   for (i in 1:length(info)){
+      str <- paste("* ", gsub(".", " ", names(info[i]), fixed = TRUE), "=", info[[i]], sep = "")
+      write.table(str, file = file, append = TRUE, row.names = FALSE, col.names = FALSE, quote = FALSE)
+   }
+   fields <- names(x)
+   fields <- fields[7:length(fields)]
+   fields <- c("Time(hh:mm:ss)", fields)
+   fields <- c("Date(yyyy-mm-dd)", fields)
+   
+   # Add 'Celsius' column:
+   col <- grep("celsius", fields)
+   if (!is.null(col)){
+      fields[col] <- paste(toupper(substr(fields[col], 1, 1)), substr(fields[col], 2, nchar(fields[col])), " (ºC)", sep = "")
+   }
+   
+   # Add 'Temp' column:
+   col <- grep("temp", fields)
+   if (!is.null(col)){
+      fields[col] <- paste(toupper(substr(fields[col], 1, 1)), substr(fields[col], 2, nchar(fields[col])), "(AtoD)", sep = "")
+   }    
+    
+   # Add 'Meters' column:
+   col <- grep("meters", fields)
+   if (!is.null(col)){
+      fields[col] <- paste(toupper(substr(fields[col], 1, 1)), substr(fields[col], 2, nchar(fields[col])), " (m)", sep = "")
+   }    
+   
+   # Add 'Depth' column:
+   col <- grep("depth", fields)
+   if (!is.null(col)){
+      fields[col] <- paste(toupper(substr(fields[col], 1, 1)), substr(fields[col], 2, nchar(fields[col])), "(AtoD)", sep = "")
+   }    
+   
+   # Write header line for file:
+   fields <- do.call(paste, c(as.list(fields), sep = ","))
+   fields <- paste("*", fields) 
+   write.table(fields, file = file, append = TRUE, row.names = FALSE, col.names = FALSE, quote = FALSE)
+   
+   # Create data frame to be written to file:
+   temp <- data.frame(date = as.character(date(x)), 
+                      time = substr(as.character(time(x)), 12, 20))
+   temp <- cbind(temp, x[, 7:dim(x)[2]])
+   
+   # Write minilog data to file:
+   write.table(temp, file = file, append = TRUE, row.names = FALSE, col.names = FALSE, quote = FALSE, sep = ",")
 }

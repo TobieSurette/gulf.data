@@ -11,6 +11,4 @@
 .gulf.path$minilog$sc <- paste0(.gulf.path$scroot)                             # Snow crab survey.
 .gulf.path$minilog$ns <- paste0(.gulf.path$rvroot, "research/northumberland/") # Northumberland Strait survey.  
 .gulf.path$minilog$rv <- paste0(.gulf.path$rvroot, "research/groundfish/")     # September RV survey.
-
-
   
