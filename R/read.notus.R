@@ -9,7 +9,6 @@
 #' 
 #' @seealso read.scanmar read.netmind read.esonar
 #' 
-
 read.notus <- function(file){
   x <- readLines(file) # Read each line separately:
  

@@ -1,3 +1,5 @@
+library(gulf.utils)
+
 .gulf.path <- list()
 
 # Root directory:
@@ -5,7 +7,7 @@
 .gulf.path$scroot <- "//mon02uni01a/AquaRes_Common$/Crab/Offshore Crab Common/"
 
 # Define minilog data paths:
-.gulf.path$minilog$collector <- "https://raw.github.com/TobieSurette/lobster-collectors/master/data/raw/Minilog_files/"
+.gulf.path$minilog$collector <- "https://raw.github.com/TobieSurette/lobster-collectors/master/data/raw/minilog/"
 
 .gulf.path$minilog$azmp <- ""
 .gulf.path$minilog$sc <- paste0(.gulf.path$scroot)                             # Snow crab survey.

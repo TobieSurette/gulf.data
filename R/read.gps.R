@@ -1,13 +1,12 @@
 #' Read a GPS file
 #' 
-#' This function reads a GPS track file.
+#' @description This function reads a GPS track file.
 #' 
 #' @param x File name(s).
 #' 
 #' @export read.gps
 #' @return Returns a data.frame with date, time, latitude and longitude fields.
 #' 
-
 read.gps <- function(x){
    res <- NULL
    for (i in 1:length(x)){
