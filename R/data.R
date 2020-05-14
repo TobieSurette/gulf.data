@@ -16,7 +16,7 @@
 #'   \item{temperature}{Temperature in degrees Celsius.}
 #' }
 #' 
-#' @section \code{species.table.csv}: 
+#' @section \code{species.csv}: 
 #' Species Names and Codes of Atlantic fish and invertebrate species used in DFO the southern Gulf and 
 #' Nova Scotia DFO science surveys.
 #' 
@@ -28,7 +28,7 @@
 #'   \item{name_latin}{Latin species names.}
 #' }
 #'   
-#' @section \code{species.table.foreign.csv}:
+#' @section \code{species.foreign.csv}:
 #' Species Names and Codes of Atlantic fish and invertebrate species used by other fishery groups, such 
 #' as the North American Fisheries Organisation and the Statistical Coordinating Committee for the Atlantic 
 #' Coast (STACAC).

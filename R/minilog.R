@@ -57,9 +57,16 @@ minilog.data.frame <- function(x, header, ...){
       attributes(x) <- c(attributes(x), list(header = header))
    }
    
+   # Index key:
+   key(x) <- c("date", "time")
+   
    # Minilog class identifier:
    class(x) <- union("minilog", class(x))
 
+   # Attach metadata attributes:
+   if ("temperature" %in% names(x)) units(x, "temperature") <- "degCelsius"
+   if ("depth" %in% names(x)) units(x, "depth") <- "meter"
+   
    return(x)
 }
 

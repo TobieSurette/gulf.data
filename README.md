@@ -12,13 +12,16 @@ There are different types of data sources:
 * **Probe data**:
   - Trawl acoustic monitoring data (Scanmar, Netmind, eSonar and Notus)
   - Depth / temperature (Minilog, Star Oddi, Seabird)
-  - GPS exports
+  - GPS data
   
 * **Observer at-sea-sampling**
-  - Snow crab observer data
   - Groundfish observer data
+  - Snow crab observer data
   
 * **Project data**:
+  - Lobster collector data
+  - Lobster escapement data
+  - Lobster SCUBA transect survey data
   - Snow crab fecundity project
   - Snow crab diet project
   - Snow crab colorimeter data

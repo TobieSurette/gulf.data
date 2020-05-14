@@ -1,7 +1,5 @@
 #' Species Names or Code
 #' 
-#' @aliases species.str
-#' 
 #' @description Converts species codes to corresponding species names and vice versa.
 #' 
 #' @param x Numerical species code(s) or species name(s).
@@ -15,9 +13,11 @@
 #'               file name prefix coding \code{\sQuote{observer}} and \code{\sQuote{commercial}}.
 #' @param oracle Logical value specifying whether to use the Oracle database as a source. Default is \code{FALSE}.
 #' 
-#' @return Vector of character strings containing species names.
+#' @return Vector of character strings containing species names. For multiple species name searches, a list of
+#'         search results are returned.
 #' 
 #' @examples
+#' # Miscellaneous queries:
 #' species(10)  # Code for "Atlantic cod".
 #' species(c(10, 12, 40:43), language = "latin") # Latin names for common species.
 #' species(101, coding = "nafo") 
@@ -34,7 +34,12 @@
 #' # Species with the word "Atlantic" in their name:
 #' species(species("atlantic"))
 #' 
+#' # Extract entire species tables:
+#' species()
+#' species.foreign()
+#' 
 #' @export species
+#' @export species.foreign
 #' @export species.default
 #' @export species.list
 #' @export species.character
@@ -45,8 +50,20 @@
 #' 
 species <- function(x, ...) UseMethod("species") # Generic function.
 
+#' @describeIn species Load foreign species code table.
+species.foreign <- function(x, ...){
+   file <- system.file("extdata", "species.foreign.csv", package = "gulf.data")
+   x <- read.csv(file, header = TRUE, stringsAsFactors = FALSE)
+   return(x)
+}
+
 #' @describeIn species \sQuote{species} default function.
 species.default <- function(x, ...){
+   if (missing(x)){
+      file <- system.file("extdata", "species.csv", package = "gulf.data")
+      x <- read.csv(file, header = TRUE, stringsAsFactors = FALSE)
+      return(x)
+   }
    if (all(is.na(x))) return(x)
    if (is.factor(x)) return(species(as.character(x)))
 }
@@ -75,7 +92,7 @@ species.numeric <- function(x, language = "english", coding = "rv", source, ...)
    # Gulf research survey codes:
    if (coding == "rv"){    
       if (missing(source)){
-         tab <- read.csv(system.file("extdata", "species table.csv", package = "gulf.data"), header = TRUE, stringsAsFactors = FALSE)
+         tab <- species()
          result <- tab[match(x, tab$code), paste0("name_", language.table$prefix)]
       }else{ 
          if (source == "oracle"){ 
@@ -107,7 +124,7 @@ species.numeric <- function(x, language = "english", coding = "rv", source, ...)
   
    # Define species names and STACAC and NAFO codes:
    if (coding %in% c("stacac", "nafo")){
-       tab <- read.csv(system.file("extdata", "species table foreign.csv", package = "gulf.data"), header = TRUE, stringsAsFactors = FALSE)
+       tab <- species.foreign()
        result <- tab[match(x, tab[, coding]), paste0("name_", language.table$prefix)]
    }
 
@@ -139,7 +156,7 @@ species.character <- function(x, language = "english", input = "stacac", output 
    # Numeric species code match:
    if (is.numeric(x)){
       # Read species table:
-      data <- read.csv(system.file("species table foreign.csv"), header = TRUE, stringsAsFactors = FALSE)                           
+      data <- species.foreign()                       
       return(data[match(x, data[, input]), output])
    }                                                                                                              
   
@@ -149,9 +166,9 @@ species.character <- function(x, language = "english", input = "stacac", output 
       
       # Species table:
       if (output != "rv"){
-         tab <- read.csv(system.file("extdata", "species table foreign.csv", package = "gulf.data"), header = TRUE, stringsAsFactors = FALSE) 
+         tab <- species.foreign() 
       }else{
-         tab <- read.csv(system.file("extdata", "species table.csv", package = "gulf.data"), header = TRUE, stringsAsFactors = FALSE)
+         tab <- species()
          output <- "code"        
       } 
       
