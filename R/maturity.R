@@ -3,21 +3,17 @@
 #' @description Determines whether an organism is sexually mature, based on qualitative or 
 #'              morphometric observational data.
 #'
-#' @param x Object.
-#' 
+#' @param x Object or numeric maturity code.
 #' @param probability Logical value specifying whether values are to be returned as 
 #'                    probabilities of being mature. For individuals with missing morphometric 
 #'                    data or observational sexual characters, a GAM binary regression is 
 #'                    performed on the observations by year and the predicted probabilties are 
 #'                    returned.
-#' 
+#' @param year Survey year.
+#' @param species Numeric species code.
 #' @param ... Further arguments passed onto internal functions.
 #' 
-#' @return A logical vector indicating the whether the organism is mature is
-#' returned.  If \code{probability = TRUE} then the result is a numeric vector
-#' containing the probability that an individual is mature.
-#' 
-#' @seealso \code{\link[gulf]{scsbio class}}
+#' @return Logical vector, probability (when \code{probability = TRUE}), or character string.
 #' 
 #' @examples
 #' x <- read.scsbio(2010)
@@ -27,6 +23,21 @@
 #' points(x$carapace.width[index], x$chela.height[index], pch = 21, bg = "grey", cex = 0.4)
 #' points(x$carapace.width[!index], x$chela.height[!index], pch = 21, bg = "red", cex = 0.4)
 #' 
+#' @section Functions:
+#' \describe{
+#'   \item{\code{is.mature}}{Generic \code{is.mature} function.}
+#'   \item{\code{is.mature.scsbio}}{Snow crab biological data (\code{scsbio}) method.}
+#'   \item{\code{is.primiparous}}{Generic \code{is.primiparous} function.}
+#'   \item{\code{is.primiparous.scsbio}}{Returns whether a female is primiparous, i.e. a first-time spawner.} 
+#'   \item{\code{is.multiparous}}{Returns whether a female is multiparous, i.e. has previously spawned.} 
+#'   \item{\code{is.multiparous.scsbio}}{Returns whether a female snow crab is multiparous, i.e. has previously spawned.} 
+#'   \item{\code{is.senile}}{Generic \code{is.senile} function.} 
+#'   \item{\code{is.senile.scsbio}}{Returns whether a female is senile, i.e. has decreased spawning capability because of age.} 
+#'   \item{\code{maturity}}{Generic maturity function.} 
+#'   \item{\code{maturity.default}}{Return sexual maturity status.} 
+#'   \item{\code{maturity.numeric}}{Convert numeric codes to descriptive maturity character strings.} 
+#' }
+#' 
 #' @export is.mature
 #' @export is.mature.scsbio
 #' @export is.primiparous
@@ -35,11 +46,15 @@
 #' @export is.multiparous.scsbio
 #' @export is.senile
 #' @export is.senile.scsbio
+#' @export maturity.default
+#' @export maturity.numeric
 #' 
+
+#' @rdname maturity
 is.mature <- function(x, ...) UseMethod("is.mature")
 
-#' @describeIn maturity Snow crab biological data (\link{\code{scsbio}}) method. 
-is.mature.scsbio <- function(x, probability = FALSE){
+#' @rdname maturity
+is.mature.scsbio <- function(x, probability = FALSE, ...){
    # IS.MATURE.SCBIO - Determine whether crab is mature.
 
    # Initialize result vector:
@@ -84,10 +99,10 @@ is.mature.scsbio <- function(x, probability = FALSE){
    return(mat)
 }
 
-#' @describeIn maturity Generic \code{is.primiparous} function.
+#' @rdname maturity
 is.primiparous <- function(x, ...) UseMethod("is.primiparous")
 
-#' @describeIn maturity Returns whether a female is primiparous, i.e. a first-tikme spawner.
+#' @rdname maturity
 is.primiparous.scsbio <- function(x, ...){
    # Returns whether a crab is newly moulted.
 
@@ -105,10 +120,10 @@ is.primiparous.scsbio <- function(x, ...){
    return(index)
 }
 
-#' @describeIn maturity Returns whether a female is multiparous, i.e. has previously spawned.
+#' @rdname maturity
 is.multiparous <- function(x, ...) UseMethod("is.multiparous")
 
-#' @describeIn maturity Returns whether a female snow crab is multiparous, i.e. has previously spawned.
+#' @rdname maturity
 is.multiparous.scsbio <- function(x, ...){
    # Returns whether a crab is newly moulted.
 
@@ -125,13 +140,13 @@ is.multiparous.scsbio <- function(x, ...){
    return(index)
 }
 
-#' @describeIn maturity Generic \code{is.senile} function.
+#' @rdname maturity
 is.senile <- function(x, ...){
    # IS.SENILE - Generic 'is.senile' method.
    UseMethod("is.senile")
 }
 
-#' @describeIn maturity Returns whether a female is senile, i.e. has decreased spawning capability because of age.
+#' @rdname maturity
 is.senile.scsbio <- function(x, ...){
    # IS.SENILE - Returns whether a crab is senile.
 
@@ -154,11 +169,20 @@ is.senile.scsbio <- function(x, ...){
    return(index)
 }
 
-#' @describeIn maturity Generic maturity function.
+#' @rdname maturity
 maturity <- function(x, ...) UseMethod("maturity")
 
-#' @describeIn maturity Convert numeric codes to descriptive maturity character strings.
-maturity.numeric <- function(code, year, species, ...){
+#' @rdname maturity
+maturity.default <- function(x, ...){
+   index <- is.mature(x)
+   v <- rep("", length(index))
+   v[index] <- "mature"
+   v[!index] <- "immature"
+   return(v)
+}
+
+#' @rdname maturity
+maturity.numeric <- function(x, year, species, ...){
    if (missing(years)) year <- as.numeric(substr(Sys.time(), 1, 4))
    
    # Standard codes from 1983-:
@@ -217,18 +241,7 @@ maturity.numeric <- function(code, year, species, ...){
    }
                              
    # Lookup codes:
-   v <- descriptions[match(code, values)]
+   v <- descriptions[match(x, values)]
    
    return(v)
 }
-
-#' @describeIn maturity Return sexual maturity status.
-maturity.default <- function(x, ...){
-   index <- is.mature(x)
-   v <- rep("", length(index))
-   v[index] <- "mature"
-   v[index] <- "immature"
-   return(v)
-}
-
-

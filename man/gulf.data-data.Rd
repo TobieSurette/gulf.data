@@ -6,9 +6,9 @@
 \alias{example}
 \alias{species.table}
 \alias{species.table.foreign}
-\title{\code{gulf.data} Reference and Example Data Sets}
+\title{Reference and Example Data Sets}
 \description{
-\code{gulf.data} Reference and Example Data Sets
+These are the reference and example data used in the \code{gulf.data} package.
 }
 \section{\code{Minilog example.txt}}{
  
@@ -22,7 +22,7 @@ A Minilog text file with the following variables:
 }
 }
 
-\section{\code{species.table.csv}}{
+\section{\code{species.csv}}{
  
 Species Names and Codes of Atlantic fish and invertebrate species used in DFO the southern Gulf and 
 Nova Scotia DFO science surveys.
@@ -36,7 +36,7 @@ A \sQuote{csv} (comma-separated) file with the following variables:
 }
 }
 
-\section{\code{species.table.foreign.csv}}{
+\section{\code{species.foreign.csv}}{
 
 Species Names and Codes of Atlantic fish and invertebrate species used by other fishery groups, such 
 as the North American Fisheries Organisation and the Statistical Coordinating Committee for the Atlantic 
@@ -53,5 +53,7 @@ A \sQuote{csv} (comma-separated) file with the following variables:
 }
 
 \seealso{
+\code{\link{gulf-data}}
+
 \code{\link{species}}
 }

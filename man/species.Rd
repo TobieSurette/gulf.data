@@ -2,7 +2,7 @@
 % Please edit documentation in R/species.R
 \name{species}
 \alias{species}
-\alias{species.str}
+\alias{species.foreign}
 \alias{species.default}
 \alias{species.list}
 \alias{species.numeric}
@@ -10,6 +10,8 @@
 \title{Species Names or Code}
 \usage{
 species(x, ...)
+
+\method{species}{foreign}(x, ...)
 
 \method{species}{default}(x, ...)
 
@@ -35,13 +37,16 @@ file name prefix coding \code{\sQuote{observer}} and \code{\sQuote{commercial}}.
 \item{oracle}{Logical value specifying whether to use the Oracle database as a source. Default is \code{FALSE}.}
 }
 \value{
-Vector of character strings containing species names.
+Vector of character strings containing species names. For multiple species name searches, a list of
+        search results are returned.
 }
 \description{
 Converts species codes to corresponding species names and vice versa.
 }
 \section{Methods (by class)}{
 \itemize{
+\item \code{foreign}: Load foreign species code table.
+
 \item \code{default}: \sQuote{species} default function.
 
 \item \code{list}: Apply \code{species} function to list elements.
@@ -52,6 +57,7 @@ Converts species codes to corresponding species names and vice versa.
 }}
 
 \examples{
+# Miscellaneous queries:
 species(10)  # Code for "Atlantic cod".
 species(c(10, 12, 40:43), language = "latin") # Latin names for common species.
 species(101, coding = "nafo") 
@@ -67,6 +73,10 @@ species(v) # Extract names.
 
 # Species with the word "Atlantic" in their name:
 species(species("atlantic"))
+
+# Extract entire species tables:
+species()
+species.foreign()
 
 }
 \seealso{

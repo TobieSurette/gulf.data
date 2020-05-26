@@ -1,198 +1,217 @@
 #' Biological Categories
 #' 
-#' @description This function checks whether a sampled specimen belongs to a specified biological category.
-#' 
-#' @param x An \sQuote{scbio} object.
-#' @param category Character string(s) specifying bioligical categories. The syntax of these 
-#'                 strings is presented in \code{\link[gulf]{category.str}}. 
-#'                 
-#' @param ... Further argument (e.g. \code{probability}) passed onto the
-#' \code{\link[gulf]{is.mature.scbio}} function.
+#' @description Convenience functions to quickly specify and identify biological categories. 
+#'              These are defined by sex, size, maturity or other biological characteristics.
+#'
+#' @param x Character string(s) specifying a biological categories or an\sQuote{scsbio} object. 
+#'          The full syntax of biological strings are presented in the \code{Details} section. =
+#' @param sex A scalar specifying the sex category of the default values to be returned if 
+#'            \code{code} is numeric. Some accepted values are \code{1}, \sQuote{m} or 
+#'            \sQuote{male} for males, or \code{2}, \sQuote{f} or \sQuote{female} for females.
+#' @param language A character string specifying the language in which category code descriptions 
+#'                 are to be returned. Either english (\code{language = "english"}), 
+#'                 french (\code{language = "french"} or \code{language = "français"}).
+#' @param parse Logical value specifying whether to parse a category string onto a list containing
+#'              the corresponding variable definitions, suitable for direct indexing of biological 
+#'              fields. 
+#' @param ... Further argument (e.g. \code{probability}) passed onto the \code{\link{is.mature.scbio}} function.
+#'
+#' @return Returns a vector of character strings containing the descriptions for a specified vector 
+#'         of category strings or codes.
+#'       
 #' @details 
 #' 
-#' #'
-#' String syntax is as follows:
+#' Strings may be expressed in lowercase or uppercase letters. Spaces or other separators may be included 
+#' in the string for clarity, but have no effect on the output. String syntax is as follows:
 #'
-#' \itemize{ \item A leading "T" (i.e. \sQuote{Total}) may be included, though
-#' not necessary as it serves no function.
+#' \describe{ 
+#'    \item{\code{Total}}{A leading \sQuote{} (i.e. \sQuote{Total}) was used historically, though it currently may be omitted.}
 #'
-#' \item The first character specifies the sex \sQuote{M} for males and
-#' \sQuote{F} for females.
+#'    \item{\code{Sex}}{The first character specifies the sex \sQuote{M} for males and \sQuote{F} for females.}
 #'
-#' \item The second character(s) is/are optional and specifies the maturity.
-#' It may be either \sQuote{M} for matures, \sQuote{I} for immatures,
-#' \sQuote{P} for primiparous, \sQuote{MULT} for multiparous or \sQuote{SENILE}
-#' for seniles.
+#'    \item{\code{Maturity}}{The second character(s) is/are optional and specifies the maturity. It may
+#'                           be either \sQuote{M} for matures, \sQuote{I} for immatures, \sQuote{P} 
+#'                           for primiparous, \sQuote{MULT} for multiparous or \sQuote{SENILE} for seniles.}
 #'
-#' \item Shell condition may be specified using the form \sQuote{SCX}, where
-#' \sQuote{X} is a string of shell condition codes.
+#'    \item{\code{Shell condition}}{Shell condition may be specified using the form \sQuote{SCX}, 
+#'                                  where \sQuote{X} is a string of shell condition codes.}
 #'
-#' \item Carapace width intervals may be specified using the forms \sQuote{GX}
-#' (greater than or equal to X) and/or \sQuote{LX} (less than X). In addition
-#' forms such as \sQuote{BTXTOY}, where \sQuote{X} and \sQuote{Y} specify lower
-#' and upper bounds, respectively. The form \sQuote{FROMXTOY} is also
-#' acceptable.
+#'    \item{\code{Size}}{Carapace width intervals may be specified using the forms \sQuote{GX} 
+#'                       (greater than or equal to X) and/or \sQuote{LX} (less than X). In addition,
+#'                       forms such as \sQuote{BTXTOY}, where \sQuote{X} and \sQuote{Y} specify 
+#'                       lower and upper bounds, respectively. The form \sQuote{FROMXTOY} is also
+#'                       acceptable.}
+#'   \item{\code{Gonad colour}}{Gonad colour may be specified using the form \sQuote{GNX} where
+#'                              \sQuote{X} is a valid colour string. Acceptable strings are \sQuote{W}
+#'                              (White), \sQuote{B} (Beige) and \sQuote{O} (Orange).}
+#'                              
+#'                              
+#'   \item{\code{Egg colour}}{Egg colour may be specified using the form \sQuote{EX} where
+#'                            \sQuote{X} is a valid colour string. Acceptable strings are 
+#'                            \sQuote{LO} (Light Orange), \sQuote{DO} (Dark Orange) and \sQuote{B} 
+#'                            (Black).}
 #'
-#' \item Gonad colour may be specified using the form \sQuote{GNX} where
-#' \sQuote{X} is a valid colour string. Acceptable strings are \sQuote{W}
-#' (White), \sQuote{B} (Beige) and \sQuote{O} (Orange).
+#'   \item{\code{Eggs remaining}}{Eggs remaining may be specified using the form \sQuote{ELXXP} 
+#'                                or \sQuote{EGXXP}, which correspond to the less-than or 
+#'                                greater-or-equal-to forms, respectively. The string \sQuote{X} 
+#'                                is a two-digit percentage of eggs remaining. So crab with eggs 
+#'                                remaining less than 50\% would be specified using the string 
+#'                                \sQuote{EL50P}.}
 #'
-#' \item Egg colour may be specified using the form \sQuote{EX} where
-#' \sQuote{X} is a valid colour string. Acceptable strings are \sQuote{LO}
-#' (Light Orange), \sQuote{DO} (Dark Orange) and \sQuote{B} (Black).
-#'
-#' \item Eggs remaining may be specified using the form \sQuote{ELXXP} or
-#' \sQuote{EGXXP}, which correspond to the less-than or greater-or-equal-to
-#' forms, respectively. The string \sQuote{X} is a two-digit percentage of eggs
-#' remaining. So crab with eggs remaining less than 50\% would be specified
-#' using the string \sQuote{EL50P}.
-#'
-#' \item Crabs with missing legs may be targetted by including a \sQuote{ML}
-#' string.
-#'
-#' \item Strings may be expressed in lowercase or uppercase letters. This has
-#' no effect on the output.
-#'
-#' \item Spaces or other separators may be included in the string for clarity, but these are ignored.}
-#'
+#'   \item{\code{Missing legs}}{Crabs with missing legs may be targetted by including a \sQuote{ML} 
+#'                              string.}
+#' }
+#' 
+#' @section Functions:
+#' \describe{
+#'   \item{\code{category}}{Generic \code{category} method.}
+#'   \item{\code{category.default}}{Default \code{category} method.}
+#'   \item{\code{category.numeric}}{Return sets of pre-defined biological category strings.}
+#'   \item{\code{category.character}}{Parse or describe a biological category string.}
+#'   \item{\code{is.category}}{Returns whether an observation belongs to a specified catgory.}
+#'   \item{\code{is.category.scsbio}}{Returns whether a snow crab biological data observation 
+#'                                    belongs to a specified catgory.}
+#' }
+#' 
 #' @examples
+#' # Default biological category strings:
+#' category()  # All.
+#' category(sex = "female") # Female category strings.
+#' category(1:10, sex = "male") # First 10 elements of male category strings:
 #'
-#'    # Get the vector of all default category strings:
-#'    category.str()
+#' # Get long form description for mature males with carapace width larger than 95mm:
+#' category("MMG95")
 #'
-#'    # Get the vector of all default female category strings:
-#'    category.str(sex = "female")
+#' # Mature males, large than 95mm with shell condition 3,4 or 5 (spaces are ignored):
+#' category("M M G95 SC345")
 #'
-#'    # Get the first 10 elements of male category strings:
-#'    category.str(1:10, sex = "male")
+#' # Multiparous females with orange gonads:
+#' category("FMULTGNO")
 #'
-#'    # Get the first 10 elements of male category strings, long form:
-#'    category.str(1:10, sex = "male", verbose = TRUE)
-#'
-#'    # Get long form description for mature males with carapace width larger than 95mm:
-#'    category.str("MMG95")
-#'
-#'    #Mature males, large than 95mm with shell condition 3,4 or 5 (spaces are ignored):
-#'    category.str("M M G95 SC345")
-#'
-#'    # Multiparous females with orange gonads:
-#'    category.str("FMULTGNO")
-#'
-#'    # With multiple entries:
-#'    category.str(c("FM", "FMULTGNO", "MG65ML"))
-
-#'    # Mature males:
-#'    parse.category.str("MM")
-#' 
-#'    # Immature males larger than 95mm:
-#'    parse.category.str("MIG95")
-#' 
-#'    # Primiparous females larger between 35 and 60mm:
-#'    parse.category.str("FPBT35TO60")
+#' # With multiple entries:
+#' category(c("FM", "FMULTGNO", "MG65ML"))
+#'    
+#' # Parse category strings:
+#' category("MM", parse = TRUE)         # Mature males.
+#' category("MIG95", parse = TRUE)      # Immature males larger than 95mm.
+#' category("FPBT35TO60", parse = TRUE) # Primiparous females larger between 35 and 60mm.
 #'        
+#' # Snow crab biological data example:
 #' x <- read.scsbio(year = 2012)
-#' index <- is.category(x, "TMMG95")
-#' 
 #' index <- is.category(x, "TMMG95")  # Mature males greater than 95mm: 
 #' 
 #' # Get number of observations per category:
 #' index <- is.category(x, c("T", "TM", "TF", "TMIL95SC12", "TMMG95", "TFMULT"))
 #' apply(index, 2, sum, na.rm = TRUE)
 #' 
-is.category <- function(x, ...) UseMethod("is.category")
+#' @export category
+#' @export category.default
+#' @export category.numeric
+#' @export category.character
+#' @export is.category
+#' @export is.category.scsbio
+#' 
+#' @rdname category
+category <- function(x, ...) UseMethod("category")
 
-is.category.scbio <- function(x, category, ...){
-   # Check whether crab belongs to a specified category:
-
-   if (length(category) == 1){
-      # Initialize result vector:
-      index <- rep(TRUE, dim(x)[1])
-   
-      # Parse category string:
-      t <- parse.category.str(category)
-   
-      # Build logical vector:
-      if (!is.null(t$sex)) index <- index & (x$sex == t$sex)
-      if (!is.null(t$carapace.width)){
-         if (!is.na(t$carapace.width[1])){
-            if (t$carapace.width.flag[1]){
-               index <- index & (x$carapace.width >= t$carapace.width[1])
-            }else{
-               index <- index & (x$carapace.width > t$carapace.width[1])
-            }
-         }
-         if (!is.na(t$carapace.width[2])){
-            if (t$carapace.width.flag[2]){ 
-               index <- index & (x$carapace.width <= t$carapace.width[2])
-            }else{
-               index <- index & (x$carapace.width < t$carapace.width[2])
-            }
-         }
-      }
-
-      if (!is.null(t$shell.condition)) index <- index & (x$shell.condition %in% t$shell.condition)
-      if (!is.null(t$missing.legs)) if (t$missing.legs) index <- index & is.missing.legs(x)
-      if (!is.null(t$gonad.colour)) index <- index & (x$gonad.colour == t$gonad.colour)
-      if (!is.null(t$eggs.remaining)){
-         if (!any(is.na(t$eggs.remaining))) index <- index & (x$eggs.remaining %in% t$eggs.remaining)
-      }
-      if (!is.null(t$egg.colour)) index <- index & (x$egg.colour == t$egg.colour)
-      ii <- index
-      if (!is.null(t$maturity)) index <- index * ifelse(t$maturity == rep(1, dim(x)[1]), is.mature(x, ...), 1-is.mature(x, ...))
-      if (!is.null(t$fun)) for (i in 1:length(t$fun)) index <- index * eval(parse(text = paste0(t$fun[i], "(x, ...)")))
-      index[!ii] <- 0
-   }else{
-      index <- NULL
-      for (i in 1:length(category)){
-         index <- cbind(index, is.category(x, category[i], ...))
-      }
-      dimnames(index) <- list(NULL, category)
-   }
-   
-   # Convert to logical if there are no fractions:
-   if (all((index[!is.na(index)] %% 1) == 0)) index <- (index == 1)
-  
-   return(index)
+#' @rdname category
+category.default <- function(x, ...){
+   if (missing(x)) category.numeric(...) 
 }
 
-#' @param code Either a numerical vector of snow crab category codes or a
-#' vector of category character strings.
-#' @param sex A scalar specifying the sex category of the default values to be
-#' returned if \code{code} is numeric. Some accepted values are \code{1},
-#' \sQuote{m} or \sQuote{male} for males, or \code{2}, \sQuote{f} or
-#' \sQuote{female} for females.
-#' @param language A character string specifying the language in which category
-#' code descriptions are to be returned. Either english (\code{language =
-#' "english"}), french (\code{language = "french"} or \code{language =
-#' "français"}).
-#' @return Returns a vector of character strings containing the descriptions
-#' for a specified vector of category strings or codes.
-#' @author Tobie Surette \email{Tobie.Surette@@dfo-mpo.gc.ca} \cr Pablo Vergara
-#' \email{Pablo.Vergara@@dfo-mpo.gc.ca}
-#' @seealso \code{\link[gulf]{Snow Crab Methods}},
-#' \code{\link[gulf]{parse.category.str}},
-#' \code{\link[gulf]{is.category.scbio}}
-#' @examples
-
-#'
-#'
-
-category.str <- function(code = NULL, sex = NULL, group, verbose = FALSE, language = "english"){
-   # Returns a short snow crab category string or description.
-
+#' @rdname category
+category.numeric <- function(x, sex, group, ...){
+   # Parse 'sex' argument:
+   if (!missing(sex)){
+      sex <- sort(unique(sex))
+      if (is.numeric(sex)) sex <- c("male", "female")[sex]
+      sex <- match.arg(tolower(sex), c("male", "female"))
+   }else{
+      sex <- NULL
+   }
+   
    # Parse 'group' object:
    if (!missing(group)) group <- match.arg(tolower(as.character(group)), c("other", "all")) else group <- NULL
    if (is.null(group)) group <- ""
+   
+   # Define short male category codes:
+   male.str <- c("TM", "TMM", "TMI", "TMGE95", "TMMGE95",
+                 "TMMNEW", "TMMMEDIUM", "TMMOLD",
+                 "TMMGE95SC12345", "TMMGE95SC1", "TMMGE95SC2", "TMMGE95SC3", "TMMGE95SC4", "TMMGE95SC5",
+                 "TMMGE95ML", "TMMGE95SC12", "TMMGE95SC345",
+                 "COMLT102", "COMLT102SC1", "COMLT102SC2", "COMLT102SC3", "COMLT102SC4", "COMLT102SC5",
+                 "COMLT102ML", "TMMGE102",
+                 "TMMGE102SC1", "TMMGE102SC2", "TMMGE102SC3", "TMMGE102SC4", "TMMGE102SC5", "TMMGE102ML",
+                 "TMIGE95SC12", "TMIGE95SC345", "TMIGE95",
+                 "TML95", "TMML95SC12", "TMML95SC345", "TMML95",
+                 "TML35", "TMGE35L95", "TMIGE56", "TMIGE76",
+                 "TMIL95SC12", "TMIL95SC345", "TMIL95")
 
+   # Define short male category codes:
+   female.str <- c("TF", "TFM", "TFI", # Total females, mature females, immature females.
+                   "TFIGNW", "TFIGNB", "TFIGNO", # Gonad colour: white, beige, orange
+                   "TFP",         # Mature, sc12
+                   "TFPELO",      # Mature, sc12, eggs Light Orange
+                   "TFPEDO",      # Mature, sc12, eggs Dark Orange
+                   "TFPEB",       # Mature, sc12, eggs Brown
+                   "TFPEL50P",    # Mature, sc12, Eggs Remaining < 50%
+                   "TFPEG50P",    # Mature, sc12, Eggs Remaining > 50%
+                   "TFMULT",      # Mature, sc34
+                   "TFMULTELO",   # Mature, sc34, eggs light orange.
+                   "TFMULTEDO",   # Mature, sc34, eggs dark orange.
+                   "TFMULTEB",    # Mature, sc34, black eggs.
+                   "TFMULTEL50P", # Mature, sc34, less than 50% eggs.
+                   "TFMULTEG50P", # Mature, sc34, more than 50% eggs.
+                   "TFSENILE")    # Mature, sc5
+
+   # Define other categories:
+   other.male.str <- c('MIGE34L45SC1','MIGE34L45SC2','MIGE34L45SC3','MIGE34L45SC4',
+                       'MIGE34L45SC5','MIGE34L45','MIGE45L56SC1','MIGE45L56SC2',
+                       'MIGE45L56SC3','MIGE45L56SC4','MIGE45L56SC5','MIGE45L56',
+                       'MIGE56L69SC1','MIGE56L69SC2','MIGE56L69SC3','MIGE56L69SC4',
+                       'MIGE56L69SC5','MIGE56L69','MIGE69L83SC1','MIGE69L83SC2',
+                       'MIGE69L83SC3','MIGE69L83SC4','MIGE69L83SC5','MIGE69L83',
+                       'MIGE83L98SC1','MIGE83L98SC2','MIGE83L98SC3','MIGE83L98SC4',
+                       'MIGE83L98SC5','MIGE83L98','MIGE98L115SC1','MIGE98L115SC2',
+                       'MIGE98L115SC3','MIGE98L115SC4','MIGE98L115SC5','MIGE98L115',
+                       'MMGE41L53SC1','MMGE41L53SC2','MMGE41L53SC3','MMGE41L53SC4',
+                       'MMGE53L65SC1','MMGE53L65SC2','MMGE53L65SC3','MMGE53L65SC4',
+                       'MMGE53L65SC5','MMGE53L65','MMGE65L79SC1','MMGE65L79SC2',
+                       'MMGE65L79SC3','MMGE65L79SC4','MMGE65L79SC5','MMGE65L79',
+                       'MMGE79L95SC1','MMGE79L95SC2','MMGE79L95SC3','MMGE79L95SC4',
+                       'MMGE79L95SC5','MMGE79L95','MMGE95L110SC1','MMGE95L110SC2',
+                       'MMGE95L110SC3','MMGE95L110SC4','MMGE95L110SC5','MMGE95L110',
+                       'MMGE110L128SC1','MMGE110L128SC2','MMGE110L128SC3','MMGE110L128SC4',
+                       'MMGE110L128SC5','MMGE110L128')
+
+   other.female.str <- paste0("F", substr(other.male.str, 2, nchar(other.male.str)))
+
+   # Define numeric code values:
+   str <- NULL
+   if (is.null(sex) & (group == ""))             str <- c(male.str, female.str, other.male.str, other.female.str)
+   if (("male" %in% sex) & (group == ""))        str <- c(str,  male.str)
+   if (("male" %in% sex) & (group == "other"))   str <- c(str,  male.str)
+   if (("male" %in% sex) & (group == "all"))     str <- c(str,  male.str, other.male.str)
+   if (("female" %in% sex) & (group == ""))      str <- c(str,  short.female.str)
+   if (("female" %in% sex) & (group == "other")) str <- c(str,  other.female.str)
+   if (("female" %in% sex) & (group == "all"))   str <- c(str,  female.str, other.female.str)
+   if (is.null(sex) & (group == "other"))        str <- c(other.male.str, other.female.str)
+ 
+   if (missing(x)) return(str) else return(str[x])
+}
+
+#' @rdname category
+category.character <- function(x, verbose = FALSE, parse = FALSE, language = "english", ...){
+   if (parse) return(parse.category(x))
+   
    # Parse 'language' argument:
-   language <- tolower(language)
-   language <- match.arg(language, c("english", "french", "français"))
+   language <- match.arg(tolower(language), c("english", "french", "français"))
    if (language == "français") language <- "french"
 
-   # Parse character string 'code' argument:
-   if (is.character(code)){
-      if (length(code) == 1){
-         r <- parse.category.str(code)
+   # Parse character string 'x' argument:
+   if (is.character(x)){
+      if (length(x) == 1){
+         r <- parse.category(x)
          str <- NULL
 
          # Maturity:
@@ -314,124 +333,17 @@ category.str <- function(code = NULL, sex = NULL, group, verbose = FALSE, langua
          return(str)
       }else{
          str <- NULL
-         for (i in 1:length(code)){
-            temp <- category.str(code = code[i])
+         for (i in 1:length(x)){
+            temp <- category(x[i])
             str <- c(str, temp)
          }
          return(str)
       }
    }
-
-   # Define short male category codes:
-   short.male.str <- c("TM", "TMM", "TMI", "TMGE95", "TMMGE95",
-                       "TMMNEW", "TMMMEDIUM", "TMMOLD",
-                       "TMMGE95SC12345", "TMMGE95SC1", "TMMGE95SC2", "TMMGE95SC3", "TMMGE95SC4", "TMMGE95SC5",
-                       "TMMGE95ML", "TMMGE95SC12", "TMMGE95SC345",
-                       "COMLT102", "COMLT102SC1", "COMLT102SC2", "COMLT102SC3", "COMLT102SC4", "COMLT102SC5",
-                       "COMLT102ML", "TMMGE102",
-                       "TMMGE102SC1", "TMMGE102SC2", "TMMGE102SC3", "TMMGE102SC4", "TMMGE102SC5",
-                       "TMMGE102ML",
-                       "TMIGE95SC12", "TMIGE95SC345", "TMIGE95",
-                       "TML95", "TMML95SC12", "TMML95SC345", "TMML95",
-                       "TML35", "TMGE35L95", "TMIGE56", "TMIGE76",
-                       "TMIL95SC12", "TMIL95SC345", "TMIL95")
-
-   # Define short male category codes:
-   short.female.str <- c("TF", "TFM", "TFI", # Total females, mature females, immature females.
-                         "TFIGNW", "TFIGNB", "TFIGNO", # Gonad colour: white, beige, orange
-                         "TFP",         # Mature, sc12
-                         "TFPELO",      # Mature, sc12, eggs Light Orange
-                         "TFPEDO",      # Mature, sc12, eggs Dark Orange
-                         "TFPEB",       # Mature, sc12, eggs Brown
-                         "TFPEL50P",    # Mature, sc12, Eggs Remaining < 50%
-                         "TFPEG50P",    # Mature, sc12, Eggs Remaining > 50%
-                         "TFMULT",      # Mature, sc34
-                         "TFMULTELO",   # Mature, sc34, eggs light orange.
-                         "TFMULTEDO",   # Mature, sc34, eggs dark orange.
-                         "TFMULTEB",    # Mature, sc34, black eggs.
-                         "TFMULTEL50P", # Mature, sc34, less than 50% eggs.
-                         "TFMULTEG50P", # Mature, sc34, more than 50% eggs.
-                         "TFSENILE")    # Mature, sc5
-
-   # Define other categories:
-   other.male.str <- c('MIGE34L45SC1','MIGE34L45SC2','MIGE34L45SC3','MIGE34L45SC4',
-                       'MIGE34L45SC5','MIGE34L45','MIGE45L56SC1','MIGE45L56SC2',
-                       'MIGE45L56SC3','MIGE45L56SC4','MIGE45L56SC5','MIGE45L56',
-                       'MIGE56L69SC1','MIGE56L69SC2','MIGE56L69SC3','MIGE56L69SC4',
-                       'MIGE56L69SC5','MIGE56L69','MIGE69L83SC1','MIGE69L83SC2',
-                       'MIGE69L83SC3','MIGE69L83SC4','MIGE69L83SC5','MIGE69L83',
-                       'MIGE83L98SC1','MIGE83L98SC2','MIGE83L98SC3','MIGE83L98SC4',
-                       'MIGE83L98SC5','MIGE83L98','MIGE98L115SC1','MIGE98L115SC2',
-                       'MIGE98L115SC3','MIGE98L115SC4','MIGE98L115SC5','MIGE98L115',
-                       'MMGE41L53SC1','MMGE41L53SC2','MMGE41L53SC3','MMGE41L53SC4',
-                       'MMGE53L65SC1','MMGE53L65SC2','MMGE53L65SC3','MMGE53L65SC4',
-                       'MMGE53L65SC5','MMGE53L65','MMGE65L79SC1','MMGE65L79SC2',
-                       'MMGE65L79SC3','MMGE65L79SC4','MMGE65L79SC5','MMGE65L79',
-                       'MMGE79L95SC1','MMGE79L95SC2','MMGE79L95SC3','MMGE79L95SC4',
-                       'MMGE79L95SC5','MMGE79L95','MMGE95L110SC1','MMGE95L110SC2',
-                       'MMGE95L110SC3','MMGE95L110SC4','MMGE95L110SC5','MMGE95L110',
-                       'MMGE110L128SC1','MMGE110L128SC2','MMGE110L128SC3','MMGE110L128SC4',
-                       'MMGE110L128SC5','MMGE110L128')
-
-    other.female.str <- paste0("F", substr(other.male.str, 2, nchar(other.male.str)))
-
-   # Parse 'sex' argument:
-   if (!is.null(sex)){
-      sex <- sort(unique(sex))
-      if (is.numeric(sex)) sex <- c("male", "female")[sex]
-      sex <- match.arg(tolower(sex), c("male", "female"))
-   }
-
-   # Define numeric code values:
-   short.str <- NULL
-   if (is.null(sex) & (group == "")) short.str <- c(short.male.str, short.female.str, other.male.str, other.female.str)
-   if (("male" %in% sex) & (group == ""))        short.str <- c(short.str,  short.male.str)
-   if (("male" %in% sex) & (group == "other"))   short.str <- c(short.str,  other.male.str)
-   if (("male" %in% sex) & (group == "all"))     short.str <- c(short.str,  short.male.str, other.male.str)
-   if (("female" %in% sex) & (group == ""))      short.str <- c(short.str,  short.female.str)
-   if (("female" %in% sex) & (group == "other")) short.str <- c(short.str,  other.female.str)
-   if (("female" %in% sex) & (group == "all"))   short.str <- c(short.str,  short.female.str, other.female.str)
-   if (is.null(sex) & (group == "other"))        short.str <- c(other.male.str, other.female.str)
-
-   values <- c(1:length(short.str))
-
-   # Convert to longer versions if specified:
-   if (verbose) short.str <- category.str(short.str, language = language)
-
-   # Look up codes in table:
-   result <- lookup(code, values, short.str)
-
-   return(result)
 }
 
-#' Parse a Snow Crab Category String
-#' 
-#' Parses a snow crab category string onto a list containing appropriate
-#' variable definitions. In effect, this function translates the crab category
-#' specification into a form which is directly applicable for indexing fields
-#' from snow crab data tables. A description of the category string's syntax is
-#' presented in \code{\link[gulf]{category.str}}.
-#' 
-#' The output of this function may be used for subsetting or indexing parts of
-#' snow crab data.
-#' 
-#' @param x A character string specifying a snow crab category.
-#' @return Returns a list whose names are variable names to be found within
-#' \sQuote{scbio} objects. The contents of each defined field is a translation
-#' of that specified in the string.
-#' @author Tobie Surette \email{Tobie.Surette@@dfo-mpo.gc.ca} \cr Pablo Vergara
-#' \email{Pablo.Vergara@@dfo-mpo.gc.ca}
-#' @seealso \code{\link[gulf]{Snow Crab Methods}},
-#' \code{\link[gulf]{category.str}}, \code{\link[gulf]{is.category.scbio}}
-#' @examples
-#' 
-
-#' 
-#' 
-# PARSE.CATEGORY.STR - Returns a list characterizing a snow crab category.
-parse.category.str <- function(x){
-
-   
+# parse.category - Returns a list characterizing a snow crab category.
+parse.category <- function(x){
    # Initialize category variables:
    sex <- NULL      # Sex.
    maturity <- NULL # Maturity.
@@ -444,21 +356,15 @@ parse.category.str <- function(x){
    ec <- NULL       # Egg colour.
    fun <- NULL      # Function category.
    
-   # Check 'category' argument:
-   if (!is.character(x)) stop("Category specification must be a character string.")
-   
-   # Convert to lower case:
-   x <- tolower(x)
-   
-   # Remove spaces:
-   x <- gsub(" ", "", x)
+   # Remove separators:
+   x <- gsub("[ ,;-_]", "", tolower(x))
    
    # Remove leading "T":
    x <- gsub("^t*", "", x)
    
    # Check for literal shell condition specification:
    if (length(grep("new", x)) > 0){
-      fun <- c(fun, "is.new")
+      fun <- c(fun, "is.new.shell")
       x <- gsub("new", "", x)
    }
    x <- gsub("med", "medium", x)
@@ -476,11 +382,11 @@ parse.category.str <- function(x){
       x <- gsub("senile", "", x)
    }
    if (length(grep("soft", x)) > 0){
-      fun <- c(fun, "is.soft")
+      fun <- c(fun, "is.soft.shell")
       x <- gsub("soft", "", x)
    }
    if (length(grep("hard", x)) > 0){
-      fun <- c(fun, "is.hard")
+      fun <- c(fun, "is.hard.shell")
       x <- gsub("hard", "", x)
    }
          
@@ -625,3 +531,62 @@ parse.category.str <- function(x){
    
    return(result)
 }
+
+#' @rdname category
+is.category <- function(x, ...) UseMethod("is.category")
+
+#' @rdname category
+is.category.scsbio <- function(x, category, ...){
+   # Check whether crab belongs to a specified category:
+
+   if (length(category) == 1){
+      # Initialize result vector:
+      index <- rep(TRUE, dim(x)[1])
+   
+      # Parse category string:
+      t <- parse.category(category)
+   
+      # Build logical vector:
+      if (!is.null(t$sex)) index <- index & (x$sex == t$sex)
+      if (!is.null(t$carapace.width)){
+         if (!is.na(t$carapace.width[1])){
+            if (t$carapace.width.flag[1]){
+               index <- index & (x$carapace.width >= t$carapace.width[1])
+            }else{
+               index <- index & (x$carapace.width > t$carapace.width[1])
+            }
+         }
+         if (!is.na(t$carapace.width[2])){
+            if (t$carapace.width.flag[2]){ 
+               index <- index & (x$carapace.width <= t$carapace.width[2])
+            }else{
+               index <- index & (x$carapace.width < t$carapace.width[2])
+            }
+         }
+      }
+
+      if (!is.null(t$shell.condition)) index <- index & (x$shell.condition %in% t$shell.condition)
+      if (!is.null(t$missing.legs)) if (t$missing.legs) index <- index & is.missing.legs(x)
+      if (!is.null(t$gonad.colour)) index <- index & (x$gonad.colour == t$gonad.colour)
+      if (!is.null(t$eggs.remaining)){
+         if (!any(is.na(t$eggs.remaining))) index <- index & (x$eggs.remaining %in% t$eggs.remaining)
+      }
+      if (!is.null(t$egg.colour)) index <- index & (x$egg.colour == t$egg.colour)
+      ii <- index
+      if (!is.null(t$maturity)) index <- index * ifelse(t$maturity == rep(1, dim(x)[1]), is.mature(x, ...), 1-is.mature(x, ...))
+      if (!is.null(t$fun)) for (i in 1:length(t$fun)) index <- index * eval(parse(text = paste0(t$fun[i], "(x, ...)")))
+      index[!ii] <- 0
+   }else{
+      index <- NULL
+      for (i in 1:length(category)){
+         index <- cbind(index, is.category(x, category[i], ...))
+      }
+      dimnames(index) <- list(NULL, category)
+   }
+   
+   # Convert to logical if there are no fractions:
+   if (all((index[!is.na(index)] %% 1) == 0)) index <- (index == 1)
+  
+   return(index)
+}
+
