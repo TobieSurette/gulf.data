@@ -35,5 +35,5 @@ Function      | Description
 `metadata`    | Retrieve metadata.
 `key`         | Set or retrieve an index key for a data table.
 `description` | Set or retrieve a text description(s) for a data table or variable field.
-`fmt`         | Set or retrieve the format defintion of a variable field.
+`format`      | Set or retrieve the format defintion of a variable field.
 `units`       | Set or retrieve the units of a variable field.
