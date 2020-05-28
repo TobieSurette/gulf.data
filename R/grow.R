@@ -13,7 +13,7 @@
 #' @param x Specimen size, length-frequency or other object.
 #' @param n Length-frequencies 
 #' 
-#' @details Crustean growth-at-moult models have just three parameters, an initial slope
+#' @details Crustacean growth-at-moult models have just three parameters, an initial slope
 #' parameter, a transition window width (exp(log.w)) and a transition point xp. These 
 #' functions generate the expected values for a given set of parameters. Also the assumed
 #' error was assumed to be increasing with size.

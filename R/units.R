@@ -1,6 +1,6 @@
-#' Assign Observational Units
+#' Measurement Units
 #'
-#' @description Assigns units to measured or observed data in an object.
+#' @description Assigns or retrieves measurement units assigned to observed data.
 #'
 #' @param x Target object.
 #' @param y Character string(s) specifying the name(s) of the variables or attributes to be assigned measurement units.
@@ -11,6 +11,14 @@
 #'
 #' @return An object with a \code{units} attribute attached to it.
 #'
+#' @section Functions:
+#' \describe{
+#'   \item{\code{units}}{Generic \code{units} extraction method.}
+#'   \item{\code{units.default}}{Default \code{units} extraction method.}
+#'   \item{\code{units<-}}{Generic \code{units} assignment method. See Examples for usage.}
+#'   \item{\code{units<-.default}}{Default \code{units} assignment method. See Examples for usage.}
+#' }
+#' 
 #' @examples
 #' x <- data.frame(year = 2010:2014, measurement = rnorm(5))
 #' units(x, "measurement") <- "centimeters"
@@ -26,10 +34,18 @@
 #' @export "units"
 #' @export "units.default"
 #'
-#' @seealso \code{\link{metadata}}, \code{\link{key}}, \code{\link{description}}, \code{\link{fmt}}
+#' @seealso \code{\link{metadata}}, \code{\link{key}}, \code{\link{description}}, \code{\link{format}}
+
+#' @rdname units
+units <- function(x, ...) UseMethod("units")
+
+#' @rdname units
+units.default <- function(x, ...) return(attr(x, "units"))
+
+#' @rdname units
 "units<-" <- function(x, ...) UseMethod("units<-")
 
-#' @describeIn units-set Default 'units' assignment method.
+#' @rdname units
 "units<-.default" <- function(x, y, value, ...){
    if (missing(y)){
       # Extract attributes fields from 'value':
@@ -56,8 +72,3 @@
    return(x)
 }
 
-#' @describeIn units-set Generic 'units' extraction method.
-units <- function(x, ...) UseMethod("units")
-
-#' @describeIn units-set Default 'units' extraction method.
-units.default <- function(x, ...) return(attr(x, "units"))

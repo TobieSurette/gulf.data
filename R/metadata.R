@@ -8,17 +8,17 @@
 #' @examples
 #' # Define sample data set:
 #' x <- data.frame(year = 2010:2014,
-#'  site = letters[1:5],
-#'  weight = exp(rnorm(5)),
-#'  number = rpois(5,5))
+#'                 site = letters[1:5],
+#'                 weight = exp(rnorm(5)),
+#'                 number = rpois(5,5))
 #'
 #' # Define metadata attributes:
 #' units(x, "weight") <- "kilogram"
 #' description(x) <- c(year = "Year of sampling",
-#'  site = "Sampling site",
-#'  weight = "Weight of specimen",
-#'  number = "Number observed")
-#' fmt(x, "year") <- "YYYY"
+#'                     site = "Sampling site",
+#'                     weight = "Weight of specimen",
+#'                     number = "Number observed")
+#' format(x, "year") <- "YYYY"
 #' key(x) <- "year"
 #'
 #' # Retrieve metadata:
@@ -32,7 +32,6 @@
 metadata <- function(x, ...) UseMethod("metadata")
 
 #' @describeIn metadata Extract metadata for a data frame.
-#' @export metadata.data.frame
 metadata.data.frame <- function(x, ...){
    # Initialize output:
    res <- data.frame(attributeName = names(x),

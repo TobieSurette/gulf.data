@@ -6,7 +6,7 @@
 \alias{scsbio.scsset}
 \alias{read.scsbio}
 \alias{update.scsbio}
-\title{Snow Crab Biological Data Class}
+\title{Snow Crab Biological Data}
 \usage{
 scsbio(x, ...)
 
@@ -19,8 +19,8 @@ read.scsbio(x, year, ...)
 \method{update}{scsbio}(year, path, Rfile = TRUE, csv = TRUE, ...)
 }
 \arguments{
-\item{x}{A \sQuote{data.frame} object. When reading data, \code{x} may be a numeric vector specifying 
-the survey years to be loaded or an \code{\link{scsset}} object for which we want to
+\item{x}{A \sQuote{data.frame} object. When reading data, \code{x} may be a numeric 
+vector specifying the survey years to be loaded or an \code{\link{scsset}} object for which we want to
 read the corresponding biological data.}
 
 \item{...}{Other parameters (not used).}
@@ -45,11 +45,21 @@ This key can then be used as a default for such operations as merging data.}
 to the \code{gulf.data} package clone.}
 }
 \description{
-The \code{scsbio} class is a biological database containing information 
-             about individual organisms sampled on the snow crab annual survey. Its functions 
-             show how to create \code{scsbio} objects, reading, manipulating and analyzing 
-             snow crab biological data.
+The \code{scsbio} class is a container for snow crab biological data, i.e. 
+             information about individual organisms sampled on the snow crab annual 
+             survey.
 }
+\section{Functions}{
+
+\describe{
+  \item{\code{scsbio}}{Generic \code{scsbio} method.}
+  \item{\code{scsbio.default}}{Create an \code{scsbio} object.}
+  \item{\code{scsbio.scsset}}{Access snow crab biological data associated with snow crab survey set data.}
+  \item{\code{read.scsbio}}{Read snow crab survey biological data.}
+  \item{\code{update.scsbio}}{Update snow snow crab survey biological data repositories.}
+}
+}
+
 \examples{
 # Create empty 'scbio' object:
 x <- scsbio()

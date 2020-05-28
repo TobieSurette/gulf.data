@@ -1,6 +1,6 @@
-#' Assign a Description
+#' Data Description
 #'
-#' @description Assigns a text description to an object or to other attributes.
+#' @description Assign or retrieve a text description to an object or to other attributes.
 #'
 #' @param x Target object.
 #' @param y Character string(s) specifying the name(s) of the variables or attributes to be assigned a description string.
@@ -10,6 +10,14 @@
 #' @details The \code{description} attribute may be erased by assigning a \code{NULL} value to it.
 #'
 #' @return An object with a \code{description} attribute attached to it.
+#'
+#' @section Functions:
+#' \describe{
+#'   \item{\code{description}}{Generic \code{description} retrieval method.}
+#'   \item{\code{description.default}}{Default \code{description} retrieval method.}
+#'   \item{\code{description<-}}{Generic \code{description} assignment method.}
+#'   \item{\code{description<-.default}}{Default \code{description} assignment method.}
+#' }
 #'
 #' @examples
 #' x <- data.frame(year = 2010:2014, measurement = rnorm(5))
@@ -32,16 +40,24 @@
 #' description(x, "year") <- NULL  # Remove 'year' description.
 #' description(x) <- NULL          # Remove all descriptions.
 #'
+#' @export description
+#' @export description.default
 #' @export "description<-"
 #' @export "description<-.default"
-#' @export "description"
-#' @export "description.default"
 #'
-#' @seealso \code{\link{metadata}}, \code{\link{key}}, \code{\link{units}}, \code{\link{fmt}}
+#' @seealso \code{\link{metadata}}, \code{\link{key}}, \code{\link{units}}, \code{\link{format}}
 #'
+
+#' @rdname description 
+description <- function(x, ...) UseMethod("description")
+
+#' @rdname description 
+description.default <- function(x, ...) return(attr(x, "description"))
+
+#' @rdname description 
 "description<-" <- function(x, ...) UseMethod("description<-")
 
-#' @describeIn description-set Default 'description' assignment method.
+#' @rdname description 
 "description<-.default" <- function(x, y, value, ...){
    if (missing(y)){
       # Extract attributes fields from 'value':
@@ -68,8 +84,3 @@
    return(x)
 }
 
-#' @describeIn description-set Generic 'description' extraction method.
-description <- function(x, ...) UseMethod("description")
-
-#' @describeIn description-set Default 'description' extraction method.
-description.default <- function(x, ...) return(attr(x, "description"))

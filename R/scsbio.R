@@ -1,12 +1,11 @@
-#' Snow Crab Biological Data Class
+#' Snow Crab Biological Data
 #'
-#' @description The \code{scsbio} class is a biological database containing information 
-#'              about individual organisms sampled on the snow crab annual survey. Its functions 
-#'              show how to create \code{scsbio} objects, reading, manipulating and analyzing 
-#'              snow crab biological data.
+#' @description The \code{scsbio} class is a container for snow crab biological data, i.e. 
+#'              information about individual organisms sampled on the snow crab annual 
+#'              survey. 
 #'              
-#' @param x A \sQuote{data.frame} object. When reading data, \code{x} may be a numeric vector specifying 
-#'          the survey years to be loaded or an \code{\link{scsset}} object for which we want to
+#' @param x A \sQuote{data.frame} object. When reading data, \code{x} may be a numeric 
+#'          vector specifying the survey years to be loaded or an \code{\link{scsset}} object for which we want to
 #'          read the corresponding biological data.
 #'          
 #' @param year Numeric vector specifying the survey years to be loaded.
@@ -29,6 +28,15 @@
 #'                to the \code{gulf.data} package clone.
 #'                         
 #' @param ... Other parameters (not used).
+#' 
+#' @section Functions:
+#' \describe{
+#'   \item{\code{scsbio}}{Generic \code{scsbio} method.}
+#'   \item{\code{scsbio.default}}{Create an \code{scsbio} object.}
+#'   \item{\code{scsbio.scsset}}{Access snow crab biological data associated with snow crab survey set data.}
+#'   \item{\code{read.scsbio}}{Read snow crab survey biological data.}
+#'   \item{\code{update.scsbio}}{Update snow snow crab survey biological data repositories.}
+#' }
 #' 
 #' @examples
 #' # Create empty 'scbio' object:
@@ -77,7 +85,7 @@ scsbio.scsset <- function(x, ...){
 }
 
 # Format for snow crab biological ASCII data files:
-fmt.scsbio <- function(x){
+format.scsbio <- function(x){
    #           variable name                   format  fill.char  description
    fmt.str = c("blank1",                        "A1",     " ",    "Blank.",
                "day",                           "A2",     "0",    "Day.",
