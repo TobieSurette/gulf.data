@@ -126,13 +126,10 @@ category.numeric <- function(x, sex, group, ...){
       sex <- sort(unique(sex))
       if (is.numeric(sex)) sex <- c("male", "female")[sex]
       sex <- match.arg(tolower(sex), c("male", "female"))
-   }else{
-      sex <- NULL
    }
    
    # Parse 'group' object:
-   if (!missing(group)) group <- match.arg(tolower(as.character(group)), c("other", "all")) else group <- NULL
-   if (is.null(group)) group <- ""
+   if (!missing(group)) group <- match.arg(tolower(as.character(group)), c("other", "all")) 
    
    # Define short male category codes:
    male.str <- c("TM", "TMM", "TMI", "TMGE95", "TMMGE95",
@@ -188,15 +185,24 @@ category.numeric <- function(x, sex, group, ...){
 
    # Define numeric code values:
    str <- NULL
-   if (is.null(sex) & (group == ""))             str <- c(male.str, female.str, other.male.str, other.female.str)
-   if (("male" %in% sex) & (group == ""))        str <- c(str,  male.str)
-   if (("male" %in% sex) & (group == "other"))   str <- c(str,  male.str)
-   if (("male" %in% sex) & (group == "all"))     str <- c(str,  male.str, other.male.str)
-   if (("female" %in% sex) & (group == ""))      str <- c(str,  short.female.str)
-   if (("female" %in% sex) & (group == "other")) str <- c(str,  other.female.str)
-   if (("female" %in% sex) & (group == "all"))   str <- c(str,  female.str, other.female.str)
-   if (is.null(sex) & (group == "other"))        str <- c(other.male.str, other.female.str)
- 
+   if (missing(group)){
+      if (missing(sex)){
+         str <- c(male.str, female.str)
+      }else{
+         if ("male" %in% sex) str <- c(str,  male.str)
+         if ("female" %in% sex) str <- c(str,  female.str)         
+      }
+   }else{
+      if (missing(sex)){
+         if (group == "other") str <- c(other.male.str, other.female.str) 
+      }else{
+         if (("male" %in% sex) & (group == "other")) str <- c(str,  male.str)
+         if (("male" %in% sex) & (group == "all")) str <- c(str,  male.str, other.male.str)
+         if (("female" %in% sex) & (group == "other")) str <- c(str,  other.female.str)
+         if (("female" %in% sex) & (group == "all")) str <- c(str,  female.str, other.female.str)         
+      }
+   }
+
    if (missing(x)) return(str) else return(str[x])
 }
 

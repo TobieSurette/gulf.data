@@ -33,6 +33,7 @@
 #' @export is.soft.shell
 #' @export is.skip.moulter 
 #' @export is.skip.moulter.scsbio
+#' 
 
 #' @rdname moult
 is.new.shell <- function(x, ...) UseMethod("is.new.shell")
@@ -165,7 +166,7 @@ is.skip.moulter.scsbio <- function(x, ...){
 
    # Contruct logical vextor:
    index <- rep(TRUE, dim(x)[1])
-   index <- index & is.mature(x, ...) * !is.new(x)
+   index <- index & is.mature(x, ...) * !is.new.shell(x)
       
    # Convert to logical if there are no fractions:
    if (all((index[!is.na(index)] %% 1) == 0)) index <- (index == 1)

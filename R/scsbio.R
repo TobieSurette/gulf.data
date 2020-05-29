@@ -1,6 +1,6 @@
 #' Snow Crab Biological Data
 #'
-#' @description The \code{scsbio} class is a container for snow crab biological data, i.e. 
+#' @description The \code{scsbio} class is a container for Snow Crab Survey Biological data, i.e. 
 #'              information about individual organisms sampled on the snow crab annual 
 #'              survey. 
 #'              
@@ -11,7 +11,7 @@
 #' @param year Numeric vector specifying the survey years to be loaded.
 #' 
 #' @param format An \sQuote{fmt} object which specifies the ASCII printing format for an 
-#'               \code{scbio} object.
+#'               \code{scsbio} object.
 #' 
 #' @param key Character string(s) specifying which data columns form the index key.
 #'            This key can then be used as a default for such operations as merging data.
@@ -26,6 +26,12 @@
 #'              
 #' @param package Logical value specifying whether to write a comma-separated (\code{csv}) format
 #'                to the \code{gulf.data} package clone.
+#' 
+#' @param by Character string(s) specifying which variables to group by when summararizing.
+#' 
+#' @param category Biological category string(s). See \code{\link{cagetory}} for more details.
+#' 
+#' @param weight Logical value specifying whether to return a summary by weights rather than counts.
 #'                         
 #' @param ... Other parameters (not used).
 #' 
@@ -35,28 +41,28 @@
 #'   \item{\code{scsbio.default}}{Create an \code{scsbio} object.}
 #'   \item{\code{scsbio.scsset}}{Access snow crab biological data associated with snow crab survey set data.}
 #'   \item{\code{read.scsbio}}{Read snow crab survey biological data.}
-#'   \item{\code{update.scsbio}}{Update snow snow crab survey biological data repositories.}
+#'   \item{\code{update.scsbio}}{Update snow crab survey biological data repositories.}
+#'   \item{\code{summary.scsbio}}{Returns a summary of an \code{scsbio} object.}
+#'   \item{\code{\link{check.scsbio}}}{Check \code{scsbio} for data issues.}
 #' }
 #' 
 #' @examples
-#' # Create empty 'scbio' object:
+#' # Create empty 'scsbio' object:
 #' x <- scsbio()
 #'    
-#' # Create 'scbio' object with specified 'tow.number' and 'sex' fields:
+#' # Create 'scsbio' object with specified 'tow.number' and 'sex' fields:
 #' x <- scsbio(data.frame(tow.number = 1:10, sex = 1))
 #'    
-#' x <- read.scsbio(year = 2012)   
-#'
-# @describeIn read.scsbio Convert ASCII-source snow crab biological data into a user-friendly format.
-# @describeIn read.scsbio Update snow crab biological data files.
-# @describeIn scsbio Summary biological data for a set of snow crab data.
-# @describeIn scsbio ASCII format definition for reading and writing snow crab biological data.
+#' x <- read.scsbio(year = 2019)   
+#' 
+#' summary(x)
 #' 
 #' @export scsbio
 #' @export scsbio.default
 #' @export scsbio.scsset
 #' @export read.scsbio
 #' @export update.scsbio
+#' @export summary.scsbio
 #' 
 #' @rdname scsbio
 scsbio <- function(x, ...) UseMethod("scsbio")
@@ -66,7 +72,7 @@ scsbio.default <- function(x, format = fmt.scsbio(), ...){
    if ("scsbio" %in% class(x)) return(x)
    
    # Define attributes:
-   key(x) <- c("year", "month", "day", "tow.number", "crab.number")
+   key(x) <- c("year", "tow.id", "crab.number")
    units(x, "carapace.width", "chela.height", "abdomen.width") <- "millimeters"
    units(x, "weight") <- "grams"
    
@@ -212,10 +218,10 @@ convert.scsbio <- function(x, ...){
       
       # Remove leading and trailing spaces:
       x$samplers <- gsub("(^[ ]+)|([ ]+$)", "", x$samplers)
-      x$comments <- gsub("(^[ ]+)|([ ]+$)", "", x$comments)
+      x$comments <- gsub("(^[ ]+)|([ ]+$)", "", x$comments) 
       
       # Add 'tow.id' from tow data:
-      y <- read.scset(year = unique(x$year))
+      y <- read.scsset(year = unique(x$year))
       vars <- c("year", "month", "day", "tow.number")
       index <- match(x[vars], y[vars])
       index[x$tow.id != ""] <- NA
@@ -280,20 +286,15 @@ read.scsbio <- function(x, year, ...){
       }
    }  
    
-   # Remove tows that are not in 'scsset' object:
-   if (!missing(x)){
-      if ("scsset" %in% class(x)){
-         vars <- c("year", "month", "day", "tow.id")
-         v <- !is.na(match(v[index], x[vars]))
-      }
-   }
-   
-   # Convert to 'scbio' object:
-   v <- scsbio(v)
-   
    # Subset by specified variables:
    v <- base::subset.data.frame(v, ...)
-
+   
+   # Convert to 'scsbio' object:
+   v <- scsbio(v)
+   
+   # Remove tows that are not in 'scsset' object:
+   if (!missing(x)) if ("scsset" %in% class(x)) v <- v[!is.na(match(v, x[key(v)])), ]
+   
    return(v)
 }
 
@@ -309,7 +310,7 @@ update.scsbio <- function(year, path, Rfile = TRUE, csv = TRUE, ...){
    # Loop over years:
    for (i in 1:length(year)){
       if (!flag){
-         path <- scbio.path.str(year = year[i], ...)
+         path <- scsbio.path.str(year = year[i], ...)
          tmp <- strsplit(path, '/')[[1]]
          path <- paste0(tmp[1:which(tmp == "Raw Data")], collapse = "/")
       }
@@ -318,7 +319,7 @@ update.scsbio <- function(year, path, Rfile = TRUE, csv = TRUE, ...){
       if (!writeable) stop(paste("Unable to write to: ", path))
          
       # Read data:
-      x <- read.scbio(year = year[i], source = "ascii", ...)
+      x <- read.scsbio(year = year[i], source = "ascii", ...)
       index <- (x$carapace.width > 0) | !is.na(x$abdomen.width) | !is.na(x$chela.height) | !is.na(x$shell.condition) | 
                !is.na(x$gonad.colour) | !is.na(x$egg.colour) | !is.na(x$eggs.remaining) 
       x[which(index), ]
@@ -328,4 +329,50 @@ update.scsbio <- function(year, path, Rfile = TRUE, csv = TRUE, ...){
       cat(paste0("Writing to : '", path, "/", "SCS", year[i], ".csv'\n"))
       if (csv) write.table(x, file = paste0(path, "/", "SCS", year[i], ".csv"), row.names = FALSE, col.names = TRUE, sep = ",")
    }
+}
+
+#' @rdname scsbio
+summary.scsbio <- function(x, by, category, weight = FALSE, ...){
+   # Parse input arguments:
+   if (!missing(category)) if (!is.character(category)) stop("'category' must be a vector of character strings.")
+   if (!missing(by)) if (!is.character(by)) stop("'by' must be a vector of character strings.")
+
+   if (!missing(category)){
+      if (missing(by)) by <- c("year", "tow.id")
+      if (weight) x$weight <- weight(x, ...) else x$weight <- 1
+      res <- stats::aggregate(list(n = is.category(x, category[1]) * x$weight), by = x[by], sum, na.rm = TRUE)
+      if (length(category) > 1){
+         for (i in 2:length(category)){
+            res <- cbind(res, stats::aggregate(list(n = is.category(x, category[i]) * x$weight), by = x[by], sum, na.rm = TRUE)["n"])
+         }
+      }
+      tmp <- res[grep("n", names(res))]
+      names(tmp) <- category
+      res <- cbind(res[setdiff(names(res), "n")],  tmp)
+      res <- sort(res, by = by)
+
+      return(res)
+   }
+
+   # Print data summary:
+   describe(x)
+
+   cat("\nData Summary : \n")
+   cat(paste0("                             Crab : ", nrow(x), "\n"))
+   cat(paste0("                            Males : ", sum(is.category(x, "M"), na.rm = TRUE), "\n"))
+   cat(paste0("                          Females : ", sum(is.category(x, "F"), na.rm = TRUE), "\n"))
+   cat(paste0("                     Mature Males : ", sum(is.category(x, "MM"), na.rm = TRUE), "\n"))
+   cat(paste0("                   Immature Males : ", sum(is.category(x, "MI"), na.rm = TRUE), "\n"))
+   cat(paste0("                Legal-sized Males : ", sum(is.category(x, "MGE95"), na.rm = TRUE), "\n"))
+   cat(paste0("               Male Skip-Moulters : ", sum(is.category(x, "MISC345"), na.rm = TRUE), "\n"))
+   cat(paste0("   Legal-sized Male Skip-Moulters : ", sum(is.category(x, "MIGE95SC345"), na.rm = TRUE), "\n"))
+   cat(paste0("                 Commercial Males : ", sum(is.category(x, "COM"), na.rm = TRUE), "\n"))
+   cat(paste0("              Commercial Recruits : ", sum(is.category(x, "TMMSC12GE95"), na.rm = TRUE), "\n"))
+   cat(paste0("             Commercial Residuals : ", sum(is.category(x, "TMMSC345GE95"), na.rm = TRUE), "\n"))
+   cat(paste0("                   Mature Females : ", sum(is.category(x, "FM"), na.rm = TRUE), "\n"))
+   cat(paste0("                 Immature Females : ", sum(is.category(x, "FI"), na.rm = TRUE), "\n"))
+   
+   # Print data issues:
+   cat("\nIrregularity summary : \n")
+   check(x)
 }

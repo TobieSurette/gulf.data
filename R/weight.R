@@ -44,7 +44,6 @@
 #'         of an organism for a given length measurement.
 #' 
 #' @section Functions:
-#' 
 #' \describe{
 #'   \item{\code{weight}}{Generic \code{weight} method.}
 #'   \item{\code{weight.default}}{Returns the expected weight for a given organism length.}

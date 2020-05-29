@@ -45,7 +45,7 @@ metadata.data.frame <- function(x, ...){
    # Extract attributes:
    res$attributeDefinition[match(names(attr(x, "description")), res$attributeName)] <- as.vector(attr(x, "description"))
    res$unit[match(names(attr(x, "units")), res$attributeName)] <- as.vector(attr(x, "units"))
-   res$formatString[match(names(attr(x, "fmt")), res$attributeName)] <- as.vector(attr(x, "fmt"))
+   res$formatString[match(names(attr(x, "format")), res$attributeName)] <- as.vector(attr(x, "format"))
 
    return(res)
 }

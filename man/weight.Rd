@@ -63,7 +63,6 @@ Returns an estimate of the weight of individual organisms for a specified length
 }
 \section{Functions}{
 
-
 \describe{
   \item{\code{weight}}{Generic \code{weight} method.}
   \item{\code{weight.default}}{Returns the expected weight for a given organism length.}

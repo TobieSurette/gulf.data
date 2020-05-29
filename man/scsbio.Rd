@@ -6,6 +6,7 @@
 \alias{scsbio.scsset}
 \alias{read.scsbio}
 \alias{update.scsbio}
+\alias{summary.scsbio}
 \title{Snow Crab Biological Data}
 \usage{
 scsbio(x, ...)
@@ -17,6 +18,8 @@ scsbio(x, ...)
 read.scsbio(x, year, ...)
 
 \method{update}{scsbio}(year, path, Rfile = TRUE, csv = TRUE, ...)
+
+\method{summary}{scsbio}(x, by, category, weight = FALSE, ...)
 }
 \arguments{
 \item{x}{A \sQuote{data.frame} object. When reading data, \code{x} may be a numeric 
@@ -26,7 +29,7 @@ read the corresponding biological data.}
 \item{...}{Other parameters (not used).}
 
 \item{format}{An \sQuote{fmt} object which specifies the ASCII printing format for an 
-\code{scbio} object.}
+\code{scsbio} object.}
 
 \item{year}{Numeric vector specifying the survey years to be loaded.}
 
@@ -38,6 +41,12 @@ updating snow crab biological data.}
 \item{csv}{Logical value specifying whether to write a comma-separated (\code{csv}) format file 
 when updating snow crab biological data.}
 
+\item{by}{Character string(s) specifying which variables to group by when summararizing.}
+
+\item{category}{Biological category string(s). See \code{\link{cagetory}} for more details.}
+
+\item{weight}{Logical value specifying whether to return a summary by weights rather than counts.}
+
 \item{key}{Character string(s) specifying which data columns form the index key.
 This key can then be used as a default for such operations as merging data.}
 
@@ -45,7 +54,7 @@ This key can then be used as a default for such operations as merging data.}
 to the \code{gulf.data} package clone.}
 }
 \description{
-The \code{scsbio} class is a container for snow crab biological data, i.e. 
+The \code{scsbio} class is a container for Snow Crab Survey Biological data, i.e. 
              information about individual organisms sampled on the snow crab annual 
              survey.
 }
@@ -56,18 +65,21 @@ The \code{scsbio} class is a container for snow crab biological data, i.e.
   \item{\code{scsbio.default}}{Create an \code{scsbio} object.}
   \item{\code{scsbio.scsset}}{Access snow crab biological data associated with snow crab survey set data.}
   \item{\code{read.scsbio}}{Read snow crab survey biological data.}
-  \item{\code{update.scsbio}}{Update snow snow crab survey biological data repositories.}
+  \item{\code{update.scsbio}}{Update snow crab survey biological data repositories.}
+  \item{\code{summary.scsbio}}{Returns a summary of an \code{scsbio} object.}
+  \item{\code{\link{check.scsbio}}}{Check \code{scsbio} for data issues.}
 }
 }
 
 \examples{
-# Create empty 'scbio' object:
+# Create empty 'scsbio' object:
 x <- scsbio()
    
-# Create 'scbio' object with specified 'tow.number' and 'sex' fields:
+# Create 'scsbio' object with specified 'tow.number' and 'sex' fields:
 x <- scsbio(data.frame(tow.number = 1:10, sex = 1))
    
-x <- read.scsbio(year = 2012)   
+x <- read.scsbio(year = 2019)   
 
+summary(x)
 
 }
