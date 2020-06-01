@@ -34,6 +34,7 @@ scsset.default <- function(x, ...){
    class(x) <- unique(c("scsset", class(x))) 
    
    # Define attributes:
+   project(x) <- "scs"
    key(x) <- c("year", "tow.id")
    units(x, c("longitude", "latitude", "longitude.start.logbook", "longitude.end.logbook", "latitude.start.logbook", "latitude.end.logbook")) <- "degrees"
    units(x, "swept.area") <- "square.meters"

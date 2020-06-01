@@ -23,6 +23,7 @@
 #' If \code{x} is left unspecified, then a function is returned which can be used to 
 #' evaluate growth if given inputs.
 #' 
+#' @rdname growth
 grow <- function(x, ...) UseMethod("grow")
 
 # Crustacean growth model kernel:
@@ -39,7 +40,7 @@ f <- function(x){
 
 g <- function(x, xp, log.w = 0, slope) v <- slope * x - slope * exp(log.w) * f(((x-xp)/w) + 0.5)
 
-#' @describeIn grow Defeult growth function.
+#' @rdname growth
 grow.default <- function(x, n, species, sex, theta){
    # Snow crab growth increment:
    if (species == 2526){

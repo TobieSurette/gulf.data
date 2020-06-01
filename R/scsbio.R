@@ -72,10 +72,11 @@ scsbio.default <- function(x, format = fmt.scsbio(), ...){
    if ("scsbio" %in% class(x)) return(x)
    
    # Define attributes:
+   project(x) <- "scs"
    key(x) <- c("year", "tow.id", "crab.number")
    units(x, "carapace.width", "chela.height", "abdomen.width") <- "millimeters"
    units(x, "weight") <- "grams"
-   
+
    # Define class:
    class(x) <- unique(c("scsbio", class(x))) 
    

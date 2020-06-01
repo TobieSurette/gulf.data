@@ -4,6 +4,7 @@
 \alias{minilog}
 \alias{minilog.default}
 \alias{minilog.data.frame}
+\alias{plot.minilog}
 \title{Minilog Data}
 \usage{
 minilog(x, ...)
@@ -11,6 +12,8 @@ minilog(x, ...)
 \method{minilog}{default}(x, ...)
 
 \method{minilog}{data.frame}(x, header, ...)
+
+\method{plot}{minilog}(x, col, lwd = 1, ...)
 }
 \arguments{
 \item{x}{Minilog data file}
@@ -20,7 +23,7 @@ minilog(x, ...)
 \item{survey, project}{Character string specifying the survey or project name. 
 The survey may refer to the September multi-species survey (\code{survey = "rv"},
 \code{survey = "sep"} or \code{survey = "September"}), the  Northumberland Strait 
-survey (\code{= "ns"}), the mobile Sentinel survey (\code{= "sen"} or \code{= "sentinel"}),
+survey (\code{= "ns"}), the mobile Sentinel survey  \code{= "sentinel"}),
 or the snow crab survey (\code{= "sc"} or \code{= "snow crab"}).}
 
 \item{set.number, tow.id}{Numeric value or strings specifying the survey set number or tow ID.}
@@ -30,16 +33,9 @@ or the snow crab survey (\code{= "sc"} or \code{= "snow crab"}).}
 \item{path}{Logical value specifying whether to include the path in the Minilog files.}
 }
 \description{
-Minilog probes are used to record depth and temperature data. 
-These are functions to create, read and write \code{minilog} objects.
+Functions to create, read, write, manipulate and analyze Minilog depth/temperature 
+             probe data.
 }
-\section{Methods (by class)}{
-\itemize{
-\item \code{default}: Default \code{minilog} object.
-
-\item \code{data.frame}: Converts a data frame to a \code{minilog} object.
-}}
-
 \examples{
 # Minilog files for the 2000 September RV survey:
 minilog.file(survey = "rv", year = 2000)
@@ -54,11 +50,14 @@ minilog.file("GP001", year = 2006:2012)
 x <- read.minilog(tow.id = "GP001F", year = 2010)
 x <- read.minilog(survey = "rv", year = 2010)
 
+# Plot Minilog data:
+file <- system.file("extdata", "Minilog example.txt", package = "gulf.data")
+x <- read.minilog(file)
+plot(x)
+
 }
 \seealso{
 \code{\link[gulf.data]{read.minilog}}
 
 \code{\link[gulf.data]{header}}
-
-\code{\link[gulf.data]{plot.minilog}}
 }

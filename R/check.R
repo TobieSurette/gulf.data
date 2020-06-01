@@ -3,7 +3,7 @@
 #' @description Functions for validate data objects.
 #' 
 #' @param x Object.
-#' �
+#' 
 #' @export check
 #' 
 #' @section Functions:

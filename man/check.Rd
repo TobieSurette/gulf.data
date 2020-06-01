@@ -10,8 +10,7 @@ check(x, ...)
 \method{check}{scsbio}(x)
 }
 \arguments{
-\item{x}{Object.
-�}
+\item{x}{Object.}
 }
 \description{
 Functions for validate data objects.

@@ -35,10 +35,10 @@
 #' @export is.skip.moulter.scsbio
 #' 
 
-#' @rdname moult
+#' @rdname moulting
 is.new.shell <- function(x, ...) UseMethod("is.new.shell")
 
-#' @rdname moult
+#' @rdname moulting
 is.new.shell.scsbio <- function(x){
    index <- rep(FALSE, dim(x)[1])
    names(x) <- tolower(names(x))
@@ -48,10 +48,10 @@ is.new.shell.scsbio <- function(x){
    return(index)
 }
 
-#' @rdname moult
+#' @rdname moulting
 is.hard.shell <- function(x, ...) UseMethod("is.hard.shell")
 
-#' @rdname moult
+#' @rdname moulting
 is.hard.shell.scsbio <- function(x, durometer, shell.condition, zone, ...){
    # Parse input arguments:
    if (is.data.frame(x)) names(x) <- tolower(names(x))
@@ -98,7 +98,7 @@ is.hard.shell.scsbio <- function(x, durometer, shell.condition, zone, ...){
    return(v)
 }
 
-#' @rdname moult
+#' @rdname moulting
 is.hard.shell.scsobs <- function(x, durometer, shell.condition, zone, ...){
    # Parse input arguments:
    if (is.data.frame(x)) names(x) <- tolower(names(x))
@@ -154,13 +154,13 @@ is.hard.shell.scsobs <- function(x, durometer, shell.condition, zone, ...){
    return(v)
 }
 
-#' @rdname moult
+#' @rdname moulting
 is.soft.shell <- function(x) return(!is.hard.shell(x))
 
-#' @rdname moult
+#' @rdname moulting
 is.skip.moulter <- function(x, ...) UseMethod("is.skip.moulter")
 
-#' @rdname moult
+#' @rdname moulting
 is.skip.moulter.scsbio <- function(x, ...){
    # IS.SKIP.MOULTER - Returns whether a crab a skip moulter.
 
