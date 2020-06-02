@@ -2,11 +2,10 @@ Package: gulf.data
 Type: Package
 Title: Southern Gulf of St Lawrence Data Access
 Version: 0.1.0
-Imports: gulf.utils
+Imports: gulf.utils, gulf.metadata
 Authors@R: as.person(c("Tobie Surette <Tobie.Surette@dfo-mpo.gc.ca> [aut, cre]"))
 Description: Data access and metadata functions for extracting Southern Gulf of Saint Lawrence fisheries data, scientific survey data and research project data.
 License: GPL
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.0
-
