@@ -1,0 +1,42 @@
+survey,year,start.month,start.day,end.month,end.day,vessel,length,weight,horsepower,hull.material,trawl.method,trawl.type,acoustic.sensor,minilog,star-oddi,season
+sc,1988,8,5,11,13,Emy Serge D.,64,,375,wood,side,Nephrops,,no,no,fall
+sc,1989,8,15,10,29,Emy Serge D.,64,,375,wood,side,Nephrops,,no,no,fall
+sc,1990,6,18,10,8,Emy Serge D.,64,,375,wood,side,Nephrops,Scanmar,yes,no,fall
+sc,1991,7,10,11,7,Emy Serge D.,64,,375,wood,side,Nephrops,Scanmar,yes,no,fall
+sc,1992,7,13,10,21,Emy Serge D.,64,,375,wood,side,Nephrops,Scanmar,yes,no,fall
+sc,1993,7,12,10,15,Emy Serge D.,64,,375,wood,side,Nephrops,Scanmar,yes,no,fall
+sc,1994,7,12,10,9,Emy Serge D.,64,,375,wood,side,Nephrops,Scanmar,yes,no,fall
+sc,1995,7,19,10,18,Emy Serge D.,64,,375,wood,side,Nephrops,Scanmar,yes,no,fall
+sc,1996,8,21,10,11,Emy Serge D.,64,,375,wood,side,Nephrops,Scanmar,yes,no,fall
+sc,1997,7,9,9,11,Emy Serge D.,64,,375,wood,side,Nephrops,Scanmar,yes,no,fall
+sc,1998,7,7,9,14,Emy Serge D.,64,,375,wood,side,Nephrops,Scanmar,yes,no,fall
+sc,1999,7,9,9,10,Den C. Martin,64,,402,steel,stern,Nephrops,Netmind,yes,no,fall
+sc,2000,8,1,9,21,Den C. Martin,64,,402,steel,stern,Nephrops,Netmind,yes,no,fall
+sc,2001,8,9,10,2,Den C. Martin,64,,402,steel,stern,Nephrops,Netmind,yes,no,fall
+sc,2002,6,26,6,29,Den C. Martin,64,,402,steel,stern,Nephrops,Netmind,yes,no,summer
+sc,2002,7,8,9,19,Den C. Martin,64,,402,steel,stern,Nephrops,Netmind,yes,no,fall
+sc,2003,7,15,10,7,Marco-Michel,65,,660,fiberglass,stern,Nephrops,Netmind,yes,no,fall
+sc,2004,6,22,6,26,Marco-Michel,65,,660,fiberglass,stern,Nephrops,Netmind,yes,no,summer
+sc,2004,7,14,10,1,Marco-Michel,65,,660,fiberglass,stern,Nephrops,Netmind,yes,no,fall
+sc,2005,4,26,5,4,Marco-Michel,65,,660,fiberglass,stern,Nephrops,Netmind,yes,no,spring
+sc,2005,6,9,6,13,Marco-Michel,65,,660,fiberglass,stern,Nephrops,Netmind,yes,no,summer
+sc,2005,7,13,9,20,Marco-Michel,65,,660,fiberglass,stern,Nephrops,Netmind,yes,no,fall
+sc,2006,5,30,6,5,Marco-Michel,65,,660,fiberglass,stern,Nephrops,Netmind,yes,no,summer
+sc,2006,8,2,10,18,Marco-Michel,65,,660,fiberglass,stern,Nephrops,Netmind,yes,no,fall
+sc,2007,6,12,6,17,Marco-Michel,65,,660,fiberglass,stern,Nephrops,Netmind,yes,no,summer
+sc,2007,7,10,9,22,Marco-Michel,65,,660,fiberglass,stern,Nephrops,Netmind,yes,no,fall
+sc,2008,6,19,6,24,Marco-Michel,65,,660,fiberglass,stern,Nephrops,Netmind,yes,no,summer
+sc,2008,7,16,9,25,Marco-Michel,65,,660,fiberglass,stern,Nephrops,Netmind,yes,no,fall
+sc,2009,6,13,6,18,Marco-Michel,65,,660,fiberglass,stern,Nephrops,Netmind,yes,no,summer
+sc,2009,7,16,9,27,Marco-Michel,65,,660,fiberglass,stern,Nephrops,Netmind,yes,no,fall
+sc,2010,7,8,9,14,Marco-Michel,65,,660,fiberglass,stern,Nephrops,Netmind,yes,no,fall
+sc,2011,7,13,10,4,Marco-Michel,65,,660,fiberglass,stern,Nephrops,Netmind,yes,no,fall
+sc,2012,7,10,9,23,Marco-Michel,65,,660,fiberglass,stern,Nephrops,Netmind,yes,no,fall
+sc,2013,7,9,10,14,Jean-Mathieu,65,99,720,steel,stern,Nephrops,eSonar,yes,no,fall
+sc,2014,7,9,10,12,Jean-Mathieu,65,99,720,steel,stern,Nephrops,eSonar,yes,yes,fall
+sc,2015,7,9,10,15,Jean-Mathieu,65,99,720,steel,stern,Nephrops,eSonar,yes,yes,fall
+sc,2016,7,10,10,4,Jean-Mathieu,65,99,720,steel,stern,Nephrops,eSonar,yes,yes,fall
+sc,2017,7,10,10,31,Jean-Mathieu,65,99,720,steel,stern,Nephrops,eSonar,yes,yes,fall
+sc,2018,7,19,9,16,Jean-Mathieu,65,99,720,steel,stern,Nephrops,eSonar,yes,yes,fall
+sc,2019,7,11,9,25,Avalon Voyager II,65,137.6,850,steel,stern,Nephrops,eSonar,no,yes,fall
+sc,2019,9,19,9,25,Jean-Mathieu,65,99,720,steel,stern,Nephrops,eSonar,no,yes,comparative
