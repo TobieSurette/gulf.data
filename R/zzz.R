@@ -1,0 +1,54 @@
+.onLoad <- function(libname, pkgname) {
+   library(gulf.utils)
+   library(gulf.metadata)
+   
+   # Define default paths to be used and store them within 'options':
+   path <- list()
+   
+   # Main drive paths:
+   path$hd2 <- "//DFNBE1CwpFSP002/Hd2/"
+   path$hd3 <- "//DFNBE1CwpFSP002/Hd3/"
+   path$snow.crab <- "//mon02uni01a/AquaRes_Common$/Crab"
+
+   # Groundfish directories:
+   path$data         <- paste0(path$hd2, "Programs and Documentation/R/Data files/") # Root data directory.
+   path$log          <- paste0(path$hd2, "Programs and Documentation/R/gulf package/code/logs/") # Log file directory.
+   path$com          <- paste0(path$hd2, "commercial/") # Commercial data directory.
+   path$obs          <- paste0(path$hd2, "observer/") # Observer data directory.
+   path$rv           <- paste0(path$hd2, "research/groundfish/") # Research vessel survey data directory.
+   path$sc           <- paste0(path$hd2, "research/groundfish/snowcrab/") # Snow crab survey data directory.
+   path$sen          <- paste0(path$hd2, "research/sentinel/") # Sentinel survey data directory.
+   path$ns           <- paste0(path$hd2, "research/northumberland/") # Northumberland Strait survey data directory..path$inshore      <- paste(.gulf.path$root, "research/inshore/", sep = "") # Inshore survey data directory.
+   path$january      <- paste0(path$hd2, "research/january/") # January survey data directory.
+   path$juvenile     <- paste0(path$hd2, "research/juvenile/") # Juvenile survey data directory.
+   path$seasonal     <- paste0(path$hd2, "research/seasonal/") # Seasonal survey data directory.
+   path$scallop      <- paste0(path$hd2, "research/scallop/") # scallop survey data directory.
+   path$ziff         <- paste0(path$hd3, "landings/zif/raw/") # ZIFF data directory.
+   path$nafo         <- paste0(path$hd3, "landings/nafo/") # NAFO landings data directory.
+   
+   # Survey probe data:
+   path$rv.minilog   <- paste0(path$rv, "minilog/") # Research vessel survey minilog data directory.
+   path$ns.minilog   <- paste0(path$ns, "minilog/") # Northumberland Strait survey minilog data directory.
+   path$rv.scanmar   <- paste0(path$rv, "scanmar/") # Research vessel survey scanmar data directory.
+   path$ns.scanmar   <- paste0(path$ns, "scanmar/") # Northumberland Strait survey scanmar data directory.
+   
+   # Snow crab data paths:
+   path$sc.data      <- paste0(path$snow.crab, "//mon02uni01a/AquaRes_Common$/Crab/Offshore Crab Common/")
+   
+   # Herring data paths:
+   path$herring.phone <- paste0(path$root, "herring/phone/")
+   
+   # Oracle databases:
+   oracle <- list()
+   oracle$generic.user <- "GLF_4R"
+   oracle$generic.pass <- "GLF_4R"
+   oracle$dev.bd       <- "dtran"
+   oracle$prod.bd      <- "ptran"
+   oracle$gap.bd       <- "gap"
+   
+   # Attach to options:
+   options(gulf.path = path, gulf.oracle = oracle)
+
+   invisible()
+}
+
