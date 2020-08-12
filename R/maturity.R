@@ -39,15 +39,15 @@
 #' }
 #' 
 #' @export is.mature
-#' @export is.mature.scsbio
+#' @rawNamespace S3method(is.mature, scsbio)
 #' @export is.primiparous
-#' @export is.primiparous.scsbio
+#' @rawNamespace S3method(is.primiparous, scsbio)
 #' @export is.multiparous
-#' @export is.multiparous.scsbio
+#' @rawNamespace S3method(is.multiparous, scsbio)
 #' @export is.senile
-#' @export is.senile.scsbio
-#' @export maturity.default
-#' @export maturity.numeric
+#' @rawNamespace S3method(is.senile, scsbio)
+#' @rawNamespace S3method(maturity, default)
+#' @rawNamespace S3method(maturity, numeric)
 #' 
 
 #' @rdname maturity

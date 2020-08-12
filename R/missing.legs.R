@@ -65,7 +65,15 @@
 #'                                      leg data observations.}
 #' }
 #' 
-
+#' @export missing.legs
+#' @export is.missing.legs
+#' @export bin2str.missing.legs
+#' @rawNamespace S3method(missing.legs, default)
+#' @rawNamespace S3method(missing.legs, numeric)
+#' @rawNamespace S3method(missing.legs, character)
+#' @rawNamespace S3method(is.missing.legs, character)
+#' @rawNamespace S3method(is.missing.legs, data.frame)
+#' 
 #' @rdname missing.legs
 missing.legs <- function(x, ...) UseMethod("missing.legs")
 

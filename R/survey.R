@@ -34,8 +34,9 @@
 #' survey(year = 1990:1995, survey = "juv")
 #'
 #' @export survey
-#' @export survey.default
-#' @export survey.character
+#' @rawNamespace S3method(survey, default)
+#' @rawNamespace S3method(survey, character)
+#' 
 
 #' @rdname survey
 survey <- function(x, ...) UseMethod("survey")
@@ -221,7 +222,6 @@ survey.character <- function(x, survey, year, verbose = FALSE, ...){
    if (missing(x) & !missing(survey) & !missing(year))
        return(survey.default(survey = survey, year = year, verbose = verbose, ...))
    if (missing(x) & !missing(survey)) x <- survey
-
 
    # Load project information:
    p <- project()

@@ -19,7 +19,7 @@
 #' }
 #' 
 #' @export scsset
-#' @export scsset.default
+#' @rawNamespace S3method(scsset, default)
 #' @export read.scsset
 #' 
 

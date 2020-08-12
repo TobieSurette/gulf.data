@@ -92,9 +92,9 @@
 #' weight(x, by = c("year", "month", "day"), category = c("TM", "TMM", "TMSC12", "TMSC345"))
 #'
 #' @export weight
-#' @export weight.default
-#' @export weight.scsbio
-#' @export weight.scobs
+#' @rawNamespace S3method(weight, default)
+#' @rawNamespace S3method(weight, scsbio)
+#' @rawNamespace S3method(weight, scobs)
 #' 
 
 #' @rdname weight

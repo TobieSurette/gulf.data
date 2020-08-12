@@ -13,7 +13,7 @@
 #' }
 #' 
 #' @export check
-#' @export check.scsbio
+#' @rawNamespace S3method(check, scsbio)
 
 #' @rdname check
 check <- function(x, ...) UseMethod("check")

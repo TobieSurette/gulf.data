@@ -58,11 +58,11 @@
 #' summary(x)
 #' 
 #' @export scsbio
-#' @export scsbio.default
-#' @export scsbio.scsset
+#' @rawNamespace S3method(scsbio, default)
+#' @rawNamespace S3method(scsbio, scsset)
 #' @export read.scsbio
-#' @export update.scsbio
-#' @export summary.scsbio
+#' @rawNamespace S3method(update, scsbio)
+#' @rawNamespace S3method(summary, scsbio)
 #' 
 #' @rdname scsbio
 scsbio <- function(x, ...) UseMethod("scsbio")

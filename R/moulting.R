@@ -26,13 +26,13 @@
 #' }
 #' 
 #' @export is.new.shell
-#' @export is.new.shell.scsbio
+#' @rawNamespace S3method(is.new.shell, scsbio)
 #' @export is.hard.shell
-#' @export is.hard.shell.scsobs
-#' @export is.hard.shell.scsbio
+#' @rawNamespace S3method(is.hard.shell, scsobs)
+#' @rawNamespace S3method(is.hard.shell, scsbio)
 #' @export is.soft.shell
 #' @export is.skip.moulter 
-#' @export is.skip.moulter.scsbio
+#' @rawNamespace S3method(is.skip.moulter, scsbio)
 #' 
 
 #' @rdname moulting

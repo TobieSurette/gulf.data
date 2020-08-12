@@ -3,7 +3,7 @@
 #' @description Return the minimum legal sizes.
 #' 
 #' @export minimum.legal.size
-#' @export minimum.legal.size.default
+#' @rawNamespace S3method(minimum.legal.size, default)
 
 minimum.legal.size <- function(x, ...) UseMethod("minimum.legal.size")
 

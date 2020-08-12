@@ -105,11 +105,11 @@
 #' apply(index, 2, sum, na.rm = TRUE)
 #' 
 #' @export category
-#' @export category.default
-#' @export category.numeric
-#' @export category.character
+#' @rawNamespace S3method(category, default)
+#' @rawNamespace S3method(category, numeric)
+#' @rawNamespace S3method(category, character)
 #' @export is.category
-#' @export is.category.scsbio
+#' @rawNamespace S3method(is.category, scsbio)
 #' 
 #' @rdname category
 category <- function(x, ...) UseMethod("category")

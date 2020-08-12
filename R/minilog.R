@@ -34,21 +34,17 @@
 #' plot(x)
 #' 
 #' @export minilog
-#' @export minilog.default
-#' @export minilog.data.frame
-#' @export plot.minilog
 #' 
 #' @seealso \code{\link[gulf.data]{read.minilog}}
 #' @seealso \code{\link[gulf.data]{header}}
 #' 
 
-#' @rdname minilog 
 minilog <- function(x, ...) UseMethod("minilog")
 
-#' @rdname minilog 
+#' @describeIn minilog Default minilog object.
 minilog.default <- function(x, ...) if ("minilog" %in% class(x)) return(x) else stop("Not a 'minilog' object.")
 
-#' @rdname minilog 
+#' @describeIn minilog Convert data frame to minilog object.
 minilog.data.frame <- function(x, header, ...){
    # Remove non-minilog variables:
    names(x) <- tolower(names(x))
@@ -77,7 +73,7 @@ minilog.data.frame <- function(x, header, ...){
    return(x)
 }
 
-#' @rdname minilog 
+#' @describeIn minilog Plot minilog data object.
 plot.minilog <- function(x, col, lwd = 1, ...){
    # Define default colours:
    if (missing(col)){

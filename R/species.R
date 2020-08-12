@@ -40,10 +40,10 @@
 #' 
 #' @export species
 #' @export species.foreign
-#' @export species.default
-#' @export species.list
-#' @export species.character
-#' @export species.numeric
+#' @rawNamespace S3method(species, default)
+#' @rawNamespace S3method(species, list)
+#' @rawNamespace S3method(species, character)
+#' @rawNamespace S3method(species, numeric)
 #' @export species.str
 #' 
 #' @seealso \code{\link{species.table}}

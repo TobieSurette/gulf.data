@@ -11,7 +11,7 @@
 #' }
 #'     
 #' @export "catch<-"
-#' @export "catch<-.scsset"
+#' @rawNamespace S3method("catch<-", scsset)
 #' 
 
 #' @rdname catch
