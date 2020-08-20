@@ -65,7 +65,7 @@ locate.esonar <- function(x, year, tow.id, full.names = TRUE, remove = "test", .
    }
 
    # Load set of file names:
-   files <- locate(pattern = "*.csv", keywords = "esonar")
+   files <- locate(pattern = "*.csv", keywords = "esonar", ...)
 
    # Target year:
    if (!missing(year)){
@@ -87,6 +87,7 @@ locate.esonar <- function(x, year, tow.id, full.names = TRUE, remove = "test", .
    if (!full.names) files <- unlist(lapply(strsplit(files, "/", fixed = TRUE), function(x) x[length(x)]))
 
    # Remove files:
+   if (!missing(remove)) if (length(remove) == 1) if (remove == FALSE) remove <- NULL
    if (!missing(remove)) remove <- remove[remove != "" & !is.na(remove)]
    if ((length(files) > 0) & (length(remove) > 0)) {
       index <- NULL
