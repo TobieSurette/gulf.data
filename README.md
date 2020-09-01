@@ -25,3 +25,11 @@ There are different types of data sources:
   - Snow crab fecundity project
   - Snow crab diet project
   - Snow crab colorimeter data
+
+* **Package Data Tables**
+  - North Atlantic species names and codes (e.g. STACAC, NAFO, ...).
+  - Project codes and description table.
+  - Survey description table.
+  - Survey vessel description table.
+  - Snow crab survey tow data.
+  - Snow crab survey biological data.
