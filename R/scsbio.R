@@ -1,17 +1,15 @@
 #' Snow Crab Biological Data
 #'
-#' @description The \code{scsbio} class is a container for Snow Crab Survey Biological data, i.e. 
-#'              information about individual organisms sampled on the snow crab annual 
-#'              survey. 
+#' @description The \code{scsbio} class is a container for Snow Crab Survey Biological data, i.e. information 
+#'              about individual organisms sampled on the snow crab annual survey. 
 #'              
-#' @param x A \sQuote{data.frame} object. When reading data, \code{x} may be a numeric 
+#' @param x A \code{data.frame} object. When reading data, \code{x} may be a numeric 
 #'          vector specifying the survey years to be loaded or an \code{\link{scsset}} object for which we want to
 #'          read the corresponding biological data.
 #'          
 #' @param year Numeric vector specifying the survey years to be loaded.
 #' 
-#' @param format An \sQuote{fmt} object which specifies the ASCII printing format for an 
-#'               \code{scsbio} object.
+#' @param format A \code{data.frame} specifying the ASCII printing format for an \code{scsbio} object.
 #' 
 #' @param key Character string(s) specifying which data columns form the index key.
 #'            This key can then be used as a default for such operations as merging data.
@@ -35,16 +33,6 @@
 #'                         
 #' @param ... Other parameters (not used).
 #' 
-#' @section Functions:
-#' \describe{
-#'   \item{\code{scsbio}}{Generic \code{scsbio} method.}
-#'   \item{\code{scsbio.default}}{Create an \code{scsbio} object.}
-#'   \item{\code{scsbio.scsset}}{Access snow crab biological data associated with snow crab survey set data.}
-#'   \item{\code{read.scsbio}}{Read snow crab survey biological data.}
-#'   \item{\code{update.scsbio}}{Update snow crab survey biological data repositories.}
-#'   \item{\code{summary.scsbio}}{Returns a summary of an \code{scsbio} object.}
-#'   \item{\code{\link{check.scsbio}}}{Check \code{scsbio} for data issues.}
-#' }
 #' 
 #' @examples
 #' # Create empty 'scsbio' object:
@@ -57,17 +45,23 @@
 #' 
 #' summary(x)
 #' 
-#' @export scsbio
-#' @rawNamespace S3method(scsbio, default)
-#' @rawNamespace S3method(scsbio, scsset)
-#' @export read.scsbio
-#' @rawNamespace S3method(update, scsbio)
-#' @rawNamespace S3method(summary, scsbio)
+#' @section Functions:
+#' \describe{
+#'   \item{\code{scsbio}}{Generic \code{scsbio} method.}
+#'   \item{\code{scsbio.default}}{Create an \code{scsbio} object.}
+#'   \item{\code{read.scsbio}}{Read snow crab survey biological data.}
+#'   \item{\code{scsbio.scsset}}{Load biological associated with snow crab survey tow data.}
+#'   \item{\code{fmt.scsbio}}{ASCII file format for reading snow crab biological data.}
+#'   \item{\code{convert.scsbio}}{Convert snow crab biological ASCII data to standard format.}
+#'   \item{\code{update.scsbio}}{Update snow crab survey biological data repositories.}
+#'   \item{\code{summary.scsbio}}{Returns a data summary of an \code{scsbio} object.}
+#' } 
 #' 
-#' @rdname scsbio
+
+#' @export
 scsbio <- function(x, ...) UseMethod("scsbio")
 
-#' @rdname scsbio
+#' @export
 scsbio.default <- function(x, format = fmt.scsbio(), ...){
    if ("scsbio" %in% class(x)) return(x)
    
@@ -91,8 +85,8 @@ scsbio.scsset <- function(x, ...){
    x <- cbind(x, v[index, setdiff(names(x), key(x))])
 }
 
-# Format for snow crab biological ASCII data files:
-format.scsbio <- function(x){
+#' @export
+fmt.scsbio <- function(x){
    #           variable name                   format  fill.char  description
    fmt.str = c("blank1",                        "A1",     " ",    "Blank.",
                "day",                           "A2",     "0",    "Day.",
@@ -153,7 +147,7 @@ format.scsbio <- function(x){
    return(x)
 }
 
-# Convert snow crab biological ASCII data to usable format:
+#' @export
 convert.scsbio <- function(x, ...){
    if (!attr(x, "converted")){
       temp <- attributes(x) # Get catch attributes.
@@ -273,7 +267,7 @@ convert.scsbio <- function(x, ...){
    return(x)
 }
 
-#' @rdname scsbio
+#' @export read.scsbio
 read.scsbio <- function(x, year, ...){
    if (!missing(x)) if ("scsset" %in% class(x)) year <- sort(unique(x$year))
    if (!missing(x)) if (is.numeric(x)) year <- x
@@ -299,7 +293,7 @@ read.scsbio <- function(x, year, ...){
    return(v)
 }
 
-#' @rdname scsbio
+#' @export update.scsbio
 update.scsbio <- function(year, path, Rfile = TRUE, csv = TRUE, ...){
    # Check input argument:
    if (!is.numeric(year) | (length(year) == 0)) stop("'year' must be a numeric vector.")
@@ -332,7 +326,7 @@ update.scsbio <- function(year, path, Rfile = TRUE, csv = TRUE, ...){
    }
 }
 
-#' @rdname scsbio
+#' @export
 summary.scsbio <- function(x, by, category, weight = FALSE, ...){
    # Parse input arguments:
    if (!missing(category)) if (!is.character(category)) stop("'category' must be a vector of character strings.")

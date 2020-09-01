@@ -2,28 +2,31 @@
 % Please edit documentation in R/survey.R
 \name{survey}
 \alias{survey}
-\alias{survey.default}
-\alias{survey.character}
 \title{Survey Identifiers}
 \usage{
 survey(x, ...)
-
-\method{survey}{default}(x, survey, year, ...)
-
-\method{survey}{character}(x, survey, year, verbose = FALSE, ...)
 }
 \arguments{
+\item{year}{Survey year(s).}
+
 \item{survey}{Character string specifying the research survey. The input is passed onto the
 \code{\link{project}} function. To see the complete list of survey IDs available,
 run \code{survey()}.}
-
-\item{year}{Survey year(s).}
 
 \item{verbose}{Logical value specifying whether to return the survey identifiers in long form.}
 }
 \description{
 Returns research survey codes and identifiers.
 }
+\section{Functions}{
+
+\describe{
+  \item{\code{survey}}{Generic \code{survey} method.}
+  \item{\code{survey.default}}{Fetch survey identifiers.}
+  \item{\code{survey.character}}{Fetch survey identifiers and information.}
+}
+}
+
 \examples{
 # Complete lists survey codes:
 survey()               # List all survey IDs.

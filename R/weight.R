@@ -42,14 +42,6 @@
 #' 
 #' @return Returns a numerical vector the same size as \code{length} containing the expected weight 
 #'         of an organism for a given length measurement.
-#' 
-#' @section Functions:
-#' \describe{
-#'   \item{\code{weight}}{Generic \code{weight} method.}
-#'   \item{\code{weight.default}}{Returns the expected weight for a given organism length.}
-#'   \item{\code{weight.scsbio}}{Returns expected weight for an \code{scsbio} object.}
-#'   \item{\code{weight.scobs}}{Returns expected weight for a snow crab from observer data.}
-#' }
 #'       
 #' @examples
 #' # Weights for Atlantic cod:
@@ -90,17 +82,20 @@
 #'
 #' # Calculate total weights by day:
 #' weight(x, by = c("year", "month", "day"), category = c("TM", "TMM", "TMSC12", "TMSC345"))
-#'
-#' @export weight
-#' @rawNamespace S3method(weight, default)
-#' @rawNamespace S3method(weight, scsbio)
-#' @rawNamespace S3method(weight, scobs)
+#' 
+#' @section Functions:
+#' \describe{
+#'   \item{\code{weight}}{Generic \code{weight} method.}
+#'   \item{\code{weight.default}}{Returns the expected weight for a given organism length.}
+#'   \item{\code{weight.scsbio}}{Returns expected weight for an \code{scsbio} object.}
+#'   \item{\code{weight.scobs}}{Returns expected weight for a snow crab from an \code{scobs} observer data object.}
+#' } 
 #' 
 
-#' @rdname weight
+#' @export
 weight <- function(x, ...) UseMethod("weight")
 
-#' @rdname weight
+#' @export
 weight.default <- function(x, species, sex, coefficients, units = "kg",  ...){
    # Parse 'units' argument:
    units <- match.arg(tolower(units), c("grams", "kg", "kilograms"))
@@ -222,7 +217,7 @@ weight.default <- function(x, species, sex, coefficients, units = "kg",  ...){
    return(v)
 }
 
-#' @rdname weight
+#' @export
 weight.scsbio <- function(x, category, by, hard.shelled, units = "g", ...){
    y <- x
 
@@ -288,7 +283,7 @@ weight.scsbio <- function(x, category, by, hard.shelled, units = "g", ...){
    return(w)
 }
 
-#' @rdname weight
+#' @export
 weight.scobs <- function(x, ...){
    # Buffer variables:
    if (!("chela.height" %in% names(x)))   x$chela.height <- x$chela.height.right

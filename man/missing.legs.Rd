@@ -2,30 +2,9 @@
 % Please edit documentation in R/missing.legs.R
 \name{missing.legs}
 \alias{missing.legs}
-\alias{missing.legs.default}
-\alias{missing.legs.numeric}
-\alias{missing.legs.character}
-\alias{is.missing.legs}
-\alias{is.missing.legs.character}
-\alias{is.missing.legs.data.frame}
-\alias{bin2str.missing.legs}
 \title{Missing Legs}
 \usage{
 missing.legs(x, ...)
-
-\method{missing.legs}{default}(x)
-
-\method{missing.legs}{numeric}(x)
-
-\method{missing.legs}{character}(x)
-
-is.missing.legs(x, ...)
-
-\method{is.missing.legs}{character}(x, side, include.regenerated = FALSE, ...)
-
-\method{is.missing.legs}{data.frame}(x, side, include.regenerated = FALSE, ...)
-
-bin2str.missing.legs(x)
 }
 \arguments{
 \item{x}{Numerical code(s), character string(s) or \code{list} objects.}
@@ -85,7 +64,7 @@ missing.legs()
 # Missing legs descriptions for specified codes:
 missing.legs(c(1, 1, 2, 3)) 
 
-# A sample of test cases:
+# A rich sample of test cases:
 str <- c("11 L234 R34R", "15 R2M L3R L4M L5", "  ", "", "56", "r3",
          "15 L2,3,5,R2,4", "That's R2 right", "R234  L2,3r", "l3r", " 34 what",
          "L1,3,2R", "This a comment", "R234r5r, l12r3, 49")

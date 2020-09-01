@@ -2,18 +2,9 @@
 % Please edit documentation in R/minilog.R
 \name{minilog}
 \alias{minilog}
-\alias{minilog.default}
-\alias{minilog.data.frame}
-\alias{plot.minilog}
 \title{Minilog Data}
 \usage{
 minilog(x, ...)
-
-\method{minilog}{default}(x, ...)
-
-\method{minilog}{data.frame}(x, header, ...)
-
-\method{plot}{minilog}(x, col, lwd = 1, ...)
 }
 \arguments{
 \item{x}{Minilog data file}
@@ -36,6 +27,24 @@ or the snow crab survey (\code{= "sc"} or \code{= "snow crab"}).}
 Functions to create, read, write, manipulate and analyze Minilog depth/temperature 
              probe data.
 }
+\section{Functions}{
+
+\describe{
+   \item{\code{minilog}}{Generic \code{minilog} method.}
+   \item{\code{minilog.default}}{Default minilog method}
+   \item{\code{minilog.data.frame}}{Convert data frame to minilog object.}
+   \item{\code{path.minilog}}{Find a minilog data path.}
+   \item{\code{file.minilog}}{Find a minilog data file.}
+   \item{\code{read.minilog}}{Read Minilog data. }
+   \item{\code{write.minilog}}{Write a \code{minilog} object to a file.}
+   \item{\code{plot.minilog}}{Plot minilog data object.}
+   \item{\code{summary.minilog}}{Minilog data object summary.}
+   \item{\code{split.minilog}}{Split minilog data object into disjoint subsets.}
+   \item{\code{truncate.minilog}}{Truncate minilog data object.}
+   \item{\code{info.minilog}}{Minilog data object information.}
+}
+}
+
 \examples{
 # Minilog files for the 2000 September RV survey:
 minilog.file(survey = "rv", year = 2000)
@@ -55,9 +64,4 @@ file <- system.file("extdata", "Minilog example.txt", package = "gulf.data")
 x <- read.minilog(file)
 plot(x)
 
-}
-\seealso{
-\code{\link[gulf.data]{read.minilog}}
-
-\code{\link[gulf.data]{header}}
 }

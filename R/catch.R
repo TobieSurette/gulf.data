@@ -3,21 +3,24 @@
 #' @description Attach catch data.
 #' 
 #' @param x Target object.
-#'
+#' @param value Object containing catch data to be assigned.
+#' 
+#' 
 #' @section Functions:
 #' \describe{
-#'   \item{\code{catch}}{Generic \code{catch} assignment method.}
-#'   \item{\code{catch<-.scsset}}{Import catch data into an \code{\link{scsset}} object. }
+#'    \item{\code{catch}}{Generic \code{catch} method.}
+#'    \item{\code{catch<-}}{Generic \code{catch} assignment method.}
+#'    \item{\code{catch<-.scsset}}{Import catch data into an \code{\link{scsset}} object.}
 #' }
-#'     
-#' @export "catch<-"
-#' @rawNamespace S3method("catch<-", scsset)
 #' 
 
-#' @rdname catch
+#' @export
+"catch" <- function(x, ...) UseMethod("catch")
+
+#' @export
 "catch<-" <- function(x, ...) UseMethod("catch<-")
 
-#' @rdname catch
+#' @export 
 "catch<-.scsset" <- function(x, value, ...){
    args <- list(...)
    if (length(args) == 0) r <- summary(value, category = category(), ...) else r <- summary(value, ...)  
@@ -30,4 +33,3 @@
 
    return(x)
 }
-

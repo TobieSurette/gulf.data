@@ -26,34 +26,23 @@
 #' @section Functions:
 #' \describe{
 #'   \item{\code{is.mature}}{Generic \code{is.mature} function.}
-#'   \item{\code{is.mature.scsbio}}{Snow crab biological data (\code{scsbio}) method.}
+#'   \item{\code{is.mature.scsbio}}{GSnow crab biological data (\code{scsbio}) method.}
 #'   \item{\code{is.primiparous}}{Generic \code{is.primiparous} function.}
-#'   \item{\code{is.primiparous.scsbio}}{Returns whether a female is primiparous, i.e. a first-time spawner.} 
-#'   \item{\code{is.multiparous}}{Returns whether a female is multiparous, i.e. has previously spawned.} 
-#'   \item{\code{is.multiparous.scsbio}}{Returns whether a female snow crab is multiparous, i.e. has previously spawned.} 
-#'   \item{\code{is.senile}}{Generic \code{is.senile} function.} 
-#'   \item{\code{is.senile.scsbio}}{Returns whether a female is senile, i.e. has decreased spawning capability because of age.} 
-#'   \item{\code{maturity}}{Generic maturity function.} 
-#'   \item{\code{maturity.default}}{Return sexual maturity status.} 
-#'   \item{\code{maturity.numeric}}{Convert numeric codes to descriptive maturity character strings.} 
+#'   \item{\code{is.primiparous.scsbio}}{Returns whether a female is primiparous, i.e. a first-time spawner.}
+#'   \item{\code{is.multiparous}}{Generic \code{is.multiparous} function.}
+#'   \item{\code{is.multiparous.scsbio}}{Returns whether a female is multiparous, i.e. has previously spawned.}
+#'   \item{\code{is.senile}}{Generic \code{is.senile} function.}
+#'   \item{\code{is.senile.scsbio}}{Returns whether an animal is senile, i.e. has decreased spawning capability because of old age.}
+#'   \item{\code{maturity}}{Generic \code{weight} method.}
+#'   \item{\code{maturity.default}}{Return sexual maturity status.}
+#'   \item{\code{maturity.numeric}}{Convert numeric codes to descriptive maturity character strings.}
 #' }
 #' 
+ 
 #' @export is.mature
-#' @rawNamespace S3method(is.mature, scsbio)
-#' @export is.primiparous
-#' @rawNamespace S3method(is.primiparous, scsbio)
-#' @export is.multiparous
-#' @rawNamespace S3method(is.multiparous, scsbio)
-#' @export is.senile
-#' @rawNamespace S3method(is.senile, scsbio)
-#' @rawNamespace S3method(maturity, default)
-#' @rawNamespace S3method(maturity, numeric)
-#' 
-
-#' @rdname maturity
 is.mature <- function(x, ...) UseMethod("is.mature")
 
-#' @rdname maturity
+#' @export
 is.mature.scsbio <- function(x, probability = FALSE, ...){
    # IS.MATURE.SCBIO - Determine whether crab is mature.
 
@@ -99,10 +88,10 @@ is.mature.scsbio <- function(x, probability = FALSE, ...){
    return(mat)
 }
 
-#' @rdname maturity
+#' @export is.primiparous
 is.primiparous <- function(x, ...) UseMethod("is.primiparous")
 
-#' @rdname maturity
+#' @export
 is.primiparous.scsbio <- function(x, ...){
    # Returns whether a crab is newly moulted.
 
@@ -120,10 +109,10 @@ is.primiparous.scsbio <- function(x, ...){
    return(index)
 }
 
-#' @rdname maturity
+#' @export is.multiparous 
 is.multiparous <- function(x, ...) UseMethod("is.multiparous")
 
-#' @rdname maturity
+#' @export
 is.multiparous.scsbio <- function(x, ...){
    # Returns whether a crab is newly moulted.
 
@@ -140,13 +129,13 @@ is.multiparous.scsbio <- function(x, ...){
    return(index)
 }
 
-#' @rdname maturity
+#' @export is.senile
 is.senile <- function(x, ...){
    # IS.SENILE - Generic 'is.senile' method.
    UseMethod("is.senile")
 }
 
-#' @rdname maturity
+#' @export
 is.senile.scsbio <- function(x, ...){
    # IS.SENILE - Returns whether a crab is senile.
 
@@ -169,10 +158,10 @@ is.senile.scsbio <- function(x, ...){
    return(index)
 }
 
-#' @rdname maturity
+#' @export maturity
 maturity <- function(x, ...) UseMethod("maturity")
 
-#' @rdname maturity
+#' @export
 maturity.default <- function(x, ...){
    index <- is.mature(x)
    v <- rep("", length(index))
@@ -181,7 +170,7 @@ maturity.default <- function(x, ...){
    return(v)
 }
 
-#' @rdname maturity
+#' @export
 maturity.numeric <- function(x, year, species, ...){
    if (missing(years)) year <- as.numeric(substr(Sys.time(), 1, 4))
    
@@ -245,3 +234,4 @@ maturity.numeric <- function(x, year, species, ...){
    
    return(v)
 }
+

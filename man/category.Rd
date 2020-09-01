@@ -2,24 +2,9 @@
 % Please edit documentation in R/category.R
 \name{category}
 \alias{category}
-\alias{category.default}
-\alias{category.numeric}
-\alias{category.character}
-\alias{is.category}
-\alias{is.category.scsbio}
-\title{Biological Categories}
+\title{Biological and Species Categories}
 \usage{
 category(x, ...)
-
-\method{category}{default}(x, ...)
-
-\method{category}{numeric}(x, sex, group, ...)
-
-\method{category}{character}(x, verbose = FALSE, parse = FALSE, language = "english", ...)
-
-is.category(x, ...)
-
-\method{is.category}{scsbio}(x, category, ...)
 }
 \arguments{
 \item{x}{Character string(s) specifying a biological categories or an\sQuote{scsbio} object. 
@@ -31,29 +16,29 @@ The full syntax of biological strings are presented in the \code{Details} sectio
 \code{code} is numeric. Some accepted values are \code{1}, \sQuote{m} or 
 \sQuote{male} for males, or \code{2}, \sQuote{f} or \sQuote{female} for females.}
 
+\item{language}{A character string specifying the language in which category code descriptions 
+are to be returned. Either english (\code{language = "english"}), 
+french (\code{language = "french"} or \code{language = "français"}).}
+
 \item{parse}{Logical value specifying whether to parse a category string onto a list containing
 the corresponding variable definitions, suitable for direct indexing of biological 
 fields.}
 
-\item{language}{A character string specifying the language in which category code descriptions 
-are to be returned. Either english (\code{language = "english"}), 
-french (\code{language = "french"} or \code{language = "français"}).}
+\item{species}{Numerical species code(s).}
 }
 \value{
 Returns a vector of character strings containing the descriptions for a specified vector 
         of category strings or codes.
 }
 \description{
-Convenience functions to quickly specify and identify biological categories. 
+Convenience functions to quickly specify and identify biological categories and species groups. 
              These are defined by sex, size, maturity or other biological characteristics.
 }
 \details{
-Strings may be expressed in lowercase or uppercase letters. Spaces or other separators may be included 
-in the string for clarity, but have no effect on the output. String syntax is as follows:
+String are not case sensitive. Spaces or other separators may be included in the string for clarity, 
+but have no effect on the output. String syntax is as follows:
 
 \describe{ 
-   \item{\code{Total}}{A leading \sQuote{} (i.e. \sQuote{Total}) was used historically, though it currently may be omitted.}
-
    \item{\code{Sex}}{The first character specifies the sex \sQuote{M} for males and \sQuote{F} for females.}
 
    \item{\code{Maturity}}{The second character(s) is/are optional and specifies the maturity. It may
@@ -92,13 +77,16 @@ in the string for clarity, but have no effect on the output. String syntax is as
 \section{Functions}{
 
 \describe{
-  \item{\code{category}}{Generic \code{category} method.}
-  \item{\code{category.default}}{Default \code{category} method.}
-  \item{\code{category.numeric}}{Return sets of pre-defined biological category strings.}
-  \item{\code{category.character}}{Parse or describe a biological category string.}
-  \item{\code{is.category}}{Returns whether an observation belongs to a specified catgory.}
-  \item{\code{is.category.scsbio}}{Returns whether a snow crab biological data observation 
-                                   belongs to a specified catgory.}
+   \item{\code{category}}{Generic \code{category} method.}
+   \item{\code{category.default}}{Default \code{category} method.}
+   \item{\code{category.numeric}}{Return sets of pre-defined biological category strings.}
+   \item{\code{category.character}}{Return informal description or formal specification of a biological category string.}
+   \item{\code{is.category}}{Generic \code{is.category} function.}
+   \item{\code{is.category.scsbio}}{Returns whether an observation belongs to a specified snow crab biological category.}
+   \item{\code{is.fish}}{Determine whether a species is an vertebrate fish species.}
+   \item{\code{is.invertebrate}}{Determine whether a species is an invertebrate.}
+   \item{\code{is.skate}}{Determine whether a fish species is a skate.}
+   \item{\code{is.shrimp}}{Determine whether a species was categorized as a shrimp historically.}
 }
 }
 

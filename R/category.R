@@ -1,6 +1,6 @@
-#' Biological Categories
+#' Biological and Species Categories
 #' 
-#' @description Convenience functions to quickly specify and identify biological categories. 
+#' @description Convenience functions to quickly specify and identify biological categories and species groups. 
 #'              These are defined by sex, size, maturity or other biological characteristics.
 #'
 #' @param x Character string(s) specifying a biological categories or an\sQuote{scsbio} object. 
@@ -14,19 +14,17 @@
 #' @param parse Logical value specifying whether to parse a category string onto a list containing
 #'              the corresponding variable definitions, suitable for direct indexing of biological 
 #'              fields. 
+#' @param species Numerical species code(s).
 #' @param ... Further argument (e.g. \code{probability}) passed onto the \code{\link{is.mature.scbio}} function.
 #'
 #' @return Returns a vector of character strings containing the descriptions for a specified vector 
 #'         of category strings or codes.
 #'       
 #' @details 
-#' 
-#' Strings may be expressed in lowercase or uppercase letters. Spaces or other separators may be included 
-#' in the string for clarity, but have no effect on the output. String syntax is as follows:
+#' String are not case sensitive. Spaces or other separators may be included in the string for clarity, 
+#' but have no effect on the output. String syntax is as follows:
 #'
 #' \describe{ 
-#'    \item{\code{Total}}{A leading \sQuote{} (i.e. \sQuote{Total}) was used historically, though it currently may be omitted.}
-#'
 #'    \item{\code{Sex}}{The first character specifies the sex \sQuote{M} for males and \sQuote{F} for females.}
 #'
 #'    \item{\code{Maturity}}{The second character(s) is/are optional and specifies the maturity. It may
@@ -62,17 +60,6 @@
 #'                              string.}
 #' }
 #' 
-#' @section Functions:
-#' \describe{
-#'   \item{\code{category}}{Generic \code{category} method.}
-#'   \item{\code{category.default}}{Default \code{category} method.}
-#'   \item{\code{category.numeric}}{Return sets of pre-defined biological category strings.}
-#'   \item{\code{category.character}}{Parse or describe a biological category string.}
-#'   \item{\code{is.category}}{Returns whether an observation belongs to a specified catgory.}
-#'   \item{\code{is.category.scsbio}}{Returns whether a snow crab biological data observation 
-#'                                    belongs to a specified catgory.}
-#' }
-#' 
 #' @examples
 #' # Default biological category strings:
 #' category()  # All.
@@ -104,22 +91,28 @@
 #' index <- is.category(x, c("T", "TM", "TF", "TMIL95SC12", "TMMG95", "TFMULT"))
 #' apply(index, 2, sum, na.rm = TRUE)
 #' 
-#' @export category
-#' @rawNamespace S3method(category, default)
-#' @rawNamespace S3method(category, numeric)
-#' @rawNamespace S3method(category, character)
-#' @export is.category
-#' @rawNamespace S3method(is.category, scsbio)
-#' 
-#' @rdname category
+#' @section Functions:
+#' \describe{
+#'    \item{\code{category}}{Generic \code{category} method.}
+#'    \item{\code{category.default}}{Default \code{category} method.}
+#'    \item{\code{category.numeric}}{Return sets of pre-defined biological category strings.}
+#'    \item{\code{category.character}}{Return informal description or formal specification of a biological category string.}
+#'    \item{\code{is.category}}{Generic \code{is.category} function.}
+#'    \item{\code{is.category.scsbio}}{Returns whether an observation belongs to a specified snow crab biological category.}
+#'    \item{\code{is.fish}}{Determine whether a species is an vertebrate fish species.}
+#'    \item{\code{is.invertebrate}}{Determine whether a species is an invertebrate.}
+#'    \item{\code{is.skate}}{Determine whether a fish species is a skate.}
+#'    \item{\code{is.shrimp}}{Determine whether a species was categorized as a shrimp historically.}
+#' }   
+#'    
+ 
+#' @export
 category <- function(x, ...) UseMethod("category")
 
-#' @rdname category
-category.default <- function(x, ...){
-   if (missing(x)) category.numeric(...) 
-}
+#' @export
+category.default <- function(x, ...) category.numeric(...) 
 
-#' @rdname category
+#' @export
 category.numeric <- function(x, sex, group, ...){
    # Parse 'sex' argument:
    if (!missing(sex)){
@@ -206,149 +199,7 @@ category.numeric <- function(x, sex, group, ...){
    if (missing(x)) return(str) else return(str[x])
 }
 
-#' @rdname category
-category.character <- function(x, verbose = FALSE, parse = FALSE, language = "english", ...){
-   if (parse) return(parse.category(x))
-   
-   # Parse 'language' argument:
-   language <- match.arg(tolower(language), c("english", "french", "français"))
-   if (language == "français") language <- "french"
-
-   # Parse character string 'x' argument:
-   if (is.character(x)){
-      if (length(x) == 1){
-         r <- parse.category(x)
-         str <- NULL
-
-         # Maturity:
-         if (!is.null(r$maturity)){
-            if (r$maturity == 1) str <- paste(str, "mature", sep = "")
-            if (r$maturity == 2) str <- paste(str, "immature", sep = "")
-         }
-
-         # Extract maturity string:
-         if (!is.null(r$fun)){
-            str <- paste(str, gsub("is.", "", r$fun))
-         }
-
-         # Sex:
-         if (!is.null(r$sex)){
-            if (r$sex == 1){
-               if (language == "english") str <- paste(str, "males")
-               if (language == "french")  str <- paste(str, "mâles")
-            }
-            if (r$sex == 2){
-               if (language == "english") str <- paste(str, "females")
-               if (language == "french")  str <- paste(str, "femelles")
-            }
-         }
-         str <- paste(str, ",", sep = "")
-
-         # Carapace width:
-         if (!is.null(r$carapace.width)){
-            if (!is.na(r$carapace.width[1])){
-               if (language == "english"){
-                  if (r$carapace.width.flag[1]){
-                     str <- paste(str, " cw >= ", r$carapace.width[1], "mm,", sep = "")
-                  }else{
-                     str <- paste(str, " cw > ", r$carapace.width[1], "mm,", sep = "")
-                  }
-               }
-               if (language == "french"){
-                  if (r$carapace.width.flag[1]){
-                     str <- paste(str, " lc >= ", r$carapace.width[1], "mm,", sep = "")
-                  }else{
-                     str <- paste(str, " lc > ", r$carapace.width[1], "mm,", sep = "")
-                  }
-               }
-            }
-            if (!is.na(r$carapace.width[2])){
-               if (language == "english"){
-                  if (r$carapace.width.flag[2]){
-                     str <- paste(str, " cw <= ", r$carapace.width[2], "mm,", sep = "")
-                  }else{
-                     str <- paste(str, " cw < ", r$carapace.width[2], "mm,", sep = "")
-                  }
-               }
-               if (language == "french"){
-                  if (r$carapace.width.flag[2]){
-                     str <- paste(str, " lc <= ", r$carapace.width[2], "mm,", sep = "")
-                  }else{
-                     str <- paste(str, " lc < ", r$carapace.width[2], "mm,", sep = "")
-                  }
-               }
-            }
-         }
-
-         # Shell condition:
-         if (!is.null(r$shell.condition)){
-            if (language == "english") str <- paste(str, " shell condition ", paste(r$shell.condition, collapse = ","), ",", sep = "")
-            if (language == "french")  str <- paste(str, " condition de carapace ", paste(r$shell.condition, collapse = ","), ",", sep = "")
-         }
-
-         # Missing legs:
-         if (!is.null(r$missing.legs)){
-            if (r$missing.legs){
-               if (language == "english") str <- paste(str, " with missing legs,", sep = "")
-               if (language == "french") str <- paste(str, " avec pattes manquantes,", sep = "")
-            }
-         }
-
-         # Gonad colour:
-         if (!is.null(r$gonad.colour)){
-            if (language == "english"){
-               if (r$gonad.colour == 1) str <- paste(str, " white gonads,", sep = "")
-               if (r$gonad.colour == 2) str <- paste(str, " beige gonads,", sep = "")
-               if (r$gonad.colour == 3) str <- paste(str, " orange gonads,", sep = "")
-            }
-            if (language == "french"){
-               if (r$gonad.colour == 1) str <- paste(str, " gonade blanche,", sep = "")
-               if (r$gonad.colour == 2) str <- paste(str, " gonade beige,", sep = "")
-               if (r$gonad.colour == 3) str <- paste(str, " gonade orange,", sep = "")
-            }
-         }
-
-         # Eggs remaining:
-         if (!is.null(r$eggs.remaining)){
-            if (language == "english") str <- paste(str, " eggs remaining = ", paste(r$eggs.remaining, collapse = ","), ",", sep = "")
-            if (language == "french")  str <- paste(str, " oeufs restants = ", paste(r$eggs.remaining, collapse = ","), ",", sep = "")
-         }
-
-         # Egg colour:
-         if (!is.null(r$egg.colour)){
-            if (language == "english"){
-               if (r$egg.colour == 1) str <- paste(str, " light orange eggs,", sep = "")
-               if (r$egg.colour == 2) str <- paste(str, " dark orange eggs,", sep = "")
-               if (r$egg.colour == 3)  str <- paste(str, " brown eggs,", sep = "")
-            }
-            if (language == "french"){
-               if (r$egg.colour == 1) str <- paste(str, " oeufs orange clairs,", sep = "")
-               if (r$egg.colour == 2) str <- paste(str, " oeufs orange foncés,", sep = "")
-               if (r$egg.colour == 3)  str <- paste(str, " oeufs bruns,", sep = "")
-            }
-         }
-
-         # Remove leading space:
-         if (substr(str, 1, 1) == " ") str <- substr(str, 2, nchar(str))
-
-         # Remove trailing comma:
-         if (substr(str, nchar(str), nchar(str)) == ",") str <- substr(str, 1, nchar(str)-1)
-
-         # Capitalize first letter:
-         str <- paste(toupper(substr(str, 1, 1)), substr(str, 2, nchar(str)), sep = "")
-         return(str)
-      }else{
-         str <- NULL
-         for (i in 1:length(x)){
-            temp <- category(x[i])
-            str <- c(str, temp)
-         }
-         return(str)
-      }
-   }
-}
-
-# parse.category - Returns a list characterizing a snow crab category.
+# Internal biological string parsing function:
 parse.category <- function(x){
    # Initialize category variables:
    sex <- NULL      # Sex.
@@ -538,10 +389,154 @@ parse.category <- function(x){
    return(result)
 }
 
-#' @rdname category
+# Internal string category description function:
+describe.category <- function(x, language = "english", ...){
+   # Parse 'language' argument:
+   language <- match.arg(tolower(language), c("english", "french", "français"))
+   if (language == "français") language <- "french"
+
+   # Initilize result string:
+   str <- NULL
+      
+   # Parse character string 'x' argument:
+   if (length(x) == 0) return(str)
+   if (length(x) > 1){
+      for (i in 1:length(x)) str <- c(str, describe.category(x[i]))
+   }else{
+      # Extract formal specifications:
+      r <- parse.category(x)
+
+      # Maturity:
+      if (!is.null(r$maturity)){
+         if (r$maturity == 1) str <- paste(str, "mature", sep = "")
+         if (r$maturity == 2) str <- paste(str, "immature", sep = "")
+      }
+
+      # Extract function string:
+      if (!is.null(r$fun)) str <- paste(str, gsub("is.", "", r$fun))
+
+      # Sex:
+      if (!is.null(r$sex)){
+         if (r$sex == 1){
+            if (language == "english") str <- paste(str, "males")
+            if (language == "french")  str <- paste(str, "mâles")
+         }
+         if (r$sex == 2){
+            if (language == "english") str <- paste(str, "females")
+            if (language == "french")  str <- paste(str, "femelles")
+         }
+      }
+      str <- paste(str, ",", sep = "")
+
+      # Carapace width:
+      if (!is.null(r$carapace.width)){
+         if (!is.na(r$carapace.width[1])){
+            if (language == "english"){
+               if (r$carapace.width.flag[1]){
+                  str <- paste(str, " cw >= ", r$carapace.width[1], "mm,", sep = "")
+               }else{
+                  str <- paste(str, " cw > ", r$carapace.width[1], "mm,", sep = "")
+               }
+            }
+            if (language == "french"){
+               if (r$carapace.width.flag[1]){
+                  str <- paste(str, " lc >= ", r$carapace.width[1], "mm,", sep = "")
+               }else{
+                  str <- paste(str, " lc > ", r$carapace.width[1], "mm,", sep = "")
+               }
+            }
+         }
+         if (!is.na(r$carapace.width[2])){
+            if (language == "english"){
+               if (r$carapace.width.flag[2]){
+                  str <- paste(str, " cw <= ", r$carapace.width[2], "mm,", sep = "")
+               }else{
+                  str <- paste(str, " cw < ", r$carapace.width[2], "mm,", sep = "")
+               }
+            }
+            if (language == "french"){
+               if (r$carapace.width.flag[2]){
+                  str <- paste(str, " lc <= ", r$carapace.width[2], "mm,", sep = "")
+               }else{
+                  str <- paste(str, " lc < ", r$carapace.width[2], "mm,", sep = "")
+               }
+            }
+         }
+      }
+
+      # Shell condition:
+      if (!is.null(r$shell.condition)){
+         if (language == "english") str <- paste(str, " shell condition ", paste(r$shell.condition, collapse = ","), ",", sep = "")
+         if (language == "french")  str <- paste(str, " condition de carapace ", paste(r$shell.condition, collapse = ","), ",", sep = "")
+      }
+
+      # Missing legs:
+      if (!is.null(r$missing.legs)){
+         if (r$missing.legs){
+            if (language == "english") str <- paste(str, " with missing legs,", sep = "")
+            if (language == "french")  str <- paste(str, " avec pattes manquantes,", sep = "")
+         }
+      }
+
+      # Gonad colour:
+      if (!is.null(r$gonad.colour)){
+         if (language == "english"){
+            if (r$gonad.colour == 1) str <- paste(str, " white gonads,", sep = "")
+            if (r$gonad.colour == 2) str <- paste(str, " beige gonads,", sep = "")
+            if (r$gonad.colour == 3) str <- paste(str, " orange gonads,", sep = "")
+         }
+         if (language == "french"){
+            if (r$gonad.colour == 1) str <- paste(str, " gonade blanche,", sep = "")
+            if (r$gonad.colour == 2) str <- paste(str, " gonade beige,", sep = "")
+            if (r$gonad.colour == 3) str <- paste(str, " gonade orange,", sep = "")
+         }
+      }
+
+      # Eggs remaining:
+      if (!is.null(r$eggs.remaining)){
+         if (language == "english") str <- paste(str, " eggs remaining = ", paste(r$eggs.remaining, collapse = ","), ",", sep = "")
+         if (language == "french")  str <- paste(str, " oeufs restants = ", paste(r$eggs.remaining, collapse = ","), ",", sep = "")
+      }
+
+      # Egg colour:
+      if (!is.null(r$egg.colour)){
+         if (language == "english"){
+            if (r$egg.colour == 1) str <- paste(str, " light orange eggs,", sep = "")
+            if (r$egg.colour == 2) str <- paste(str, " dark orange eggs,", sep = "")
+            if (r$egg.colour == 3)  str <- paste(str, " brown eggs,", sep = "")
+         }
+         if (language == "french"){
+            if (r$egg.colour == 1) str <- paste(str, " oeufs orange clairs,", sep = "")
+            if (r$egg.colour == 2) str <- paste(str, " oeufs orange foncés,", sep = "")
+            if (r$egg.colour == 3)  str <- paste(str, " oeufs bruns,", sep = "")
+         }
+      }
+
+      # Remove leading space:
+      if (substr(str, 1, 1) == " ") str <- substr(str, 2, nchar(str))
+         
+      # Remove trailing comma:
+      if (substr(str, nchar(str), nchar(str)) == ",") str <- substr(str, 1, nchar(str)-1)
+
+      # Capitalize first letter:
+      str <- paste(toupper(substr(str, 1, 1)), substr(str, 2, nchar(str)), sep = "")
+   }
+   
+   return(str)
+}
+
+#' @export
+category.character <- function(x, parse = FALSE, ...){
+   args <- list(...)
+   if (any(c("sex", "group") %in% names(args))) return(category.numeric(...))
+   if (parse) return(parse.category(x))
+   return(describe.category(x, ...))
+}
+
+#' @export is.category
 is.category <- function(x, ...) UseMethod("is.category")
 
-#' @rdname category
+#' @export
 is.category.scsbio <- function(x, category, ...){
    # Check whether crab belongs to a specified category:
 
@@ -596,3 +591,18 @@ is.category.scsbio <- function(x, category, ...){
    return(index)
 }
 
+#' @export is.fish
+is.fish <- function(species) return(species %in% c(1:899, 940, 950, 960, 965))
+
+#' @export is.invertebrate
+is.invertebrate <- function(species) return((species >= 1700) & (species < 9000))
+
+#' @export is.skate
+is.skate <- function(species) return(species %in% c(200:212, 217, 219))
+
+#' @export is.shrimp
+is.shrimp <- function(species){
+   v <- species %in% c(2211:2213, 2220:2222, 2230, 2312, 2313, 2315, 2316, 2319, 
+                       2331:2333, 2411, 2414, 2415, 2417, 2420, 2421)
+   return(v)
+}

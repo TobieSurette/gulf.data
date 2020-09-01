@@ -2,24 +2,9 @@
 % Please edit documentation in R/species.R
 \name{species}
 \alias{species}
-\alias{species.foreign}
-\alias{species.default}
-\alias{species.list}
-\alias{species.numeric}
-\alias{species.character}
 \title{Species Names or Code}
 \usage{
 species(x, ...)
-
-\method{species}{foreign}(x, ...)
-
-\method{species}{default}(x, ...)
-
-\method{species}{list}(x, ...)
-
-\method{species}{numeric}(x, language = "english", coding = "rv", source, ...)
-
-\method{species}{character}(x, language = "english", input = "stacac", output = "rv", ...)
 }
 \arguments{
 \item{x}{Numerical species code(s) or species name(s).}
@@ -43,18 +28,19 @@ Vector of character strings containing species names. For multiple species name 
 \description{
 Converts species codes to corresponding species names and vice versa.
 }
-\section{Methods (by class)}{
-\itemize{
-\item \code{foreign}: Load foreign species code table.
+\section{Functions}{
 
-\item \code{default}: \sQuote{species} default function.
-
-\item \code{list}: Apply \code{species} function to list elements.
-
-\item \code{numeric}: Convert species code(s) to corresponding species name(s).
-
-\item \code{character}: Convert species name(s) to corresponding numeric code(s).
-}}
+\describe{
+  \item{\code{species}}{Generic \code{species} method.}
+  \item{\code{species.foreign}}{Load foreign species code table.}
+  \item{\code{species.default}}{Default \code{species} method.}
+  \item{\code{species.list}}{Apply \code{species} function to list elements.}
+  \item{\code{species.numeric}}{Convert numeric species code(s) to corresponding species name(s).}
+  \item{\code{species.character}}{Find numeric species code(s).}
+  \item{\code{species.str}}{Alias of \code{species.numeric}.}
+  \item{\code{species.code}}{Alias of \code{species.character}.}
+}
+}
 
 \examples{
 # Miscellaneous queries:
@@ -80,5 +66,5 @@ species.foreign()
 
 }
 \seealso{
-\code{\link{species.table}}
+\code{\link{gulf.data-data}}
 }

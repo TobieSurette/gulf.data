@@ -32,16 +32,19 @@
 #'
 #' # Return the juvenile cod survey codes for a vector of years:
 #' survey(year = 1990:1995, survey = "juv")
-#'
-#' @export survey
-#' @rawNamespace S3method(survey, default)
-#' @rawNamespace S3method(survey, character)
 #' 
-
-#' @rdname survey
+#' @section Functions:
+#' \describe{
+#'   \item{\code{survey}}{Generic \code{survey} method.}
+#'   \item{\code{survey.default}}{Fetch survey identifiers.}
+#'   \item{\code{survey.character}}{Fetch survey identifiers and information.}
+#' } 
+#' 
+ 
+#' @export
 survey <- function(x, ...) UseMethod("survey")
 
-#' @rdname survey
+#' @export
 survey.default <- function(x, survey, year, ...){
    if (missing(survey) & missing(year)) return(survey.character(...))
 
@@ -217,7 +220,7 @@ survey.default <- function(x, survey, year, ...){
    return(v)
 }
 
-#' @rdname survey
+#' @export
 survey.character <- function(x, survey, year, verbose = FALSE, ...){
    if (missing(x) & !missing(survey) & !missing(year))
        return(survey.default(survey = survey, year = year, verbose = verbose, ...))

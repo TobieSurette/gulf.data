@@ -11,8 +11,8 @@ read.notus(file)
 }
 \description{
 Read trawl acoustic monitoring data files. Acoustic sensors are attached to bottom trawls to measure
-various aspects of the trawl, such as the door spread, wing spread, water depth and temperature.
+             various aspects of the trawl, such as the door spread, wing spread, water depth and temperature.
 }
 \seealso{
-read.scanmar read.netmind read.esonar
+scanmar, netmind, esonar
 }

@@ -1,7 +1,4 @@
-.onLoad <- function(libname, pkgname) {
-   library(gulf.utils)
-   library(gulf.metadata)
-   
+.onLoad <- function(libname, pkgname){
    # Define default paths to be used and store them within 'options':
    path <- list()
    

@@ -42,6 +42,4 @@
 #'   \item{name_fr}{French species names.}
 #' }
 #' 
-#' @seealso \code{\link{gulf-data}}
-#' @seealso \code{\link{species}}
 NULL

@@ -2,7 +2,7 @@
 % Please edit documentation in R/read.gps.R
 \name{read.gps}
 \alias{read.gps}
-\title{Read a GPS file}
+\title{Read GPS Data}
 \usage{
 read.gps(x)
 }

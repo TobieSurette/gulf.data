@@ -52,8 +52,3 @@ A \sQuote{csv} (comma-separated) file with the following variables:
 }
 }
 
-\seealso{
-\code{\link{gulf-data}}
-
-\code{\link{species}}
-}

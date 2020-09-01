@@ -15,30 +15,21 @@
 #' 
 #' @section Functions:
 #' \describe{
-#'   \item{\code{is.new.shell}}{Returns whether a crustacean is newly moulted.}
-#'   \item{\code{is.new.shell.scsbio}}{Returns whether a crab is newly moulted for snow crab survey data.}
-#'   \item{\code{is.hard.shell}}{Returns whether a carapace is considered hard.}
-#'   \item{\code{is.hard.shell.scsbio}}{Returns whether a carapace is considered hard for snow crab survey data.}
-#'   \item{\code{is.hard.shell.scsobs}}{Returns whether a carapace is considered hard for snow crab observer data.}
-#'   \item{\code{is.soft.shell}}{Returns whether a carapace is considered soft.}
-#'   \item{\code{is.skip.moulter}}{Returns whether a crustacean is a skip-moulter.}
-#'   \item{\code{is.skip.moulter.scsbio}}{Returns whether a snow crab is a skip-moulter.}
-#' }
-#' 
-#' @export is.new.shell
-#' @rawNamespace S3method(is.new.shell, scsbio)
-#' @export is.hard.shell
-#' @rawNamespace S3method(is.hard.shell, scsobs)
-#' @rawNamespace S3method(is.hard.shell, scsbio)
-#' @export is.soft.shell
-#' @export is.skip.moulter 
-#' @rawNamespace S3method(is.skip.moulter, scsbio)
+#'   \item{\code{is.new.shell}}{Generic \code{is.new.shell} method.}
+#'   \item{\code{is.new.shell.scsbio}}{Returns whether a crab is newly-moulted based on snow crab survey data.}
+#'   \item{\code{is.hard.shell}}{Generic \code{is.hard.shell} method.}
+#'   \item{\code{is.hard.shell.scsbio}}{Returns whether a carapace is considered hard based on snow crab survey data.}
+#'   \item{\code{is.hard.shell.scsobs}}{Returns whether a carapace is considered hard based on snow crab observer data.}
+#'   \item{\code{is.soft.shell}}{Returns whether a crustacean carapace is considered soft.}
+#'   \item{\code{is.skip.moulter}}{Generic \code{is.skip.moulter} method.}
+#'   \item{\code{is.skip.moulter.scsbio}}{Returns whether a crustacean is considered to have skipped a moult, based on snow crab survey data.}
+#' } 
 #' 
 
-#' @rdname moulting
+#' @export is.new.shell
 is.new.shell <- function(x, ...) UseMethod("is.new.shell")
 
-#' @rdname moulting
+#' @export 
 is.new.shell.scsbio <- function(x){
    index <- rep(FALSE, dim(x)[1])
    names(x) <- tolower(names(x))
@@ -48,10 +39,10 @@ is.new.shell.scsbio <- function(x){
    return(index)
 }
 
-#' @rdname moulting
+#' @export is.hard.shell
 is.hard.shell <- function(x, ...) UseMethod("is.hard.shell")
 
-#' @rdname moulting
+#' @export
 is.hard.shell.scsbio <- function(x, durometer, shell.condition, zone, ...){
    # Parse input arguments:
    if (is.data.frame(x)) names(x) <- tolower(names(x))
@@ -98,7 +89,7 @@ is.hard.shell.scsbio <- function(x, durometer, shell.condition, zone, ...){
    return(v)
 }
 
-#' @rdname moulting
+#' @export
 is.hard.shell.scsobs <- function(x, durometer, shell.condition, zone, ...){
    # Parse input arguments:
    if (is.data.frame(x)) names(x) <- tolower(names(x))
@@ -154,13 +145,13 @@ is.hard.shell.scsobs <- function(x, durometer, shell.condition, zone, ...){
    return(v)
 }
 
-#' @rdname moulting
-is.soft.shell <- function(x) return(!is.hard.shell(x))
+#' @export is.soft.shell
+is.soft.shell <- function(x, ...) return(!is.hard.shell(x, ...))
 
-#' @rdname moulting
+#' @export is.skip.moulter
 is.skip.moulter <- function(x, ...) UseMethod("is.skip.moulter")
 
-#' @rdname moulting
+#' @export
 is.skip.moulter.scsbio <- function(x, ...){
    # IS.SKIP.MOULTER - Returns whether a crab a skip moulter.
 

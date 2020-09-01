@@ -13,7 +13,7 @@
 #' # Missing legs descriptions for specified codes:
 #' missing.legs(c(1, 1, 2, 3)) 
 #' 
-#' # A sample of test cases:
+#' # A rich sample of test cases:
 #' str <- c("11 L234 R34R", "15 R2M L3R L4M L5", "  ", "", "56", "r3",
 #'          "15 L2,3,5,R2,4", "That's R2 right", "R234  L2,3r", "l3r", " 34 what",
 #'          "L1,3,2R", "This a comment", "R234r5r, l12r3, 49")
@@ -65,19 +65,11 @@
 #'                                      leg data observations.}
 #' }
 #' 
-#' @export missing.legs
-#' @export is.missing.legs
-#' @export bin2str.missing.legs
-#' @rawNamespace S3method(missing.legs, default)
-#' @rawNamespace S3method(missing.legs, numeric)
-#' @rawNamespace S3method(missing.legs, character)
-#' @rawNamespace S3method(is.missing.legs, character)
-#' @rawNamespace S3method(is.missing.legs, data.frame)
-#' 
-#' @rdname missing.legs
+
+#' @export
 missing.legs <- function(x, ...) UseMethod("missing.legs")
 
-#' @rdname missing.legs
+#' @export
 missing.legs.default <- function(x){
    if (missing(x)){ 
       v <- missing.legs.numeric()
@@ -86,7 +78,7 @@ missing.legs.default <- function(x){
    }
 }
 
-#' @rdname missing.legs
+#' @export
 missing.legs.numeric <- function(x){
    # Define code descriptions:
    descriptions <- c("Missing (M)",
@@ -99,7 +91,7 @@ missing.legs.numeric <- function(x){
    if (missing(x)) return(descriptions) else return(descriptions[x])
 }
 
-#' @rdname missing.legs
+#' @export
 missing.legs.character <- function(x){
    x <- toupper(x)
 
@@ -193,10 +185,10 @@ missing.legs.character <- function(x){
    return(res)
 }
 
-#' @rdname missing.legs
+#' @export is.missing.legs
 is.missing.legs <- function(x, ...) UseMethod("is.missing.legs")
 
-#' @rdname missing.legs
+#' @export
 is.missing.legs.character <- function(x, side, include.regenerated = FALSE, ...){
    # Convert to data frame:
    x <- data.frame(missing.legs = x)
@@ -238,7 +230,7 @@ is.missing.legs.character <- function(x, side, include.regenerated = FALSE, ...)
    return(index)
 }
 
-#' @rdname missing.legs
+#' @export
 is.missing.legs.data.frame <- function(x, side, include.regenerated = FALSE, ...){
    names(x) <- tolower(names(x))
    if (!("missing.legs" %in% names(x))) stop("No missing legs field in target object.")
@@ -246,7 +238,7 @@ is.missing.legs.data.frame <- function(x, side, include.regenerated = FALSE, ...
    return(is.missing.legs(x$missing.legs)) 
 }
 
-#' @rdname missing.legs
+#' @export bin2str.missing.legs
 bin2str.missing.legs <- function(x){
    # BIN2STR.MISSING.LEGS - Convert missing legs binary string to character string format.
    
@@ -259,7 +251,6 @@ bin2str.missing.legs <- function(x){
    
    x <- gsub("*", "0", x, fixed = TRUE)
    x <- gsub(" ", "0", x, fixed = TRUE)
-   
    
    # Buffer strings with irregular lengths:
    index <- which(nchar(x) < 5)

@@ -25,13 +25,24 @@
 #' plot(x)      # Graphical summary.
 #' summary(x)   # Data summary.
 #'
-#' @seealso \code{\link[gulf.data]{minilog}}, \code{\link[gulf.data]{star.oddi}}
-#'
+#' @section Functions:
+#' \describe{
+#'    \item{\code{esonar}}{Generic \code{esonar} method.}
+#'    \item{\code{esonar.default}}{Create an \code{esonar} object.}
+#'    \item{\code{locate.esonar}}{Find \code{esonar} data file(s).}
+#'    \item{\code{read.esonar}}{Read \code{esonar} data file(s).}
+#'    \item{\code{plot.esonar}}{Plot \code{esonar} data.}
+#'    \item{\code{map.esonar}}{Map \code{esonar} vessel and data track.}
+#'    \item{\code{describe.esonar}}{\code{esonar} data description.}
+#'    \item{\code{summary.esonar}}{Summary statistics for an \code{esonar} object.}
+#'    \item{\code{match.esonar}}{Match \code{esonar} data records.}
+#'    \item{\code{truncate.esonar}}{Remove \code{esonar} which lie outside a specified time interval.}
+#' } 
+#' 
 
 #' @export
 esonar <- function(x, ...) UseMethod("esonar")
 
-#' @describeIn esonar Create an \code{esonar} object.
 #' @export
 esonar.default <- function(x, header, ...){
    # Add 'esonar' class tag:
@@ -50,7 +61,6 @@ esonar.default <- function(x, header, ...){
    return(x)
 }
 
-#' @describeIn esonar Find \code{esonar} data file(s).
 #' @export
 locate.esonar <- function(x, year, tow.id, full.names = TRUE, remove = "test", ...){
    # Parse 'x' argument:
@@ -101,7 +111,6 @@ locate.esonar <- function(x, year, tow.id, full.names = TRUE, remove = "test", .
    return(files)
 }
 
-#' @describeIn esonar Read \code{esonar} data file(s).
 #' @export read.esonar
 read.esonar <- function(x, offset = 0, repeats = FALSE, ...){
    # Define list of files to be read:
@@ -254,7 +263,6 @@ read.esonar <- function(x, offset = 0, repeats = FALSE, ...){
    return(v)
 }
 
-#' @describeIn esonar Plot \code{esonar} data.
 #' @export
 plot.esonar <- function(x, ...){
    # Define time series in minutes:
@@ -284,7 +292,6 @@ plot.esonar <- function(x, ...){
    map(x)
 }
 
-#' @describeIn esonar Map \code{esonar} vessel and data track.
 #' @export
 map.esonar <- function(x, set.card = NULL, variable = NULL, ...){
    # MAP.SONAR - Display an 'esonar' object on a map.
@@ -314,7 +321,6 @@ map.esonar <- function(x, set.card = NULL, variable = NULL, ...){
    }
 }
 
-#' @describeIn esonar \code{esonar} data description.
 #' @export
 describe.esonar <- function(x, ...){
    if (is.null(header(x))) return(NULL)
@@ -346,7 +352,6 @@ describe.esonar <- function(x, ...){
    return(v)
 }
 
-#' @describeIn esonar Summary statistics for an \code{esonar} object.
 #' @export
 summary.esonar <- function(x, year, truncate = TRUE, round = TRUE, ...){
 
@@ -420,7 +425,6 @@ summary.esonar <- function(x, year, truncate = TRUE, round = TRUE, ...){
    return(res)
 }
 
-#' @describeIn esonar Match \code{esonar} data records.
 #' @export
 match.esonar <- function(x, set.card, method = "file.name"){
    # MATCH.ESONAR - Return the set card indices which match a 'esonar' object.
@@ -501,7 +505,6 @@ match.esonar <- function(x, set.card, method = "file.name"){
    return(index)
 }
 
-#' @describeIn esonar Remove \code{esonar} which lie outside a specified time interval.
 #' @export
 truncate.esonar <- function(x, buffer = 0, ...){
    # TRUNCATE.ESONAR - Truncate a 'esonar' object.

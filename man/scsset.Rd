@@ -2,15 +2,9 @@
 % Please edit documentation in R/scsset.R
 \name{scsset}
 \alias{scsset}
-\alias{scsset.default}
-\alias{read.scsset}
 \title{Snow Crab Set/Tow Data}
 \usage{
 scsset(x, ...)
-
-\method{scsset}{default}(x, ...)
-
-read.scsset(x, year, ...)
 }
 \arguments{
 \item{x}{A \sQuote{data.frame} object. When reading data, \code{x} may be a numeric 
@@ -28,9 +22,8 @@ The \code{scsset} class is a container for Snow Crab Survey Set/Tow data, i.e.
   \item{\code{scsset}}{Generic \code{scsset} method.}
   \item{\code{scsset.default}}{Create an \code{scsset} object.}
   \item{\code{read.scsset}}{Read snow crab survey set/tow data.}
-  \item{\code{update.scsset}}{Update  snow crab survey set/tow data repositories.}
-  \item{\code{summary.scsset}}{Returns a summary of an \code{scsset} object.}
-  \item{\code{\link{check.scsset}}}{Check \code{scsset} for data issues.}
+  \item{\code{update.scsset}}{Create an \code{scsset} object.}
+  \item{\code{summary.scsset}}{Return a summary of an \code{scsset} object.}
 }
 }
 

@@ -15,6 +15,18 @@
 #' 
 #' @return Vector of character strings containing species names. For multiple species name searches, a list of
 #'         search results are returned.
+#'         
+#' @section Functions:
+#' \describe{
+#'   \item{\code{species}}{Generic \code{species} method.}
+#'   \item{\code{species.foreign}}{Load foreign species code table.}
+#'   \item{\code{species.default}}{Default \code{species} method.}
+#'   \item{\code{species.list}}{Apply \code{species} function to list elements.}
+#'   \item{\code{species.numeric}}{Convert numeric species code(s) to corresponding species name(s).}
+#'   \item{\code{species.character}}{Find numeric species code(s).}
+#'   \item{\code{species.str}}{Alias of \code{species.numeric}.}
+#'   \item{\code{species.code}}{Alias of \code{species.character}.}
+#' }
 #' 
 #' @examples
 #' # Miscellaneous queries:
@@ -38,26 +50,20 @@
 #' species()
 #' species.foreign()
 #' 
-#' @export species
-#' @export species.foreign
-#' @rawNamespace S3method(species, default)
-#' @rawNamespace S3method(species, list)
-#' @rawNamespace S3method(species, character)
-#' @rawNamespace S3method(species, numeric)
-#' @export species.str
+#' @seealso \code{\link{gulf.data-data}}
 #' 
-#' @seealso \code{\link{species.table}}
-#' 
+ 
+#' @export 
 species <- function(x, ...) UseMethod("species") # Generic function.
 
-#' @describeIn species Load foreign species code table.
+#' @export species.foreign
 species.foreign <- function(x, ...){
    file <- system.file("extdata", "species.foreign.csv", package = "gulf.data")
    x <- read.csv(file, header = TRUE, stringsAsFactors = FALSE)
    return(x)
 }
 
-#' @describeIn species \sQuote{species} default function.
+#' @export
 species.default <- function(x, ...){
    if (missing(x)){
       file <- system.file("extdata", "species.csv", package = "gulf.data")
@@ -68,10 +74,10 @@ species.default <- function(x, ...){
    if (is.factor(x)) return(species(as.character(x)))
 }
 
-#' @describeIn species Apply \code{species} function to list elements.
+#' @export
 species.list <- function(x, ...) return(lapply(x, species))
 
-#' @describeIn species Convert species code(s) to corresponding species name(s).
+#' @export
 species.numeric <- function(x, language = "english", coding = "rv", source, ...){
    # Parse input arguments:
    language <- match.arg(tolower(language), c("english", "french", "latin" , "any"))
@@ -139,7 +145,7 @@ species.numeric <- function(x, language = "english", coding = "rv", source, ...)
    return(result)
 }
 
-#' @describeIn species Convert species name(s) to corresponding numeric code(s).
+#' @export
 species.character <- function(x, language = "english", input = "stacac", output = "rv", ...){
    # Languages:
    language <- match.arg(tolower(language), c("", "any", "english", "french", "latin"))
@@ -196,5 +202,9 @@ species.character <- function(x, language = "english", input = "stacac", output 
    }
 }
 
-# Wrapper functions:
+#' @export species.str
 species.str <- species.numeric
+
+#' @export species.str
+species.code <- species.character
+
