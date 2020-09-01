@@ -24,18 +24,18 @@ scsset <- function(x, ...) UseMethod("scsset")
 #' @export
 scsset.default <- function(x, ...){
    if ("scsset" %in% class(x)) return(x)
-  
-   # Define class:
-   class(x) <- unique(c("scsset", class(x))) 
-   
+ 
    # Define attributes:
    project(x) <- "scs"
    key(x) <- c("year", "tow.id")
-   units(x, c("longitude", "latitude", "longitude.start.logbook", "longitude.end.logbook", "latitude.start.logbook", "latitude.end.logbook")) <- "degrees"
-   units(x, "swept.area") <- "square.meters"
-   units(x, c("depth", "warp")) <- "fathoms"
-   units(x, "bottom.temperature") <- "degreesC"
-   format(x, c("start.time", "end.time", "start.time.logbook", "end.time.logbook")) <- "hh:mm:ss"
+   gulf.metadata::units(x, c("longitude", "latitude", "longitude.start.logbook", "longitude.end.logbook", "latitude.start.logbook", "latitude.end.logbook")) <- "degrees"
+   gulf.metadata::units(x, "swept.area") <- "square.meters"
+   gulf.metadata::units(x, c("depth", "warp")) <- "fathoms"
+   gulf.metadata::units(x, "bottom.temperature") <- "degreesC"
+   fmt(x, c("start.time", "end.time", "start.time.logbook", "end.time.logbook")) <- "hh:mm:ss"
+   
+   # Define class:
+   class(x) <- unique(c("scsset", class(x))) 
    
    return(x)
 }
@@ -48,7 +48,7 @@ read.scsset <- function(x, year, ...){
    if (!missing(year)){
       v <- NULL
       for (i in 1:length(year)){
-         file <- file.locate(package = "gulf.data", pattern = c("scs", "set", "csv", year[i]))
+         file <- locate(package = "gulf.data", pattern = c("scs", "set", "csv", year[i]))
          if (length(file) == 1) v <- rbind(v, read.csv(file, header = TRUE, stringsAsFactors = FALSE))
       }
    }  

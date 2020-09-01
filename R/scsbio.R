@@ -64,12 +64,13 @@ scsbio <- function(x, ...) UseMethod("scsbio")
 #' @export
 scsbio.default <- function(x, format = fmt.scsbio(), ...){
    if ("scsbio" %in% class(x)) return(x)
-   
+
    # Define attributes:
    project(x) <- "scs"
    key(x) <- c("year", "tow.id", "crab.number")
-   units(x, "carapace.width", "chela.height", "abdomen.width") <- "millimeters"
-   units(x, "weight") <- "grams"
+   
+   gulf.metadata::units(x, c("carapace.width", "chela.height", "abdomen.width")) <- "millimeters"
+   gulf.metadata::units(x, "weight") <- "grams"
 
    # Define class:
    class(x) <- unique(c("scsbio", class(x))) 
@@ -276,7 +277,7 @@ read.scsbio <- function(x, year, ...){
    if (!missing(year)){
       v <- NULL
       for (i in 1:length(year)){
-         file <- file.locate(package = "gulf.data", pattern = c("scs", "bio", "csv", year[i]))
+         file <- locate(package = "gulf.data", pattern = c("scs", "bio", "csv", year[i]))
          if (length(file) == 1) v <- rbind(v, read.csv(file, header = TRUE, stringsAsFactors = FALSE))
       }
    }  

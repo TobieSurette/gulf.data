@@ -1,5 +1,8 @@
 #' Carapace Moult Status
 #' 
+#' @name moulting
+#' @aliases molting
+#' 
 #' @description Determines the carapace moult or hardness status.
 #' 
 #' @param x Object.
@@ -10,6 +13,7 @@
 #' # Read 2010 crab data:
 #' x <- read.scsbio(2010)
 #' index <- is.new.shell(x)    # Newly moulted crab.
+#' index <- is.soft.shell(x)   # Soft-shelled crab.
 #' index <- is.multiparous(x)  # Multiparous females.
 #' index <- is.skip.moulter(x) # Skip-moulters.
 #' 

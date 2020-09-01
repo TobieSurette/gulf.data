@@ -6,6 +6,33 @@
 #' @aliases Minilog example
 #' @aliases species.table species.table.foreign
 #' 
+#' Survey fishing vessel table:
+#' \describe{
+#'   \item{name}{Survey vessel name.}
+#'   \item{vessel.length}{Survey vessel length.}
+#'   \item{vessel.weight}{Vessel weight (tonnes).}
+#'   \item{vessel.horsepower}{Survey vessel horsepower.}
+#'   \item{vessel.hull}{Vessel hull material.}
+#'   \item{trawl.method}{Trawl method.}
+#' }
+#' 
+#' Survey table:
+#' \describe{
+#'    \item{project}{Survey project ID.}
+#'    \item{year}{Survey year.}
+#'    \item{id}{Survey identifier.}
+#'    \item{vessel}{Survey vessel name.}
+#'    \item{type}{Survey type.}
+#'    \item{start.month}{Survey start month.}
+#'    \item{start.day}{Survey start day.}
+#'    \item{end.month}{Survey end month.}	
+#'    \item{end.day}{Survey end day.}
+#'    \item{trawl.type}{Type of trawl used.}
+#'    \item{trawl.sensor}{Trawl acoustic sensor system.}	
+#'    \item{minilog}{Whether a Minilog temperature-depth probe was used.}
+#'    \item{star-oddi}{Whether Star-Oddi probe(s) were used.}
+#' }
+#' 
 #' @section \code{Minilog example.txt}: 
 #' A sample Minilog text file with a header, field names, and temperature observations.
 #' 

@@ -61,7 +61,7 @@ esonar.default <- function(x, header, ...){
    return(x)
 }
 
-#' @export
+#' @export locate.esonar
 locate.esonar <- function(x, year, tow.id, full.names = TRUE, remove = "test", ...){
    # Parse 'x' argument:
    if (!missing(x)){
