@@ -1,5 +1,7 @@
 #' Individual or Catch Weight
-#'
+#' 
+#' @name weight
+#' 
 #' @description Returns an estimate of the weight of individual organisms for a specified length. 
 #'              Estimated weights of sample subsets can also be calculated.
 #'              
@@ -95,6 +97,7 @@
 #' @export
 weight <- function(x, ...) UseMethod("weight")
 
+#' @rdname weight
 #' @export
 weight.default <- function(x, species, sex, coefficients, units = "kg",  ...){
    # Parse 'units' argument:
@@ -217,6 +220,7 @@ weight.default <- function(x, species, sex, coefficients, units = "kg",  ...){
    return(v)
 }
 
+#' @rdname weight
 #' @export
 weight.scsbio <- function(x, category, by, hard.shelled, units = "g", ...){
    y <- x
@@ -283,6 +287,7 @@ weight.scsbio <- function(x, category, by, hard.shelled, units = "g", ...){
    return(w)
 }
 
+#' @rdname weight
 #' @export
 weight.scobs <- function(x, ...){
    # Buffer variables:

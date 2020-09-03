@@ -1,5 +1,7 @@
 #' Survey Identifiers
 #'
+#' @name survey
+#' 
 #' @description Returns research survey codes and identifiers.
 #'
 #' @param year Survey year(s).
@@ -12,17 +14,16 @@
 #'
 #' @examples
 #' # Complete lists survey codes:
-#' survey()               # List all survey IDs.
-#' survey(verbose = TRUE) # List survey full names.
-#  survey("rv")           # September multispecies survey ID.
-#  survey("sept")         # September multispecies survey ID.
-#  survey("september")    # September multispecies survey ID.
-#' survey("ns")           # Northumberland Strait survey ID.
-#' survey("northumb")     # Northumberland Strait survey ID.
-#' survey("sen")          # Sentinel survey ID.
+#' survey()                      # Complete survey table.
+#' survey(project = "sept")      # September multispecies survey table.
+#  survey("rv")                  # September multispecies survey table.
+#' survey(project = "ns")        # Northumberland Strait survey ID.
+#' survey(project = "northumb")  # Northumberland Strait survey ID.
 #'
+#' survey("^P")                  # Surveys whose IDs start with "P".
+#' 
 #' # Return the September research vessel survey code for 2005:
-#' survey(year = 2005:2007, survey = "rv")
+#' survey(year = 2005:2007, project = "rv")
 #'
 #' # Return the September research vessel survey codes for a vector of years:
 #' survey(survey = "rv", year = 2000:2019)
@@ -44,48 +45,31 @@
 #' @export
 survey <- function(x, ...) UseMethod("survey")
 
+#' @rdname survey
 #' @export
-survey.default <- function(x, survey, year, ...){
-   if (missing(survey) & missing(year)) return(survey.character(...))
-
-   # Get project ID:
-   project <- survey(survey)
-
-   file <- locate(package = "gulf.data", pattern = c("survey.csv"))
-   tab <- read.csv(file, header = TRUE, stringsAsFactors = FALSE)
-   tab <- tab[tab$project == project, ]
+survey.default <- function(x, year, project, ...){
+   file <- locate(package = "gulf.data", pattern = "survey.csv")
+   v <- read.csv(file, header = TRUE, stringsAsFactors = FALSE)
    
-   # Return the whole list if year is unspecified:
-   if (missing(year)) v <- tab else v <- tab[as.character(year)]
-
-   # Replace NULL values with NAs:
-   v[unlist(lapply(v, is.null))] <- list(NA)
-
-   # Convert to named vector:
-   v <- unlist(v)
-   names(v) <- substr(names(v), 1, 4)
-
+   # Subset by project:
+   if (!missing(project)){
+      project <- project(project)
+      v <- v[v$project %in% project, ]
+   }
+   
+   # Subset by year:
+   if (!missing(year)) v <- v[v$year %in% year, ]
+   
+   if (!missing(x)){
+      if (length(x) > 0){
+         index <- NULL
+         for (i in 1:length(x)) index <- c(index, grep(tolower(x[i]), tolower(v$project)))
+         for (i in 1:length(x)) index <- c(index, grep(tolower(x[i]), tolower(v$id)))
+         index <- sort(unique(index))
+         v <- v[index, ]
+      }
+   }
+   
    return(v)
 }
 
-#' @export
-survey.character <- function(x, survey, year, verbose = FALSE, ...){
-   if (missing(x) & !missing(survey) & !missing(year))
-       return(survey.default(survey = survey, year = year, verbose = verbose, ...))
-   if (missing(x) & !missing(survey)) x <- survey
-
-   # Load project information:
-   p <- project()
-   p <- p[grep("survey", p$keyword), ]
-   if (missing(x)) if (!verbose) return(p$name) else return(p$name.long)
-
-   # Look up survey names:
-   x <- tolower(x)
-   v <- match(x, gsub("s$", "", p$name))
-   v[is.na(v)] <- pmatch(x[is.na(v)], tolower(p$name))
-   v[is.na(v)] <- pmatch(x[is.na(v)], tolower(p$name.long))
-
-   if (!verbose) v <- p$name[v] else v <- p$name.long[v]
-
-   return(v)
-}

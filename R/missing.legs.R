@@ -1,5 +1,7 @@
 #' Missing Legs
 #' 
+#' @name missing.legs 
+#' 
 #' @description Functions for formatting and checking whether a crustacean has missing legs.
 #' 
 #' @param x Numerical code(s), character string(s) or \code{list} objects.
@@ -69,6 +71,7 @@
 #' @export
 missing.legs <- function(x, ...) UseMethod("missing.legs")
 
+#' @rdname missing.legs
 #' @export
 missing.legs.default <- function(x){
    if (missing(x)){ 
@@ -78,6 +81,7 @@ missing.legs.default <- function(x){
    }
 }
 
+#' @rdname missing.legs
 #' @export
 missing.legs.numeric <- function(x){
    # Define code descriptions:
@@ -91,6 +95,7 @@ missing.legs.numeric <- function(x){
    if (missing(x)) return(descriptions) else return(descriptions[x])
 }
 
+#' @rdname missing.legs
 #' @export
 missing.legs.character <- function(x){
    x <- toupper(x)
@@ -185,9 +190,11 @@ missing.legs.character <- function(x){
    return(res)
 }
 
+#' @rdname missing.legs
 #' @export is.missing.legs
 is.missing.legs <- function(x, ...) UseMethod("is.missing.legs")
 
+#' @rdname missing.legs
 #' @export
 is.missing.legs.character <- function(x, side, include.regenerated = FALSE, ...){
    # Convert to data frame:
@@ -230,6 +237,7 @@ is.missing.legs.character <- function(x, side, include.regenerated = FALSE, ...)
    return(index)
 }
 
+#' @rdname missing.legs
 #' @export
 is.missing.legs.data.frame <- function(x, side, include.regenerated = FALSE, ...){
    names(x) <- tolower(names(x))
@@ -238,6 +246,7 @@ is.missing.legs.data.frame <- function(x, side, include.regenerated = FALSE, ...
    return(is.missing.legs(x$missing.legs)) 
 }
 
+#' @rdname missing.legs
 #' @export bin2str.missing.legs
 bin2str.missing.legs <- function(x){
    # BIN2STR.MISSING.LEGS - Convert missing legs binary string to character string format.

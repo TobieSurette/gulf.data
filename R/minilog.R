@@ -1,5 +1,7 @@
 #' Minilog Data
 #'
+#' @name minilog
+#' 
 #' @description Functions to create, read, write, manipulate and analyze Minilog depth/temperature 
 #'              probe data.
 #' 
@@ -53,9 +55,11 @@
 #' @export
 minilog <- function(x, ...) UseMethod("minilog")
 
+#' @rdname minilog
 #' @export
 minilog.default <- function(x, ...) if ("minilog" %in% class(x)) return(x) else stop("Not a 'minilog' object.")
 
+#' @rdname minilog
 #' @export
 minilog.data.frame <- function(x, header, ...){
    # Remove non-minilog variables:
@@ -85,6 +89,7 @@ minilog.data.frame <- function(x, header, ...){
    return(x)
 }
 
+#' @rdname minilog
 #' @export path.minilog
 path.minilog <- function(year, project, survey, ...){
    # Check input arguments:
@@ -147,6 +152,7 @@ path.minilog <- function(year, project, survey, ...){
    return(str)
 }
 
+#' @rdname minilog
 #' @export file.minilog
 file.minilog <- function(x, year, set.number, tow.id, set.card, path = TRUE, survey = "sc", project, ...){
    # Parse 'x' argument:
@@ -229,6 +235,7 @@ file.minilog <- function(x, year, set.number, tow.id, set.card, path = TRUE, sur
    return(str)
 }
 
+#' @rdname minilog
 #' @export read.minilog
 read.minilog <- function(x, project, offset = 0, file, ...){
    # Define list of files to be read:
@@ -383,6 +390,7 @@ read.minilog <- function(x, project, offset = 0, file, ...){
    return(x)
 }
 
+#' @rdname minilog
 #' @export write.minilog
 write.minilog <- function(x, file = NULL){
    # Write header information to file:
@@ -435,6 +443,7 @@ write.minilog <- function(x, file = NULL){
    write.table(temp, file = file, append = TRUE, row.names = FALSE, col.names = FALSE, quote = FALSE, sep = ",")
 }
 
+#' @rdname minilog
 #' @export
 plot.minilog <- function(x, col, lwd = 1, ...){
    # Define default colours:
@@ -463,6 +472,7 @@ plot.minilog <- function(x, col, lwd = 1, ...){
    }
 }
 
+#' @rdname minilog
 #' @export 
 summary.minilog <- function(x, truncate = TRUE, round = TRUE, ...){
    # SUMMARY.MINILOG - Returns summary statistics of a 'minilog' object.
@@ -526,6 +536,7 @@ summary.minilog <- function(x, truncate = TRUE, round = TRUE, ...){
    return(res)
 }
 
+#' @rdname minilog
 #' @export split.minilog
 split.minilog <- function(x, by = "file.name", set.card, start, end, buffer = 0){
    # SPLIT.MINILOG - Split a 'minilog' object into its component tows.
@@ -579,6 +590,7 @@ split.minilog <- function(x, by = "file.name", set.card, start, end, buffer = 0)
    return(res)
 }
 
+#' @rdname minilog
 #' @export truncate.minilog
 truncate.minilog <- function(x, buffer = 0, ...){
    # TRUNCATE.MINILOG - Truncate a 'minilog' object.
@@ -614,6 +626,7 @@ truncate.minilog <- function(x, buffer = 0, ...){
    return(x)
 }
 
+#' @rdname minilog
 #' @export info.minilog
 info.minilog <- function(x, set.card = NULL){
    # INFO.MINILOG - Extract information for a 'minilog' object.

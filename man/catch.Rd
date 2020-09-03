@@ -2,9 +2,15 @@
 % Please edit documentation in R/catch.R
 \name{catch}
 \alias{catch}
-\title{Attach Catch Data}
+\alias{catch<-}
+\alias{catch<-.scsset}
+\title{Catch Data}
 \usage{
 catch(x, ...)
+
+catch(x, ...) <- value
+
+\method{catch}{scsset}(x, ...) <- value
 }
 \arguments{
 \item{x}{Target object.}
@@ -12,7 +18,7 @@ catch(x, ...)
 \item{value}{Object containing catch data to be assigned.}
 }
 \description{
-Attach catch data.
+Extract or attach or catch data.
 }
 \section{Functions}{
 

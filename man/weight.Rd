@@ -2,9 +2,18 @@
 % Please edit documentation in R/weight.R
 \name{weight}
 \alias{weight}
+\alias{weight.default}
+\alias{weight.scsbio}
+\alias{weight.scobs}
 \title{Individual or Catch Weight}
 \usage{
 weight(x, ...)
+
+\method{weight}{default}(x, species, sex, coefficients, units = "kg", ...)
+
+\method{weight}{scsbio}(x, category, by, hard.shelled, units = "g", ...)
+
+\method{weight}{scobs}(x, ...)
 }
 \arguments{
 \item{x}{A numerical vector of organism lengths, or alternatively, a
@@ -26,12 +35,12 @@ log-10 scale and the units in grams.}
 \item{units}{Units of the weight vector to be returned. It may be either in grams 
 (\code{units = "g"}) or kilograms (\code{units = "kg"}).}
 
-\item{year}{Survey years to use as data when calculating the length-weight coefficients. 
-If left unspecified, a table of default values are used.}
-
 \item{category}{A character string specifying a snow crab or crustacean category for syntax.}
 
 \item{by}{Character string(s) specifying the fields by which to group the estimated weights.}
+
+\item{year}{Survey years to use as data when calculating the length-weight coefficients. 
+If left unspecified, a table of default values are used.}
 
 \item{probability}{Logical value specifying whether maturity values are to
 be filled in with probabilties when morphometric values are unavailable. In

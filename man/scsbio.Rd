@@ -2,12 +2,30 @@
 % Please edit documentation in R/scsbio.R
 \name{scsbio}
 \alias{scsbio}
+\alias{scsbio.default}
 \alias{scsbio.scsset}
+\alias{fmt.scsbio}
+\alias{convert.scsbio}
+\alias{read.scsbio}
+\alias{update.scsbio}
+\alias{summary.scsbio}
 \title{Snow Crab Biological Data}
 \usage{
 scsbio(x, ...)
 
+\method{scsbio}{default}(x, format = fmt.scsbio(), ...)
+
 \method{scsbio}{scsset}(x, ...)
+
+\method{fmt}{scsbio}(x)
+
+convert.scsbio(x, ...)
+
+read.scsbio(x, year, ...)
+
+\method{update}{scsbio}(year, path, Rfile = TRUE, csv = TRUE, ...)
+
+\method{summary}{scsbio}(x, by, category, weight = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{data.frame} object. When reading data, \code{x} may be a numeric 
@@ -16,12 +34,9 @@ read the corresponding biological data.}
 
 \item{...}{Other parameters (not used).}
 
-\item{year}{Numeric vector specifying the survey years to be loaded.}
-
 \item{format}{A \code{data.frame} specifying the ASCII printing format for an \code{scsbio} object.}
 
-\item{key}{Character string(s) specifying which data columns form the index key.
-This key can then be used as a default for such operations as merging data.}
+\item{year}{Numeric vector specifying the survey years to be loaded.}
 
 \item{path}{string specifying the path to read or write snow crab biological data.}
 
@@ -31,14 +46,17 @@ updating snow crab biological data.}
 \item{csv}{Logical value specifying whether to write a comma-separated (\code{csv}) format file 
 when updating snow crab biological data.}
 
-\item{package}{Logical value specifying whether to write a comma-separated (\code{csv}) format
-to the \code{gulf.data} package clone.}
-
 \item{by}{Character string(s) specifying which variables to group by when summararizing.}
 
 \item{category}{Biological category string(s). See \code{\link{cagetory}} for more details.}
 
 \item{weight}{Logical value specifying whether to return a summary by weights rather than counts.}
+
+\item{key}{Character string(s) specifying which data columns form the index key.
+This key can then be used as a default for such operations as merging data.}
+
+\item{package}{Logical value specifying whether to write a comma-separated (\code{csv}) format
+to the \code{gulf.data} package clone.}
 }
 \description{
 The \code{scsbio} class is a container for Snow Crab Survey Biological data, i.e. information 
@@ -64,8 +82,11 @@ x <- scsbio()
    
 # Create 'scsbio' object with specified 'tow.number' and 'sex' fields:
 x <- scsbio(data.frame(tow.number = 1:10, sex = 1))
-   
-x <- read.scsbio(year = 2019)   
+
+# Read data:    
+x <- read.scsbio()                 # Read all avaliable data.
+x <- read.scsbio(year = 2019)      # Read single year.
+x <- read.scsbio(year = 2010:2015) # Read range of years.
 
 summary(x)
 

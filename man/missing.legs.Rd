@@ -2,9 +2,30 @@
 % Please edit documentation in R/missing.legs.R
 \name{missing.legs}
 \alias{missing.legs}
+\alias{missing.legs.default}
+\alias{missing.legs.numeric}
+\alias{missing.legs.character}
+\alias{is.missing.legs}
+\alias{is.missing.legs.character}
+\alias{is.missing.legs.data.frame}
+\alias{bin2str.missing.legs}
 \title{Missing Legs}
 \usage{
 missing.legs(x, ...)
+
+\method{missing.legs}{default}(x)
+
+\method{missing.legs}{numeric}(x)
+
+\method{missing.legs}{character}(x)
+
+is.missing.legs(x, ...)
+
+\method{is.missing.legs}{character}(x, side, include.regenerated = FALSE, ...)
+
+\method{is.missing.legs}{data.frame}(x, side, include.regenerated = FALSE, ...)
+
+bin2str.missing.legs(x)
 }
 \arguments{
 \item{x}{Numerical code(s), character string(s) or \code{list} objects.}

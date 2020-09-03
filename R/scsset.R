@@ -1,5 +1,7 @@
 #' Snow Crab Set/Tow Data
 #' 
+#' @name scsset
+#' 
 #' @description The \code{scsset} class is a container for Snow Crab Survey Set/Tow data, i.e. 
 #'              information about individual tows performed on the snow crab annual survey. 
 #'              
@@ -8,6 +10,12 @@
 #'          
 #' @param year Survey year(s) to be loaded.   
 #'  
+#' @examples 
+#' # Read data:
+#' x <- read.scsset()                 # Read all avaliable data.
+#' x <- read.scsset(year = 2019)      # Read single year.
+#' x <- read.scsset(year = 2010:2015) # Read range of years. 
+#' 
 #' @section Functions:
 #' \describe{
 #'   \item{\code{scsset}}{Generic \code{scsset} method.}
@@ -21,6 +29,7 @@
 #' @export
 scsset <- function(x, ...) UseMethod("scsset")
 
+#' @rdname scsset
 #' @export
 scsset.default <- function(x, ...){
    if ("scsset" %in% class(x)) return(x)
@@ -40,18 +49,27 @@ scsset.default <- function(x, ...){
    return(x)
 }
 
+#' @rdname scsset
 #' @export read.scsset
 read.scsset <- function(x, year, ...){
    if (!missing(x)) if (is.numeric(x)) year <- x
    
    # Use 'gulf.data' as data source:
+   v <- NULL
    if (!missing(year)){
-      v <- NULL
       for (i in 1:length(year)){
          file <- locate(package = "gulf.data", pattern = c("scs", "set", "csv", year[i]))
          if (length(file) == 1) v <- rbind(v, read.csv(file, header = TRUE, stringsAsFactors = FALSE))
       }
-   }  
+   }else{
+      file <- locate(package = "gulf.data", pattern = c("scs", "set", "csv"))
+      if (length(file) > 0){
+         for (i in 1:length(file)) v <- rbind(v, read.csv(file[i], header = TRUE, stringsAsFactors = FALSE)) 
+      }
+   }
+   
+   # NULL if no data found:
+   if (length(v) == 0) return(NULL)
    
    # Subset by specified variables:
    v <- base::subset.data.frame(v, ...)
@@ -62,9 +80,11 @@ read.scsset <- function(x, year, ...){
    return(v)
 }
 
+#' @rdname scsset
 #' @export update.scsset
 update.scsset <- function(x, ...){}
 
+#' @rdname scsset
 #' @export
 summary.scsset <- function(x, year, tow.id, category, ...){
    # Load tow data:
@@ -94,8 +114,6 @@ summary.scsset <- function(x, year, tow.id, category, ...){
    # Define flag whether to load all probe data:
    flag <- FALSE
    
-
-      
    # Define 'year':
    if (missing(year)) year <- sort(unique(x$year))
    

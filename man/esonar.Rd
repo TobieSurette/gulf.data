@@ -2,26 +2,53 @@
 % Please edit documentation in R/esonar.R
 \name{esonar}
 \alias{esonar}
+\alias{esonar.default}
+\alias{locate.esonar}
+\alias{read.esonar}
+\alias{plot.esonar}
+\alias{map.esonar}
+\alias{describe.esonar}
+\alias{summary.esonar}
+\alias{match.esonar}
+\alias{truncate.esonar}
 \title{\strong{eSonar} Data}
 \usage{
 esonar(x, ...)
+
+\method{esonar}{default}(x, header, ...)
+
+\method{locate}{esonar}(x, year, tow.id, full.names = TRUE, remove = "test", ...)
+
+read.esonar(x, offset = 0, repeats = FALSE, ...)
+
+\method{plot}{esonar}(x, ...)
+
+map.esonar(x, set.card = NULL, variable = NULL, ...)
+
+\method{describe}{esonar}(x, ...)
+
+\method{summary}{esonar}(x, year, truncate = TRUE, round = TRUE, ...)
+
+match.esonar(x, set.card, method = "file.name")
+
+\method{truncate}{esonar}(x, buffer = 0, ...)
 }
 \arguments{
 \item{x}{An \code{esonar} object, data file, survey year or keyword search term.}
 
+\item{header}{\strong{eSonar} file header information to be assigned as metadata.}
+
 \item{year}{Numeric value specifying the survey or project year(s).}
+
+\item{tow.id}{Numeric value or character string specifying the ID corresponding to a particular tow sampling station.}
 
 \item{full.names}{Logical value specifying whether to include file paths when searching for \strong{eSonar} data files.}
 
-\item{header}{\strong{eSonar} file header information to be assigned as metadata.}
-
-\item{tow.id}{Numeric value or character string specifying the ID corresponding to a particular tow sampling station.}
+\item{remove}{Character string specifying keyword(s) which, if found in the data file or path, are removed from the search results.}
 
 \item{offset}{Numeric value specifying the offset time (in minutes) to include as a corrective in the data time stamps.}
 
 \item{repeats}{Logical value specifying whether to keep repeated data records.}
-
-\item{remove}{Character string specifying keyword(s) which, if found in the data file or path, are removed from the search results.}
 }
 \description{
 Functions to read, manipulate and analyze \strong{eSonar} trawl acoustic monitoring  probe data.

@@ -1,5 +1,7 @@
 #' Species Names or Code
 #' 
+#' @name species
+#' 
 #' @description Converts species codes to corresponding species names and vice versa.
 #' 
 #' @param x Numerical species code(s) or species name(s).
@@ -56,6 +58,7 @@
 #' @export 
 species <- function(x, ...) UseMethod("species") # Generic function.
 
+#' @rdname species
 #' @export species.foreign
 species.foreign <- function(x, ...){
    file <- system.file("extdata", "species.foreign.csv", package = "gulf.data")
@@ -63,6 +66,7 @@ species.foreign <- function(x, ...){
    return(x)
 }
 
+#' @rdname species
 #' @export
 species.default <- function(x, ...){
    if (missing(x)){
@@ -74,9 +78,11 @@ species.default <- function(x, ...){
    if (is.factor(x)) return(species(as.character(x)))
 }
 
+#' @rdname species
 #' @export
 species.list <- function(x, ...) return(lapply(x, species))
 
+#' @rdname species
 #' @export
 species.numeric <- function(x, language = "english", coding = "rv", source, ...){
    # Parse input arguments:
@@ -145,6 +151,7 @@ species.numeric <- function(x, language = "english", coding = "rv", source, ...)
    return(result)
 }
 
+#' @rdname species
 #' @export
 species.character <- function(x, language = "english", input = "stacac", output = "rv", ...){
    # Languages:
@@ -205,6 +212,6 @@ species.character <- function(x, language = "english", input = "stacac", output 
 #' @export species.str
 species.str <- species.numeric
 
-#' @export species.str
+#' @export species.code
 species.code <- species.character
 

@@ -2,9 +2,36 @@
 % Please edit documentation in R/category.R
 \name{category}
 \alias{category}
+\alias{category.default}
+\alias{category.numeric}
+\alias{category.character}
+\alias{is.category}
+\alias{is.category.scsbio}
+\alias{is.fish}
+\alias{is.invertebrate}
+\alias{is.skate}
+\alias{is.shrimp}
 \title{Biological and Species Categories}
 \usage{
 category(x, ...)
+
+\method{category}{default}(x, ...)
+
+\method{category}{numeric}(x, sex, group, ...)
+
+\method{category}{character}(x, parse = FALSE, ...)
+
+is.category(x, ...)
+
+\method{is.category}{scsbio}(x, category, ...)
+
+is.fish(species)
+
+is.invertebrate(species)
+
+is.skate(species)
+
+is.shrimp(species)
 }
 \arguments{
 \item{x}{Character string(s) specifying a biological categories or an\sQuote{scsbio} object. 
@@ -16,15 +43,15 @@ The full syntax of biological strings are presented in the \code{Details} sectio
 \code{code} is numeric. Some accepted values are \code{1}, \sQuote{m} or 
 \sQuote{male} for males, or \code{2}, \sQuote{f} or \sQuote{female} for females.}
 
-\item{language}{A character string specifying the language in which category code descriptions 
-are to be returned. Either english (\code{language = "english"}), 
-french (\code{language = "french"} or \code{language = "français"}).}
-
 \item{parse}{Logical value specifying whether to parse a category string onto a list containing
 the corresponding variable definitions, suitable for direct indexing of biological 
 fields.}
 
 \item{species}{Numerical species code(s).}
+
+\item{language}{A character string specifying the language in which category code descriptions 
+are to be returned. Either english (\code{language = "english"}), 
+french (\code{language = "french"} or \code{language = "français"}).}
 }
 \value{
 Returns a vector of character strings containing the descriptions for a specified vector 

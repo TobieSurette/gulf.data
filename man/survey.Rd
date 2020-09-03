@@ -2,9 +2,12 @@
 % Please edit documentation in R/survey.R
 \name{survey}
 \alias{survey}
+\alias{survey.default}
 \title{Survey Identifiers}
 \usage{
 survey(x, ...)
+
+\method{survey}{default}(x, year, project, ...)
 }
 \arguments{
 \item{year}{Survey year(s).}
@@ -29,14 +32,15 @@ Returns research survey codes and identifiers.
 
 \examples{
 # Complete lists survey codes:
-survey()               # List all survey IDs.
-survey(verbose = TRUE) # List survey full names.
-survey("ns")           # Northumberland Strait survey ID.
-survey("northumb")     # Northumberland Strait survey ID.
-survey("sen")          # Sentinel survey ID.
+survey()                      # Complete survey table.
+survey(project = "sept")      # September multispecies survey table.
+survey(project = "ns")        # Northumberland Strait survey ID.
+survey(project = "northumb")  # Northumberland Strait survey ID.
+
+survey("^P")                  # Surveys whose IDs start with "P".
 
 # Return the September research vessel survey code for 2005:
-survey(year = 2005:2007, survey = "rv")
+survey(year = 2005:2007, project = "rv")
 
 # Return the September research vessel survey codes for a vector of years:
 survey(survey = "rv", year = 2000:2019)

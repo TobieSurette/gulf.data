@@ -1,5 +1,7 @@
 #' Biological Growth Functions
-#'
+#' 
+#' @name growth
+#' 
 #' @description Animal growth can be expressed in various ways. Fish species growth is 
 #' generally modeled as length-at-age, while crustacean growth is normally modeled as
 #' growth-at-moult size increment, i.e. the expected size increase. An common example 
@@ -40,6 +42,7 @@ f <- function(x){
 
 g <- function(x, xp, log.w = 0, slope) v <- slope * x - slope * exp(log.w) * f(((x-xp)/w) + 0.5)
 
+#' @rdname growth
 #' @export
 grow.default <- function(x, n, species, sex, theta){
    # Snow crab growth increment:

@@ -1,5 +1,7 @@
 #' \strong{eSonar} Data
 #'
+#' @name esonar
+#' 
 #' @description Functions to read, manipulate and analyze \strong{eSonar} trawl acoustic monitoring  probe data.
 #'
 #' @param x An \code{esonar} object, data file, survey year or keyword search term.
@@ -43,6 +45,7 @@
 #' @export
 esonar <- function(x, ...) UseMethod("esonar")
 
+#' @rdname esonar
 #' @export
 esonar.default <- function(x, header, ...){
    # Add 'esonar' class tag:
@@ -61,6 +64,7 @@ esonar.default <- function(x, header, ...){
    return(x)
 }
 
+#' @rdname esonar
 #' @export locate.esonar
 locate.esonar <- function(x, year, tow.id, full.names = TRUE, remove = "test", ...){
    # Parse 'x' argument:
@@ -111,6 +115,7 @@ locate.esonar <- function(x, year, tow.id, full.names = TRUE, remove = "test", .
    return(files)
 }
 
+#' @rdname esonar
 #' @export read.esonar
 read.esonar <- function(x, offset = 0, repeats = FALSE, ...){
    # Define list of files to be read:
@@ -263,6 +268,7 @@ read.esonar <- function(x, offset = 0, repeats = FALSE, ...){
    return(v)
 }
 
+#' @rdname esonar
 #' @export
 plot.esonar <- function(x, ...){
    # Define time series in minutes:
@@ -292,6 +298,7 @@ plot.esonar <- function(x, ...){
    map(x)
 }
 
+#' @rdname esonar
 #' @export
 map.esonar <- function(x, set.card = NULL, variable = NULL, ...){
    # MAP.SONAR - Display an 'esonar' object on a map.
@@ -321,6 +328,7 @@ map.esonar <- function(x, set.card = NULL, variable = NULL, ...){
    }
 }
 
+#' @rdname esonar
 #' @export
 describe.esonar <- function(x, ...){
    if (is.null(header(x))) return(NULL)
@@ -352,6 +360,7 @@ describe.esonar <- function(x, ...){
    return(v)
 }
 
+#' @rdname esonar
 #' @export
 summary.esonar <- function(x, year, truncate = TRUE, round = TRUE, ...){
 
@@ -425,6 +434,7 @@ summary.esonar <- function(x, year, truncate = TRUE, round = TRUE, ...){
    return(res)
 }
 
+#' @rdname esonar
 #' @export
 match.esonar <- function(x, set.card, method = "file.name"){
    # MATCH.ESONAR - Return the set card indices which match a 'esonar' object.
@@ -505,6 +515,7 @@ match.esonar <- function(x, set.card, method = "file.name"){
    return(index)
 }
 
+#' @rdname esonar
 #' @export
 truncate.esonar <- function(x, buffer = 0, ...){
    # TRUNCATE.ESONAR - Truncate a 'esonar' object.

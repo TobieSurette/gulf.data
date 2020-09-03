@@ -1,5 +1,7 @@
 #' Snow Crab Biological Data
 #'
+#' @name scsbio
+#' 
 #' @description The \code{scsbio} class is a container for Snow Crab Survey Biological data, i.e. information 
 #'              about individual organisms sampled on the snow crab annual survey. 
 #'              
@@ -40,8 +42,11 @@
 #'    
 #' # Create 'scsbio' object with specified 'tow.number' and 'sex' fields:
 #' x <- scsbio(data.frame(tow.number = 1:10, sex = 1))
-#'    
-#' x <- read.scsbio(year = 2019)   
+#' 
+#' # Read data:    
+#' x <- read.scsbio()                 # Read all avaliable data.
+#' x <- read.scsbio(year = 2019)      # Read single year.
+#' x <- read.scsbio(year = 2010:2015) # Read range of years.
 #' 
 #' summary(x)
 #' 
@@ -61,6 +66,7 @@
 #' @export
 scsbio <- function(x, ...) UseMethod("scsbio")
 
+#' @rdname scsbio
 #' @export
 scsbio.default <- function(x, format = fmt.scsbio(), ...){
    if ("scsbio" %in% class(x)) return(x)
@@ -79,6 +85,7 @@ scsbio.default <- function(x, format = fmt.scsbio(), ...){
 }
 
 #' @rdname scsbio
+#' @export
 scsbio.scsset <- function(x, ...){
    v <- read.scsbio(x, ...)
    v <- summary(v, by = key(x), ...)
@@ -86,6 +93,7 @@ scsbio.scsset <- function(x, ...){
    x <- cbind(x, v[index, setdiff(names(x), key(x))])
 }
 
+#' @rdname scsbio
 #' @export
 fmt.scsbio <- function(x){
    #           variable name                   format  fill.char  description
@@ -148,6 +156,7 @@ fmt.scsbio <- function(x){
    return(x)
 }
 
+#' @rdname scsbio
 #' @export
 convert.scsbio <- function(x, ...){
    if (!attr(x, "converted")){
@@ -268,19 +277,27 @@ convert.scsbio <- function(x, ...){
    return(x)
 }
 
+#' @rdname scsbio
 #' @export read.scsbio
 read.scsbio <- function(x, year, ...){
    if (!missing(x)) if ("scsset" %in% class(x)) year <- sort(unique(x$year))
    if (!missing(x)) if (is.numeric(x)) year <- x
    
-   # Use 'gulf.data' as data source:
+   v <- NULL
    if (!missing(year)){
-      v <- NULL
       for (i in 1:length(year)){
          file <- locate(package = "gulf.data", pattern = c("scs", "bio", "csv", year[i]))
          if (length(file) == 1) v <- rbind(v, read.csv(file, header = TRUE, stringsAsFactors = FALSE))
       }
-   }  
+   }else{
+      file <- locate(package = "gulf.data", pattern = c("scs", "bio", "csv"))
+      if (length(file) > 0){
+         for (i in 1:length(file)) v <- rbind(v, read.csv(file[i], header = TRUE, stringsAsFactors = FALSE)) 
+      }
+   }
+   
+   # NULL if no data found:
+   if (length(v) == 0) return(NULL)
    
    # Subset by specified variables:
    v <- base::subset.data.frame(v, ...)
@@ -294,6 +311,7 @@ read.scsbio <- function(x, year, ...){
    return(v)
 }
 
+#' @rdname scsbio
 #' @export update.scsbio
 update.scsbio <- function(year, path, Rfile = TRUE, csv = TRUE, ...){
    # Check input argument:
@@ -327,6 +345,7 @@ update.scsbio <- function(year, path, Rfile = TRUE, csv = TRUE, ...){
    }
 }
 
+#' @rdname scsbio
 #' @export
 summary.scsbio <- function(x, by, category, weight = FALSE, ...){
    # Parse input arguments:

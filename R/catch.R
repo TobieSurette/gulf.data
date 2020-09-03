@@ -1,6 +1,8 @@
-#' Attach Catch Data
+#' Catch Data
 #' 
-#' @description Attach catch data.
+#' @name catch
+#' 
+#' @description Extract or attach or catch data.
 #' 
 #' @param x Target object.
 #' @param value Object containing catch data to be assigned.
@@ -17,9 +19,11 @@
 #' @export
 "catch" <- function(x, ...) UseMethod("catch")
 
+#' @rdname catch
 #' @export
 "catch<-" <- function(x, ...) UseMethod("catch<-")
 
+#' @rdname catch
 #' @export 
 "catch<-.scsset" <- function(x, value, ...){
    args <- list(...)

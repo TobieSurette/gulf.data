@@ -1,10 +1,8 @@
 #' Reference and Example Data Sets
 #' 
-#' @description These are the reference and example data used in the \code{gulf.data} package.
+#' @name gulf.data-tables
 #' 
-#' @name gulf.data data
-#' @aliases Minilog example
-#' @aliases species.table species.table.foreign
+#' @description These are the reference and example data used in the \code{gulf.data} package.
 #' 
 #' Survey fishing vessel table:
 #' \describe{

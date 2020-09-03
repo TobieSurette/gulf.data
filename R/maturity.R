@@ -1,5 +1,7 @@
 #' Sexual Maturity Functions
 #'
+#' @name maturity
+#' 
 #' @description Determines whether an organism is sexually mature, based on qualitative or 
 #'              morphometric observational data.
 #'
@@ -42,6 +44,7 @@
 #' @export is.mature
 is.mature <- function(x, ...) UseMethod("is.mature")
 
+#' @rdname maturity
 #' @export
 is.mature.scsbio <- function(x, probability = FALSE, ...){
    # IS.MATURE.SCBIO - Determine whether crab is mature.
@@ -88,9 +91,11 @@ is.mature.scsbio <- function(x, probability = FALSE, ...){
    return(mat)
 }
 
+#' @rdname maturity
 #' @export is.primiparous
 is.primiparous <- function(x, ...) UseMethod("is.primiparous")
 
+#' @rdname maturity
 #' @export
 is.primiparous.scsbio <- function(x, ...){
    # Returns whether a crab is newly moulted.
@@ -109,9 +114,11 @@ is.primiparous.scsbio <- function(x, ...){
    return(index)
 }
 
+#' @rdname maturity
 #' @export is.multiparous 
 is.multiparous <- function(x, ...) UseMethod("is.multiparous")
 
+#' @rdname maturity
 #' @export
 is.multiparous.scsbio <- function(x, ...){
    # Returns whether a crab is newly moulted.
@@ -129,12 +136,14 @@ is.multiparous.scsbio <- function(x, ...){
    return(index)
 }
 
+#' @rdname maturity
 #' @export is.senile
 is.senile <- function(x, ...){
    # IS.SENILE - Generic 'is.senile' method.
    UseMethod("is.senile")
 }
 
+#' @rdname maturity
 #' @export
 is.senile.scsbio <- function(x, ...){
    # IS.SENILE - Returns whether a crab is senile.
@@ -158,9 +167,11 @@ is.senile.scsbio <- function(x, ...){
    return(index)
 }
 
+#' @rdname maturity
 #' @export maturity
 maturity <- function(x, ...) UseMethod("maturity")
 
+#' @rdname maturity
 #' @export
 maturity.default <- function(x, ...){
    index <- is.mature(x)
@@ -170,6 +181,7 @@ maturity.default <- function(x, ...){
    return(v)
 }
 
+#' @rdname maturity
 #' @export
 maturity.numeric <- function(x, year, species, ...){
    if (missing(years)) year <- as.numeric(substr(Sys.time(), 1, 4))

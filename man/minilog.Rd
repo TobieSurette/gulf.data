@@ -2,9 +2,52 @@
 % Please edit documentation in R/minilog.R
 \name{minilog}
 \alias{minilog}
+\alias{minilog.default}
+\alias{minilog.data.frame}
+\alias{path.minilog}
+\alias{file.minilog}
+\alias{read.minilog}
+\alias{write.minilog}
+\alias{plot.minilog}
+\alias{summary.minilog}
+\alias{split.minilog}
+\alias{truncate.minilog}
+\alias{info.minilog}
 \title{Minilog Data}
 \usage{
 minilog(x, ...)
+
+\method{minilog}{default}(x, ...)
+
+\method{minilog}{data.frame}(x, header, ...)
+
+path.minilog(year, project, survey, ...)
+
+file.minilog(
+  x,
+  year,
+  set.number,
+  tow.id,
+  set.card,
+  path = TRUE,
+  survey = "sc",
+  project,
+  ...
+)
+
+read.minilog(x, project, offset = 0, file, ...)
+
+write.minilog(x, file = NULL)
+
+\method{plot}{minilog}(x, col, lwd = 1, ...)
+
+\method{summary}{minilog}(x, truncate = TRUE, round = TRUE, ...)
+
+\method{split}{minilog}(x, by = "file.name", set.card, start, end, buffer = 0)
+
+\method{truncate}{minilog}(x, buffer = 0, ...)
+
+info.minilog(x, set.card = NULL)
 }
 \arguments{
 \item{x}{Minilog data file}

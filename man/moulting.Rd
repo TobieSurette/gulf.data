@@ -4,9 +4,30 @@
 \alias{moulting}
 \alias{is.new.shell}
 \alias{molting}
+\alias{is.new.shell.scsbio}
+\alias{is.hard.shell}
+\alias{is.hard.shell.scsbio}
+\alias{is.hard.shell.scsobs}
+\alias{is.soft.shell}
+\alias{is.skip.moulter}
+\alias{is.skip.moulter.scsbio}
 \title{Carapace Moult Status}
 \usage{
 is.new.shell(x, ...)
+
+\method{is.new.shell}{scsbio}(x)
+
+is.hard.shell(x, ...)
+
+\method{is.hard.shell}{scsbio}(x, durometer, shell.condition, zone, ...)
+
+\method{is.hard.shell}{scsobs}(x, durometer, shell.condition, zone, ...)
+
+is.soft.shell(x, ...)
+
+is.skip.moulter(x, ...)
+
+\method{is.skip.moulter}{scsbio}(x, ...)
 }
 \arguments{
 \item{x}{Object.}
@@ -35,6 +56,7 @@ Determines the carapace moult or hardness status.
 # Read 2010 crab data:
 x <- read.scsbio(2010)
 index <- is.new.shell(x)    # Newly moulted crab.
+index <- is.soft.shell(x)   # Soft-shelled crab.
 index <- is.multiparous(x)  # Multiparous females.
 index <- is.skip.moulter(x) # Skip-moulters.
 

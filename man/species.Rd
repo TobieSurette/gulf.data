@@ -2,9 +2,24 @@
 % Please edit documentation in R/species.R
 \name{species}
 \alias{species}
+\alias{species.foreign}
+\alias{species.default}
+\alias{species.list}
+\alias{species.numeric}
+\alias{species.character}
 \title{Species Names or Code}
 \usage{
 species(x, ...)
+
+\method{species}{foreign}(x, ...)
+
+\method{species}{default}(x, ...)
+
+\method{species}{list}(x, ...)
+
+\method{species}{numeric}(x, language = "english", coding = "rv", source, ...)
+
+\method{species}{character}(x, language = "english", input = "stacac", output = "rv", ...)
 }
 \arguments{
 \item{x}{Numerical species code(s) or species name(s).}
