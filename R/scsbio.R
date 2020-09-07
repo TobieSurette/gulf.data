@@ -52,8 +52,10 @@
 #' 
 #' @section Functions:
 #' \describe{
+#'   \item{\code{key.scsbio}}{Define or extract \code{scsbio} object index key.}
 #'   \item{\code{scsbio}}{Generic \code{scsbio} method.}
 #'   \item{\code{scsbio.default}}{Create an \code{scsbio} object.}
+#'   \item{\code{locate.scsbio}}{Locate snow crab biological data files.}
 #'   \item{\code{read.scsbio}}{Read snow crab survey biological data.}
 #'   \item{\code{scsbio.scsset}}{Load biological associated with snow crab survey tow data.}
 #'   \item{\code{fmt.scsbio}}{ASCII file format for reading snow crab biological data.}
@@ -62,6 +64,12 @@
 #'   \item{\code{summary.scsbio}}{Returns a data summary of an \code{scsbio} object.}
 #' } 
 #' 
+
+#' @rdname scsbio
+#' @export
+key.scsbio <- function(x, ...){
+   if (missing(x)) return(c("year", "tow.id", "crab.number")) else return(gulf.metadata::key(x))
+}
 
 #' @export
 scsbio <- function(x, ...) UseMethod("scsbio")
@@ -72,9 +80,8 @@ scsbio.default <- function(x, format = fmt.scsbio(), ...){
    if ("scsbio" %in% class(x)) return(x)
 
    # Define attributes:
-   project(x) <- "scs"
-   key(x) <- c("year", "tow.id", "crab.number")
-   
+   gulf.metadata::project(x) <- "scs"
+   gulf.metadata::key(x) <- key.scsbio()
    gulf.metadata::units(x, c("carapace.width", "chela.height", "abdomen.width")) <- "millimeters"
    gulf.metadata::units(x, "weight") <- "grams"
 
@@ -277,37 +284,43 @@ convert.scsbio <- function(x, ...){
    return(x)
 }
 
-#' @rdname scsbio
-#' @export read.scsbio
-read.scsbio <- function(x, year, ...){
-   if (!missing(x)) if ("scsset" %in% class(x)) year <- sort(unique(x$year))
+#' @rdname scsset
+#' @export 
+locate.scsbio <- function(x, year, ...){
+   file <- NULL
    if (!missing(x)) if (is.numeric(x)) year <- x
+   if (!missing(x)) if (is.character(x)) file <- x
    
-   v <- NULL
-   if (!missing(year)){
-      for (i in 1:length(year)){
-         file <- locate(package = "gulf.data", pattern = c("scs", "bio", "csv", year[i]))
-         if (length(file) == 1) v <- rbind(v, read.csv(file, header = TRUE, stringsAsFactors = FALSE))
-      }
-   }else{
-      file <- locate(package = "gulf.data", pattern = c("scs", "bio", "csv"))
-      if (length(file) > 0){
-         for (i in 1:length(file)) v <- rbind(v, read.csv(file[i], header = TRUE, stringsAsFactors = FALSE)) 
-      }
+   # Use 'gulf.data' as data source:
+   if (length(file) == 0) file <- locate(package = "gulf.data", pattern = c("scs", "bio", "csv"), ...)
+
+   # Year subset:
+   if (!missing(year) & (length(file) > 0)){
+      index <- rep(FALSE, length(file))
+      for (i in 1:length(year)) index[grep(year[i], file)] <- TRUE
+      file <- file[index]
    }
    
-   # NULL if no data found:
-   if (length(v) == 0) return(NULL)
+   # Empty search:
+   if (length(file ) == 0)  return(NULL) else return(file)
+}
+
+#' @rdname scsbio
+#' @export read.scsbio
+read.scsbio <- function(x, ...){
+   # Find data file:
+   file <- locate.scsbio(x, ...)
+   
+   # Load data:
+   v <- NULL
+   for (i in 1:length(file)) v <- rbind(v, read.csv(file[i], header = TRUE, stringsAsFactors = FALSE))  
    
    # Subset by specified variables:
    v <- base::subset.data.frame(v, ...)
    
-   # Convert to 'scsbio' object:
+   # Convert to 'scsset' object:
    v <- scsbio(v)
-   
-   # Remove tows that are not in 'scsset' object:
-   if (!missing(x)) if ("scsset" %in% class(x)) v <- v[!is.na(match(v, x[key(v)])), ]
-   
+
    return(v)
 }
 

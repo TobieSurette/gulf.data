@@ -21,7 +21,7 @@ scsbio(x, ...)
 
 convert.scsbio(x, ...)
 
-read.scsbio(x, year, ...)
+read.scsbio(x, ...)
 
 \method{update}{scsbio}(year, path, Rfile = TRUE, csv = TRUE, ...)
 
@@ -67,6 +67,7 @@ The \code{scsbio} class is a container for Snow Crab Survey Biological data, i.e
 \describe{
   \item{\code{scsbio}}{Generic \code{scsbio} method.}
   \item{\code{scsbio.default}}{Create an \code{scsbio} object.}
+  \item{\code{locate.scsbio}}{Locate snow crab biological data files.}
   \item{\code{read.scsbio}}{Read snow crab survey biological data.}
   \item{\code{scsbio.scsset}}{Load biological associated with snow crab survey tow data.}
   \item{\code{fmt.scsbio}}{ASCII file format for reading snow crab biological data.}

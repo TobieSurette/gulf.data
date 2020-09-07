@@ -3,6 +3,8 @@
 \name{esonar}
 \alias{esonar}
 \alias{esonar.default}
+\alias{wingspread}
+\alias{wingspread.esonar}
 \alias{locate.esonar}
 \alias{read.esonar}
 \alias{plot.esonar}
@@ -10,12 +12,15 @@
 \alias{describe.esonar}
 \alias{summary.esonar}
 \alias{match.esonar}
-\alias{truncate.esonar}
 \title{\strong{eSonar} Data}
 \usage{
 esonar(x, ...)
 
 \method{esonar}{default}(x, header, ...)
+
+wingspread(x, ...)
+
+\method{wingspread}{esonar}(x, ...)
 
 \method{locate}{esonar}(x, year, tow.id, full.names = TRUE, remove = "test", ...)
 
@@ -30,8 +35,6 @@ map.esonar(x, set.card = NULL, variable = NULL, ...)
 \method{summary}{esonar}(x, year, truncate = TRUE, round = TRUE, ...)
 
 match.esonar(x, set.card, method = "file.name")
-
-\method{truncate}{esonar}(x, buffer = 0, ...)
 }
 \arguments{
 \item{x}{An \code{esonar} object, data file, survey year or keyword search term.}
@@ -48,7 +51,7 @@ match.esonar(x, set.card, method = "file.name")
 
 \item{offset}{Numeric value specifying the offset time (in minutes) to include as a corrective in the data time stamps.}
 
-\item{repeats}{Logical value specifying whether to keep repeated data records.}
+\item{repeats}{Logical value specifying whether to keep or average out data records with identical time stamps.}
 }
 \description{
 Functions to read, manipulate and analyze \strong{eSonar} trawl acoustic monitoring  probe data.
@@ -58,6 +61,8 @@ Functions to read, manipulate and analyze \strong{eSonar} trawl acoustic monitor
 \describe{
    \item{\code{esonar}}{Generic \code{esonar} method.}
    \item{\code{esonar.default}}{Create an \code{esonar} object.}
+   \item{\code{wingspread}}{Generic \code{wingspread} method.}
+   \item{\code{wingspread.esonar}}{Extract wing spread observations from \code{esonar} object.}
    \item{\code{locate.esonar}}{Find \code{esonar} data file(s).}
    \item{\code{read.esonar}}{Read \code{esonar} data file(s).}
    \item{\code{plot.esonar}}{Plot \code{esonar} data.}
@@ -65,7 +70,6 @@ Functions to read, manipulate and analyze \strong{eSonar} trawl acoustic monitor
    \item{\code{describe.esonar}}{\code{esonar} data description.}
    \item{\code{summary.esonar}}{Summary statistics for an \code{esonar} object.}
    \item{\code{match.esonar}}{Match \code{esonar} data records.}
-   \item{\code{truncate.esonar}}{Remove \code{esonar} which lie outside a specified time interval.}
 }
 }
 

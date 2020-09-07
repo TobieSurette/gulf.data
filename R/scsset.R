@@ -18,15 +18,25 @@
 #' 
 #' @section Functions:
 #' \describe{
+#'   \item{\code{key.scsset}}{Define or extract \code{scsset} object index key.}
 #'   \item{\code{scsset}}{Generic \code{scsset} method.}
 #'   \item{\code{scsset.default}}{Create an \code{scsset} object.}
+#'   \item{\code{locate.scsset}}{Locate snow crab set/tow data files.}
 #'   \item{\code{read.scsset}}{Read snow crab survey set/tow data.}
+#'   \item{\code{start.time.scsset}}{Tow start time.}
+#'   \item{\code{end.time.scsset}}{Tow end time.}
 #'   \item{\code{update.scsset}}{Create an \code{scsset} object.}
 #'   \item{\code{summary.scsset}}{Return a summary of an \code{scsset} object.}
 #' }
 #' 
 
+#' @rdname scsset
 #' @export
+key.scsset <- function(x, ...){
+   if (missing(x)) return(c("year", "tow.id") ) else return(gulf.metadata::key(x))
+}
+
+#' @export scsset
 scsset <- function(x, ...) UseMethod("scsset")
 
 #' @rdname scsset
@@ -35,13 +45,13 @@ scsset.default <- function(x, ...){
    if ("scsset" %in% class(x)) return(x)
  
    # Define attributes:
-   project(x) <- "scs"
-   key(x) <- c("year", "tow.id")
+   gulf.metadata::project(x) <- "scs"
+   gulf.metadata::key(x) <- key.scsset()
    gulf.metadata::units(x, c("longitude", "latitude", "longitude.start.logbook", "longitude.end.logbook", "latitude.start.logbook", "latitude.end.logbook")) <- "degrees"
    gulf.metadata::units(x, "swept.area") <- "square.meters"
    gulf.metadata::units(x, c("depth", "warp")) <- "fathoms"
    gulf.metadata::units(x, "bottom.temperature") <- "degreesC"
-   fmt(x, c("start.time", "end.time", "start.time.logbook", "end.time.logbook")) <- "hh:mm:ss"
+   gulf.metadata::fmt(x, c("start.time", "end.time", "start.time.logbook", "end.time.logbook")) <- "hh:mm:ss"
    
    # Define class:
    class(x) <- unique(c("scsset", class(x))) 
@@ -50,26 +60,35 @@ scsset.default <- function(x, ...){
 }
 
 #' @rdname scsset
-#' @export read.scsset
-read.scsset <- function(x, year, ...){
+#' @export 
+locate.scsset <- function(x, year, ...){
+   file <- NULL
    if (!missing(x)) if (is.numeric(x)) year <- x
+   if (!missing(x)) if (is.character(x)) file <- x
    
    # Use 'gulf.data' as data source:
-   v <- NULL
-   if (!missing(year)){
-      for (i in 1:length(year)){
-         file <- locate(package = "gulf.data", pattern = c("scs", "set", "csv", year[i]))
-         if (length(file) == 1) v <- rbind(v, read.csv(file, header = TRUE, stringsAsFactors = FALSE))
-      }
-   }else{
-      file <- locate(package = "gulf.data", pattern = c("scs", "set", "csv"))
-      if (length(file) > 0){
-         for (i in 1:length(file)) v <- rbind(v, read.csv(file[i], header = TRUE, stringsAsFactors = FALSE)) 
-      }
+   if (length(file) == 0) file <- locate(package = "gulf.data", pattern = c("scs", "set", "csv"), ...)
+
+   # Year subset:
+   if (!missing(year) & (length(file) > 0)){
+      index <- rep(FALSE, length(file))
+      for (i in 1:length(year)) index[grep(year[i], file)] <- TRUE
+      file <- file[index]
    }
    
-   # NULL if no data found:
-   if (length(v) == 0) return(NULL)
+   # Empty search:
+   if (length(file ) == 0)  return(NULL) else return(file)
+}
+
+#' @rdname scsset
+#' @export read.scsset
+read.scsset <- function(x, ...){
+   # Find data file:
+   file <- locate.scsset(x, ...)
+   
+   # Load data:
+   v <- NULL
+   for (i in 1:length(file)) v <- rbind(v, read.csv(file[i], header = TRUE, stringsAsFactors = FALSE))  
    
    # Subset by specified variables:
    v <- base::subset.data.frame(v, ...)
@@ -78,6 +97,30 @@ read.scsset <- function(x, year, ...){
    v <- scsset(v)
 
    return(v)
+}
+
+#' @rdname scsset
+#' @rawNamespace S3method(start.time,scsset)
+start.time.scsset <- function(x, ...){
+   v <- x$start.time
+   v[is.na(v)] <- ""
+   index <- which(deblank(v) == "")
+   v[index] <- x$start.time.logbook
+   v[is.na(v)] <- ""
+   v <- as.POSIXct(paste(as.character(gulf.utils::date(x)), v))
+   return(v)   
+}
+
+#' @rdname scsset
+#' @rawNamespace S3method(end.time,scsset)
+end.time.scsset <- function(x, ...){
+   v <- x$end.time
+   v[is.na(v)] <- ""
+   index <- which(deblank(v) == "")
+   v[index] <- x$end.time.logbook
+   v[is.na(v)] <- ""
+   v <- as.POSIXct(paste(as.character(gulf.utils::date(x)), v))
+   return(v)   
 }
 
 #' @rdname scsset
