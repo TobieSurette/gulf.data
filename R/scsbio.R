@@ -35,7 +35,6 @@
 #'                         
 #' @param ... Other parameters (not used).
 #' 
-#' 
 #' @examples
 #' # Create empty 'scsbio' object:
 #' x <- scsbio()
