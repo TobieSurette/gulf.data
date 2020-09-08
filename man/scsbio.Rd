@@ -2,6 +2,7 @@
 % Please edit documentation in R/scsbio.R
 \name{scsbio}
 \alias{scsbio}
+\alias{key.scsbio}
 \alias{scsbio.default}
 \alias{scsbio.scsset}
 \alias{fmt.scsbio}
@@ -11,7 +12,7 @@
 \alias{summary.scsbio}
 \title{Snow Crab Biological Data}
 \usage{
-scsbio(x, ...)
+\method{key}{scsbio}(x, ...)
 
 \method{scsbio}{default}(x, format = fmt.scsbio(), ...)
 
@@ -65,6 +66,7 @@ The \code{scsbio} class is a container for Snow Crab Survey Biological data, i.e
 \section{Functions}{
 
 \describe{
+  \item{\code{key.scsbio}}{Define or extract \code{scsbio} object index key.}
   \item{\code{scsbio}}{Generic \code{scsbio} method.}
   \item{\code{scsbio.default}}{Create an \code{scsbio} object.}
   \item{\code{locate.scsbio}}{Locate snow crab biological data files.}

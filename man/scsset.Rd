@@ -3,6 +3,7 @@
 \name{locate.scsbio}
 \alias{locate.scsbio}
 \alias{scsset}
+\alias{key.scsset}
 \alias{scsset.default}
 \alias{locate.scsset}
 \alias{read.scsset}
@@ -14,7 +15,7 @@
 \usage{
 \method{locate}{scsbio}(x, year, ...)
 
-scsset(x, ...)
+\method{key}{scsset}(x, ...)
 
 \method{scsset}{default}(x, ...)
 
@@ -43,6 +44,7 @@ The \code{scsset} class is a container for Snow Crab Survey Set/Tow data, i.e.
 \section{Functions}{
 
 \describe{
+  \item{\code{key.scsset}}{Define or extract \code{scsset} object index key.}
   \item{\code{scsset}}{Generic \code{scsset} method.}
   \item{\code{scsset.default}}{Create an \code{scsset} object.}
   \item{\code{locate.scsset}}{Locate snow crab set/tow data files.}

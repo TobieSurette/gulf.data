@@ -1,7 +1,7 @@
 #' \strong{eSonar} Data
 #'
 #' @name esonar
-#' 
+#'
 #' @description Functions to read, manipulate and analyze \strong{eSonar} trawl acoustic monitoring  probe data.
 #'
 #' @param x An \code{esonar} object, data file, survey year or keyword search term.
@@ -40,8 +40,8 @@
 #'    \item{\code{describe.esonar}}{\code{esonar} data description.}
 #'    \item{\code{summary.esonar}}{Summary statistics for an \code{esonar} object.}
 #'    \item{\code{match.esonar}}{Match \code{esonar} data records.}
-#' } 
-#' 
+#' }
+#'
 
 #' @export
 esonar <- function(x, ...) UseMethod("esonar")
@@ -72,7 +72,7 @@ wingspread <- function(x, ...) UseMethod("wingspread")
 #' @rdname esonar
 #' @export
 wingspread.esonar <- function(x, ...) return(x$doormaster)
-   
+
 #' @rdname esonar
 #' @export locate.esonar
 locate.esonar <- function(x, year, tow.id, full.names = TRUE, remove = "test", ...){
@@ -524,3 +524,4 @@ match.esonar <- function(x, set.card, method = "file.name"){
 
    return(index)
 }
+

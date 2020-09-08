@@ -108,7 +108,8 @@
 #' }   
 #'    
  
-#' @export
+#' @rdname category
+#' @export category
 category <- function(x, ...) UseMethod("category")
 
 #' @rdname category
