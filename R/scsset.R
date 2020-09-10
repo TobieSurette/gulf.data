@@ -32,10 +32,7 @@
 
 #' @rdname scsset
 #' @export
-key.scsset <- function(x, ...){
-   print(123)
-   if (missing(x)) return(c("year", "tow.id") ) else return(gulf.metadata::key.default(x))
-}
+key.scsset <- function(x, ...) if (missing(x)) return(c("year", "tow.id") ) else return(attr(x, "key"))
 
 #' @export scsset
 scsset <- function(x, ...) UseMethod("scsset")

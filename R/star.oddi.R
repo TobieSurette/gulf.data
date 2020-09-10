@@ -46,19 +46,12 @@ star.oddi <- function(x, ...) UseMethod("star.oddi")
 
 #' @rdname star.oddi
 #' @export
-star.oddi.default <- function(x, header, ...){
-   # Add 'star.oddi' class tag:
-   if (!("star.oddi" %in% class(x))) class(x) <- c("star.oddi", class(x))
-
-   # Add header:
-   if (!missing(header)) header(x) <- header
-
-   # Assign key:
-   key(x) <- c("year", "month", "day", "hour", "minute", "second")
-
-   # Assign additional arguments as attributes:
-   args <- list(...)
-   if (length(args) > 0) for (i in 1:length(args)) attr(x, names(args)[i]) <- args[[i]]
+star.oddi.default <- function(x, ...){
+   # Define as probe data object:
+   x <- probe(x, ...)
+   
+   # Add 'esonar' class tag:
+   class(x) <- unique(c("star.oddi", class(x)))
 
    return(x)
 }
@@ -329,6 +322,3 @@ describe.star.oddi <- function(x, ...){}
 #' @export
 summary.star.oddi <- function(x, year, truncate = TRUE, round = TRUE, ...){}
  
-#' @rdname star.oddi
-#' @export
-match.star.oddi <- function(x, set.card, method = "file.name"){}
