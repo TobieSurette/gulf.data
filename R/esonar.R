@@ -90,6 +90,15 @@ locate.esonar <- function(x, year, tow.id, full.names = TRUE, remove = "test", .
    # Load set of file names:
    files <- locate(pattern = "*.csv", keywords = "esonar", ...)
 
+   # Search Shared drive:
+   if (length(files) == 0){
+      if (file.exists(options()$gulf.path$snow.crab)){
+         files <- locate(pattern = "*.csv",
+                         path = paste0(options()$gulf.path$snow.crab, 
+                                       "/Offshore Crab Common/Fishing Year ", year, "/Trawl Data/South Western Gulf/ESonar/Summary"))      
+      }
+   }
+
    # Target year:
    if (!missing(year)){
       if (!is.numeric(year)) stop("'year' must be a numeric integer.")

@@ -19,6 +19,20 @@
 #' @export
 "catch" <- function(x, ...) UseMethod("catch")
 
+#' @export
+catch.scsset <- function(x, category = "T", ...){
+   b <- read.scsbio(x, ...) 
+   b <- b[b$tow.id != "" , ]
+   res <- summary(b, category = category, by = c("year", "tow.id"), ...)
+   x[category] <- 0
+   index <- match(res[c("year", "tow.id")], x[c("year", "tow.id")])
+   if (any(is.na(index))) stop("Some biological data was not matched to the tow data.")
+   x[index, category] <- res[category]
+   
+   return(x)
+}
+
+
 #' @rdname catch
 #' @export
 "catch<-" <- function(x, ...) UseMethod("catch<-")

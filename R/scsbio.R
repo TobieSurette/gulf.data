@@ -286,13 +286,31 @@ convert.scsbio <- function(x, ...){
 #' @rdname scsset
 #' @export 
 locate.scsbio <- function(x, year, ...){
-   file <- NULL
-   if (!missing(x)) if (is.numeric(x)) year <- x
-   if (!missing(x)) if (is.character(x)) file <- x
+   # Parse survey year:
+   if (!missing(x) & missing(year)){
+      if (is.numeric(x)) year <- x
+      if ("year" %in% names(x)) year <- sort(unique(x$year))
+   }
+   if (!missing(year)) year <- sort(year)
+   
+   # Parse data file:
+   file <- NULL; if (!missing(x)) if (is.character(x)) file <- x
    
    # Use 'gulf.data' as data source:
-   if (length(file) == 0) file <- locate(package = "gulf.data", pattern = c("scs", "bio", "csv"), ...)
-
+   if (length(file) == 0){
+      if (file.exists(options()$gulf.path$snow.crab)){
+         if (missing(year)){
+            path <- dir(paste0(options()$gulf.path$snow.crab, "/Offshore Crab Common/"), pattern = "Fishing Year [0-9]{4,4}")
+         }else{
+            path <- paste0("Fishing Year ", year)
+         }
+         path <- paste0(options()$gulf.path$snow.crab, "/Offshore Crab Common/", path, "/Trawl Data/South Western Gulf/Raw Data")
+         file <- locate(pattern = "*.csv", path = path)
+      }
+      
+      if (length(file) == 0) file <- locate(package = "gulf.data", pattern = c("scs", "bio", "csv"), ...)
+   } 
+   
    # Year subset:
    if (!missing(year) & (length(file) > 0)){
       index <- rep(FALSE, length(file))
@@ -307,6 +325,7 @@ locate.scsbio <- function(x, year, ...){
 #' @rdname scsbio
 #' @export read.scsbio
 read.scsbio <- function(x, ...){
+ 
    # Find data file:
    file <- locate.scsbio(x, ...)
    
@@ -320,6 +339,12 @@ read.scsbio <- function(x, ...){
    # Convert to 'scsset' object:
    v <- scsbio(v)
 
+   # Subset by 'year' and 'tow.id':
+   if (!missing(x)){
+      vars <- c("year", "tow.id")
+      if (all(vars %in% names(x)))  v <- v[!is.na(match(v[vars], x[vars])), ]
+   }  
+   
    return(v)
 }
 
