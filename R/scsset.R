@@ -27,6 +27,7 @@
 #'   \item{\code{end.time.scsset}}{Tow end time.}
 #'   \item{\code{update.scsset}}{Create an \code{scsset} object.}
 #'   \item{\code{summary.scsset}}{Return a summary of an \code{scsset} object.}
+#'   \item{\code{tow.id}}{Generic \code{tow.id} method.}
 #' }
 #' 
 
@@ -163,3 +164,7 @@ summary.scsset <- function(x, truncate = TRUE, ...){
    
    return(res)
 }
+
+#' @export tow.id
+tow.id <- function(x, ...) UseMethod("tow.id")
+
