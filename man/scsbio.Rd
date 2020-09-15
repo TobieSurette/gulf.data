@@ -5,26 +5,20 @@
 \alias{key.scsbio}
 \alias{scsbio.default}
 \alias{scsbio.scsset}
-\alias{fmt.scsbio}
-\alias{convert.scsbio}
+\alias{locate.scsbio}
 \alias{read.scsbio}
-\alias{update.scsbio}
 \alias{summary.scsbio}
 \title{Snow Crab Biological Data}
 \usage{
 \method{key}{scsbio}(x, ...)
 
-\method{scsbio}{default}(x, format = fmt.scsbio(), ...)
+\method{scsbio}{default}(x, ...)
 
 \method{scsbio}{scsset}(x, ...)
 
-\method{fmt}{scsbio}(x)
-
-convert.scsbio(x, ...)
+\method{locate}{scsbio}(x, year, source = "gulf.data", remove = "bad", ...)
 
 read.scsbio(x, ...)
-
-\method{update}{scsbio}(year, path, Rfile = TRUE, csv = TRUE, ...)
 
 \method{summary}{scsbio}(x, by, category, weight = FALSE, ...)
 }
@@ -35,9 +29,18 @@ read the corresponding biological data.}
 
 \item{...}{Other parameters (not used).}
 
+\item{year}{Numeric vector specifying the survey years to be loaded.}
+
+\item{by}{Character string(s) specifying which variables to group by when summararizing.}
+
+\item{category}{Biological category string(s). See \code{\link{cagetory}} for more details.}
+
+\item{weight}{Logical value specifying whether to return a summary by weights rather than counts.}
+
 \item{format}{A \code{data.frame} specifying the ASCII printing format for an \code{scsbio} object.}
 
-\item{year}{Numeric vector specifying the survey years to be loaded.}
+\item{key}{Character string(s) specifying which data columns form the index key.
+This key can then be used as a default for such operations as merging data.}
 
 \item{path}{string specifying the path to read or write snow crab biological data.}
 
@@ -46,15 +49,6 @@ updating snow crab biological data.}
 
 \item{csv}{Logical value specifying whether to write a comma-separated (\code{csv}) format file 
 when updating snow crab biological data.}
-
-\item{by}{Character string(s) specifying which variables to group by when summararizing.}
-
-\item{category}{Biological category string(s). See \code{\link{cagetory}} for more details.}
-
-\item{weight}{Logical value specifying whether to return a summary by weights rather than counts.}
-
-\item{key}{Character string(s) specifying which data columns form the index key.
-This key can then be used as a default for such operations as merging data.}
 
 \item{package}{Logical value specifying whether to write a comma-separated (\code{csv}) format
 to the \code{gulf.data} package clone.}
@@ -72,9 +66,6 @@ The \code{scsbio} class is a container for Snow Crab Survey Biological data, i.e
   \item{\code{locate.scsbio}}{Locate snow crab biological data files.}
   \item{\code{read.scsbio}}{Read snow crab survey biological data.}
   \item{\code{scsbio.scsset}}{Load biological associated with snow crab survey tow data.}
-  \item{\code{fmt.scsbio}}{ASCII file format for reading snow crab biological data.}
-  \item{\code{convert.scsbio}}{Convert snow crab biological ASCII data to standard format.}
-  \item{\code{update.scsbio}}{Update snow crab survey biological data repositories.}
   \item{\code{summary.scsbio}}{Returns a data summary of an \code{scsbio} object.}
 }
 }

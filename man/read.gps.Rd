@@ -15,3 +15,6 @@ Returns a data.frame with date, time, latitude and longitude fields.
 \description{
 This function reads a GPS track file.
 }
+\seealso{
+\code{\link{probe}}
+}

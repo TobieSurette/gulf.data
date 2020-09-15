@@ -6,6 +6,8 @@
 #' 
 #' @return Returns a data.frame with date, time, latitude and longitude fields.
 #' 
+#' @seealso \code{\link{probe}}
+
 #' @export read.gps
 read.gps <- function(x){
    res <- NULL

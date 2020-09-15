@@ -7,15 +7,24 @@
 #' @examples 
 #' x <- read.scsset(2019)
 #' trip(x)
+#' 
+#' @section Methods:
+#' \describe{
+#'    \item{\code{trip}}{Generic \code{trip} method.}
+#'    \item{\code{trip.scsset}}{Determine snow crab survey trip using an analysis of date sequences.}
+#' }
+#' 
+#' @seealso \code{\link{scsset}}
 
-#' @describeIn trip Generic \code{trip} method.
-#' @export 
+#' @rdname trip
+#' @export trip
 trip <- function(x) UseMethod("trip")
 
-#' @describeIn trip \code{scsset} \code{trip} method, using sequence of dates.
+#' @rdname trip
 #' @export 
 trip.scsset <- function(x){
-   index <- rep(FALSE, nrow(x))
-   index[c(1, which(diff(gulf.utils::julian(sort(gulf.utils::date(x)))) > 2)+1)] <- TRUE
-   return(cumsum(index))
+   v <- rep(FALSE, nrow(x))
+   v[c(1, which(diff(gulf.utils::julian(base::sort(gulf.utils::date(x)))) > 2)+1)] <- TRUE
+   v <- cumsum(v)
+   return(v)
 }

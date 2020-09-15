@@ -2,7 +2,7 @@
 % Please edit documentation in R/read.notus.R
 \name{read.notus}
 \alias{read.notus}
-\title{Read Trawl Monitoring Data}
+\title{Notus Acoustic Trawl Data}
 \usage{
 read.notus(file)
 }
@@ -10,9 +10,10 @@ read.notus(file)
 \item{file}{Data file name.}
 }
 \description{
-Read trawl acoustic monitoring data files. Acoustic sensors are attached to bottom trawls to measure
-             various aspects of the trawl, such as the door spread, wing spread, water depth and temperature.
+Read Notus trawl acoustic monitoring data files. Acoustic sensors are attached to bottom trawls 
+             to measure various aspects of the trawl, such as the door spread, wing spread, water depth and 
+             temperature.
 }
 \seealso{
-scanmar, netmind, esonar
+\code{\link{probe}}, \code{\link{esonar}}, \code{\link{netmind}}, \code{\link{scanmar}}
 }
