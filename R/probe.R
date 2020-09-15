@@ -28,28 +28,33 @@ probe <- function(x, ...) UseMethod("probe")
 
 #' @rdname probe
 #' @export
-probe.default <- function(x, header, ....){
+probe.default <- function(x, header, ...){
    # Store date and time stamp:
    v <- data.frame(date = as.character(gulf.utils::date(x)),
-                   time = gulf.utils::time(x),
+                   time = unlist(lapply(strsplit(as.character(gulf.utils::time(x)), " "), function(x) x[2])), 
                    stringsAsFactors = FALSE)
    
-   # Identify and store observations:
-   remove <- c("date", "time", "year", "month", "day", "hour", "minute", "second")
-   vars <- setdiff(names(x), remove)
+   # Add other variables:
+   vars <- setdiff(names(x), c("date", "time", "year", "month", "day", "hour", "minute", "second"))
    v[vars] <- x[vars]
    
    # Define index key:
    key(v) <- c("date", "time")
    
    # Add header:
-   if (!missing(header)) header(x) <- header
+   if (!missing(header)) header(v) <- header
    
    # Assign additional arguments as attributes: 
    args <- list(...)
-   if (length(args) > 0) for (i in 1:length(args)) attr(x, names(args)[i]) <- args[[i]]
+   if (length(args) > 0) for (i in 1:length(args)) attr(v, names(args)[i]) <- args[[i]]
+   
+   # Add date and time formats:
+   fmt(x, "date") <- "YYYY-MM-DD"
+   fmt(x, "time") <- "hh:mm:ss"
    
    class(v) <- unique(c("probe", class(v)))
+   
+   return(v)
 }
 
 #' @rdname probe

@@ -47,13 +47,21 @@ esonar <- function(x, ...) UseMethod("esonar")
 
 #' @rdname esonar
 #' @export
-esonar.default <- function(x, header, ...){
+esonar.default <- function(x, ...){
    # Define as probe data object:
    x <- probe(x, ...)
    
+   # Define study project:
+   project(x) <- project("snow crab survey")
+   
+   # Define measurement units:
+   units(x, c("headline", "wingspread", "doorspread", "depth")) <- "meters"
+   units(x, "speed") <- "knots"
+   units(x, c("longitude", "latitude", "heading")) <- "degrees"
+
    # Add 'esonar' class tag:
    class(x) <- unique(c("esonar", class(x)))
-
+   
    return(x)
 }
 
@@ -173,7 +181,7 @@ read.esonar <- function(x, offset = 0, repeats = FALSE, ...){
    header[gsub(" ", "", strsplit(y[3, ], ",")[[1]])] <- strsplit(y[4, ], ",")[[1]]
    header <- header[header != ""]
    file.name <- lapply(strsplit(file, "/"), function(x) x[length(x)])[[1]]
-   tow.id <- toupper(lapply(strsplit(header["file.name"], "[.]"), function(x) x[1])[[1]])
+   tow.id <- toupper(lapply(strsplit(file.name, "[.]"), function(x) x[1])[[1]])
 
    # Define data field names:
    fields <- gsub(" ", "_", strsplit(y[5,], ",")[[1]]) # Split header fields and their values.
@@ -266,15 +274,11 @@ read.esonar <- function(x, offset = 0, repeats = FALSE, ...){
       v$second <- as.numeric(substr(t, 18, 19))
    }
 
-   # Create 'esonar' object:
-   v <- esonar(v, header, tow.id = tow.id, file.name = file.name)
-
-   # Include 'tow.id' as a field:
-   v$tow.id <- tow.id
-
    # Remove records with missing time stamp:
-   index <- is.na(v$hour) | is.na(v$minute) | is.na(v$second)
-   v <- v[!index, ]
+   v <- v[!(is.na(v$hour) | is.na(v$minute) | is.na(v$second)), ]
+   
+   # Create 'esonar' object:
+   v <- esonar(v, header = header, tow.id = tow.id, file.name = file.name)
 
    return(v)
 }

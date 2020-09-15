@@ -11,7 +11,6 @@
 \alias{map.esonar}
 \alias{describe.esonar}
 \alias{summary.esonar}
-\alias{match.esonar}
 \title{\strong{eSonar} Data}
 \usage{
 esonar(x, ...)
@@ -33,8 +32,6 @@ map.esonar(x, set.card = NULL, variable = NULL, ...)
 \method{describe}{esonar}(x, ...)
 
 \method{summary}{esonar}(x, year, truncate = TRUE, round = TRUE, ...)
-
-match.esonar(x, set.card, method = "file.name")
 }
 \arguments{
 \item{x}{An \code{esonar} object, data file, survey year or keyword search term.}
@@ -69,7 +66,6 @@ Functions to read, manipulate and analyze \strong{eSonar} trawl acoustic monitor
    \item{\code{map.esonar}}{Map \code{esonar} vessel and data track.}
    \item{\code{describe.esonar}}{\code{esonar} data description.}
    \item{\code{summary.esonar}}{Summary statistics for an \code{esonar} object.}
-   \item{\code{match.esonar}}{Match \code{esonar} data records.}
 }
 }
 

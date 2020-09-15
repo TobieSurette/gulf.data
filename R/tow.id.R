@@ -25,17 +25,17 @@ tow.id <- function(x, ...) UseMethod("tow.id")
 #' @rdname tow.id
 #' @rawNamespace S3method(tow.id,default)
 tow.id.default <- function(x, ...){
-   if ("tow.id" %in% tolower(names(x))){
-      names(x) <- tolower(names(x))
-      return(x$tow.id)
-   }else{
-      return(attr(x, "tow.id"))  
-   }
+   v <- attr(x, "tow.id")
+   if (is.null(v)) v <- x$tow.id
+   return(v)
 } 
 
 #' @rdname tow.id
 #' @rawNamespace S3method(tow.id,probe)
 tow.id.probe <- function(x, method, max.distance = 500, ...){
+   v <- tow.id.default(x)
+   if (!is.null(v)) return(v)
+   
    # Parse 'method' argument:
    if (!missing(method)) method <- match.arg(tolower(method), c("time", "latlong"))
    
