@@ -25,11 +25,10 @@
 #'   \item{\code{read.scsset}}{Read snow crab survey set/tow data.}
 #'   \item{\code{start.time.scsset}}{Tow start time.}
 #'   \item{\code{end.time.scsset}}{Tow end time.}
-#'   \item{\code{update.scsset}}{Create an \code{scsset} object.}
 #'   \item{\code{summary.scsset}}{Return a summary of an \code{scsset} object.}
-#'   \item{\code{tow.id}}{Generic \code{tow.id} method.}
 #' }
 #' 
+#' @seealso \code{\link{scsbio}}, \code{\link{tow.id}}
 
 #' @rdname scsset
 #' @export
@@ -59,7 +58,7 @@ scsset.default <- function(x, ...){
 }
 
 #' @rdname scsset
-#' @export 
+#' @export locate.scsset
 locate.scsset <- function(x, year, source = "gulf.data", ...){
    if (!missing(x)) if (is.numeric(x)) year <- x
 
@@ -161,40 +160,6 @@ end.time.scsset <- function(x, ...){
 }
 
 #' @rdname scsset
-#' @export update.scsset
-update.scsset <- function(x, year, path = getwd(), ...){
-   # Parse 'x' as 'year':
-   if (is.numeric(x) & missing(year)) year <- x
-
-   # Get current year:
-   if (missing(year)){
-      tmp <- strsplit(as.character(date()), " ")[[1]]
-      year <- as.numeric(tmp[length(tmp)])
-   } 
-
-   # Read data files:
-   for (i in 1:length(year)){
-      # Read data:
-      x <- read.scsset(year[i], source = "ascii")
-      for (j in 1:ncol(x)) if (is.character(x[, j])) x[,j] <- gulf.utils::deblank(x[,j]) 
-
-      # Read biological data:
-      y <- read.scsbio(year[i])
-      y$samplers <- sampler.scs(y$samplers)
-      y <- aggregate(list(sampler = y$samplers), by = y[key(x)], function(x) paste(unique(sort(x)), collapse = ", "))
-         
-      # Import sampler data:
-      x$sampler <- y$sampler[gulf.utils::match(x[key(x)], y[key(x)])]
-      x$sampler[is.na(x$sampler)] <- ""
-         
-      # Write to file:
-      file <- paste0(path, "/scs.set.", year[i], ".csv")
-      cat(paste0("Writing to : '", file, "'\n"))
-      write.csv(x, file = file, row.names = FALSE)
-   }
-}
-
-#' @rdname scsset
 #' @export
 summary.scsset <- function(x, truncate = TRUE, ...){
    if (missing(tow.id)) tow.id <- unique(x$tow.id)
@@ -233,6 +198,4 @@ summary.scsset <- function(x, truncate = TRUE, ...){
    return(res)
 }
 
-#' @export tow.id
-tow.id <- function(x, ...) UseMethod("tow.id")
 

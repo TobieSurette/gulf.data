@@ -6,7 +6,7 @@
 #' 
 #' @param file Data file name.
 #' 
-#' @seealso \code{\link{esonar}}, \code{\link{netmind}}, \code{\link{scanmar}}
+#' @seealso \code{\link{probe}}, \code{\link{esonar}}, \code{\link{netmind}}, \code{\link{scanmar}}
 #' 
 
 #' @export read.notus

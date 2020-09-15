@@ -57,9 +57,6 @@
 #'   \item{\code{locate.scsbio}}{Locate snow crab biological data files.}
 #'   \item{\code{read.scsbio}}{Read snow crab survey biological data.}
 #'   \item{\code{scsbio.scsset}}{Load biological associated with snow crab survey tow data.}
-#'   \item{\code{fmt.scsbio}}{ASCII file format for reading snow crab biological data.}
-#'   \item{\code{convert.scsbio}}{Convert snow crab biological ASCII data to standard format.}
-#'   \item{\code{update.scsbio}}{Update snow crab survey biological data repositories.}
 #'   \item{\code{summary.scsbio}}{Returns a data summary of an \code{scsbio} object.}
 #' } 
 #' 
@@ -75,7 +72,7 @@ scsbio <- function(x, ...) UseMethod("scsbio")
 
 #' @rdname scsbio
 #' @export
-scsbio.default <- function(x, format = fmt.scsbio(), ...){
+scsbio.default <- function(x, ...){
    if ("scsbio" %in% class(x)) return(x)
 
    # Define attributes:
@@ -99,9 +96,8 @@ scsbio.scsset <- function(x, ...){
    x <- cbind(x, v[index, setdiff(names(x), key(x))])
 }
 
-
 #' @rdname scsbio
-#' @export 
+#' @export locate.scsbio
 locate.scsbio <- function(x, year, source = "gulf.data", remove = "bad", ...){
    # Parse survey year:
    if (!missing(x) & missing(year)){
@@ -145,22 +141,30 @@ locate.scsbio <- function(x, year, source = "gulf.data", remove = "bad", ...){
 #' @rdname scsbio
 #' @export read.scsbio
 read.scsbio <- function(x, ...){
-   file <- locate.scsbio(x, ...)
-   
+   # Define file(s) to be read:
+   file <- NULL
+   if (!missing(x)) if (is.character(x)) file <- x
+   if (length(file) == 0){
+      if (missing(x)) file <- locate.scsbio(...) else file <- locate.scsbio(x, ...)
+   } 
+
    # Load data:
    v <- NULL
    for (i in 1:length(file)){
+      if (length(file) > 10) cat(paste0(i, ") Reading :'", file[i], "'\n"))
+         
       # Determine file extension:
       ext <- tolower(unlist(lapply(strsplit(file[i], "[.]"), function(x) x[length(x)])))
-      
+
       tmp <- NULL
       # Read fixed-width file:
       if (ext == "txt"){
-         tmp <- read.fortran(file = file, format = c("A1", "A2", "A2", "A4", "A1", "A2", "A1", "A3", "A1", "A1", "A3", "A4", "A1", "A1", "A6", 
-                                                     "A5", "A1", "A5", "A1", "A1", "A1", "A1", "A2", "A1", "A1", "A1", "A8", "A1", "A10", "A1",
-                                                     "A2", "A1", "A8", "A1", "A8", "A1", "A3", "A1", "A1", "A3", "A1", "A4", "A7", "A21", "A6",  
-                                                     "A1", "A25", "A8"))
-         
+         tmp <- read.fortran(file = file[i], 
+                             format = c("A1", "A2", "A2", "A4", "A1", "A2", "A1", "A3", "A1", "A1", "A3", "A4", "A1", "A1", "A6", 
+                                        "A5", "A1", "A5", "A1", "A1", "A1", "A1", "A2", "A1", "A1", "A1", "A8", "A1", "A10", "A1",
+                                        "A2", "A1", "A8", "A1", "A8", "A1", "A3", "A1", "A1", "A3", "A1", "A4", "A7", "A21", "A6",  
+                                        "A1", "A25", "A8"))
+
          names(tmp) <- c("blank1",  "day", "month", "year", "blank2",  "zone",  "subzone", "blank3", "data.type", 
               "blank4", "tow.number", "crab.number", "blank5", "sex", "carapace.width", "abdomen.width", 
               "blank6", "chela.height", "maturity", "blank7",  "shell.condition", "shell.condition.mossy", 
@@ -169,11 +173,26 @@ read.scsbio <- function(x, ...){
               "depth", "blank14", "soak.days", "durometer", "blank15", "trap.code",  "blank16", "samplers",   
               "weight", "blank17", "comments", "tow.id")  
          
+         # Remove blank columns:
+         tmp <- tmp[, -grep("blank", names(tmp))]
+         
+         # Remove blanks:
+         for (j in 1:ncol(tmp)) if (is.character(tmp[, j])) tmp[, j] <- deblank(tmp[, j])
+          
+         # Numeric conversions:
+         nvars <- c("day", "month", "year", "tow.number", "crab.number", "carapace.width", "abdomen.width", 
+                    "chela.height", "shell.condition", "gonad.colour", "egg.colour", "latitude.start", "longitude.start",
+                    "soak.days", "depth", "weight")
+         f <- function(x) return(as.numeric(gsub("[*]", "", x)))
+         for (j in 1:length(nvars)) tmp[, nvars[j]] <- f(tmp[, nvars[j]])
+         
          # Tranform coordinates:
          vars <- names(tmp)[grep("^l.*itude", names(tmp))]
-         for (i in 1:length(vars)){
-            tmp[, vars[i]] <- dmm2deg(tmp[, vars[i]] / 1000)
-            if (length(grep("longitude", vars[i])) > 0) tmp[, vars[i]] <- -abs(tmp[, vars[i]])
+         for (j in 1:length(vars)){
+            if (!all(is.na(tmp[, vars[j]]))){ 
+               tmp[, vars[j]] <- dmm2deg(tmp[, vars[j]] / 1000)
+               if (length(grep("longitude", vars[j])) > 0) tmp[, vars[j]] <- -abs(tmp[, vars[j]])
+            }
          }
       }
       
@@ -184,7 +203,6 @@ read.scsbio <- function(x, ...){
       v <- rbind(v, tmp) 
    }
    
-      
    # Convert to 'scsset' object:
    v <- scsbio(v)
       
@@ -195,40 +213,6 @@ read.scsbio <- function(x, ...){
    }  
 
    return(v)
-}
-
-#' @rdname scsbio
-#' @export update.scsbio
-update.scsbio <- function(year, path, Rfile = TRUE, csv = TRUE, ...){
-   # Check input argument:
-   if (!is.numeric(year) | (length(year) == 0)) stop("'year' must be a numeric vector.")
-   if (any((year %% 1) != 0 )) stop("'year' must be an integer.")
-   
-   flag <- FALSE
-   if (!missing(path)) flag <- TRUE
-   
-   # Loop over years:
-   for (i in 1:length(year)){
-      if (!flag){
-         path <- scsbio.path.str(year = year[i], ...)
-         tmp <- strsplit(path, '/')[[1]]
-         path <- paste0(tmp[1:which(tmp == "Raw Data")], collapse = "/")
-      }
-      
-      writeable <- Sys.chmod(path = path)
-      if (!writeable) stop(paste("Unable to write to: ", path))
-         
-      # Read data:
-      x <- read.scsbio(year = year[i], source = "ascii", ...)
-      index <- (x$carapace.width > 0) | !is.na(x$abdomen.width) | !is.na(x$chela.height) | !is.na(x$shell.condition) | 
-               !is.na(x$gonad.colour) | !is.na(x$egg.colour) | !is.na(x$eggs.remaining) 
-      x[which(index), ]
-      
-      cat(paste0("Writing to : '", path, "/", "SCS", year[i], ".Rdata'\n"))
-      if (Rfile) save(x, file = paste0(path, "/", "SCS", year[i], ".Rdata"))
-      cat(paste0("Writing to : '", path, "/", "SCS", year[i], ".csv'\n"))
-      if (csv) write.table(x, file = paste0(path, "/", "SCS", year[i], ".csv"), row.names = FALSE, col.names = TRUE, sep = ",")
-   }
 }
 
 #' @rdname scsbio
