@@ -39,7 +39,6 @@
 #'    \item{\code{map.esonar}}{Map \code{esonar} vessel and data track.}
 #'    \item{\code{describe.esonar}}{\code{esonar} data description.}
 #'    \item{\code{summary.esonar}}{Summary statistics for an \code{esonar} object.}
-#'    \item{\code{match.esonar}}{Match \code{esonar} data records.}
 #' }
 #'
 
@@ -445,10 +444,3 @@ summary.esonar <- function(x, year, truncate = TRUE, round = TRUE, ...){
 
    return(res)
 }
-
-#' @rdname esonar
-#' @export
-match.esonar <- function(x, set.card, method = "file.name"){
-   
-}
-

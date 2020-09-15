@@ -37,7 +37,6 @@
 #'    \item{\code{map.star.oddi}}{Map \code{star.oddi} vessel and data track.}
 #'    \item{\code{describe.star.oddi}}{\code{star.oddi} data description.}
 #'    \item{\code{summary.star.oddi}}{Summary statistics for an \code{star.oddi} object.}
-#'    \item{\code{match.star.oddi}}{Match \code{star.oddi} data records.}
 #' }
 #'
 
@@ -313,10 +312,6 @@ plot.star.oddi <- function(x, tow.id, year, buffer = 2, ...){
            paste0("Tow ID: '", tow.id[i], "'"))
    }
 }
-
-#' @rdname star.oddi
-#' @export
-describe.star.oddi <- function(x, ...){}
 
 #' @rdname star.oddi
 #' @export
