@@ -149,7 +149,8 @@ sampler.scs <- function(x){
    v[v == "*"] <- ""
    v <- gsub("[.]", " ", v)
    v <- gsub("[;]", ",", v)
-   
+   v <- gsub("[/]$", "", v)
+
    # Ad hoc corrections:
    v <- gsub("ALBERT, GIONET, D.GIONET", "ALBERT, DANIEL GIONET", v, fixed = TRUE)
    v <- gsub("ALBERT, GIONET", "ALBERT, DANIEL GIONET", v, fixed = TRUE)
@@ -157,7 +158,7 @@ sampler.scs <- function(x){
    v <- gsub("GIONET, D.GIONET,", "DANIEL GIONET,", v, fixed = TRUE)
    
    # Re-order samplers:
-   v <- unlist(lapply(lapply(strsplit(v, ", "), sort), paste, collapse = ", "))
+   v <- unlist(lapply(lapply(strsplit(v, ", "), sort), paste, collapse = ","))
 
    return(v)
 }  

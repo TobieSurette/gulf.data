@@ -99,193 +99,10 @@ scsbio.scsset <- function(x, ...){
    x <- cbind(x, v[index, setdiff(names(x), key(x))])
 }
 
-#' @rdname scsbio
-#' @export
-fmt.scsbio <- function(x){
-   #           variable name                   format  fill.char  description
-   fmt.str = c("blank1",                        "A1",     " ",    "Blank.",
-               "day",                           "A2",     "0",    "Day.",
-               "month",                         "A2",     "0",    "Month.",
-               "year",                          "A4",     " ",    "Year.",
-               "blank2",                        "A1",     " ",    "Blank.",
-               "zone",                          "A2",     " ",    "Fishing zone.",
-               "subzone",                       "A1",     " ",    "Fishing sub-zone.",
-               "blank3",                        "A3",     " ",    "Blank.",
-               "data.type",                     "A1",     " ",    "Trawl = 3.",
-               "blank4",                        "A1",     " ",    "Blank.",
-               "tow.number",                    "A3",     "0",    "Tow number.",
-               "crab.number",                   "A4",     "0",    "Crab ID number.",
-               "blank5",                        "A1",     " ",    "Blank.",
-               "sex",                           "A1",     "*",    "Sex.",
-               "carapace.width",                "A6",     "*",    "Carapace width(mm).",
-               "abdomen.width",                 "A5",     "*",    "Abdomen width(mm).",
-               "blank6",                        "A1",     " ",    "Blank.",
-               "chela.height",                  "A5",     "*",    "Chela height.",
-               "maturity",                      "A1",     "*",    "Maturity.",
-               "blank7",                        "A1",     " ",    "Blank.",
-               "shell.condition",               "A1",     "*",    "Shell condition.",
-               "shell.condition.mossy",         "A1",     " ",    "Mossy shell condition.",
-               "gonad.colour",                  "A2",     "*",    "Gonad colour code.",
-               "blank8",                        "A1",     " ",    "Blank.",
-               "egg.colour",                    "A1",     "*",    "Egg colour code.",
-               "eggs.remaining",                "A1",     "*",    "Eggs remaining code.",
-               "tag.number",                    "A8",     "0",    "Crab tag number.",
-               "blank9",                        "A1",     " ",    "Blank.",
-               "missing.legs",                  "A10",    " ",    "Missing leg codification.",
-               "blank10",                       "A1",     " ",    "Blank.",
-               "position.type",                 "A2",     " ",    "Position type.",
-               "blank11",                       "A1",     " ",    "Blank.",
-               "latitude.start",                "A8",     " ",    "Start latitude of tow.",
-               "blank12",                       "A1",     " ",    "Blank.",
-               "longitude.start",               "A8",     " ",    "Start longitude of tow.",
-               "blank13",                       "A1",     " ",    "Blank.",
-               "depth",                         "A3",     " ",    "Depth(fathoms).",
-               "blank14",                       "A1",     " ",    "Blank.",
-               "soak.days",                     "A1",     " ",    "Soak days for traps.",
-               "durometer",                     "A3",     "*",    "Durometer measurement.",
-               "blank15",                       "A1",     " ",    "Blank.",
-               "trap.code",                     "A4",     " ",    "Trap code.",
-               "blank16",                       "A7",     " ",    "Blank.",
-               "samplers",                      "A21",    " ",    "Sampler names.",
-               "weight",                        "A6",     " ",    "Crab weight.",
-               "blank17",                       "A1",     " ",    "Blank.",
-               "comments",                      "A25",    " ",    "Comments.",
-               "tow.id",                        "A8",     " ",    "Tow ID string.")
-
-   n <- length(fmt.str) # Total number of fields.
-   k <- 4 # Number of columns to be parsed.
-
-   # Recast file.info as a 'fmt' (format) object:
-   x <- data.frame(variable = fmt.str[seq(1,n,k)], format = fmt.str[seq(2,n,k)],
-                   fill.char = fmt.str[seq(3,n,k)], description = fmt.str[seq(4,n,k)])
-
-   return(x)
-}
 
 #' @rdname scsbio
-#' @export
-convert.scsbio <- function(x, ...){
-   if (!attr(x, "converted")){
-      temp <- attributes(x) # Get catch attributes.
-      x <- as.data.frame(x) # Convert 'x' to data frame.
-
-      # Remove blank columns:
-      variables <- names(x)
-      index <- grep("blank", variables)
-      x <- x[, setdiff(variables, variables[index])]
-      temp$format <- temp$format[setdiff(variables, variables[index]), ]
-
-      # Define variables which are to be converted to numeric format:
-      vars <- c("day", "month", "year", "data.type", "sex",
-                "tow.number", "crab.number", "carapace.width",
-                "abdomen.width", "chela.height", "shell.condition",
-                "gonad.colour", "egg.colour", "soak.days", "durometer",
-                "eggs.remaining", "egg.colour", "weight", "maturity")
-      for (i in 1:length(vars)){
-         x[, vars[i]] <- gsub("*", " ", x[, vars[i]], fixed = TRUE)
-         x[, vars[i]] <- as.numeric(x[, vars[i]], fixed = TRUE)
-      }
-      type(temp$format[vars, ]) <- "i"
-      temp$format["carapace.width", "format"] <- "F6.0"
-      temp$format["abdomen.width", "format"]  <- "F5.0"
-      temp$format["chela.height", "format"]   <- "F5.0"
-
-      # Convert coordinates:
-      x$longitude.start[x$longitude.start == "99999999"] <- NA
-      x$latitude.start[x$latitude.start == "99999999"] <- NA
-      vars <- c("longitude.start", "latitude.start")
-      for (i in 1:length(vars)){
-         index <- !is.na(x[, vars[i]])
-         x[index, vars[i]] <- as.numeric(substr(x[index, vars[i]], 1, 3)) +  as.numeric(substr(x[index, vars[i]], 4, 8)) / 60000
-      }
-      if (is.character(x$longitude.start)) x$longitude.start <- as.numeric(x$longitude.start)
-      if (is.character(x$latitude.start))  x$latitude.start <- as.numeric(x$latitude.start)
-      x$longitude.start <- -x$longitude.start
-      temp$format[vars, "format"] <- "F9.7"
-
-      # Correct inconsistencies:
-      index <- (x$sex == 1)
-      x$eggs.remaining[index] <- NA
-      x$gonad.colour[index] <- NA
-      x$egg.colour[index] <- NA
-      
-      # Add species code:
-      x <- cbind(x, data.frame(species = rep(2526, dim(x)[1])))
-      temp$format <- rbind(temp$format, fmt(var = "species", format = "I4", desc = "Species code."))
-
-      # Restore format attribute:
-      temp$names <- rownames(temp$format)
-      attributes(x) <- temp
-
-      # Remove spaces from 'tow.id':
-      x$tow.id <- gsub(" ", "", x$tow.id)
-      
-      # Replace zero values with NA:
-      x$carapace.width[which(x$carapace.width <= 0)] <- NA
-      
-      # Remove blank records:
-      index <- is.na(x$sex) & is.na(x$carapace.width) & is.na(x$abdomen.width) & is.na(x$chela.height) & is.na(x$shell.condition)
-      x <- x[!index, ]
-      
-      # Remove leading and trailing spaces:
-      x$samplers <- gsub("(^[ ]+)|([ ]+$)", "", x$samplers)
-      x$comments <- gsub("(^[ ]+)|([ ]+$)", "", x$comments) 
-      
-      # Add 'tow.id' from tow data:
-      y <- read.scsset(year = unique(x$year))
-      vars <- c("year", "month", "day", "tow.number")
-      index <- match(x[vars], y[vars])
-      index[x$tow.id != ""] <- NA
-      ii <- !is.na(index)
-      x$tow.id[ii] <- y$tow.id[index[ii]]
-     
-      # Import 'zone' identifier:
-      ii <- which(((gsub(" ", "", x$zone) == "") | is.na(x$zone)))
-      index <- match(x$tow.id[ii], y$tow.id) 
-      x$zone[ii] <- y$zone[index]
-      
-      # Update 'converted' attribute:
-      attr(x, "converted") <- TRUE
-   }else{
-      temp <- attributes(x) # Get biological attributes.
-      format <- fmt(eval(call(class(x)[1]))) # Get catch format.
-      x <- as.data.frame(x)
-
-      # Recreate columns which were deleted or absent:
-      if (!is.empty(x)){
-         x[, setdiff(row.names(format), names(x))] <- NA
-      }else{
-         x <- cbind(x, data.frame(names = setdiff(row.names(format), names(x))))
-      }
-
-      # Re-order columns of x to familiar order and delete standard format columns:
-      x <- x[, row.names(format)]
-
-      # Import information from old format if variables are present in new format:
-      index <- intersect(row.names(format), row.names(temp$format))
-      format[index, ] <- temp$format[index, ]
-
-      # Convert coordinates:
-      vars <- c("longitude.start", "latitude.start")
-      x$longitude.start <- abs(x$longitude.start)
-      for (i in 1:length(vars)) x[, vars[i]] <- deg2dmm(x[, vars[i]]) * 1000
-      format[vars, "format"] <- "I8"
-
-      # Restore format attribute:
-      temp$names <- rownames(format)
-      temp$format <- format
-      attributes(x) <- temp
-
-      # Update 'converted' attribute:
-      attr(x, "converted") <- FALSE
-   }
-
-   return(x)
-}
-
-#' @rdname scsset
 #' @export 
-locate.scsbio <- function(x, year, ...){
+locate.scsbio <- function(x, year, source = "gulf.data", remove = "bad", ...){
    # Parse survey year:
    if (!missing(x) & missing(year)){
       if (is.numeric(x)) year <- x
@@ -293,28 +110,31 @@ locate.scsbio <- function(x, year, ...){
    }
    if (!missing(year)) year <- sort(year)
    
-   # Parse data file:
-   file <- NULL; if (!missing(x)) if (is.character(x)) file <- x
-   
    # Use 'gulf.data' as data source:
-   if (length(file) == 0){
-      if (file.exists(options()$gulf.path$snow.crab)){
-         if (missing(year)){
-            path <- dir(paste0(options()$gulf.path$snow.crab, "/Offshore Crab Common/"), pattern = "Fishing Year [0-9]{4,4}")
-         }else{
-            path <- paste0("Fishing Year ", year)
-         }
-         path <- paste0(options()$gulf.path$snow.crab, "/Offshore Crab Common/", path, "/Trawl Data/South Western Gulf/Raw Data")
-         file <- locate(pattern = "*.csv", path = path)
+   if (source == "ascii"){
+      if (missing(year)){
+         path <- dir(paste0(options()$gulf.path$snow.crab, "/Offshore Crab Common/"), pattern = "Fishing Year [0-9]{4,4}", full.names = TRUE)
+      }else{
+         path <- paste0(options()$gulf.path$snow.crab, "/Offshore Crab Common/Fishing Year ", year)
       }
-      
-      if (length(file) == 0) file <- locate(package = "gulf.data", pattern = c("scs", "bio", "csv"), ...)
-   } 
+      path <- paste0(path, "/Trawl Data/South Western Gulf/Raw Data")
+      file <- locate(path = path, pattern = "*.txt")
+   }
    
+   # Data source is 'gulf.data' package:
+   if (source == "gulf.data") file <- locate(package = "gulf.data", pattern = c("scs", "bio", "csv"), ...)
+
    # Year subset:
    if (!missing(year) & (length(file) > 0)){
       index <- rep(FALSE, length(file))
       for (i in 1:length(year)) index[grep(year[i], file)] <- TRUE
+      file <- file[index]
+   }
+   
+   # Remove irrelevant files:
+   if (length(remove) > 0){
+      index <- rep(TRUE, length(file))
+      for (i in 1:length(remove)) index[grep(tolower(remove[i]), tolower(file))] <- FALSE
       file <- file[index]
    }
    
@@ -325,26 +145,55 @@ locate.scsbio <- function(x, year, ...){
 #' @rdname scsbio
 #' @export read.scsbio
 read.scsbio <- function(x, ...){
- 
-   # Find data file:
    file <- locate.scsbio(x, ...)
    
    # Load data:
    v <- NULL
-   for (i in 1:length(file)) v <- rbind(v, read.csv(file[i], header = TRUE, stringsAsFactors = FALSE))  
+   for (i in 1:length(file)){
+      # Determine file extension:
+      ext <- tolower(unlist(lapply(strsplit(file[i], "[.]"), function(x) x[length(x)])))
+      
+      tmp <- NULL
+      # Read fixed-width file:
+      if (ext == "txt"){
+         tmp <- read.fortran(file = file, format = c("A1", "A2", "A2", "A4", "A1", "A2", "A1", "A3", "A1", "A1", "A3", "A4", "A1", "A1", "A6", 
+                                                     "A5", "A1", "A5", "A1", "A1", "A1", "A1", "A2", "A1", "A1", "A1", "A8", "A1", "A10", "A1",
+                                                     "A2", "A1", "A8", "A1", "A8", "A1", "A3", "A1", "A1", "A3", "A1", "A4", "A7", "A21", "A6",  
+                                                     "A1", "A25", "A8"))
+         
+         names(tmp) <- c("blank1",  "day", "month", "year", "blank2",  "zone",  "subzone", "blank3", "data.type", 
+              "blank4", "tow.number", "crab.number", "blank5", "sex", "carapace.width", "abdomen.width", 
+              "blank6", "chela.height", "maturity", "blank7",  "shell.condition", "shell.condition.mossy", 
+              "gonad.colour", "blank8", "egg.colour", "eggs.remaining", "tag.number", "blank9", "missing.legs", 
+              "blank10", "position.type", "blank11", "latitude.start", "blank12", "longitude.start", "blank13", 
+              "depth", "blank14", "soak.days", "durometer", "blank15", "trap.code",  "blank16", "samplers",   
+              "weight", "blank17", "comments", "tow.id")  
+         
+         # Tranform coordinates:
+         vars <- names(tmp)[grep("^l.*itude", names(tmp))]
+         for (i in 1:length(vars)){
+            tmp[, vars[i]] <- dmm2deg(tmp[, vars[i]] / 1000)
+            if (length(grep("longitude", vars[i])) > 0) tmp[, vars[i]] <- -abs(tmp[, vars[i]])
+         }
+      }
+      
+      # Read comma-delimited file:
+      if (ext == "csv") tmp <- read.csv(file[i], header = TRUE, stringsAsFactors = FALSE)
+      
+      # Append data:
+      v <- rbind(v, tmp) 
+   }
    
-   # Subset by specified variables:
-   v <- base::subset.data.frame(v, ...)
-   
+      
    # Convert to 'scsset' object:
    v <- scsbio(v)
-
+      
    # Subset by 'year' and 'tow.id':
    if (!missing(x)){
       vars <- c("year", "tow.id")
       if (all(vars %in% names(x)))  v <- v[!is.na(match(v[vars], x[vars])), ]
    }  
-   
+
    return(v)
 }
 

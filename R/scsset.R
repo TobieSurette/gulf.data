@@ -59,13 +59,18 @@ scsset.default <- function(x, ...){
 
 #' @rdname scsset
 #' @export 
-locate.scsset <- function(x, year, ...){
-   file <- NULL
+locate.scsset <- function(x, year, source = "gulf.data", ...){
    if (!missing(x)) if (is.numeric(x)) year <- x
-   if (!missing(x)) if (is.character(x)) file <- x
-   
+
    # Use 'gulf.data' as data source:
-   if (length(file) == 0) file <- locate(package = "gulf.data", pattern = c("scs", "set", "csv"), ...)
+   if (source == "ascii"){
+      path <- dir(paste0(options()$gulf.path$snow.crab, "/Offshore Crab Common/"), pattern = "Fishing Year [0-9]{4,4}", full.names = TRUE)
+      path <- paste0(path, "/Trawl Data/South Western Gulf/Tow Data")
+      file <- locate(path = path, pattern = "Tows [0-9]{4,4}.txt")
+   }
+      
+   # Data source is 'gulf.data' package:
+   if (source == "gulf.data") file <- locate(package = "gulf.data", pattern = c("scs", "set", "csv"), ...)
 
    # Year subset:
    if (!missing(year) & (length(file) > 0)){
@@ -84,9 +89,42 @@ read.scsset <- function(x, ...){
    # Find data file:
    file <- locate.scsset(x, ...)
    
+   # No files found:
+   if (length(file) == 0) return(NULL)
+   
    # Load data:
    v <- NULL
-   for (i in 1:length(file)) v <- rbind(v, read.csv(file[i], header = TRUE, stringsAsFactors = FALSE))  
+   for (i in 1:length(file)){
+      # Determine file extension:
+      ext <- tolower(unlist(lapply(strsplit(file[i], "[.]"), function(x) x[length(x)])))
+      
+      tmp <- NULL
+      # Read fixed-width file:
+      if (ext == "txt"){
+         tmp <- read.fortran(file = file, format = c("I4", "I2", "I2", "A2", "A8", "I2", "I1", "I8", "I8", "I8",
+                                                     "I8", "I8", "I8", "A8", "A8", "A8", "A8", "I5", "F4.1", "I4",
+                                                     "F5.1", "A7", "I1", "I1", "A300"))
+         
+         names(tmp) <- c("year", "month", "day", "zone", "tow.id", "tow.number", "valid", "longitude", "latitude", 
+                         "longitude.start.logbook", "longitude.end.logbook", "latitude.start.logbook", "latitude.end.logbook",            
+                         "start.time", "end.time", "start.time.logbook", "end.time.logbook",   
+                         "depth", "bottom.temperature", "warp", "swept.area", "swept.area.method", 
+                         "groundfish.sample", "water.sample", "comment")
+         
+         # Tranform coordinates:
+         vars <- names(tmp)[grep("^l.*itude", names(tmp))]
+         for (i in 1:length(vars)){
+            tmp[, vars[i]] <- dmm2deg(tmp[, vars[i]] / 1000)
+            if (length(grep("longitude", vars[i])) > 0) tmp[, vars[i]] <- -abs(tmp[, vars[i]])
+         }
+      }
+      
+      # Read comma-delimited file:
+      if (ext == "csv") tmp <- read.csv(file[i], header = TRUE, stringsAsFactors = FALSE)
+
+      # Append data:
+      v <- rbind(v, tmp) 
+   }  
    
    # Subset by specified variables:
    v <- base::subset.data.frame(v, ...)
@@ -123,7 +161,37 @@ end.time.scsset <- function(x, ...){
 
 #' @rdname scsset
 #' @export update.scsset
-update.scsset <- function(x, ...){}
+update.scsset <- function(x, year, path = getwd(), ...){
+   # Parse 'x' as 'year':
+   if (is.numeric(x) & missing(year)) year <- x
+
+   # Get current year:
+   if (missing(year)){
+      tmp <- strsplit(as.character(date()), " ")[[1]]
+      year <- as.numeric(tmp[length(tmp)])
+   } 
+
+   # Read data files:
+   for (i in 1:length(year)){
+      # Read data:
+      x <- read.scsset(year[i], source = "ascii")
+      for (j in 1:ncol(x)) if (is.character(x[, j])) x[,j] <- gulf.utils::deblank(x[,j]) 
+
+      # Read biological data:
+      y <- read.scsbio(year[i])
+      y$samplers <- sampler.scs(y$samplers)
+      y <- aggregate(list(sampler = y$samplers), by = y[key(x)], function(x) paste(unique(sort(x)), collapse = ", "))
+         
+      # Import sampler data:
+      x$sampler <- y$sampler[gulf.utils::match(x[key(x)], y[key(x)])]
+      x$sampler[is.na(x$sampler)] <- ""
+         
+      # Write to file:
+      file <- paste0(path, "/scs.set.", year[i], ".csv")
+      cat(paste0("Writing to : '", file, "'\n"))
+      write.csv(x, file = file, row.names = FALSE)
+   }
+}
 
 #' @rdname scsset
 #' @export
