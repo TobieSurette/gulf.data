@@ -52,12 +52,12 @@ esonar.default <- function(x, ...){
    x <- probe(x, ...)
    
    # Define study project:
-   project(x) <- project("snow crab survey")
+   gulf.metadata::project(x) <- project("snow crab survey")
    
    # Define measurement units:
-   units(x, intersect(c("headline", "wingspread", "doorspread", "doormaster", "depth"), names(x))) <- "meters"
-   units(x, intersect(c("speed"), names(x))) <- "knots"
-   units(x, intersect(c("longitude", "latitude", "heading"), names(x))) <- "degrees"
+   gulf.metadata::units(x, intersect(c("headline", "wingspread", "doorspread", "doormaster", "depth"), names(x))) <- "meters"
+   gulf.metadata::units(x, intersect(c("speed"), names(x))) <- "knots"
+   gulf.metadata::units(x, intersect(c("longitude", "latitude", "heading"), names(x))) <- "degrees"
 
    # Add 'esonar' class tag:
    class(x) <- unique(c("esonar", class(x)))
@@ -378,13 +378,11 @@ describe.esonar <- function(x, ...){
 #' @rdname esonar
 #' @export
 summary.esonar <- function(x, year, truncate = TRUE, round = TRUE, ...){
-
-
    # Load E-Sonar data:
    if (missing(x) & !missing(year)) x <- read.esonar(year = year)
 
    # Read tow data:
-   y <- read.scset(year = unique(x$year), print = FALSE)
+   y <- read.scsset(year = unique(x$year), print = FALSE)
 
    # Trim data:
    if (truncate) x <- truncate(x, ...)

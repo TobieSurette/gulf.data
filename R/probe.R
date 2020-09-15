@@ -58,7 +58,8 @@ probe.default <- function(x, header, ...){
 }
 
 #' @rdname probe
-#' @export
+#' @export start.time.probe
+#' @rawNamespace S3method(start.time,probe)
 start.time.probe <- function(x, ...){
    if (project(x) == "scs"){
       if ("year" %in% names(x)) year <- x$year else year <- attr(x, "year")

@@ -15,7 +15,7 @@
 \usage{
 esonar(x, ...)
 
-\method{esonar}{default}(x, header, ...)
+\method{esonar}{default}(x, ...)
 
 wingspread(x, ...)
 
@@ -36,8 +36,6 @@ map.esonar(x, set.card = NULL, variable = NULL, ...)
 \arguments{
 \item{x}{An \code{esonar} object, data file, survey year or keyword search term.}
 
-\item{header}{\strong{eSonar} file header information to be assigned as metadata.}
-
 \item{year}{Numeric value specifying the survey or project year(s).}
 
 \item{tow.id}{Numeric value or character string specifying the ID corresponding to a particular tow sampling station.}
@@ -49,6 +47,8 @@ map.esonar(x, set.card = NULL, variable = NULL, ...)
 \item{offset}{Numeric value specifying the offset time (in minutes) to include as a corrective in the data time stamps.}
 
 \item{repeats}{Logical value specifying whether to keep or average out data records with identical time stamps.}
+
+\item{header}{\strong{eSonar} file header information to be assigned as metadata.}
 }
 \description{
 Functions to read, manipulate and analyze \strong{eSonar} trawl acoustic monitoring  probe data.

@@ -136,6 +136,7 @@ read.scsset <- function(x, ...){
 }
 
 #' @rdname scsset
+#' @export start.time.scsset
 #' @rawNamespace S3method(start.time,scsset)
 start.time.scsset <- function(x, ...){
    v <- x$start.time

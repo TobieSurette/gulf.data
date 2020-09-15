@@ -11,7 +11,7 @@
 \usage{
 probe(x, ...)
 
-\method{probe}{default}(x, header, ....)
+\method{probe}{default}(x, header, ...)
 
 \method{start}{time.probe}(x, ...)
 
