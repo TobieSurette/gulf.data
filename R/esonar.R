@@ -55,9 +55,9 @@ esonar.default <- function(x, ...){
    project(x) <- project("snow crab survey")
    
    # Define measurement units:
-   units(x, c("headline", "wingspread", "doorspread", "depth")) <- "meters"
-   units(x, "speed") <- "knots"
-   units(x, c("longitude", "latitude", "heading")) <- "degrees"
+   units(x, intersect(c("headline", "wingspread", "doorspread", "doormaster", "depth"), names(x))) <- "meters"
+   units(x, intersect(c("speed"), names(x))) <- "knots"
+   units(x, intersect(c("longitude", "latitude", "heading"), names(x))) <- "degrees"
 
    # Add 'esonar' class tag:
    class(x) <- unique(c("esonar", class(x)))

@@ -49,8 +49,8 @@ probe.default <- function(x, header, ...){
    if (length(args) > 0) for (i in 1:length(args)) attr(v, names(args)[i]) <- args[[i]]
    
    # Add date and time formats:
-   fmt(x, "date") <- "YYYY-MM-DD"
-   fmt(x, "time") <- "hh:mm:ss"
+   fmt(v, "date") <- "YYYY-MM-DD"
+   fmt(v, "time") <- "hh:mm:ss"
    
    class(v) <- unique(c("probe", class(v)))
    
