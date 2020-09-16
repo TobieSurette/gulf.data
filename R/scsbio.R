@@ -159,6 +159,7 @@ read.scsbio <- function(x, ...){
       tmp <- NULL
       # Read fixed-width file:
       if (ext == "txt"){
+         print(i)
          tmp <- read.fortran(file = file[i], 
                              format = c("A1", "A2", "A2", "A4", "A1", "A2", "A1", "A3", "A1", "A1", "A3", "A4", "A1", "A1", "A6", 
                                         "A5", "A1", "A5", "A1", "A1", "A1", "A1", "A2", "A1", "A1", "A1", "A8", "A1", "A10", "A1",
@@ -185,15 +186,6 @@ read.scsbio <- function(x, ...){
                     "soak.days", "depth", "weight")
          f <- function(x) return(as.numeric(gsub("[*]", "", x)))
          for (j in 1:length(nvars)) tmp[, nvars[j]] <- f(tmp[, nvars[j]])
-         
-         # Tranform coordinates:
-         vars <- names(tmp)[grep("^l.*itude", names(tmp))]
-         for (j in 1:length(vars)){
-            if (!all(is.na(tmp[, vars[j]]))){ 
-               tmp[, vars[j]] <- dmm2deg(tmp[, vars[j]] / 1000)
-               if (length(grep("longitude", vars[j])) > 0) tmp[, vars[j]] <- -abs(tmp[, vars[j]])
-            }
-         }
       }
       
       # Read comma-delimited file:
@@ -203,15 +195,18 @@ read.scsbio <- function(x, ...){
       v <- rbind(v, tmp) 
    }
    
+   # Subset by specified variables:
+   args <- list(...)
+   args <- args[names(args) %in% names(v)]
+   if (length(args) > 0){
+      index <- rep(TRUE, nrow(v))
+      for (i in 1:length(args)) index <- index & (v[,names(args)[i]] %in% args[[i]])
+      v <- v[index, ]
+   }
+   
    # Convert to 'scsset' object:
    v <- scsbio(v)
       
-   # Subset by 'year' and 'tow.id':
-   if (!missing(x)){
-      vars <- c("year", "tow.id")
-      if (all(vars %in% names(x)))  v <- v[!is.na(match(v[vars], x[vars])), ]
-   }  
-
    return(v)
 }
 

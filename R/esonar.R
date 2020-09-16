@@ -36,7 +36,6 @@
 #'    \item{\code{locate.esonar}}{Find \code{esonar} data file(s).}
 #'    \item{\code{read.esonar}}{Read \code{esonar} data file(s).}
 #'    \item{\code{plot.esonar}}{Plot \code{esonar} data.}
-#'    \item{\code{map.esonar}}{Map \code{esonar} vessel and data track.}
 #'    \item{\code{describe.esonar}}{\code{esonar} data description.}
 #'    \item{\code{summary.esonar}}{Summary statistics for an \code{esonar} object.}
 #' }
@@ -71,7 +70,12 @@ wingspread <- function(x, ...) UseMethod("wingspread")
 
 #' @rdname esonar
 #' @export
-wingspread.esonar <- function(x, ...) return(x$doormaster)
+wingspread.esonar <- function(x, ...){
+   v <- x$wingspread
+   if (is.null(v)) v <- x$doorspread
+   if (is.null(v)) v <- x$doormaster
+   return(v)
+} 
 
 #' @rdname esonar
 #' @export locate.esonar
@@ -289,57 +293,48 @@ plot.esonar <- function(x, ...){
    # Define time series in minutes:
    time <- as.numeric((time(x) - min(time(x))) / 60)
 
-   layout(matrix(1:4, ncol = 2, nrow = 2))
-
-   # Plot primary sensor profile:
-   index <- !is.na(time) & !is.na(x$headline) & (x$headline > 0)
-   plot(time[index], x$headline[index],
-        type = "l", xlab = "Time(min)", ylab = "Headline(m)",
-        col = "blue", ylim = c(0, 50))
-   points(time[index], x$headline[index], pch = 21, bg = "blue")
+   # Define set of variables to display:
+   vars <- c("speed", "heading", "depth", "headline") 
+   vars <- vars[vars %in% names(x)]
+   vars <- vars[!unlist(lapply(x[, vars], function(x) return(all(is.na(x)))))]
+   x$wingspread <- wingspread(x)
+   vars <- c(vars, "wingspread")
+   
+   # Prepare layout:
+   m <- kronecker(matrix(1:length(vars)), matrix(1, ncol = 5, nrow = 5))
+   m <- rbind(0, cbind(0, m, 0), 0, 0)
+   layout(m)
+   par(mar = c(0,0,0,0))
 
    # Plot secondary sensor profile:
-   index <- !is.na(time) & !is.na(x$depth)
-   plot(time[index], x$depth[index], type = "l", xlab = "Time(min)", ylab = "Depth(m)", col = "blue")
-   points(time[index], x$depth[index], pch = 21, bg = "blue")
+   xlim = range(time)
+   for (i in  1:length(vars)){
+      y <- x[, vars[i]]
 
-   # Plot door spread profile:
-   index <- !is.na(time) & !is.na(x$doormaster) & (x$doormaster > 0)
-   plot(time[index], x$doormaster[index], type = "l",
-        xlab = "Time(min)", ylab = "Door spread(m)",
-        ylim = c(0, 30), col = "blue")
-   points(time[index], x$doormaster[index], pch = 21, bg = "blue")
-
-   map(x)
-}
-
-#' @rdname esonar
-#' @export
-map.esonar <- function(x, set.card = NULL, variable = NULL, ...){
-   # MAP.SONAR - Display an 'esonar' object on a map.
-
-   # Create map axes:
-   rx <- range(x$longitude)
-   ry <- range(x$latitude)
-   dx <- diff(rx)
-   dy <- diff(ry)
-   gulf.map(xlim = c(rx[1] - dx*0.1, rx[2] + dx*0.1),
-            ylim = c(ry[1] - dy*0.1, ry[2] + dy*0.1),
-            aspect.adjust = TRUE, ...)
-
-   # Draw points:
-   if (is.null(variable)){
-      points(x$longitude, x$latitude, pch = 21, bg = "blue", cex = 0.8)
-   }else{
-      index <- !is.na(x[, variable])
-      points(x$longitude[index], x$latitude[index], pch = 21, bg = "blue", cex = 2* 0.8* x[index, variable] / max(x[index, variable]))
-   }
-
-   # Plot set card start-end points:
-   if (!is.null(set.card)){
-      index <- match(x, set.card)
-      points(set.card$longitude.start[index], set.card$latitude.start[index], pch = 21, bg = "red")
-      points(set.card$longitude.end[index], set.card$latitude.end[index], pch = 21, bg = "red")
+      if (!(vars[i] %in% "heading")) ylim = c(0, 1.15 * max(y, na.rm = TRUE)) else ylim <- range(y, na.rm = TRUE)
+      plot(xlim, ylim, type = "n", xlab = "", ylab = "", xaxs = "i", yaxs = "i", xaxt = "n")
+      if (!any(is.na(y))){
+         lines(time, y, col = "blue", lwd = 2)
+      }else{
+         points(time, y, pch = 21, bg = "blue")
+      }
+      
+      # Y axis labels:
+      ylab <- vars[i]
+      ylab <- paste0(toupper(substr(ylab, 1, 1)), substr(ylab, 2, nchar(ylab)))
+      if (vars[i] == "wingspread") u <- "meters" else u <- units(x)[vars[i]]
+      u <- gsub("meters", "m", u)
+      u <- gsub("degrees", "°", u)
+      u <- gsub("knots", "kts", u)
+      
+      if (length(u) > 0) ylab <- paste0(ylab, "(", u, ")")
+      mtext(ylab, 2, 2.5, cex = 0.8)
+      
+      # X axis:
+      if (i == length(vars)){
+         mtext("Time(min)", 1, 2.5, cex = 0.8)
+         axis(1)
+      } 
    }
 }
 
@@ -446,3 +441,4 @@ summary.esonar <- function(x, year, truncate = TRUE, round = TRUE, ...){
 
    return(res)
 }
+

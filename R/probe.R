@@ -14,6 +14,7 @@
 #' \describe{
 #'    \item{\code{probe}}{Generic \code{probe} method.}
 #'    \item{\code{probe.default}}{Create a \code{probe} object.}
+#'    \item{\code{as.data.frame.probe}}{Convert \code{probe} object to a pure data frame.}
 #'    \item{\code{start.time.probe}}{Find start time for a \code{probe} data object.}
 #'    \item{\code{end.time.probe}}{Find end time for a \code{probe} data object.}
 #'    \item{\code{truncate.probe}}{Truncate \code{probe} data object to lie within start and end time limits.}
@@ -58,12 +59,19 @@ probe.default <- function(x, header, ...){
 }
 
 #' @rdname probe
+#' @export
+as.data.frame.probe <- function(x, ...){
+   class(x) <- "data.frame"
+   return(x)
+}
+   
+#' @rdname probe
 #' @export start.time.probe
 #' @rawNamespace S3method(start.time,probe)
 start.time.probe <- function(x, ...){
    if (project(x) == "scs"){
-      if ("year" %in% names(x)) year <- x$year else year <- attr(x, "year")
-      if ("tow.id" %in% names(x)) tow.id <- x$tow.id else year <- attr(x, "tow.id")
+      year <- as.numeric(format(date(unique(x$date)), format="%Y"))
+      if ("tow.id" %in% names(x)) tow.id <- x$tow.id else tow.id <- attr(x, "tow.id")
       y <- data.frame(year = year, tow.id = tow.id, stringsAsFactors = FALSE)
       z <- read.scsset(year = unique(year))
       r <- start.time(z)[match(y[key(z)], unique(z[key(z)]))]

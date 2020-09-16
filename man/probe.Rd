@@ -3,6 +3,7 @@
 \name{probe}
 \alias{probe}
 \alias{probe.default}
+\alias{as.data.frame.probe}
 \alias{start.time.probe}
 \alias{end.time.probe}
 \alias{truncate.probe}
@@ -12,6 +13,8 @@
 probe(x, ...)
 
 \method{probe}{default}(x, header, ...)
+
+\method{as.data.frame}{probe}(x, ...)
 
 \method{start}{time.probe}(x, ...)
 
@@ -39,6 +42,7 @@ Measurement probe data class definition and methods.
 \describe{
    \item{\code{probe}}{Generic \code{probe} method.}
    \item{\code{probe.default}}{Create a \code{probe} object.}
+   \item{\code{as.data.frame.probe}}{Convert \code{probe} object to a pure data frame.}
    \item{\code{start.time.probe}}{Find start time for a \code{probe} data object.}
    \item{\code{end.time.probe}}{Find end time for a \code{probe} data object.}
    \item{\code{truncate.probe}}{Truncate \code{probe} data object to lie within start and end time limits.}

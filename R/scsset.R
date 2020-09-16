@@ -110,14 +110,10 @@ read.scsset <- function(x, ...){
                          "start.time", "end.time", "start.time.logbook", "end.time.logbook",   
                          "depth", "bottom.temperature", "warp", "swept.area", "swept.area.method", 
                          "groundfish.sample", "water.sample", "comment")
-         
-         # Tranform coordinates:
-         vars <- names(tmp)[grep("^l.*itude", names(tmp))]
-         for (i in 1:length(vars)){
-            tmp[, vars[i]] <- dmm2deg(tmp[, vars[i]] / 1000)
-            if (length(grep("longitude", vars[i])) > 0) tmp[, vars[i]] <- -abs(tmp[, vars[i]])
-         }
       }
+      
+      # Remove blank spaces:
+      for (j in 1:ncol(tmp)) if (is.character(tmp[, j])) tmp[,j] <- gulf.utils::deblank(tmp[,j]) 
       
       # Read comma-delimited file:
       if (ext == "csv") tmp <- read.csv(file[i], header = TRUE, stringsAsFactors = FALSE)
@@ -127,7 +123,13 @@ read.scsset <- function(x, ...){
    }  
    
    # Subset by specified variables:
-   v <- base::subset.data.frame(v, ...)
+   args <- list(...)
+   args <- args[names(args) %in% names(v)]
+   if (length(args) > 0){
+      index <- rep(TRUE, nrow(v))
+      for (i in 1:length(args)) index <- index & (v[,names(args)[i]] %in% args[[i]])
+      v <- v[index, ]
+   }
    
    # Convert to 'scsset' object:
    v <- scsset(v)
@@ -183,7 +185,7 @@ summary.scsset <- function(x, truncate = TRUE, ...){
       if (n(esonar) > 0) esonar.distance <- min(distance(longitude(x[i,]), latitude(x[i,]), esonar$longitude, esonar$latitude))
 
       # Counts of data records:
-      tmp <- data.frame(date = as.character(date(x[i,])),
+      tmp <- data.frame(date = as.character(gulf.utils::date(x[i,])),
                         tow.number = x$tow.number[i],
                         valid = x$valid[i],
                         esonar = n(esonar), 

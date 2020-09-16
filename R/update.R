@@ -21,7 +21,8 @@
 
 #' @rdname update
 #' @rawNamespace S3method(update,scsset)
-update.scsset <- function(x, year, path = getwd(), ...){
+#' @export update.scsset
+update.scsset <- function(x, year, path = getwd(), package = TRUE, ...){
    # Parse 'x' as 'year':
    if (is.numeric(x) & missing(year)) year <- x
    
@@ -35,19 +36,9 @@ update.scsset <- function(x, year, path = getwd(), ...){
    for (i in 1:length(year)){
       # Read data:
       x <- read.scsset(year[i], source = "ascii")
-      for (j in 1:ncol(x)) if (is.character(x[, j])) x[,j] <- gulf.utils::deblank(x[,j]) 
-      
-      # Read biological data:
-      y <- read.scsbio(year[i])
-      y$samplers <- sampler.scs(y$samplers)
-      y <- aggregate(list(sampler = y$samplers), by = y[key(x)], function(x) paste(unique(sort(x)), collapse = ", "))
-      
-      # Import sampler data:
-      x$sampler <- y$sampler[gulf.utils::match(x[key(x)], y[key(x)])]
-      x$sampler[is.na(x$sampler)] <- ""
       
       # Write to file:
-      file <- paste0(path, "/scs.set.", year[i], ".csv")
+      file <- paste0(path, "/inst/extdata/scs.set.", year[i], ".csv")
       cat(paste0("Writing to : '", file, "'\n"))
       write.csv(x, file = file, row.names = FALSE)
    }
@@ -55,7 +46,8 @@ update.scsset <- function(x, year, path = getwd(), ...){
 
 #' @rdname update
 #' @rawNamespace S3method(update,scsbio)
-update.scsbio <- function(year, path, Rfile = TRUE, csv = TRUE, ...){
+#' @export update.scsset
+update.scsbio <- function(year, path, Rfile = FALSE, csv = FALSE, ...){
    # Check input argument:
    if (!is.numeric(year) | (length(year) == 0)) stop("'year' must be a numeric vector.")
    if (any((year %% 1) != 0 )) stop("'year' must be an integer.")

@@ -8,7 +8,6 @@
 \alias{locate.esonar}
 \alias{read.esonar}
 \alias{plot.esonar}
-\alias{map.esonar}
 \alias{describe.esonar}
 \alias{summary.esonar}
 \title{\strong{eSonar} Data}
@@ -26,8 +25,6 @@ wingspread(x, ...)
 read.esonar(x, offset = 0, repeats = FALSE, ...)
 
 \method{plot}{esonar}(x, ...)
-
-map.esonar(x, set.card = NULL, variable = NULL, ...)
 
 \method{describe}{esonar}(x, ...)
 
@@ -63,7 +60,6 @@ Functions to read, manipulate and analyze \strong{eSonar} trawl acoustic monitor
    \item{\code{locate.esonar}}{Find \code{esonar} data file(s).}
    \item{\code{read.esonar}}{Read \code{esonar} data file(s).}
    \item{\code{plot.esonar}}{Plot \code{esonar} data.}
-   \item{\code{map.esonar}}{Map \code{esonar} vessel and data track.}
    \item{\code{describe.esonar}}{\code{esonar} data description.}
    \item{\code{summary.esonar}}{Summary statistics for an \code{esonar} object.}
 }
