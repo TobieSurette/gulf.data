@@ -6,9 +6,9 @@
 \alias{update.scsbio}
 \title{Update Data}
 \usage{
-\method{update}{scsset}(x, year, path = getwd(), ...)
+\method{update}{scsset}(x, year, path = getwd(), package = TRUE, ...)
 
-\method{update}{scsbio}(year, path, Rfile = TRUE, csv = TRUE, ...)
+\method{update}{scsbio}(year, path, Rfile = FALSE, csv = FALSE, ...)
 }
 \arguments{
 \item{year}{Project year(s) to be updated.}
