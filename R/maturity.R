@@ -28,7 +28,7 @@
 #' @section Functions:
 #' \describe{
 #'   \item{\code{is.mature}}{Generic \code{is.mature} function.}
-#'   \item{\code{is.mature.scsbio}}{GSnow crab biological data (\code{scsbio}) method.}
+#'   \item{\code{is.mature.scsbio}}{Snow crab biological data (\code{scsbio}) maturity method.}
 #'   \item{\code{is.primiparous}}{Generic \code{is.primiparous} function.}
 #'   \item{\code{is.primiparous.scsbio}}{Returns whether a female is primiparous, i.e. a first-time spawner.}
 #'   \item{\code{is.multiparous}}{Generic \code{is.multiparous} function.}
@@ -45,10 +45,9 @@
 is.mature <- function(x, ...) UseMethod("is.mature")
 
 #' @rdname maturity
+#' @export is.mature.scsbio
 #' @export
 is.mature.scsbio <- function(x, probability = FALSE, ...){
-   # IS.MATURE.SCBIO - Determine whether crab is mature.
-
    # Initialize result vector:
    mat <- as.logical(rep(NA, dim(x)[1]))
 
@@ -96,6 +95,7 @@ is.mature.scsbio <- function(x, probability = FALSE, ...){
 is.primiparous <- function(x, ...) UseMethod("is.primiparous")
 
 #' @rdname maturity
+#' @export is.primiparous.scsbio
 #' @export
 is.primiparous.scsbio <- function(x, ...){
    # Returns whether a crab is newly moulted.
@@ -119,6 +119,7 @@ is.primiparous.scsbio <- function(x, ...){
 is.multiparous <- function(x, ...) UseMethod("is.multiparous")
 
 #' @rdname maturity
+#' @export is.multiparous.scsbio
 #' @export
 is.multiparous.scsbio <- function(x, ...){
    # Returns whether a crab is newly moulted.
@@ -144,6 +145,7 @@ is.senile <- function(x, ...){
 }
 
 #' @rdname maturity
+#' @export is.senile.scsbio
 #' @export
 is.senile.scsbio <- function(x, ...){
    # IS.SENILE - Returns whether a crab is senile.
