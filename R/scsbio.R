@@ -63,9 +63,7 @@
 
 #' @rdname scsbio
 #' @export
-key.scsbio <- function(x, ...){
-   if (missing(x)) return(c("year", "tow.id", "crab.number")) else return(gulf.metadata::key(x))
-}
+key.scsbio <- function(x, ...) if (missing(x)) return(c("year", "tow.id", "crab.number")) else return(gulf.metadata::key(x))
 
 #' @export
 scsbio <- function(x, ...) UseMethod("scsbio")
@@ -77,7 +75,6 @@ scsbio.default <- function(x, ...){
 
    # Define attributes:
    gulf.metadata::project(x) <- "scs"
-   gulf.metadata::key(x) <- key.scsbio()
    gulf.metadata::units(x, c("carapace.width", "chela.height", "abdomen.width")) <- "millimeters"
    gulf.metadata::units(x, "weight") <- "grams"
 

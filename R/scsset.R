@@ -11,7 +11,12 @@
 #' @param year Survey year(s) to be loaded.   
 #'  
 #' @examples 
-#' # Read data:
+#' # Locate snow crab survey set data files:
+#' locate.scsset()
+#' locate.scsset(1988)
+#' locate.scsset(2010:2020)
+
+#' # Read snow crab survey set data files:
 #' x <- read.scsset()                 # Read all avaliable data.
 #' x <- read.scsset(year = 2019)      # Read single year.
 #' x <- read.scsset(year = 2010:2015) # Read range of years. 
@@ -32,7 +37,7 @@
 
 #' @rdname scsset
 #' @export
-key.scsset <- function(x, ...) if (missing(x)) return(c("year", "tow.id") ) else return(attr(x, "key"))
+key.scsset <- function(x, ...) if (missing(x)) return(c("year", "tow.id")) else return(attr(x, "key"))
 
 #' @export scsset
 scsset <- function(x, ...) UseMethod("scsset")
@@ -45,7 +50,6 @@ scsset.default <- function(x, ...){
    # Define attributes:
    gulf.metadata::project(x) <- "scs"
    gulf.metadata::key(x) <- key.scsset()
-   gulf.metadata::units(x, c("longitude", "latitude", "longitude.start.logbook", "longitude.end.logbook", "latitude.start.logbook", "latitude.end.logbook")) <- "degrees"
    gulf.metadata::units(x, "swept.area") <- "square.meters"
    gulf.metadata::units(x, c("depth", "warp")) <- "fathoms"
    gulf.metadata::units(x, "bottom.temperature") <- "degreesC"
@@ -66,7 +70,7 @@ locate.scsset <- function(x, year, source = "gulf.data", ...){
    if (source == "ascii"){
       path <- dir(paste0(options()$gulf.path$snow.crab, "/Offshore Crab Common/"), pattern = "Fishing Year [0-9]{4,4}", full.names = TRUE)
       path <- paste0(path, "/Trawl Data/South Western Gulf/Tow Data")
-      file <- locate(path = path, pattern = "Tows [0-9]{4,4}.txt")
+      file <- locate(path = path, pattern = c("scs", "set", "csv"))
    }
       
    # Data source is 'gulf.data' package:
@@ -101,7 +105,7 @@ read.scsset <- function(x, ...){
       tmp <- NULL
       # Read fixed-width file:
       if (ext == "txt"){
-         tmp <- read.fortran(file = file, format = c("I4", "I2", "I2", "A2", "A8", "I2", "I1", "I8", "I8", "I8",
+         tmp <- read.fortran(file = file[i], format = c("I4", "I2", "I2", "A2", "A8", "I2", "I1", "I8", "I8", "I8",
                                                      "I8", "I8", "I8", "A8", "A8", "A8", "A8", "I5", "F4.1", "I4",
                                                      "F5.1", "A7", "I1", "I1", "A300"))
          
@@ -110,11 +114,11 @@ read.scsset <- function(x, ...){
                          "start.time", "end.time", "start.time.logbook", "end.time.logbook",   
                          "depth", "bottom.temperature", "warp", "swept.area", "swept.area.method", 
                          "groundfish.sample", "water.sample", "comment")
+         
+         # Remove blank spaces:
+         for (j in 1:ncol(tmp)) if (is.character(tmp[, j])) tmp[,j] <- gulf.utils::deblank(tmp[,j])          
       }
-      
-      # Remove blank spaces:
-      for (j in 1:ncol(tmp)) if (is.character(tmp[, j])) tmp[,j] <- gulf.utils::deblank(tmp[,j]) 
-      
+   
       # Read comma-delimited file:
       if (ext == "csv") tmp <- read.csv(file[i], header = TRUE, stringsAsFactors = FALSE)
 
@@ -131,6 +135,7 @@ read.scsset <- function(x, ...){
       v <- v[index, ]
    }
    
+   print(head(v))
    # Convert to 'scsset' object:
    v <- scsset(v)
 
@@ -141,11 +146,11 @@ read.scsset <- function(x, ...){
 #' @export start.time.scsset
 #' @rawNamespace S3method(start.time,scsset)
 start.time.scsset <- function(x, ...){
-   v <- x$start.time
-   v[is.na(v)] <- ""
-   index <- which(deblank(v) == "")
-   v[index] <- x$start.time.logbook
-   v[is.na(v)] <- ""
+   v <- rep("", nrow(x))
+   index <- which((deblank(x$start.time) != "")  &  !is.na(x$start.time)) 
+   v[index] <- x$start.time[index]
+   index <- which((v == "") & (deblank(x$start.time.logbook) != "")  &  !is.na(x$start.time.logbook)) 
+   v[index] <- x$start.time.logbook[index]
    v <- as.POSIXct(paste(as.character(gulf.utils::date(x)), v))
    return(v)   
 }
@@ -153,13 +158,13 @@ start.time.scsset <- function(x, ...){
 #' @rdname scsset
 #' @rawNamespace S3method(end.time,scsset)
 end.time.scsset <- function(x, ...){
-   v <- x$end.time
-   v[is.na(v)] <- ""
-   index <- which(deblank(v) == "")
-   v[index] <- x$end.time.logbook
-   v[is.na(v)] <- ""
+   v <- rep("", nrow(x))
+   index <- which((deblank(x$end.time) != "")  &  !is.na(x$end.time)) 
+   v[index] <- x$end.time[index]
+   index <- which((v == "") & (deblank(x$end.time.logbook) != "")  &  !is.na(x$end.time.logbook)) 
+   v[index] <- x$end.time.logbook[index]
    v <- as.POSIXct(paste(as.character(gulf.utils::date(x)), v))
-   return(v)   
+   return(v)  
 }
 
 #' @rdname scsset
