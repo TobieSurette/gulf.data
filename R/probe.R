@@ -70,9 +70,8 @@ as.data.frame.probe <- function(x, ...){
 #' @rawNamespace S3method(start.time,probe)
 start.time.probe <- function(x, ...){
    if (project(x) == "scs"){
-      year <- as.numeric(format(date(unique(x$date)), format="%Y"))
-      if ("tow.id" %in% names(x)) tow.id <- x$tow.id else tow.id <- attr(x, "tow.id")
-      y <- data.frame(year = year, tow.id = tow.id, stringsAsFactors = FALSE)
+      year <- as.numeric(format(gulf.utils::date(unique(x$date)), format="%Y"))
+      y <- data.frame(year = year, tow.id = tow.id(x), stringsAsFactors = FALSE)
       z <- read.scsset(year = unique(year))
       r <- start.time(z)[match(y[key(z)], unique(z[key(z)]))]
    }
@@ -84,9 +83,8 @@ start.time.probe <- function(x, ...){
 #' @export
 end.time.probe <- function(x, ...){
    if (project(x) == "scs"){
-      if ("year" %in% names(x)) year <- x$year else year <- attr(x, "year")
-      if ("tow.id" %in% names(x)) tow.id <- x$tow.id else year <- attr(x, "tow.id")
-      y <- data.frame(year = year, tow.id = tow.id, stringsAsFactors = FALSE)
+      year <- as.numeric(format(gulf.utils::date(unique(x$date)), format="%Y"))
+      y <- data.frame(year = year, tow.id = tow.id(x), stringsAsFactors = FALSE)
       z <- read.scsset(year = unique(year))
       r <- end.time(z)[match(y[key(z)], unique(z[key(z)]))]
    }

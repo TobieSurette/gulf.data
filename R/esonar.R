@@ -322,7 +322,7 @@ plot.esonar <- function(x, ...){
       # Y axis labels:
       ylab <- vars[i]
       ylab <- paste0(toupper(substr(ylab, 1, 1)), substr(ylab, 2, nchar(ylab)))
-      if (vars[i] == "wingspread") u <- "meters" else u <- units(x)[vars[i]]
+      if (vars[i] == "wingspread") u <- "meters" else u <- gulf.metadata::units(x)[vars[i]]
       u <- gsub("meters", "m", u)
       u <- gsub("degrees", "°", u)
       u <- gsub("knots", "kts", u)
