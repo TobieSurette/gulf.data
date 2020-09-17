@@ -62,7 +62,7 @@ Determines whether an organism is sexually mature, based on qualitative or
 
 \describe{
   \item{\code{is.mature}}{Generic \code{is.mature} function.}
-  \item{\code{is.mature.scsbio}}{GSnow crab biological data (\code{scsbio}) method.}
+  \item{\code{is.mature.scsbio}}{Snow crab biological data (\code{scsbio}) maturity method.}
   \item{\code{is.primiparous}}{Generic \code{is.primiparous} function.}
   \item{\code{is.primiparous.scsbio}}{Returns whether a female is primiparous, i.e. a first-time spawner.}
   \item{\code{is.multiparous}}{Generic \code{is.multiparous} function.}
