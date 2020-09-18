@@ -37,7 +37,7 @@
 
 #' @rdname scsset
 #' @export
-key.scsset <- function(x, ...) if (missing(x)) return(c("year", "tow.id")) else return(attr(x, "key"))
+key.scsset <- function(x, ...) if (missing(x)) return(c("date", "tow.id")) else return(attr(x, "key"))
 
 #' @export scsset
 scsset <- function(x, ...) UseMethod("scsset")
@@ -70,7 +70,7 @@ locate.scsset <- function(x, year, source = "gulf.data", ...){
    if (source == "ascii"){
       path <- dir(paste0(options()$gulf.path$snow.crab, "/Offshore Crab Common/"), pattern = "Fishing Year [0-9]{4,4}", full.names = TRUE)
       path <- paste0(path, "/Trawl Data/South Western Gulf/Tow Data")
-      file <- locate(path = path, pattern = c("scs", "set", "csv"))
+      file <- locate(path = path, pattern = c("Tows [0-9]{4,4}.txt"))
    }
       
    # Data source is 'gulf.data' package:
@@ -106,8 +106,8 @@ read.scsset <- function(x, ...){
       # Read fixed-width file:
       if (ext == "txt"){
          tmp <- read.fortran(file = file[i], format = c("I4", "I2", "I2", "A2", "A8", "I2", "I1", "I8", "I8", "I8",
-                                                     "I8", "I8", "I8", "A8", "A8", "A8", "A8", "I5", "F4.1", "I4",
-                                                     "F5.1", "A7", "I1", "I1", "A300"))
+                                                        "I8", "I8", "I8", "A8", "A8", "A8", "A8", "I5", "F4.1", "I4",
+                                                        "F5.1", "A7", "I1", "I1", "A300"))
          
          names(tmp) <- c("year", "month", "day", "zone", "tow.id", "tow.number", "valid", "longitude", "latitude", 
                          "longitude.start.logbook", "longitude.end.logbook", "latitude.start.logbook", "latitude.end.logbook",            
@@ -122,6 +122,12 @@ read.scsset <- function(x, ...){
       # Read comma-delimited file:
       if (ext == "csv") tmp <- read.csv(file[i], header = TRUE, stringsAsFactors = FALSE)
 
+      # Compress date variables:
+      if (all(c("year", "month", "day") %in% names(tmp))){
+         tmp$date <- as.character(date(tmp))
+         tmp <- cbind(tmp[c("date")], tmp[setdiff(names(tmp), c("date", "year", "month", "day"))])
+      }
+      
       # Append data:
       v <- rbind(v, tmp) 
    }  
@@ -135,7 +141,6 @@ read.scsset <- function(x, ...){
       v <- v[index, ]
    }
    
-   print(head(v))
    # Convert to 'scsset' object:
    v <- scsset(v)
 
@@ -205,5 +210,3 @@ summary.scsset <- function(x, truncate = TRUE, ...){
    
    return(res)
 }
-
-

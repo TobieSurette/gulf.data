@@ -156,7 +156,6 @@ read.scsbio <- function(x, ...){
       tmp <- NULL
       # Read fixed-width file:
       if (ext == "txt"){
-         print(i)
          tmp <- read.fortran(file = file[i], 
                              format = c("A1", "A2", "A2", "A4", "A1", "A2", "A1", "A3", "A1", "A1", "A3", "A4", "A1", "A1", "A6", 
                                         "A5", "A1", "A5", "A1", "A1", "A1", "A1", "A2", "A1", "A1", "A1", "A8", "A1", "A10", "A1",
@@ -174,11 +173,14 @@ read.scsbio <- function(x, ...){
          # Remove blank columns:
          tmp <- tmp[, -grep("blank", names(tmp))]
          
-         # Remove blanks:
+         # Remove blank leading and trailing spaces:
          for (j in 1:ncol(tmp)) if (is.character(tmp[, j])) tmp[, j] <- deblank(tmp[, j])
           
+         # Convert to date:
+         tmp$date <- as.character(date(tmp[c("day", "month", "year")]))
+         
          # Numeric conversions:
-         nvars <- c("day", "month", "year", "tow.number", "crab.number", "carapace.width", "abdomen.width", 
+         nvars <- c("tow.number", "crab.number", "carapace.width", "abdomen.width", 
                     "chela.height", "shell.condition", "gonad.colour", "egg.colour", "latitude.start", "longitude.start",
                     "soak.days", "depth", "weight")
          f <- function(x) return(as.numeric(gsub("[*]", "", x)))
@@ -191,6 +193,11 @@ read.scsbio <- function(x, ...){
       # Append data:
       v <- rbind(v, tmp) 
    }
+   
+   # Delete empty data rows:
+   index <- (v$carapace.width > 0) | !is.na(v$abdomen.width) | !is.na(v$chela.height) | !is.na(v$shell.condition) | 
+            !is.na(v$gonad.colour) | !is.na(v$egg.colour) | !is.na(v$eggs.remaining) 
+   v <- v[which(index), ]
    
    # Subset by specified variables:
    args <- list(...)

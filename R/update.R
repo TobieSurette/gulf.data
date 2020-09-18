@@ -32,10 +32,36 @@ update.scsset <- function(x, year, path = getwd(), package = TRUE, ...){
       year <- as.numeric(tmp[length(tmp)])
    } 
    
+   # Read trawl survey event times:
+   touchdown.times <- read.csv(paste0(options()$gulf.path$snow.crab, "/Databases/Snow crab survey/scsset/touchdown.times.csv"), header = TRUE, stringsAsFactors = FALSE)
+   liftoff.times <- read.csv(paste0(options()$gulf.path$snow.crab, "/Databases/Snow crab survey/scsset/liftoff.times.csv"), header = TRUE, stringsAsFactors = FALSE)
+   haul.times <- read.csv(paste0(options()$gulf.path$snow.crab, "/Databases/Snow crab survey/scsset/haul.times.csv"), header = TRUE, stringsAsFactors = FALSE)
+   
    # Read data files:
    for (i in 1:length(year)){
       # Read data:
       x <- read.scsset(year[i], source = "ascii")
+
+      # Add year column for row matching:
+      x$year <- as.numeric(substr(as.character(date(x)), 1, 4))
+
+      # Trawl haul times:
+      index <- match(x[c("year", "tow.id")], haul.times[c("year", "tow.id")])
+      x$haul.time <- "        "
+      x$haul.time[which(!is.na(index))] <- haul.times$time[index[which(!is.na(index))]]
+      
+      # Trawl touchddown times:
+      index <- match(x[c("year", "tow.id")], touchdown.times[c("year", "tow.id")])
+      x$touchdown.time <- "        "
+      x$touchdown.time[which(!is.na(index))] <- touchdown.times$time[index[which(!is.na(index))]]
+ 
+      # Trawl liftoff times:
+      index <- match(x[c("year", "tow.id")], liftoff.times[c("year", "tow.id")])
+      x$liftoff.time <- "        "
+      x$liftoff.time[which(!is.na(index))] <- liftoff.times$time[index[which(!is.na(index))]]
+            
+      # Remove year:
+      x <- x[setdiff(names(x), "year")]
       
       # Write to file:
       file <- paste0(path, "/inst/extdata/scs.set.", year[i], ".csv")
@@ -47,35 +73,26 @@ update.scsset <- function(x, year, path = getwd(), package = TRUE, ...){
 #' @rdname update
 #' @rawNamespace S3method(update,scsbio)
 #' @export update.scsset
-update.scsbio <- function(year, path, Rfile = FALSE, csv = FALSE, ...){
-   # Check input argument:
-   if (!is.numeric(year) | (length(year) == 0)) stop("'year' must be a numeric vector.")
-   if (any((year %% 1) != 0 )) stop("'year' must be an integer.")
-   
-   flag <- FALSE
-   if (!missing(path)) flag <- TRUE
-   
+update.scsbio <- function(year, path = getwd(), ...){
    # Loop over years:
    for (i in 1:length(year)){
-      if (!flag){
-         path <- scsbio.path.str(year = year[i], ...)
-         tmp <- strsplit(path, '/')[[1]]
-         path <- paste0(tmp[1:which(tmp == "Raw Data")], collapse = "/")
-      }
-      
-      writeable <- Sys.chmod(path = path)
-      if (!writeable) stop(paste("Unable to write to: ", path))
-      
       # Read data:
-      x <- read.scsbio(year = year[i], source = "ascii", ...)
-      index <- (x$carapace.width > 0) | !is.na(x$abdomen.width) | !is.na(x$chela.height) | !is.na(x$shell.condition) | 
-         !is.na(x$gonad.colour) | !is.na(x$egg.colour) | !is.na(x$eggs.remaining) 
-      x[which(index), ]
+      x <- read.scsbio(year[i], ...)
       
-      cat(paste0("Writing to : '", path, "/", "SCS", year[i], ".Rdata'\n"))
-      if (Rfile) save(x, file = paste0(path, "/", "SCS", year[i], ".Rdata"))
-      cat(paste0("Writing to : '", path, "/", "SCS", year[i], ".csv'\n"))
-      if (csv) write.table(x, file = paste0(path, "/", "SCS", year[i], ".csv"), row.names = FALSE, col.names = TRUE, sep = ",")
+      # Add date:
+      x <- cbind(data.frame(date = as.character(date(x)), stringsAsFactors = FALSE), x)
+      x <- x[setdiff(names(x), c("year", "month", "day"))]
+      
+      # Add tow ID:
+      y <- read.scsset(year[i])
+      index <- match(x[c("date", "tow.number")], y[c("date", "tow.number")])
+      x$tow.id <- y$tow.id[index]
+      x$tow.id[is.na(x$tow.id)] <- ""
+      
+      # Write to file:
+      file <- paste0(path, "/inst/extdata/scs.bio.", year[i], ".csv")
+      cat(paste0("Writing to : '", file, "'\n"))
+      write.csv(x, file = file, row.names = FALSE)      
    }
 }
 
