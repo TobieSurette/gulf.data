@@ -1,16 +1,16 @@
 #' Snow Crab Set/Tow Data
-#' 
+#'
 #' @name scsset
-#' 
-#' @description The \code{scsset} class is a container for Snow Crab Survey Set/Tow data, i.e. 
-#'              information about individual tows performed on the snow crab annual survey. 
-#'              
-#' @param x A \sQuote{data.frame} object. When reading data, \code{x} may be a numeric 
+#'
+#' @description The \code{scsset} class is a container for Snow Crab Survey Set/Tow data, i.e.
+#'              information about individual tows performed on the snow crab annual survey.
+#'
+#' @param x A \sQuote{data.frame} object. When reading data, \code{x} may be a numeric
 #'          vector specifying the survey years.
-#'          
-#' @param year Survey year(s) to be loaded.   
-#'  
-#' @examples 
+#'
+#' @param year Survey year(s) to be loaded.
+#'
+#' @examples
 #' # Locate snow crab survey set data files:
 #' locate.scsset()
 #' locate.scsset(1988)
@@ -19,8 +19,8 @@
 #' # Read snow crab survey set data files:
 #' x <- read.scsset()                 # Read all avaliable data.
 #' x <- read.scsset(year = 2019)      # Read single year.
-#' x <- read.scsset(year = 2010:2015) # Read range of years. 
-#' 
+#' x <- read.scsset(year = 2010:2015) # Read range of years.
+#'
 #' @section Functions:
 #' \describe{
 #'   \item{\code{as.data.frame.scsset}}{Convert \code{scsset} object to a data frame.}
@@ -33,7 +33,7 @@
 #'   \item{\code{end.time.scsset}}{Tow end time.}
 #'   \item{\code{summary.scsset}}{Return a summary of an \code{scsset} object.}
 #' }
-#' 
+#'
 #' @seealso \code{\link{scsbio}}, \code{\link{tow.id}}
 
 #' @rdname scsset
@@ -41,8 +41,8 @@
 as.data.frame.scsset <- function(x, ...){
    class(x) <- "data.frame"
    return(x)
-}   
- 
+}
+
 #' @rdname scsset
 #' @export
 key.scsset <- function(x, ...) if (missing(x)) return(c("year", "tow.id")) else return(attr(x, "key"))
@@ -54,7 +54,7 @@ scsset <- function(x, ...) UseMethod("scsset")
 #' @export
 scsset.default <- function(x, ...){
    if ("scsset" %in% class(x)) return(x)
- 
+
    # Define attributes:
    gulf.metadata::project(x) <- "scs"
    gulf.metadata::key(x) <- key.scsset()
@@ -62,10 +62,10 @@ scsset.default <- function(x, ...){
    gulf.metadata::units(x, c("depth", "warp")) <- "fathoms"
    gulf.metadata::units(x, "bottom.temperature") <- "degreesC"
    gulf.metadata::fmt(x, c("start.time", "end.time", "start.time.logbook", "end.time.logbook")) <- "hh:mm:ss"
-   
+
    # Define class:
-   class(x) <- unique(c("scsset", class(x))) 
-   
+   class(x) <- unique(c("scsset", class(x)))
+
    return(x)
 }
 
@@ -78,9 +78,9 @@ locate.scsset <- function(x, year, source = "gulf.data", ...){
    if (source == "ascii"){
       path <- dir(paste0(options()$gulf.path$snow.crab, "/Offshore Crab Common/"), pattern = "Fishing Year [0-9]{4,4}", full.names = TRUE)
       path <- paste0(path, "/Trawl Data/South Western Gulf/Tow Data")
-      file <- locate(path = path, pattern = c("scs", "set", "csv"))
+      file <- locate(path = path, pattern = c("Tows [0-9]{4,4}.txt"))
    }
-      
+
    # Data source is 'gulf.data' package:
    if (source == "gulf.data") file <- locate(package = "gulf.data", pattern = c("scs", "set", "csv"), ...)
 
@@ -90,7 +90,7 @@ locate.scsset <- function(x, year, source = "gulf.data", ...){
       for (i in 1:length(year)) index[grep(year[i], file)] <- TRUE
       file <- file[index]
    }
-   
+
    # Empty search:
    if (length(file ) == 0)  return(NULL) else return(file)
 }
@@ -100,40 +100,46 @@ locate.scsset <- function(x, year, source = "gulf.data", ...){
 read.scsset <- function(x, ...){
    # Find data file:
    file <- locate.scsset(x, ...)
-   
+
    # No files found:
    if (length(file) == 0) return(NULL)
-   
+
    # Load data:
    v <- NULL
    for (i in 1:length(file)){
       # Determine file extension:
       ext <- tolower(unlist(lapply(strsplit(file[i], "[.]"), function(x) x[length(x)])))
-      
+
       tmp <- NULL
       # Read fixed-width file:
       if (ext == "txt"){
          tmp <- read.fortran(file = file[i], format = c("I4", "I2", "I2", "A2", "A8", "I2", "I1", "I8", "I8", "I8",
-                                                     "I8", "I8", "I8", "A8", "A8", "A8", "A8", "I5", "F4.1", "I4",
-                                                     "F5.1", "A7", "I1", "I1", "A300"))
-         
-         names(tmp) <- c("year", "month", "day", "zone", "tow.id", "tow.number", "valid", "longitude", "latitude", 
-                         "longitude.start.logbook", "longitude.end.logbook", "latitude.start.logbook", "latitude.end.logbook",            
-                         "start.time", "end.time", "start.time.logbook", "end.time.logbook",   
-                         "depth", "bottom.temperature", "warp", "swept.area", "swept.area.method", 
+                                                        "I8", "I8", "I8", "A8", "A8", "A8", "A8", "I5", "F4.1", "I4",
+                                                        "F5.1", "A7", "I1", "I1", "A300"))
+
+         names(tmp) <- c("year", "month", "day", "zone", "tow.id", "tow.number", "valid", "longitude", "latitude",
+                         "longitude.start.logbook", "longitude.end.logbook", "latitude.start.logbook", "latitude.end.logbook",
+                         "start.time", "end.time", "start.time.logbook", "end.time.logbook",
+                         "depth", "bottom.temperature", "warp", "swept.area", "swept.area.method",
                          "groundfish.sample", "water.sample", "comment")
-         
+
          # Remove blank spaces:
-         for (j in 1:ncol(tmp)) if (is.character(tmp[, j])) tmp[,j] <- gulf.utils::deblank(tmp[,j])          
+         for (j in 1:ncol(tmp)) if (is.character(tmp[, j])) tmp[,j] <- gulf.utils::deblank(tmp[,j])
       }
-   
+
       # Read comma-delimited file:
       if (ext == "csv") tmp <- read.csv(file[i], header = TRUE, stringsAsFactors = FALSE)
 
+      # Compress date variables:
+      if (all(c("year", "month", "day") %in% names(tmp))){
+         tmp$date <- as.character(date(tmp))
+         tmp <- cbind(tmp[c("date")], tmp[setdiff(names(tmp), c("date", "year", "month", "day"))])
+      }
+
       # Append data:
-      v <- rbind(v, tmp) 
-   }  
-   
+      v <- rbind(v, tmp)
+   }
+
    # Subset by specified variables:
    args <- list(...)
    args <- args[names(args) %in% names(v)]
@@ -142,8 +148,7 @@ read.scsset <- function(x, ...){
       for (i in 1:length(args)) index <- index & (v[,names(args)[i]] %in% args[[i]])
       v <- v[index, ]
    }
-   
-   print(head(v))
+
    # Convert to 'scsset' object:
    v <- scsset(v)
 
@@ -155,24 +160,24 @@ read.scsset <- function(x, ...){
 #' @rawNamespace S3method(start.time,scsset)
 start.time.scsset <- function(x, ...){
    v <- rep("", nrow(x))
-   index <- which((deblank(x$start.time) != "")  &  !is.na(x$start.time)) 
+   index <- which((deblank(x$start.time) != "")  &  !is.na(x$start.time))
    v[index] <- x$start.time[index]
-   index <- which((v == "") & (deblank(x$start.time.logbook) != "")  &  !is.na(x$start.time.logbook)) 
+   index <- which((v == "") & (deblank(x$start.time.logbook) != "")  &  !is.na(x$start.time.logbook))
    v[index] <- x$start.time.logbook[index]
    v <- as.POSIXct(paste(as.character(gulf.utils::date(x)), v))
-   return(v)   
+   return(v)
 }
 
 #' @rdname scsset
 #' @rawNamespace S3method(end.time,scsset)
 end.time.scsset <- function(x, ...){
    v <- rep("", nrow(x))
-   index <- which((deblank(x$end.time) != "")  &  !is.na(x$end.time)) 
+   index <- which((deblank(x$end.time) != "")  &  !is.na(x$end.time))
    v[index] <- x$end.time[index]
-   index <- which((v == "") & (deblank(x$end.time.logbook) != "")  &  !is.na(x$end.time.logbook)) 
+   index <- which((v == "") & (deblank(x$end.time.logbook) != "")  &  !is.na(x$end.time.logbook))
    v[index] <- x$end.time.logbook[index]
    v <- as.POSIXct(paste(as.character(gulf.utils::date(x)), v))
-   return(v)  
+   return(v)
 }
 
 #' @rdname scsset
@@ -182,17 +187,17 @@ summary.scsset <- function(x, truncate = TRUE, ...){
 
    # Initialize result variable:
    res <- NULL
-   
+
    for (i in 1:nrow(x)){
       # Read probe files:
       esonar   <- read.esonar(year = x$year[i], tow.id = x$tow.id[i])
       minilog  <- read.minilog(year = x$year[i], tow.id = x$tow.id[i])
       headline <- read.star.oddi(year = x$year[i], tow.id = x$tow.id[i], type = "depth")
       tilt     <- read.star.oddi(year = x$year[i], tow.id = x$tow.id[i], type = "tilt")
-      
+
       # Record count function:
       n <- function(x) if (is.data.frame(x)) return(nrow(x)) else return(length(x))
-      
+
       # Calculate minimum distance between eSonar coordinates and survey logbook coordinates:
       esonar.distance <- NA
       if (n(esonar) > 0) esonar.distance <- min(distance(longitude(x[i,]), latitude(x[i,]), esonar$longitude, esonar$latitude))
@@ -201,17 +206,15 @@ summary.scsset <- function(x, truncate = TRUE, ...){
       tmp <- data.frame(date = as.character(gulf.utils::date(x[i,])),
                         tow.number = x$tow.number[i],
                         valid = x$valid[i],
-                        esonar = n(esonar), 
-                        minilog = n(minilog), 
-                        headline = n(headline), 
+                        esonar = n(esonar),
+                        minilog = n(minilog),
+                        headline = n(headline),
                         tilt = n(tilt),
                         esonar.distance = esonar.distance)
-      
+
       # Apped results:
       res <- rbind(res, tmp)
    }
-   
+
    return(res)
 }
-
-
