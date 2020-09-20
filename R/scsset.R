@@ -23,6 +23,7 @@
 #' 
 #' @section Functions:
 #' \describe{
+#'   \item{\code{as.data.frame.scsset}}{Convert \code{scsset} object to a data frame.}
 #'   \item{\code{key.scsset}}{Define or extract \code{scsset} object index key.}
 #'   \item{\code{scsset}}{Generic \code{scsset} method.}
 #'   \item{\code{scsset.default}}{Create an \code{scsset} object.}
@@ -35,6 +36,13 @@
 #' 
 #' @seealso \code{\link{scsbio}}, \code{\link{tow.id}}
 
+#' @rdname scsset
+#' @export
+as.data.frame.scsset <- function(x, ...){
+   class(x) <- "data.frame"
+   return(x)
+}   
+ 
 #' @rdname scsset
 #' @export
 key.scsset <- function(x, ...) if (missing(x)) return(c("year", "tow.id")) else return(attr(x, "key"))

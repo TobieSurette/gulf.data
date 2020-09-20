@@ -3,7 +3,8 @@
 #' @name probe
 #' 
 #' @description Measurement probe data class definition and methods.
-#' 
+#'
+#'
 #' @param x Probe data object.
 #' @param header File header data.
 #' @param start.time,end.time Time bounds beyind which probe data are to be truncated. If left unspecified, 
