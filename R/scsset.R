@@ -44,8 +44,9 @@ as.data.frame.scsset <- function(x, ...){
 }
 
 #' @rdname scsset
+#' @export key.scsset
 #' @export
-key.scsset <- function(x, ...) if (missing(x)) return(c("year", "tow.id")) else return(attr(x, "key"))
+key.scsset <- function(x, ...) if (missing(x)) return(c("date", "tow.id")) else return(attr(x, "key"))
 
 #' @export scsset
 scsset <- function(x, ...) UseMethod("scsset")

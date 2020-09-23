@@ -2,11 +2,17 @@
 % Please edit documentation in R/catch.R
 \name{catch}
 \alias{catch}
+\alias{catch.scsset}
+\alias{catch.scsbio}
 \alias{catch<-}
 \alias{catch<-.scsset}
 \title{Catch Data}
 \usage{
 catch(x, ...)
+
+\method{catch}{scsset}(x, ...)
+
+\method{catch}{scsbio}(x, by = key.scsset(), category, species, weight = FALSE, ...)
 
 catch(x, ...) <- value
 
@@ -14,6 +20,14 @@ catch(x, ...) <- value
 }
 \arguments{
 \item{x}{Target object.}
+
+\item{...}{Other parameters (not used).}
+
+\item{by}{Character string(s) specifying which variables to group by when summararizing.}
+
+\item{category}{Biological category string(s). See \code{\link{cagetory}} for more details.}
+
+\item{weight}{Logical value specifying whether to return a summary by weights rather than counts.}
 
 \item{value}{Object containing catch data to be assigned.}
 }
@@ -25,6 +39,8 @@ Extract or attach or catch data.
 \describe{
    \item{\code{catch}}{Generic \code{catch} method.}
    \item{\code{catch<-}}{Generic \code{catch} assignment method.}
+   \item{\code{catch.scsset}}{Generate catch data summary for an \code{\link{scsset}} object.}
+   \item{\code{catch.scsbio}}{Generate catch data summary for an \code{\link{scsbio}} object.}
    \item{\code{catch<-.scsset}}{Import catch data into an \code{\link{scsset}} object.}
 }
 }

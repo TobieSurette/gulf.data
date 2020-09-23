@@ -20,7 +20,7 @@
 
 read.scsbio(x, ...)
 
-\method{summary}{scsbio}(x, by, category, weight = FALSE, ...)
+\method{summary}{scsbio}(x, category, ...)
 }
 \arguments{
 \item{x}{A \code{data.frame} object. When reading data, \code{x} may be a numeric 
@@ -31,11 +31,7 @@ read the corresponding biological data.}
 
 \item{year}{Numeric vector specifying the survey years to be loaded.}
 
-\item{by}{Character string(s) specifying which variables to group by when summararizing.}
-
 \item{category}{Biological category string(s). See \code{\link{cagetory}} for more details.}
-
-\item{weight}{Logical value specifying whether to return a summary by weights rather than counts.}
 
 \item{format}{A \code{data.frame} specifying the ASCII printing format for an \code{scsbio} object.}
 
@@ -52,6 +48,10 @@ when updating snow crab biological data.}
 
 \item{package}{Logical value specifying whether to write a comma-separated (\code{csv}) format
 to the \code{gulf.data} package clone.}
+
+\item{by}{Character string(s) specifying which variables to group by when summararizing.}
+
+\item{weight}{Logical value specifying whether to return a summary by weights rather than counts.}
 }
 \description{
 The \code{scsbio} class is a container for Snow Crab Survey Biological data, i.e. information 

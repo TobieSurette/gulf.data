@@ -2,6 +2,7 @@
 % Please edit documentation in R/scsset.R
 \name{scsset}
 \alias{scsset}
+\alias{as.data.frame.scsset}
 \alias{key.scsset}
 \alias{scsset.default}
 \alias{locate.scsset}
@@ -11,6 +12,8 @@
 \alias{summary.scsset}
 \title{Snow Crab Set/Tow Data}
 \usage{
+\method{as.data.frame}{scsset}(x, ...)
+
 \method{key}{scsset}(x, ...)
 
 \method{scsset}{default}(x, ...)
@@ -26,18 +29,19 @@ read.scsset(x, ...)
 \method{summary}{scsset}(x, truncate = TRUE, ...)
 }
 \arguments{
-\item{x}{A \sQuote{data.frame} object. When reading data, \code{x} may be a numeric 
+\item{x}{A \sQuote{data.frame} object. When reading data, \code{x} may be a numeric
 vector specifying the survey years.}
 
 \item{year}{Survey year(s) to be loaded.}
 }
 \description{
-The \code{scsset} class is a container for Snow Crab Survey Set/Tow data, i.e. 
+The \code{scsset} class is a container for Snow Crab Survey Set/Tow data, i.e.
              information about individual tows performed on the snow crab annual survey.
 }
 \section{Functions}{
 
 \describe{
+  \item{\code{as.data.frame.scsset}}{Convert \code{scsset} object to a data frame.}
   \item{\code{key.scsset}}{Define or extract \code{scsset} object index key.}
   \item{\code{scsset}}{Generic \code{scsset} method.}
   \item{\code{scsset.default}}{Create an \code{scsset} object.}
@@ -57,7 +61,7 @@ locate.scsset(2010:2020)
 # Read snow crab survey set data files:
 x <- read.scsset()                 # Read all avaliable data.
 x <- read.scsset(year = 2019)      # Read single year.
-x <- read.scsset(year = 2010:2015) # Read range of years. 
+x <- read.scsset(year = 2010:2015) # Read range of years.
 
 }
 \seealso{

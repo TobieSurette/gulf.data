@@ -8,7 +8,7 @@
 \usage{
 \method{update}{scsset}(x, year, path = getwd(), package = TRUE, ...)
 
-\method{update}{scsbio}(year, path, Rfile = FALSE, csv = FALSE, ...)
+\method{update}{scsbio}(year, path = getwd(), ...)
 }
 \arguments{
 \item{year}{Project year(s) to be updated.}

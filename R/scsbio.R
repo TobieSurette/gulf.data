@@ -62,8 +62,9 @@
 #' 
 
 #' @rdname scsbio
+#' @export key.scsbio
 #' @export
-key.scsbio <- function(x, ...) if (missing(x)) return(c("year", "tow.id", "crab.number")) else return(gulf.metadata::key(x))
+key.scsbio <- function(x, ...) if (missing(x)) return(c("date", "tow.id", "crab.number")) else return(gulf.metadata::key(x))
 
 #' @export
 scsbio <- function(x, ...) UseMethod("scsbio")
@@ -100,6 +101,7 @@ locate.scsbio <- function(x, year, source = "gulf.data", remove = "bad", ...){
    if (!missing(x) & missing(year)){
       if (is.numeric(x)) year <- x
       if ("year" %in% names(x)) year <- sort(unique(x$year))
+      if ("date" %in% names(x)) year <- as.numeric(substr(x$date, 1, 4))
    }
    if (!missing(year)) year <- sort(year)
    
@@ -141,9 +143,7 @@ read.scsbio <- function(x, ...){
    # Define file(s) to be read:
    file <- NULL
    if (!missing(x)) if (is.character(x)) file <- x
-   if (length(file) == 0){
-      if (missing(x)) file <- locate.scsbio(...) else file <- locate.scsbio(x, ...)
-   } 
+   if (length(file) == 0) if (!missing(x)) file <- locate.scsbio(x, ...) else file <- locate.scsbio(...)
 
    # Load data:
    v <- NULL
@@ -208,6 +208,9 @@ read.scsbio <- function(x, ...){
       v <- v[index, ]
    }
    
+   # Subset if 'scsset' object was given:
+   if ("scsset" %in% class(x)) v <- v[!is.na(match(v[key.scsset()], x[key.scsset()])), ]
+   
    # Convert to 'scsset' object:
    v <- scsbio(v)
       
@@ -216,27 +219,13 @@ read.scsbio <- function(x, ...){
 
 #' @rdname scsbio
 #' @export
-summary.scsbio <- function(x, by, category, weight = FALSE, ...){
+summary.scsbio <- function(x, category, ...){
    # Parse input arguments:
    if (!missing(category)) if (!is.character(category)) stop("'category' must be a vector of character strings.")
-   if (!missing(by)) if (!is.character(by)) stop("'by' must be a vector of character strings.")
+   if (!is.character(by)) stop("'by' must be a vector of character strings.")
 
-   if (!missing(category)){
-      if (missing(by)) by <- c("year", "tow.id")
-      if (weight) x$weight <- weight(x, ...) else x$weight <- 1
-      res <- stats::aggregate(list(n = is.category(x, category[1]) * x$weight), by = x[by], sum, na.rm = TRUE)
-      if (length(category) > 1){
-         for (i in 2:length(category)){
-            res <- cbind(res, stats::aggregate(list(n = is.category(x, category[i]) * x$weight), by = x[by], sum, na.rm = TRUE)["n"])
-         }
-      }
-      tmp <- res[grep("n", names(res))]
-      names(tmp) <- category
-      res <- cbind(res[setdiff(names(res), "n")],  tmp)
-      res <- sort(res, by = by)
-
-      return(res)
-   }
+   # Get catch summary:
+   if (!missing(category)) return(catch(x, category = category, ...))  
 
    # Print data summary:
    describe(x)
@@ -255,8 +244,4 @@ summary.scsbio <- function(x, by, category, weight = FALSE, ...){
    cat(paste0("             Commercial Residuals : ", sum(is.category(x, "TMMSC345GE95"), na.rm = TRUE), "\n"))
    cat(paste0("                   Mature Females : ", sum(is.category(x, "FM"), na.rm = TRUE), "\n"))
    cat(paste0("                 Immature Females : ", sum(is.category(x, "FI"), na.rm = TRUE), "\n"))
-   
-   # Print data issues:
-   cat("\nIrregularity summary : \n")
-   check(x)
 }

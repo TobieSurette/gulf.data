@@ -3,6 +3,7 @@
 \name{esonar}
 \alias{esonar}
 \alias{esonar.default}
+\alias{key.esonar}
 \alias{wingspread}
 \alias{wingspread.esonar}
 \alias{locate.esonar}
@@ -15,6 +16,8 @@
 esonar(x, ...)
 
 \method{esonar}{default}(x, ...)
+
+\method{key}{esonar}(x, ...)
 
 wingspread(x, ...)
 
@@ -55,6 +58,7 @@ Functions to read, manipulate and analyze \strong{eSonar} trawl acoustic monitor
 \describe{
    \item{\code{esonar}}{Generic \code{esonar} method.}
    \item{\code{esonar.default}}{Create an \code{esonar} object.}
+   \item{\code{key.esonar}}{\code{esonar} object index key.}
    \item{\code{wingspread}}{Generic \code{wingspread} method.}
    \item{\code{wingspread.esonar}}{Extract wing spread observations from \code{esonar} object.}
    \item{\code{locate.esonar}}{Find \code{esonar} data file(s).}

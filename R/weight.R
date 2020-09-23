@@ -223,8 +223,6 @@ weight.default <- function(x, species, sex, coefficients, units = "kg",  ...){
 #' @rdname weight
 #' @export
 weight.scsbio <- function(x, category, by, hard.shelled, units = "g", ...){
-   y <- x
-
    # Parse input arguments:
    units <- match.arg(tolower(units), c("g", "kg", "grams", "kilograms", "tons", "tonnes", "mt", "t"))
    if (units %in% c("tons", "tonnes", "mt")) units <- "t"
@@ -239,27 +237,27 @@ weight.scsbio <- function(x, category, by, hard.shelled, units = "g", ...){
       hard.shelled <- FALSE
    }
 
-   if (is.null(category) & is.null(by)){
+   if (missing(category) & missing(by)){
       # Initialize weight vector:
-      w <- rep(0, dim(y)[1])
+      w <- rep(0, dim(x)[1])
 
       # New adult:
-      w <- w + is.category(y, "TMMSC12", ...) * exp(-9.399 + 3.315 * log(x$carapace.width))
+      w <- w + is.category(x, "TMMSC12", ...) * exp(-9.399 + 3.315 * log(x$carapace.width))
 
       # New adolescent:
-      w <- w + is.category(y, "TMISC12", ...) * exp(-10.154 + 3.453 * log(x$carapace.width))
+      w <- w + is.category(x, "TMISC12", ...) * exp(-10.154 + 3.453 * log(x$carapace.width))
 
       # Intermediate adult:
-      w <- w + is.category(y, "TMMSC345", ...) * exp(-8.230136 + 3.098 * log(x$carapace.width))
+      w <- w + is.category(x, "TMMSC345", ...) * exp(-8.230136 + 3.098 * log(x$carapace.width))
 
       # Intermediate adolescent:
-      w <- w + is.category(y, "TMISC345", ...) * exp(-7.512 + 2.899 * log(x$carapace.width))
+      w <- w + is.category(x, "TMISC345", ...) * exp(-7.512 + 2.899 * log(x$carapace.width))
 
       # Immature females:
-      w <- w + is.category(y, "TFI", ...) * exp(-7.275 + 2.804 * log(x$carapace.width))
+      w <- w + is.category(x, "TFI", ...) * exp(-7.275 + 2.804 * log(x$carapace.width))
 
       # Mature females:
-      w <- w + is.category(y, "TFM", ...) * exp(-7.162 + 2.816 * log(x$carapace.width))
+      w <- w + is.category(x, "TFM", ...) * exp(-7.162 + 2.816 * log(x$carapace.width))
    }else{
       # Define indicator vector of category membership:
       if (!is.null(category)){

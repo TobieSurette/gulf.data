@@ -31,6 +31,7 @@
 #' \describe{
 #'    \item{\code{esonar}}{Generic \code{esonar} method.}
 #'    \item{\code{esonar.default}}{Create an \code{esonar} object.}
+#'    \item{\code{key.esonar}}{\code{esonar} object index key.}
 #'    \item{\code{wingspread}}{Generic \code{wingspread} method.}
 #'    \item{\code{wingspread.esonar}}{Extract wing spread observations from \code{esonar} object.}
 #'    \item{\code{locate.esonar}}{Find \code{esonar} data file(s).}
@@ -63,6 +64,11 @@ esonar.default <- function(x, ...){
    
    return(x)
 }
+
+#' @rdname esonar
+#' @export key.esonar
+#' @export
+key.esonar <- function(x, ...) if (missing(x)) return(c("date", "time")) else return(gulf.metadata::key(x))
 
 #' @rdname esonar
 #' @export wingspread
@@ -441,4 +447,3 @@ summary.esonar <- function(x, year, truncate = TRUE, round = TRUE, ...){
 
    return(res)
 }
-
