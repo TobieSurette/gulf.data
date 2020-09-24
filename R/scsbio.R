@@ -209,7 +209,7 @@ read.scsbio <- function(x, ...){
    }
    
    # Subset if 'scsset' object was given:
-   if ("scsset" %in% class(x)) v <- v[!is.na(match(v[key.scsset()], x[key.scsset()])), ]
+   if (!missing(x)) if ("scsset" %in% class(x)) v <- v[!is.na(match(v[key.scsset()], x[key.scsset()])), ]
    
    # Convert to 'scsset' object:
    v <- scsbio(v)

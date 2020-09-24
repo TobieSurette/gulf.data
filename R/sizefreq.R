@@ -2,107 +2,155 @@
 #' 
 #' @description Functions to generate size-frequency distributions.
 #' 
+#' @param x Vector of numeric values.
+#' @param n Vector of numeric frequency values for each \code{x}.
+#' @param by Grouping variable.
+#' @param fill Logical value specifying whether to interpolate missing frequency bins.
+#' @param step Numeric value specifying the width of the frequency bins.
+#' @param range Two-element numeric vector specifying the range of values to be included in 
+#'              the resulting frequency table. Use NA or +/- Inf to specify open bounds.
+#' 
+#' @examples 
+#' f <- freq(c(1, 1, 2, 3, 5), 
+#'           n = 1:5, 
+#'           by = data.frame(group = c(1,1,1,2,2), sub = c(1,2,2,3,3)))  
+#'           
+#' x <- read.scsbio(2020)                        
+#' freq(x)
+#' freq(x, category = c("mm", "mf"))
+#' freq(x$carapace.width, by = x$sex, step = 1)
+#' freq(x$carapace.width, index = is.category(x, c("mm", "mf"), drop = FALSE), step = 1)
+#' freq(x, by = c("sex", "shell.condition")])
+#' freq(x, category = c("MM", "MF"))
 #' 
 
+#' @export freq
+freq <- function(x, ...) UseMethod("freq")
 
 #' @export
-freq.default <- function(x, n, by, fill = TRUE, ...){
+freq.default <- function(x, n, index, by, fill = TRUE, step, range, ...){
    # FREQ.DEFAULT - Build frequency table.
 
    # Parse 'x' argument:
-   if (is.data.frame(x) | is.matrix(x)) if (ncol(x) != 1) stop("'x' must be a vector.") else x <- x[, 1]
+   if (!is.null(dim(x))) stop("'x' must be a vector.") 
 
    # Check 'n' argument:
-   if (!missing(n)) if (is.data.frame(n) | is.matrix(n)) if (ncol(n) != 1) stop("'n' must be a vector.") n <- n[, 1] 
-
-   # Convert vector 'x' to frequencies:
-   if (missing(n) & missing(by)) f <- table(x)
-
-   # Convert 'x' and 'n' to frequencies:
-   if (missing(by) & !missing(n)){
+   if (!missing(n)){
+      if (!is.null(dim(n))) stop("'n' must be a vector.") 
       if (length(x) != length(n)) stop("'x' and 'n' must have the same number of elements.")
-      t <- stats::aggregate(n, by = list(x = x), sum)
-      f <- t[, 2]
-      names(f) <- t[, 1]
+   }else{
+      # Treat 'x' as a frequency table vector:
+      if (!is.null(names(x))){
+         if (all(gsub("[-0-9.]", "", names(x)) == "")){
+            n <- as.numeric(x)
+            x <- as.numeric(names(x))
+         } 
+      }else{
+         n <- rep(1, length(x))
+      }
+   } 
+
+   # Round off frequency values:
+   if (!missing(step)) x <- round(x / step) * step
+   
+   # # Use grouping variables to parse dataset:
+   if (!missing(by)){
+      if (is.vector(by)) by <- data.frame(group = by)
+      if (nrow(by) != length(x)) stop("'by' must have the same number of rows as elements in 'x'")
+      groups <- unique(by)
+      
+      # Calculate frequencies by grouping variables:
+      f <- list()
+      for (i in 1:nrow(groups)){
+         index <- rep(TRUE, length(n))  
+         for (j in 1:ncol(groups)) index <- index & (by[,j] == groups[i,j])
+         f[[i]] <- freq(x[index], n[index], fill = FALSE, ...)
+      }
+      
+      # Square-off results into matrix form:
+      values <- sort(as.numeric(unique(unlist(lapply(f, names)))))
+      fnew <- matrix(0, nrow = nrow(groups), ncol = length(values))
+      colnames(fnew) <- values
+      for (i in 1:nrow(fnew)) fnew[i, names(f[[i]])] <- as.numeric(f[[i]])
+      fnew <- as.data.frame(fnew)
+      
+      # Combine groups and frequency matrix:
+      f <- cbind(groups, fnew)
+   }
+
+   # Use logical indices to parse dataset:
+   if (!missing(index)){
+      if (is.vector(index)) index <- t(t(index))
+      index <- as.matrix(index)
+      
+      # Convert indices to logical values:
+      if (!is.logical(index)){
+         tmp <- NULL
+         for (i in 1:ncol(index)) tmp <- cbind(tmp, 1:length(x) %in% index[,i])
+         colnames(tmp) <- colnames(index)
+         index <- tmp
+      }
+       
+      # Calculate frequencies by grouping variables:
+      f <- list()
+      for (i in 1:ncol(index)) f[[i]] <- freq(x[which(index[,i])], n[which(index[,i])], fill = FALSE, ...)
+
+      # Square-off results into matrix form:
+      values <- sort(as.numeric(unique(unlist(lapply(f, names)))))
+      fnew <- matrix(0, nrow = ncol(index), ncol = length(values))
+      colnames(fnew) <- values
+      for (i in 1:nrow(fnew)) fnew[i, names(f[[i]])] <- as.numeric(f[[i]])
+      fnew <- as.data.frame(fnew)
+      f <- fnew
+
+      # Combine groups and frequency matrix:
+      if (!is.null(colnames(index))) f <- cbind(data.frame(category = colnames(index)), f) 
+   }
+   
+   if (missing(by) & missing(index)){
+      # Convert to frequencies:
+      r <- stats::aggregate(list(n = n), by = list(x = x), sum)
+      f <- r$n; names(f) <- r$x      
    }
 
    # Fill-in missing regular values with zeroes:
    if (fill){
-      step <- min(diff(sort(as.numeric(names(f)))))
-      vnew <- seq(min(v), max(v), by = step)
-      names(vnew) <- vnew
-      vnew <- vnew * 0
-      vnew[names(v)] <- v
-      v <- vnew
-   }
-   
-   # Recursive calls:
-   if (!missing(by)){
-      if (is.vector(by)) by <- data.frame(by)
-      if (nrow(by) != length(x)) stop("'by' must have the same number of rows as elements in 'x'")
-      if (missing(n)) n <- rep(1, length(x))
-      tapply(by(data.frame)
-   }  
-
-   return(v)
-}
-
-
-sizefreq.scbio <- function(x, category = NULL, by = NULL, start = 0, bin = 1, sort = TRUE, ...){
-   # FREQ.SCBIO - Size-frequency counts for a 'scbio' object.
-   
-   # Remove irrelevant data:
-   x <- subset(x, x$carapace.width >= start, ...)
-   
-   if (is.null(category) & is.null(by)){
-      # Check and remove NA carapace width measurements:
-      index <- is.na(x$carapace.width)
-      if (sum(index) > 0) cat(paste("There were ", sum(index), " crab with no carapace width measurement.\n", sep = ""))
+      fvars <- names(f)[gsub("[-0-9.]", "", names(f)) == ""]
+      values <- sort(as.numeric(fvars))
+      if (missing(step)) step <- min(diff(values))
+      varnew <- as.character(seq(min(values), max(values), by = step))
+      f[setdiff(varnew, fvars)] <- 0
       
-      # Create binned carapace width column:
-      x$cwbin <- round((x$carapace.width - start) / bin) * bin + start
-      
-      # Create frequency vector:
-      f <- seq(start, max(x$cwbin, na.rm = TRUE), by = bin)
-      names(f) <- f
-      f <- 0 * f 
-      r <- table(x$cwbin)
-      f[names(r)] <- as.numeric(r)
-   }else{
-      # Create binned carapace width column:
-      x$cwbin <- round((x$carapace.width - start) / bin) * bin + start
-      f <- seq(start, max(x$cwbin, na.rm = TRUE), by = bin)
-      names <- c(by, "category", as.character(f))
-      f <- as.data.frame(matrix(0, ncol = length(names)))
-      names(f) <- names
-      if (is.null(category)) category <- "T"
-      k <- 1
-      for (i in 1:length(category)){
-         y <- subset(x, index = !is.na(x$carapace.width), category = category[i])
-         if (is.null(by)) temp <- list(y) else temp <- by(y, y[by], FUN = function(x) return(x))
-         for (j in 1:length(temp)){
-            if (is.null(temp[[j]])){
-               f[k, setdiff(names(f), c(by, "category"))] <- 0
-            }else{
-               res <- freq(temp[[j]], start = start, bin = bin)
-               f[k, setdiff(names(f), c(by, "category"))] <- 0
-               f[k, names(res)] <- as.numeric(res)
-               if (!is.null(by)){
-                  f[k, by] <- unique(temp[[j]][by])
-               }
-               f[k, "category"] <- category[i]
-               k <- k + 1
-            }
-         }
-      }
+      f <- f[c(setdiff(names(f), varnew), varnew)] 
+   }     
+   
+   # Impose range constraints:
+   if (!missing(range)){
+      if (!is.numeric(range) | length(range) != 2) 
+         stop("'range' must be a two element vector. Use NA or +/- Inf to specify open bounds.")
+      if (missing(by)) fvars <- names(f) else fvars <- setdiff(names(f), names(by))
+      remove <- fvars[which((as.numeric(fvars) < range[1]) | (as.numeric(fvars) > range[2]))]
+      f <- f[setdiff(names(f), remove)]
    }
    
-   # Sort results:
-   if (sort){
-      if (!is.null(by) & !is.null(category)) f <- sort(f, by = c(by, "category"))
-      if (!is.null(by) & is.null(category))  f <- sort(f, by = by)
-      if (is.null(by) & !is.null(category))  f <- sort(f, by = "category")
-   }
+   rownames(f) <- NULL
    
    return(f)
 }
+
+#' @export
+freq.scsbio <- function(x, category, by, step = 1, ...){
+   x <- x[!is.na(x$carapace.width), ]
+   
+   # Parse 'by' argument:
+   if (!missing(by))
+      if (is.character(by)) 
+         if (!all(by %in% names(x))) stop("Some 'by' variables not variables in 'x'.") else by <- x[by]
+
+   if (missing(category) & missing(by))  f <- freq(x$carapace.width, step = step, ...)
+   if (missing(category) & !missing(by)) f <- freq(x$carapace.width, by = by, step = step, ...)
+   if (!missing(category) & missing(by)) f <- freq(x$carapace.width, index = is.category(x, category = category, drop = FALSE), step = step, ...)
+
+   return(f)
+}
+

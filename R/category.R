@@ -17,6 +17,8 @@
 #'              the corresponding variable definitions, suitable for direct indexing of biological 
 #'              fields. 
 #' @param species Numerical species code(s).
+#' @param drop Logical values specifying whether to convert index to a vector from a data frame 
+#'             when only a single category is specified in \code{is.category.scsbio}.
 #' @param ... Further argument (e.g. \code{probability}) passed onto the \code{\link{is.mature.scbio}} function.
 #'
 #' @return Returns a vector of character strings containing the descriptions for a specified vector 
@@ -545,7 +547,7 @@ is.category <- function(x, ...) UseMethod("is.category")
 
 #' @rdname category
 #' @export
-is.category.scsbio <- function(x, category, ...){
+is.category.scsbio <- function(x, category, drop = TRUE, ...){
    # Check whether crab belongs to a specified category:
 
    if (length(category) == 1){
@@ -596,6 +598,11 @@ is.category.scsbio <- function(x, category, ...){
    # Convert to logical if there are no fractions:
    if (all((index[!is.na(index)] %% 1) == 0)) index <- (index == 1)
   
+   if (!drop & is.vector(index)){
+      index <- data.frame(index)
+      names(index) <- category
+   }
+
    return(index)
 }
 
