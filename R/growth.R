@@ -40,11 +40,17 @@ f <- function(x){
    return(v)
 }
 
-g <- function(x, xp, log.w = 0, slope) v <- slope * x - slope * exp(log.w) * f(((x-xp)/w) + 0.5)
+g <- function(x, xp, log.w = 0, slope){
+   w <- exp(log.w)
+   v <- slope * x - slope * w * f(((x-xp)/w) + 0.5)
+   return(v)
+}
 
 #' @rdname growth
 #' @export
 grow.default <- function(x, n, species, sex, theta){
+   if (missing(species)) stop("'species' must be specified.")
+   
    # Snow crab growth increment:
    if (species == 2526){
       theta <- c(xp = 38.2, yp = 12.5, 
@@ -62,6 +68,8 @@ grow.default <- function(x, n, species, sex, theta){
    }
 
    mu <- g(x, xp = 40.63, log.w = 3.69, slope = 0.242)
+   
+   
    sigma <- exp(theta[["log.sigma"]]) * mu
      
    if (missing(x)) return()
