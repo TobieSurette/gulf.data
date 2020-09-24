@@ -8,5 +8,13 @@
 .onLoad(libname, pkgname)
 }
 \description{
-\strong{gulf.data} is an \code{R} package for accessing southern Gulf of Saint Lawrence fisheries science data.
+\strong{gulf.data} is an \code{R} package for accessing and manipulating southern Gulf of Saint Lawrence fisheries science data.
+}
+\examples{
+# Snow crab survey data:
+x <- read.scsset(2020) # Load snow crab survey set/tow data.
+y <- read.scsbio(2020) # Load snow crab survey biological data.
+catch(x) <- catch(y, category = c("MM", "COM", "MF") # Attach snow crab catches to tow data.
+summary(x)  # Snow crab tow summary.
+summary(y)  # Snow crab biological data summary.
 }
