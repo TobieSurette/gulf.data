@@ -28,8 +28,8 @@
 #' @export
 grow <- function(x, ...) UseMethod("grow")
 
-# Crustacean growth model kernel:
-f <- function(x){
+# Smoothed piecewise-linear model polynomial kernel:
+phi <- function(x){
    v <- rep(NA, length(x))
    i <- (x >= 0) & (x < 0.5)
    v[i] <- -(8/5)*x[i]^5 + 2*x[i]^4
@@ -40,10 +40,26 @@ f <- function(x){
    return(v)
 }
 
-g <- function(x, xp, log.w = 0, slope){
-   w <- exp(log.w)
-   v <- slope * x - slope * w * f(((x-xp)/w) + 0.5)
+mu <- function(x, xp, yp, log.w, slope, theta){
+   if (!missing(theta)){
+      xp = as.numeric(theta[grep("xp", names(theta))])
+      yp = as.numeric(theta[grep("yp", names(theta))])
+      w = exp(as.numeric(theta[grep("log.w", names(theta))]))
+      slope = as.numeric(theta[grep("slope", names(theta))])
+   }
+   if (!missing(log.w)) w <- exp(log.w)
+   
+   if (length(slope) == 1) slope <- rep(slope, 2)
+   
+   # Smoothed piecewise-linear model:
+   v <- yp + slope[1] * x + (slope[2] - slope[1]) * w * phi(((x-xp)/w) + 0.5)
+   
    return(v)
+}
+
+sigma <- function(x, mu, log.sigma){
+   
+   
 }
 
 #' @rdname growth
@@ -67,7 +83,8 @@ grow.default <- function(x, n, species, sex, theta){
                  log.sigma = -2.5)
    }
 
-   mu <- g(x, xp = 40.63, log.w = 3.69, slope = 0.242)
+   m <- mu(x, xp = theta[["xp"]], yp = theta[["xp"]], 
+           log.w = theta[["log.w"]], slope = c(theta[["slope.immature"]], theta[["slope.adolescent"]])
    
    
    sigma <- exp(theta[["log.sigma"]]) * mu
@@ -77,3 +94,34 @@ grow.default <- function(x, n, species, sex, theta){
    return(y)
 }
    
+# Define Hiatt growth matrix:
+growth.matrix <- function(beta = c(0.32, 0.126), 
+                          xp = 38.2, yp = 12.5, k = 7,
+                          sigma = c(0.37, 0.25),
+                          xlim = c(0, 140), step = 1, output = "matrix"){
+   
+   w <- step / 2
+   
+   # Name input arguments:
+   names(beta) <- c("immature", "pubescent")
+   names(sigma) <- c("immature", "pubescent")
+   
+   x <- seq(xlim[1], xlim[2], by = step)
+   u <- exp(-k * diff(beta) * (x - xp))
+   mu <- -(1/k) * log(1+u) + beta[["immature"]]*(x-xp) + yp + x 
+   p <-  u / (1 + u)
+   s <- (p * sigma[["immature"]] + (1-p)*sigma[["pubescent"]]) * (mu-x)
+   s <- 0.5 * s
+   
+   # Calculate growth transition probabilities:
+   G <- matrix(0, nrow = length(x), ncol = length(x))
+   G[,1] <- pnorm((x[1]-mu+w) / s)
+   for (j in 2:(length(x)-1)) G[,j] <- pnorm((x[j] - mu + w) / s) - pnorm((x[j] - mu - w) / s)
+   G[,length(x)] <- 1-pnorm((x[length(x)]-mu-w)/s)
+   G[length(x), ] <- 0
+   G[length(x), length(x)] <- 1
+   dimnames(G) <- list(pre = x, post = x)
+   
+   if (output == "matrix") return(G)
+}
+
