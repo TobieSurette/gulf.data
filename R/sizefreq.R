@@ -11,18 +11,31 @@
 #'              the resulting frequency table. Use NA or +/- Inf to specify open bounds.
 #' 
 #' @examples 
-#' f <- freq(c(1, 1, 2, 3, 5), 
-#'           n = 1:5, 
-#'           by = data.frame(group = c(1,1,1,2,2), sub = c(1,2,2,3,3)))  
-#'           
+#' # Simple example:
+#' x <- data.frame(values = c(11, 11, 12, 13, 15),
+#'                 n      = c(2,1,3,1,1),
+#'                 group  = c(1,1,1,2,2),
+#'                 sub    = c(1,2,2,3,3))
+#'                 
+#' freq(x$values, x$n)  # Frequency table.
+#' freq(x$values, x$n, by = x["group"])  # Frequency table by group.
+#' freq(x$values, x$n, by = x[c("group", "sub")])  # Frequency table by group and subgroup.
+#'   
+#' # Snow crab survey example:       
 #' x <- read.scsbio(2020)                        
-#' freq(x)
-#' freq(x, category = c("mm", "mf"))
-#' freq(x$carapace.width, by = x$sex, step = 1)
-#' freq(x$carapace.width, index = is.category(x, c("mm", "mf"), drop = FALSE), step = 1)
-#' freq(x, by = c("sex", "shell.condition")])
-#' freq(x, category = c("MM", "MF"))
+#'
+#' # Default frequency function:
+#' freq(x$carapace.width, step = 1) # Size-frequencies using millimeter bins.
+#' freq(x$carapace.width, step = 0.5) # Size-frequencies using half-millimeter bins.
+#' freq(x$carapace.width, by = x["sex"], step = 0.5) # Size-frequencies by sex.
+#' freq(x$carapace.width, by = x[c("sex", "shell.condition")], step = 0.5) # Size-frequencies by sex and shell condition.
+#' freq(x$carapace.width, index = is.category(x, c("MM", "FM")), step = 1) # Size-frequencies for mature male and mature females.
 #' 
+#' # 'scsbio' frequency function:
+#' freq(x) # Size-frequencies.
+#' freq(x, by = "sex") # Size-frequencies by sex.
+#' freq(x, by = c("sex", "shell.condition")) # Size-frequencies by sex and shell condition.
+#' freq(x, category = c("MM", "FM")) # Size-frequencies for mature male and mature females.
 
 #' @export freq
 freq <- function(x, ...) UseMethod("freq")
