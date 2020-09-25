@@ -1,14 +1,17 @@
-#' Size-Frequency Functions
+#' Frequency Functions
 #' 
 #' @description Functions to generate size-frequency distributions.
 #' 
 #' @param x Vector of numeric values.
 #' @param n Vector of numeric frequency values for each \code{x}.
 #' @param by Grouping variable.
+#' @param index Numeric or logical indices specifying which elements of \code{x} to be analyzed as a subset. 
 #' @param fill Logical value specifying whether to interpolate missing frequency bins.
 #' @param step Numeric value specifying the width of the frequency bins.
 #' @param range Two-element numeric vector specifying the range of values to be included in 
-#'              the resulting frequency table. Use NA or +/- Inf to specify open bounds.
+#'              the resulting frequency table. Use NA or +/- Inf to specify lower or upper open bounds.
+#' @param category Character string specifying biological categories. See \code{\link{category}} for details.
+#' @param variable Character string specifying the variable used to generate the frequency table. 
 #' 
 #' @examples 
 #' # Simple example:
@@ -21,25 +24,27 @@
 #' freq(x$values, x$n, by = x["group"])  # Frequency table by group.
 #' freq(x$values, x$n, by = x[c("group", "sub")])  # Frequency table by group and subgroup.
 #'   
-#' # Snow crab survey example:       
+#' # Load snow crab biological data:       
 #' x <- read.scsbio(2020)                        
 #'
-#' # Default frequency function:
+#' # Default frequency function examples:
 #' freq(x$carapace.width, step = 1) # Size-frequencies using millimeter bins.
 #' freq(x$carapace.width, step = 0.5) # Size-frequencies using half-millimeter bins.
 #' freq(x$carapace.width, by = x["sex"], step = 0.5) # Size-frequencies by sex.
 #' freq(x$carapace.width, by = x[c("sex", "shell.condition")], step = 0.5) # Size-frequencies by sex and shell condition.
 #' freq(x$carapace.width, index = is.category(x, c("MM", "FM")), step = 1) # Size-frequencies for mature male and mature females.
 #' 
-#' # 'scsbio' frequency function:
+#' # 'scsbio' frequency function examples:
 #' freq(x) # Size-frequencies.
 #' freq(x, by = "sex") # Size-frequencies by sex.
 #' freq(x, by = c("sex", "shell.condition")) # Size-frequencies by sex and shell condition.
 #' freq(x, category = c("MM", "FM")) # Size-frequencies for mature male and mature females.
 
+#' @describeIn freq Generic \code{freq} method.
 #' @export freq
 freq <- function(x, ...) UseMethod("freq")
 
+#' @describeIn freq Default \code{freq} method.
 #' @export
 freq.default <- function(x, n, index, by, fill = TRUE, step, range, ...){
    # FREQ.DEFAULT - Build frequency table.
@@ -151,18 +156,23 @@ freq.default <- function(x, n, index, by, fill = TRUE, step, range, ...){
    return(f)
 }
 
+#' @describeIn freq \code{scsbio} \code{freq} method.
 #' @export
-freq.scsbio <- function(x, category, by, step = 1, ...){
-   x <- x[!is.na(x$carapace.width), ]
+freq.scsbio <- function(x, category, by, step = 1, variable = "carapace.width", ...){
+   
+   var <- x[, variable]
+   
+   # Remove NA values from data set:
+   x <- x[!is.na(var), ]
    
    # Parse 'by' argument:
    if (!missing(by))
       if (is.character(by)) 
          if (!all(by %in% names(x))) stop("Some 'by' variables not variables in 'x'.") else by <- x[by]
 
-   if (missing(category) & missing(by))  f <- freq(x$carapace.width, step = step, ...)
-   if (missing(category) & !missing(by)) f <- freq(x$carapace.width, by = by, step = step, ...)
-   if (!missing(category) & missing(by)) f <- freq(x$carapace.width, index = is.category(x, category = category, drop = FALSE), step = step, ...)
+   if (missing(category) & missing(by))  f <- freq(var, step = step, ...)
+   if (missing(category) & !missing(by)) f <- freq(var, by = by, step = step, ...)
+   if (!missing(category) & missing(by)) f <- freq(var, index = is.category(x, category = category, drop = FALSE), step = step, ...)
 
    return(f)
 }
