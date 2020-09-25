@@ -68,9 +68,20 @@ locate.star.oddi <- function(x, year, tow.id, full.names = TRUE, location, remov
       if (is.data.frame(x)) if (("tow.id" %in% names(x)) & missing(tow.id)) tow.id <- x$tow.id
       if (is.data.frame(x)) if (("year" %in% names(x)) & missing(year)) year <- sort(unique(x$year))
    }
-
+   
    # Load set of file names:
    files <- locate(pattern = "*.DAT", keywords = "star oddi", ...)
+   
+   # Search Shared drive:
+   if (length(files) == 0){
+      path <- paste0(options()$gulf.path$snow.crab, "/Offshore Crab Common/Fishing Year ", year, "/Trawl Data/South Western Gulf/Star Oddi")
+      if (!missing(location)) path <- paste0(path, "/", location)
+      if (file.exists(options()$gulf.path$snow.crab)) files <- locate(pattern = "*.DAT", path = path)
+      
+      # Remove redundant files:
+      fn <- unlist(lapply(strsplit(files, "/"), function(x) x[length(x)]))
+      files <- files[setdiff(1:length(files), grep("^[0-9]-", fn))]
+   }
 
    # Target year:
    if (!missing(year)){
