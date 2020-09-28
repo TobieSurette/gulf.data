@@ -23,7 +23,7 @@ category(x, ...)
 
 is.category(x, ...)
 
-\method{is.category}{scsbio}(x, category, ...)
+\method{is.category}{scsbio}(x, category, drop = TRUE, ...)
 
 is.fish(species)
 
@@ -46,6 +46,9 @@ The full syntax of biological strings are presented in the \code{Details} sectio
 \item{parse}{Logical value specifying whether to parse a category string onto a list containing
 the corresponding variable definitions, suitable for direct indexing of biological 
 fields.}
+
+\item{drop}{Logical values specifying whether to convert index to a vector from a data frame 
+when only a single category is specified in \code{is.category.scsbio}.}
 
 \item{species}{Numerical species code(s).}
 

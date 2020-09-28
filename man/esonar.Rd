@@ -8,6 +8,7 @@
 \alias{wingspread.esonar}
 \alias{locate.esonar}
 \alias{read.esonar}
+\alias{match.esonar}
 \alias{plot.esonar}
 \alias{describe.esonar}
 \alias{summary.esonar}
@@ -25,7 +26,9 @@ wingspread(x, ...)
 
 \method{locate}{esonar}(x, year, tow.id, full.names = TRUE, remove = "test", ...)
 
-read.esonar(x, offset = 0, repeats = FALSE, ...)
+read.esonar(x, offset = -3 * 60, repeats = FALSE, ...)
+
+match.esonar(x, y, ...)
 
 \method{plot}{esonar}(x, ...)
 

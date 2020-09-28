@@ -40,7 +40,6 @@
 #' freq(x, by = c("sex", "shell.condition")) # Size-frequencies by sex and shell condition.
 #' freq(x, category = c("MM", "FM")) # Size-frequencies for mature male and mature females.
 
-#' @describeIn freq Generic \code{freq} method.
 #' @export freq
 freq <- function(x, ...) UseMethod("freq")
 

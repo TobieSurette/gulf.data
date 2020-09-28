@@ -21,7 +21,7 @@
 #' locate.star.oddi("GP001", year = 2018:2020)
 #'
 #' # Working example:
-#' x <- read.star.oddi("GP001", year = 2020)
+#' x <- read.star.oddi(year = 2020, tow.id = "GP354F", probe = "headline")
 #' describe(x)  # Description of file contents.
 #' header(x)    # File header information.
 #' plot(x)      # Graphical summary.
@@ -57,7 +57,7 @@ star.oddi.default <- function(x, ...){
 
 #' @rdname star.oddi
 #' @export locate.star.oddi
-locate.star.oddi <- function(x, year, tow.id, full.names = TRUE, location, remove = "test", ...){
+locate.star.oddi <- function(x, year, tow.id, full.names = TRUE, probe, remove = c("test", "lost", "NA"), ...){
    # Parse 'x' argument:
    if (!missing(x)){
       if (is.numeric(x)) year <- x
@@ -69,8 +69,19 @@ locate.star.oddi <- function(x, year, tow.id, full.names = TRUE, location, remov
       if (is.data.frame(x)) if (("year" %in% names(x)) & missing(year)) year <- sort(unique(x$year))
    }
    
+   # Parse 'probe' argument:
+   if (missing(probe)) probe <- c("headline", "footrope")
+   probe <- tolower(probe)
+   if (!all(probe %in% c("headline", "tilt", "footrope"))) 
+      stop("'probe' must be either 'headline', 'tilt', 'footrope'.")
+   if ("tilt" %in% probe) probe <- unique(c("footrope", probe))
+   if ("footrope" %in% probe) probe <- unique(c("tilt", probe))
+   
    # Load set of file names:
-   files <- locate(pattern = "*.DAT", keywords = "star oddi", ...)
+   files <- NULL
+   for (i in 1:length(probe)){
+      files <- unique(c(files, locate(pattern = "*.DAT", keywords = c("star oddi", probe[i]), ...)))
+   }
    
    # Search Shared drive:
    if (length(files) == 0){
@@ -89,7 +100,6 @@ locate.star.oddi <- function(x, year, tow.id, full.names = TRUE, location, remov
       year <- sort(year)
       index <- NULL
       for (i in 1:length(year)) index <- c(index, grep(year[i], files))
-      files <- unique(files[index])
    }
 
    # Target tow ID:
@@ -155,53 +165,35 @@ read.star.oddi <- function(x, offset = 0, repeats = FALSE, ...){
       return(x)
    }
 
+   # Empty file:
    if (length(file) == 0) return(NULL)
 
-   if.numeric.str <- function(x) return(gsub("[ 0-9.]", "", x) == "")
-
    # Read and parse header info:
-   y <- read.table(file = file, nrow = 30, colClasses = "character", comment.char = "", sep = "\n", blank.lines.skip = FALSE)[[1]]
-   y <- gsub("#", "", y[substr(y, 1, 1) == "#"], fixed = TRUE)
-   #y <- lapply(strsplit(y, "\t"), function(x) if (if.numeric.str(x[1])) x else x[2:length(x)])
-   y <- lapply(strsplit(y, "\t"), function(x) x[2:length(x)])
-   str <- unlist(lapply(y, function(x) return(gsub(":", "", x[1]))))
-   #str <- gsub(" ", ".", unlist(lapply(y, function(x) gsub("(:)", "", x[[1]]))))
-   #str <- gsub("..", ".", str, fixed = TRUE)
-   #str <- gsub("-", ".", str, fixed = TRUE)
-   values <- unlist(lapply(y, function(x) paste(x[2:length(x)], collapse = ", ")))
-   header <- list()
-   for (i in 1:length(str)){
-      header[[i]] <- values[i]
-   }
-   names(header) <- str
-   header$file.name <- file
+   y <- read.table(file = file, nrow = 30, colClasses = "character", comment.char = "", sep = "\n", 
+                   blank.lines.skip = FALSE, fileEncoding = "Windows-1252")[[1]]
+   y <- deblank(y)
+   y <- gsub("\t", " ", y)
+   index <- grep("^#", y)
+   k <- max(index)
+   y <- y[index]
+   y <- gsub("^#[0-9]* ", "",y)
+   
+   # Parse header:
+   str <- strsplit(y, ":")
+   header <- deblank(unlist(lapply(str, function(x) x[2])))
+   names(header) <- deblank(unlist(lapply(str, function(x) x[1])))
+   
+   # Extract file name:
+   file.name <- lapply(strsplit(file, "/"), function(x) x[length(x)])[[1]]
 
-   # Extract channel names:
-   index <- grep("Channel [1-9]", str)
-   channels <- unlist(header[index])
-   if (is.null(channels)){
-      index <- grep("Axis", str)
-      channels <- unlist(header[index])
-   }
-   if (length(grep(".ACC", file)) > 0){
-      channels <- gsub("Acc. vector (m/s^2), ", "", channels, fixed = TRUE)
-      channels <- gsub("Axes X,Y,Z (m/s^2), ", "", channels, fixed = TRUE)
-      channels <- lapply(strsplit(channels, ","), function(x) return(x[[1]]))
-      channels <- unlist(channels)
-   }else{
-      channels <- strsplit(channels, "[,()]")
-      channels <- unlist(lapply(channels, function(x) x[which.max(nchar(x))]))
-      channels <- gsub(" ", "", channels, fixed = TRUE)
-      channels <- gsub("-", ".", channels, fixed = TRUE)
-      channels <- tolower(channels)
-      names(channels) <- NULL
-   }
+   # Define variable names:
+   fields <- header[grep("Channel ", names(header))]
+   fields <- unlist(lapply(strsplit(fields, " "), function(x) x[1]))
 
    # Read E-Sonar data:
-   k <- length(y)
    x <- read.table(file = file, header = FALSE, skip = k, dec = ",", sep = "\t",
-                   colClasses = c("numeric", "character", rep("numeric", length(channels))))
-   fields <- c("record", "date", channels)
+                   colClasses = c("numeric", "character", rep("numeric", length(fields))))
+   fields <- c("record", "date", fields)
    names(x) <- fields
 
    # Parse date fields:
@@ -245,15 +237,25 @@ read.star.oddi <- function(x, offset = 0, repeats = FALSE, ...){
       temp <- unlist(lapply(strsplit(file, "GP"), function(x) x[length(x)]))
       temp <- lapply(strsplit(temp, "/", fixed = TRUE), function(x) x[1])
       tow.id <- paste0("GP", unlist(temp))
-      header$tow.id <- tow.id
-
-      # Include 'tow.id' as a field:
-      v$tow.id <- header$tow.id
+      tow.id <- unlist(lapply(strsplit(tow.id, "[.]"), function(x) x[1]))
    }
 
-   # Create 'esonar' object:
-   v <- star.oddi(v, header)
+   # Create 'star.oddi' object:
+   v <- star.oddi(v, header = header)
 
+   # Define measurement units:
+   index <- grep("[(]", names(v))
+   vars <- names(v)[index]
+   units <- strsplit(gsub("[)]", "", vars), "[(]")
+   vars <- tolower(unlist(lapply(units, function(x) x[1])))
+   units <- unlist(lapply(units, function(x) x[2]))
+   units <- gsub("°", "degrees", units)
+   str <- names(v)
+   str[index] <- vars
+   names(v) <- str
+   names(units) <- vars
+   gulf.metadata::units(v) <- units
+   
    return(v)
 }
 

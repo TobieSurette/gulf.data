@@ -6,7 +6,6 @@
 \alias{as.data.frame.probe}
 \alias{start.time.probe}
 \alias{end.time.probe}
-\alias{truncate.probe}
 \alias{plot.probe}
 \title{Probe Data Class}
 \usage{
@@ -19,8 +18,6 @@ probe(x, ...)
 \method{start}{time.probe}(x, ...)
 
 \method{end}{time.probe}(x, ...)
-
-\method{truncate}{probe}(x, start.time, end.time, buffer = 0, ...)
 
 \method{plot}{probe}(x, ...)
 }
@@ -45,7 +42,6 @@ Measurement probe data class definition and methods.
    \item{\code{as.data.frame.probe}}{Convert \code{probe} object to a pure data frame.}
    \item{\code{start.time.probe}}{Find start time for a \code{probe} data object.}
    \item{\code{end.time.probe}}{Find end time for a \code{probe} data object.}
-   \item{\code{truncate.probe}}{Truncate \code{probe} data object to lie within start and end time limits.}
    \item{\code{plot.probe}}{Graphically display a \code{probe} data object.}
 }
 }

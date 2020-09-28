@@ -18,7 +18,6 @@
 #'    \item{\code{as.data.frame.probe}}{Convert \code{probe} object to a pure data frame.}
 #'    \item{\code{start.time.probe}}{Find start time for a \code{probe} data object.}
 #'    \item{\code{end.time.probe}}{Find end time for a \code{probe} data object.}
-#'    \item{\code{truncate.probe}}{Truncate \code{probe} data object to lie within start and end time limits.}
 #'    \item{\code{plot.probe}}{Graphically display a \code{probe} data object.}
 #' }
 #' 
@@ -72,9 +71,9 @@ as.data.frame.probe <- function(x, ...){
 start.time.probe <- function(x, ...){
    if (project(x) == "scs"){
       year <- as.numeric(format(gulf.utils::date(unique(x$date)), format="%Y"))
-      y <- data.frame(year = year, tow.id = tow.id(x), stringsAsFactors = FALSE)
-      z <- read.scsset(year = unique(year))
-      r <- start.time(z)[match(y[key(z)], unique(z[key(z)]))]
+      y <- data.frame(date = as.character(unique(date(e))), tow.id = tow.id(x), stringsAsFactors = FALSE)
+      z <- read.scsset(year)
+      r <- start.time(z[match(y[key(z)], z[key(z)]), ])
    }
    
    return(r)  
@@ -85,26 +84,12 @@ start.time.probe <- function(x, ...){
 end.time.probe <- function(x, ...){
    if (project(x) == "scs"){
       year <- as.numeric(format(gulf.utils::date(unique(x$date)), format="%Y"))
-      y <- data.frame(year = year, tow.id = tow.id(x), stringsAsFactors = FALSE)
-      z <- read.scsset(year = unique(year))
-      r <- end.time(z)[match(y[key(z)], unique(z[key(z)]))]
+      y <- data.frame(date = as.character(unique(date(e))), tow.id = tow.id(x), stringsAsFactors = FALSE)
+      z <- read.scsset(year)
+      r <- end.time(z[match(y[key(z)], z[key(z)]), ])
    }
    
    return(r)  
-}
-
-#' @rdname probe
-#' @export
-truncate.probe <- function(x, start.time, end.time, buffer = 0, ...){
-   # Define start and end time:
-   if (missing(start.time)) start.time <- start.time(x, ...)
-   if (missing(end.time)) end.time <- end.time(x, ...)   
-   
-   t <- time(x)
-   index <- (t >= (start.time - buffer)) & (t >= (end.time + buffer))
-   x <- x[index, ]
-   
-   return(x)
 }
 
 #'@rdname probe

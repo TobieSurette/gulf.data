@@ -146,7 +146,7 @@ locate.esonar <- function(x, year, tow.id, full.names = TRUE, remove = "test", .
 
 #' @rdname esonar
 #' @export read.esonar
-read.esonar <- function(x, offset = 0, repeats = FALSE, ...){
+read.esonar <- function(x, offset = -3*60, repeats = FALSE, ...){
    # Define list of files to be read:
    file <- locate.esonar(x, ...)
 
@@ -291,6 +291,14 @@ read.esonar <- function(x, offset = 0, repeats = FALSE, ...){
    v <- esonar(v, header = header, tow.id = tow.id, file.name = file.name)
 
    return(v)
+}
+
+#' @rdname esonar
+#' @export
+match.esonar <- function(x, y, ...){
+   uy <- data.frame(date = date(y), tow.id = tow.id(y), stringsAsFactors = FALSE)
+   ux <- data.frame(date = unique(date(x)), tow.id = tow.id(x), stringsAsFactors = FALSE)
+   return(gulf.utils::match(ux, uy))
 }
 
 #' @rdname esonar

@@ -184,24 +184,18 @@ end.time.scsset <- function(x, ...){
 #' @rdname scsset
 #' @export
 summary.scsset <- function(x, truncate = TRUE, ...){
-   if (missing(tow.id)) tow.id <- unique(x$tow.id)
-
    # Initialize result variable:
    res <- NULL
 
    for (i in 1:nrow(x)){
       # Read probe files:
       esonar   <- read.esonar(year = x$year[i], tow.id = x$tow.id[i])
-      minilog  <- read.minilog(year = x$year[i], tow.id = x$tow.id[i])
-      headline <- read.star.oddi(year = x$year[i], tow.id = x$tow.id[i], type = "depth")
-      tilt     <- read.star.oddi(year = x$year[i], tow.id = x$tow.id[i], type = "tilt")
-
-      # Record count function:
-      n <- function(x) if (is.data.frame(x)) return(nrow(x)) else return(length(x))
+      headline <- read.star.oddi(year = x$year[i], tow.id = x$tow.id[i], probe = "headline")
+      tilt     <- read.star.oddi(year = x$year[i], tow.id = x$tow.id[i], type = "footrope")
 
       # Calculate minimum distance between eSonar coordinates and survey logbook coordinates:
       esonar.distance <- NA
-      if (n(esonar) > 0) esonar.distance <- min(distance(longitude(x[i,]), latitude(x[i,]), esonar$longitude, esonar$latitude))
+      if (length(esonar) > 0) esonar.distance <- min(distance(longitude(x[i,]), latitude(x[i,]), esonar$longitude, esonar$latitude))
 
       # Counts of data records:
       tmp <- data.frame(date = as.character(gulf.utils::date(x[i,])),

@@ -32,16 +32,14 @@ tow.id.default <- function(x, ...){
 
 #' @rdname tow.id
 #' @rawNamespace S3method(tow.id,probe)
-tow.id.probe <- function(x, method, max.distance = 500, ...){
-   v <- tow.id.default(x)
-   if (!is.null(v)) return(v)
+tow.id.probe <- function(x, method, max.time = 5, max.distance = 500, ...){
+   if (missing(method)) return(tow.id.default(x,))
    
    # Parse 'method' argument:
    if (!missing(method)) method <- match.arg(tolower(method), c("time", "latlong"))
    
    # Determine project study year:                                          
-   year <- unique(x$year)
-   if (is.null(year)) year <- attr(x, "year")
+   year <- as.numeric(substr(unique(date(e)), 1, 4))
    if (is.null(year)) stop("Unable to determine study year.")
    if (length(year) > 1) stop("Multiple years in probe dataset.")
    
@@ -49,15 +47,18 @@ tow.id.probe <- function(x, method, max.distance = 500, ...){
    if (project(x) == "scs") y <- read.scsset(year)
    
    # Match using time stamps:
-   if (method == "time") v <- y$tow.id[which.min(abs(mean(time(x)) - time(y)))]
+   if (method == "time"){
+      t <- abs(difftime(mean(time(x)), start.time(y), units = "mins"))
+      v <- y$tow.id[which.min(t)] 
+   }
    
    # Match using mean coordinate values:
    if (method == "latlong"){
-      lat <- latitude(x)
-      lon <- longitude(x)
+      lat <- lat(x)
+      lon <- lon(x)
       if (!is.null(lat) & !is.null(lon)){
-         d <- distance(mean(lon, na.rm = TRUE), mean(lat, na.rm = TRUE), longitude(y), latitude(y))[1,]
-         v <- y$tow.id[which.min(d) < max.distance]
+         d <- distance(mean(lon, na.rm = TRUE), mean(lat, na.rm = TRUE), lon(y), lat(y))[1,]
+         v <- y$tow.id[which.min(d)] 
       }
    }
    
