@@ -133,7 +133,7 @@ read.scsset <- function(x, ...){
 
       # Compress date variables:
       if (all(c("year", "month", "day") %in% names(tmp))){
-         tmp$date <- as.character(date(tmp))
+         tmp$date <- as.character(gulf.utils::date(tmp))
          tmp <- cbind(tmp[c("date")], tmp[setdiff(names(tmp), c("date", "year", "month", "day"))])
       }
 

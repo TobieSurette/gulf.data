@@ -296,8 +296,8 @@ read.esonar <- function(x, offset = -3*60, repeats = FALSE, ...){
 #' @rdname esonar
 #' @export
 match.esonar <- function(x, y, ...){
-   uy <- data.frame(date = date(y), tow.id = tow.id(y), stringsAsFactors = FALSE)
-   ux <- data.frame(date = unique(date(x)), tow.id = tow.id(x), stringsAsFactors = FALSE)
+   uy <- data.frame(date = gulf.utils::date(y), tow.id = tow.id(y), stringsAsFactors = FALSE)
+   ux <- data.frame(date = unique(gulf.utils::date(x)), tow.id = tow.id(x), stringsAsFactors = FALSE)
    return(gulf.utils::match(ux, uy))
 }
 

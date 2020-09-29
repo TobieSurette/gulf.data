@@ -71,7 +71,7 @@ as.data.frame.probe <- function(x, ...){
 start.time.probe <- function(x, ...){
    if (project(x) == "scs"){
       year <- as.numeric(format(gulf.utils::date(unique(x$date)), format="%Y"))
-      y <- data.frame(date = as.character(unique(date(e))), tow.id = tow.id(x), stringsAsFactors = FALSE)
+      y <- data.frame(date = as.character(unique(gulf.utils::date(x))), tow.id = tow.id(x), stringsAsFactors = FALSE)
       z <- read.scsset(year)
       r <- start.time(z[match(y[key(z)], z[key(z)]), ])
    }
@@ -84,7 +84,7 @@ start.time.probe <- function(x, ...){
 end.time.probe <- function(x, ...){
    if (project(x) == "scs"){
       year <- as.numeric(format(gulf.utils::date(unique(x$date)), format="%Y"))
-      y <- data.frame(date = as.character(unique(date(e))), tow.id = tow.id(x), stringsAsFactors = FALSE)
+      y <- data.frame(date = as.character(unique(gulf.utils::date(x))), tow.id = tow.id(x), stringsAsFactors = FALSE)
       z <- read.scsset(year)
       r <- end.time(z[match(y[key(z)], z[key(z)]), ])
    }

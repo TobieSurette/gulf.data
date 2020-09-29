@@ -39,7 +39,7 @@ tow.id.probe <- function(x, method, max.time = 5, max.distance = 500, ...){
    if (!missing(method)) method <- match.arg(tolower(method), c("time", "latlong"))
    
    # Determine project study year:                                          
-   year <- as.numeric(substr(unique(date(e)), 1, 4))
+   year <- as.numeric(substr(unique(gulf.utils::date(x)), 1, 4))
    if (is.null(year)) stop("Unable to determine study year.")
    if (length(year) > 1) stop("Multiple years in probe dataset.")
    

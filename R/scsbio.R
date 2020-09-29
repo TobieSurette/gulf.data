@@ -177,7 +177,7 @@ read.scsbio <- function(x, ...){
          for (j in 1:ncol(tmp)) if (is.character(tmp[, j])) tmp[, j] <- deblank(tmp[, j])
           
          # Convert to date:
-         tmp$date <- as.character(date(tmp[c("day", "month", "year")]))
+         tmp$date <- as.character(gulf.utils::date(tmp[c("day", "month", "year")]))
          
          # Numeric conversions:
          nvars <- c("tow.number", "crab.number", "carapace.width", "abdomen.width", 

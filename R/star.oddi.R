@@ -1,7 +1,5 @@
 #' \strong{Star-Oddi} Data
 #'
-#' @name star.oddi
-#'
 #' @description Functions to read, manipulate and analyze \strong{star.oddi} trawl acoustic monitoring  probe data.
 #'
 #' @param x An \code{star.oddi} object, data file, survey year or keyword search term.
@@ -26,25 +24,12 @@
 #' header(x)    # File header information.
 #' plot(x)      # Graphical summary.
 #' summary(x)   # Data summary.
-#'
-#' @section Functions:
-#' \describe{
-#'    \item{\code{star.oddi}}{Generic \code{star.oddi} method.}
-#'    \item{\code{star.oddi.default}}{Create an \code{star.oddi} object.}
-#'    \item{\code{locate.star.oddi}}{Find \code{star.oddi} data file(s).}
-#'    \item{\code{read.star.oddi}}{Read \code{star.oddi} data file(s).}
-#'    \item{\code{plot.star.oddi}}{Plot \code{star.oddi} data.}
-#'    \item{\code{map.star.oddi}}{Map \code{star.oddi} vessel and data track.}
-#'    \item{\code{describe.star.oddi}}{\code{star.oddi} data description.}
-#'    \item{\code{summary.star.oddi}}{Summary statistics for an \code{star.oddi} object.}
-#' }
-#'
 
 #' @export
 star.oddi <- function(x, ...) UseMethod("star.oddi")
 
-#' @rdname star.oddi
-#' @export
+#' @describeIn star.oddi Default \code{star.oddi} method. Create an \code{star.oddi} object. 
+#' @rawNamespace S3method(star.oddi,default)
 star.oddi.default <- function(x, ...){
    # Define as probe data object:
    x <- probe(x, ...)
@@ -55,7 +40,7 @@ star.oddi.default <- function(x, ...){
    return(x)
 }
 
-#' @rdname star.oddi
+#' @describeIn star.oddi Find \code{star.oddi} data file(s).
 #' @export locate.star.oddi
 locate.star.oddi <- function(x, year, tow.id, full.names = TRUE, probe, remove = c("test", "lost", "NA"), ...){
    # Parse 'x' argument:
@@ -128,7 +113,12 @@ locate.star.oddi <- function(x, year, tow.id, full.names = TRUE, probe, remove =
    return(files)
 }
 
-#' @rdname star.oddi
+#' @describeIn star.oddi Fetch \code{star.oddi} index key.
+#' @export key.star.oddi
+#' @rawNamespace S3method(key,star.oddi)
+key.star.oddi <- function(x, ...) if (missing(x)) return(c("date", "time")) else return(gulf.metadata::key(x))
+
+#' @describeIn star.oddi Read \code{star.oddi} data file(s).
 #' @export read.star.oddi
 read.star.oddi <- function(x, offset = 0, repeats = FALSE, ...){
    # Define list of files to be read:
@@ -259,7 +249,7 @@ read.star.oddi <- function(x, offset = 0, repeats = FALSE, ...){
    return(v)
 }
 
-#' @rdname star.oddi
+#' @describeIn star.oddi Graphically dsiplay \code{star.oddi} data.
 #' @export
 plot.star.oddi <- function(x, tow.id, year, buffer = 2, ...){   
    # PLOT.STAR.ODDI - Graphically display a Star Oddi object.
@@ -326,7 +316,7 @@ plot.star.oddi <- function(x, tow.id, year, buffer = 2, ...){
    }
 }
 
-#' @rdname star.oddi
+#' @describeIn star.oddi Summary statistics for an \code{star.oddi} object.
 #' @export
-summary.star.oddi <- function(x, year, truncate = TRUE, round = TRUE, ...){}
+summary.star.oddi <- function(x, year, trim = TRUE, round = TRUE, ...){}
  
