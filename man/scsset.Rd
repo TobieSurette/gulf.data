@@ -2,31 +2,12 @@
 % Please edit documentation in R/scsset.R
 \name{scsset}
 \alias{scsset}
-\alias{as.data.frame.scsset}
-\alias{key.scsset}
 \alias{scsset.default}
-\alias{locate.scsset}
-\alias{read.scsset}
-\alias{start.time.scsset}
-\alias{end.time.scsset}
-\alias{summary.scsset}
 \title{Snow Crab Set/Tow Data}
 \usage{
-\method{as.data.frame}{scsset}(x, ...)
-
-\method{key}{scsset}(x, ...)
+scsset(x, ...)
 
 \method{scsset}{default}(x, ...)
-
-\method{locate}{scsset}(x, year, source = "gulf.data", ...)
-
-read.scsset(x, ...)
-
-\method{start}{time.scsset}(x, ...)
-
-\method{end}{time.scsset}(x, ...)
-
-\method{summary}{scsset}(x, truncate = TRUE, ...)
 }
 \arguments{
 \item{x}{A \sQuote{data.frame} object. When reading data, \code{x} may be a numeric
@@ -38,20 +19,10 @@ vector specifying the survey years.}
 The \code{scsset} class is a container for Snow Crab Survey Set/Tow data, i.e.
              information about individual tows performed on the snow crab annual survey.
 }
-\section{Functions}{
-
-\describe{
-  \item{\code{as.data.frame.scsset}}{Convert \code{scsset} object to a data frame.}
-  \item{\code{key.scsset}}{Define or extract \code{scsset} object index key.}
-  \item{\code{scsset}}{Generic \code{scsset} method.}
-  \item{\code{scsset.default}}{Create an \code{scsset} object.}
-  \item{\code{locate.scsset}}{Locate snow crab set/tow data files.}
-  \item{\code{read.scsset}}{Read snow crab survey set/tow data.}
-  \item{\code{start.time.scsset}}{Tow start time.}
-  \item{\code{end.time.scsset}}{Tow end time.}
-  \item{\code{summary.scsset}}{Return a summary of an \code{scsset} object.}
-}
-}
+\section{Methods (by class)}{
+\itemize{
+\item \code{default}: Create an \code{scsset} object.
+}}
 
 \examples{
 # Locate snow crab survey set data files:

@@ -3,74 +3,29 @@
 \name{esonar}
 \alias{esonar}
 \alias{esonar.default}
-\alias{key.esonar}
-\alias{wingspread}
-\alias{wingspread.esonar}
-\alias{locate.esonar}
-\alias{read.esonar}
-\alias{match.esonar}
-\alias{plot.esonar}
 \alias{describe.esonar}
-\alias{summary.esonar}
 \title{\strong{eSonar} Data}
 \usage{
 esonar(x, ...)
 
 \method{esonar}{default}(x, ...)
 
-\method{key}{esonar}(x, ...)
-
-wingspread(x, ...)
-
-\method{wingspread}{esonar}(x, ...)
-
-\method{locate}{esonar}(x, year, tow.id, full.names = TRUE, remove = "test", ...)
-
-read.esonar(x, offset = -3 * 60, repeats = FALSE, ...)
-
-match.esonar(x, y, ...)
-
-\method{plot}{esonar}(x, ...)
-
 \method{describe}{esonar}(x, ...)
-
-\method{summary}{esonar}(x, year, truncate = TRUE, round = TRUE, ...)
 }
 \arguments{
 \item{x}{An \code{esonar} object, data file, survey year or keyword search term.}
 
-\item{year}{Numeric value specifying the survey or project year(s).}
-
-\item{tow.id}{Numeric value or character string specifying the ID corresponding to a particular tow sampling station.}
-
-\item{full.names}{Logical value specifying whether to include file paths when searching for \strong{eSonar} data files.}
-
-\item{remove}{Character string specifying keyword(s) which, if found in the data file or path, are removed from the search results.}
-
-\item{offset}{Numeric value specifying the offset time (in minutes) to include as a corrective in the data time stamps.}
-
-\item{repeats}{Logical value specifying whether to keep or average out data records with identical time stamps.}
-
 \item{header}{\strong{eSonar} file header information to be assigned as metadata.}
 }
 \description{
-Functions to read, manipulate and analyze \strong{eSonar} trawl acoustic monitoring  probe data.
+Create \strong{eSonar} trawl acoustic monitoring probe data objects.
 }
-\section{Functions}{
+\section{Methods (by class)}{
+\itemize{
+\item \code{default}: Create an \code{esonar} object.
 
-\describe{
-   \item{\code{esonar}}{Generic \code{esonar} method.}
-   \item{\code{esonar.default}}{Create an \code{esonar} object.}
-   \item{\code{key.esonar}}{\code{esonar} object index key.}
-   \item{\code{wingspread}}{Generic \code{wingspread} method.}
-   \item{\code{wingspread.esonar}}{Extract wing spread observations from \code{esonar} object.}
-   \item{\code{locate.esonar}}{Find \code{esonar} data file(s).}
-   \item{\code{read.esonar}}{Read \code{esonar} data file(s).}
-   \item{\code{plot.esonar}}{Plot \code{esonar} data.}
-   \item{\code{describe.esonar}}{\code{esonar} data description.}
-   \item{\code{summary.esonar}}{Summary statistics for an \code{esonar} object.}
-}
-}
+\item \code{esonar}: Describe an \code{esonar} object.
+}}
 
 \examples{
 # eSonar files for the 2020 snow crab survey:
@@ -85,5 +40,4 @@ describe(x)  # Description of file contents.
 header(x)    # File header information.
 plot(x)      # Graphical summary.
 summary(x)   # Data summary.
-
 }

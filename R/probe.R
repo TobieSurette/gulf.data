@@ -1,33 +1,24 @@
 #' Probe Data Class
 #' 
-#' @name probe
-#' 
 #' @description Measurement probe data class definition and methods.
 #'
 #'
 #' @param x Probe data object.
 #' @param header File header data.
-#' @param start.time,end.time Time bounds beyind which probe data are to be truncated. If left unspecified, 
-#'                            start and end times are determined from the project study data, such as set/tow data.
 #' @param buffer Extra time, in seconds, to be included beyond the start and end time specifications when truncating data.
 #' 
 #' @section Methods:
 #' \describe{
 #'    \item{\code{probe}}{Generic \code{probe} method.}
 #'    \item{\code{probe.default}}{Create a \code{probe} object.}
-#'    \item{\code{as.data.frame.probe}}{Convert \code{probe} object to a pure data frame.}
-#'    \item{\code{start.time.probe}}{Find start time for a \code{probe} data object.}
-#'    \item{\code{end.time.probe}}{Find end time for a \code{probe} data object.}
-#'    \item{\code{plot.probe}}{Graphically display a \code{probe} data object.}
 #' }
 #' 
 #' @seealso \code{\link{tow.id}}
 
-#' @rdname probe
 #' @export
 probe <- function(x, ...) UseMethod("probe")
 
-#' @rdname probe
+#' @describeIn probe Create a \code{probe} class object.
 #' @export
 probe.default <- function(x, header, ...){
    # Store date and time stamp:
@@ -58,52 +49,4 @@ probe.default <- function(x, header, ...){
    return(v)
 }
 
-#' @rdname probe
-#' @export
-as.data.frame.probe <- function(x, ...){
-   class(x) <- "data.frame"
-   return(x)
-}
-   
-#' @rdname probe
-#' @export start.time.probe
-#' @rawNamespace S3method(start.time,probe)
-start.time.probe <- function(x, ...){
-   if (project(x) == "scs"){
-      year <- as.numeric(format(gulf.utils::date(unique(x$date)), format="%Y"))
-      y <- data.frame(date = as.character(unique(gulf.utils::date(x))), tow.id = tow.id(x), stringsAsFactors = FALSE)
-      z <- read.scsset(year)
-      r <- start.time(z[match(y[key(z)], z[key(z)]), ])
-   }
-   
-   return(r)  
-}
-
-#' @rdname probe
-#' @export
-end.time.probe <- function(x, ...){
-   if (project(x) == "scs"){
-      year <- as.numeric(format(gulf.utils::date(unique(x$date)), format="%Y"))
-      y <- data.frame(date = as.character(unique(gulf.utils::date(x))), tow.id = tow.id(x), stringsAsFactors = FALSE)
-      z <- read.scsset(year)
-      r <- end.time(z[match(y[key(z)], z[key(z)]), ])
-   }
-   
-   return(r)  
-}
-
-#'@rdname probe
-#'@export
-plot.probe <- function(x, ...){
-   vars <- setdiff(names(x), c("data", "time"))
-   m <- kronecker(1:length(n), matrix(1, nrow = 5, ncol = 5))
-   m <- rbind(0, cbind(0, m, 0), 0, 0)
-   layout(m)
-   par(mar = c(0,0,0,0))
-   t <- time2min(time(x))
-   for (i in 1:length(vars)){
-      plot(t, x[, vars[i]])
-      grid()
-   }
-}
 

@@ -3,46 +3,32 @@
 \name{probe}
 \alias{probe}
 \alias{probe.default}
-\alias{as.data.frame.probe}
-\alias{start.time.probe}
-\alias{end.time.probe}
-\alias{plot.probe}
 \title{Probe Data Class}
 \usage{
 probe(x, ...)
 
 \method{probe}{default}(x, header, ...)
-
-\method{as.data.frame}{probe}(x, ...)
-
-\method{start}{time.probe}(x, ...)
-
-\method{end}{time.probe}(x, ...)
-
-\method{plot}{probe}(x, ...)
 }
 \arguments{
 \item{x}{Probe data object.}
 
 \item{header}{File header data.}
 
-\item{start.time, end.time}{Time bounds beyind which probe data are to be truncated. If left unspecified, 
-start and end times are determined from the project study data, such as set/tow data.}
-
 \item{buffer}{Extra time, in seconds, to be included beyond the start and end time specifications when truncating data.}
 }
 \description{
 Measurement probe data class definition and methods.
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{default}: Create a \code{probe} class object.
+}}
+
 \section{Methods}{
 
 \describe{
    \item{\code{probe}}{Generic \code{probe} method.}
    \item{\code{probe.default}}{Create a \code{probe} object.}
-   \item{\code{as.data.frame.probe}}{Convert \code{probe} object to a pure data frame.}
-   \item{\code{start.time.probe}}{Find start time for a \code{probe} data object.}
-   \item{\code{end.time.probe}}{Find end time for a \code{probe} data object.}
-   \item{\code{plot.probe}}{Graphically display a \code{probe} data object.}
 }
 }
 

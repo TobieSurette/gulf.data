@@ -2,25 +2,12 @@
 % Please edit documentation in R/scsbio.R
 \name{scsbio}
 \alias{scsbio}
-\alias{key.scsbio}
 \alias{scsbio.default}
-\alias{scsbio.scsset}
-\alias{locate.scsbio}
-\alias{read.scsbio}
-\alias{summary.scsbio}
 \title{Snow Crab Biological Data}
 \usage{
-\method{key}{scsbio}(x, ...)
+scsbio(x, ...)
 
 \method{scsbio}{default}(x, ...)
-
-\method{scsbio}{scsset}(x, ...)
-
-\method{locate}{scsbio}(x, year, source = "gulf.data", remove = "bad", ...)
-
-read.scsbio(x, ...)
-
-\method{summary}{scsbio}(x, category, ...)
 }
 \arguments{
 \item{x}{A \code{data.frame} object. When reading data, \code{x} may be a numeric 
@@ -28,47 +15,15 @@ vector specifying the survey years to be loaded or an \code{\link{scsset}} objec
 read the corresponding biological data.}
 
 \item{...}{Other parameters (not used).}
-
-\item{year}{Numeric vector specifying the survey years to be loaded.}
-
-\item{category}{Biological category string(s). See \code{\link{cagetory}} for more details.}
-
-\item{format}{A \code{data.frame} specifying the ASCII printing format for an \code{scsbio} object.}
-
-\item{key}{Character string(s) specifying which data columns form the index key.
-This key can then be used as a default for such operations as merging data.}
-
-\item{path}{string specifying the path to read or write snow crab biological data.}
-
-\item{Rfile}{Logical value specifying whether to write an \code{R} data format file when 
-updating snow crab biological data.}
-
-\item{csv}{Logical value specifying whether to write a comma-separated (\code{csv}) format file 
-when updating snow crab biological data.}
-
-\item{package}{Logical value specifying whether to write a comma-separated (\code{csv}) format
-to the \code{gulf.data} package clone.}
-
-\item{by}{Character string(s) specifying which variables to group by when summararizing.}
-
-\item{weight}{Logical value specifying whether to return a summary by weights rather than counts.}
 }
 \description{
 The \code{scsbio} class is a container for Snow Crab Survey Biological data, i.e. information 
              about individual organisms sampled on the snow crab annual survey.
 }
-\section{Functions}{
-
-\describe{
-  \item{\code{key.scsbio}}{Define or extract \code{scsbio} object index key.}
-  \item{\code{scsbio}}{Generic \code{scsbio} method.}
-  \item{\code{scsbio.default}}{Create an \code{scsbio} object.}
-  \item{\code{locate.scsbio}}{Locate snow crab biological data files.}
-  \item{\code{read.scsbio}}{Read snow crab survey biological data.}
-  \item{\code{scsbio.scsset}}{Load biological associated with snow crab survey tow data.}
-  \item{\code{summary.scsbio}}{Returns a data summary of an \code{scsbio} object.}
-}
-}
+\section{Methods (by class)}{
+\itemize{
+\item \code{default}: Create an \code{scsbio} object.
+}}
 
 \examples{
 # Create empty 'scsbio' object:
@@ -83,5 +38,4 @@ x <- read.scsbio(year = 2019)      # Read single year.
 x <- read.scsbio(year = 2010:2015) # Read range of years.
 
 summary(x)
-
 }

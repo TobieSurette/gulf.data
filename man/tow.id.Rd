@@ -10,7 +10,7 @@ tow.id(x, ...)
 
 \method{tow.id}{default}(x, ...)
 
-\method{tow.id}{probe}(x, method, max.time = 5, max.distance = 500, ...)
+\method{tow.id}{probe}(x, method, ...)
 }
 \arguments{
 \item{x}{Data object.}

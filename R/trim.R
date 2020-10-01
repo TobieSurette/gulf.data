@@ -3,10 +3,16 @@
 #' @description Removes time series data which lie beyond a specified time interval.
 #' 
 #' @param x Data object containing time series data.
-#' 
+#' @param range Two-element vector specifying the time range of data beyond which data frame records will be removed. 
+#'              \code{NA} or \code{+/-Inf} can be used to specify open bounds.
+#' @param start.time,end.time Time bounds beyind which probe data are to be truncated. If left unspecified, 
+#'                            start and end times are determined from the project study data, such as set/tow data.
 
 #' @export
 trim <- function(x, ...) UseMethod("trim")
+
+#' @export 
+trim.NULL <- function(x, ...) return(NULL)
 
 #' @describeIn trim Removes time series data which lie beyond a specified time interval for a \code{data.frame} object.
 #' @export 

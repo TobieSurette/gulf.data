@@ -14,6 +14,12 @@ trim(x, ...)
 }
 \arguments{
 \item{x}{Data object containing time series data.}
+
+\item{range}{Two-element vector specifying the time range of data beyond which data frame records will be removed. 
+\code{NA} or \code{+/-Inf} can be used to specify open bounds.}
+
+\item{start.time, end.time}{Time bounds beyind which probe data are to be truncated. If left unspecified, 
+start and end times are determined from the project study data, such as set/tow data.}
 }
 \description{
 Removes time series data which lie beyond a specified time interval.

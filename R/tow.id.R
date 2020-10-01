@@ -32,7 +32,7 @@ tow.id.default <- function(x, ...){
 
 #' @rdname tow.id
 #' @rawNamespace S3method(tow.id,probe)
-tow.id.probe <- function(x, method, max.time = 5, max.distance = 500, ...){
+tow.id.probe <- function(x, method, ...){
    if (missing(method)) return(tow.id.default(x,))
    
    # Parse 'method' argument:
@@ -44,7 +44,7 @@ tow.id.probe <- function(x, method, max.time = 5, max.distance = 500, ...){
    if (length(year) > 1) stop("Multiple years in probe dataset.")
    
    # Load project sampling data:
-   if (project(x) == "scs") y <- read.scsset(year)
+   if (gulf.metadata::project(x) == "scs") y <- read.scsset(year)
    
    # Match using time stamps:
    if (method == "time"){

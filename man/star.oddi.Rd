@@ -3,65 +3,36 @@
 \name{star.oddi}
 \alias{star.oddi}
 \alias{star.oddi.default}
-\alias{locate.star.oddi}
-\alias{read.star.oddi}
-\alias{plot.star.oddi}
-\alias{summary.star.oddi}
 \title{\strong{Star-Oddi} Data}
 \usage{
 star.oddi(x, ...)
 
 \method{star.oddi}{default}(x, ...)
-
-\method{locate}{star.oddi}(
-  x,
-  year,
-  tow.id,
-  full.names = TRUE,
-  probe,
-  remove = c("test", "lost", "NA"),
-  ...
-)
-
-read.star.oddi(x, offset = 0, repeats = FALSE, ...)
-
-\method{plot}{star.oddi}(x, tow.id, year, buffer = 2, ...)
-
-\method{summary}{star.oddi}(x, year, truncate = TRUE, round = TRUE, ...)
 }
 \arguments{
 \item{x}{An \code{star.oddi} object, data file, survey year or keyword search term.}
 
 \item{year}{Numeric value specifying the survey or project year(s).}
 
-\item{tow.id}{Numeric value or character string specifying the ID corresponding to a particular tow sampling station.}
-
 \item{full.names}{Logical value specifying whether to include file paths when searching for \strong{star.oddi} data files.}
 
-\item{remove}{Character string specifying keyword(s) which, if found in the data file or path, are removed from the search results.}
+\item{header}{\strong{star.oddi} file header information to be assigned as metadata.}
+
+\item{tow.id}{Numeric value or character string specifying the ID corresponding to a particular tow sampling station.}
 
 \item{offset}{Numeric value specifying the offset time (in minutes) to include as a corrective in the data time stamps.}
 
 \item{repeats}{Logical value specifying whether to keep or average out data records with identical time stamps.}
 
-\item{header}{\strong{star.oddi} file header information to be assigned as metadata.}
+\item{remove}{Character string specifying keyword(s) which, if found in the data file or path, are removed from the search results.}
 }
 \description{
 Functions to read, manipulate and analyze \strong{star.oddi} trawl acoustic monitoring  probe data.
 }
-\section{Functions}{
-
-\describe{
-   \item{\code{star.oddi}}{Generic \code{star.oddi} method.}
-   \item{\code{star.oddi.default}}{Create an \code{star.oddi} object.}
-   \item{\code{locate.star.oddi}}{Find \code{star.oddi} data file(s).}
-   \item{\code{read.star.oddi}}{Read \code{star.oddi} data file(s).}
-   \item{\code{plot.star.oddi}}{Plot \code{star.oddi} data.}
-   \item{\code{map.star.oddi}}{Map \code{star.oddi} vessel and data track.}
-   \item{\code{describe.star.oddi}}{\code{star.oddi} data description.}
-   \item{\code{summary.star.oddi}}{Summary statistics for an \code{star.oddi} object.}
-}
-}
+\section{Methods (by class)}{
+\itemize{
+\item \code{default}: Default \code{star.oddi} method. Create an \code{star.oddi} object.
+}}
 
 \examples{
 # star.oddi files for the 2020 snow crab survey:
@@ -76,5 +47,4 @@ describe(x)  # Description of file contents.
 header(x)    # File header information.
 plot(x)      # Graphical summary.
 summary(x)   # Data summary.
-
 }
