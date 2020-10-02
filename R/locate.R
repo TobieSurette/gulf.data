@@ -52,13 +52,11 @@ locate.scsset <- function(x, year, source = "gulf.data", ...){
 #' @describeIn locate Locate snow crab survey biological data files.
 #' @export locate.scsbio
 locate.scsbio <- function(x, year, source = "gulf.data", remove = "bad", ...){
-   # Parse survey year:
    if (!missing(x) & missing(year)){
       if (is.numeric(x)) year <- x
       if ("year" %in% names(x)) year <- sort(unique(x$year))
       if ("date" %in% names(x)) year <- as.numeric(substr(x$date, 1, 4))
    }
-   if (!missing(year)) year <- sort(year)
    
    # Use 'gulf.data' as data source:
    if (source == "ascii"){
@@ -182,8 +180,6 @@ locate.esonar.default <- function(x, year, tow.id, remove = "test", ...){
          if (any(file.exists(x))) return(x[file.exists(x)])
          tow.id <- x
       }
-      if (is.data.frame(x)) if (("tow.id" %in% names(x)) & missing(tow.id)) tow.id <- x$tow.id
-      if (is.data.frame(x)) if (("year" %in% names(x)) & missing(year)) year <- sort(unique(x$year))
    }
 
    # Load set of file names:
@@ -231,5 +227,4 @@ locate.esonar.default <- function(x, year, tow.id, remove = "test", ...){
 }
 
 #' @rawNamespace S3method(locate.esonar,scsset)
-locate.esonar.scsset <- function(x, ...) 
-   return(locate.esonar(year = unique(as.numeric(substr(gulf.utils::date(x), 1, 4))), tow.id = unique(x$tow.id, ...)))
+locate.esonar.scsset <- function(x, ...) return(locate.esonar(year = unique(year(x)), tow.id = unique(x$tow.id, ...)))

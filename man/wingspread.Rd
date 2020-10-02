@@ -13,7 +13,7 @@ wingspread(x, ...)
 \item{x}{Data object containing trawl wing spread measurements.}
 }
 \description{
-Functions to get trawl wing spread measurements.
+Functions to extract trawl wing spread measurements.
 }
 \section{Methods (by class)}{
 \itemize{

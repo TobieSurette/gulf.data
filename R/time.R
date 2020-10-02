@@ -62,10 +62,10 @@ stop.time.scsset <- function(x, ...){
 #' @rawNamespace S3method(start.time,probe)
 start.time.probe <- function(x, ...){
    if (gulf.metadata::project(x) == "scs"){
-      year <- as.numeric(format(gulf.utils::date(unique(x$date)), format="%Y"))
+      year <- unique(year(x))
       y <- data.frame(date = as.character(unique(gulf.utils::date(x))), tow.id = tow.id(x), stringsAsFactors = FALSE)
       z <- read.scsset(year)
-      r <- start.time(z[match(y[key(z)], z[key(z)]), ])
+      r <- start.time(z[gulf.utils::match(y[gulf.metadata::key(z)], z[key(z)]), ])
    }
    
    return(r)  
@@ -78,7 +78,7 @@ stop.time.probe <- function(x, ...){
       year <- as.numeric(format(gulf.utils::date(unique(x$date)), format="%Y"))
       y <- data.frame(date = as.character(unique(gulf.utils::date(x))), tow.id = tow.id(x), stringsAsFactors = FALSE)
       z <- read.scsset(year)
-      r <- end.time(z[match(y[key(z)], z[key(z)]), ])
+      r <- stop.time(z[match(y[key(z)], z[key(z)]), ])
    }
    
    return(r)  

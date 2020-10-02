@@ -1,6 +1,6 @@
 #' Trawl Wing Spread
 #' 
-#' @description Functions to get trawl wing spread measurements.
+#' @description Functions to extract trawl wing spread measurements.
 #' 
 #' @param x Data object containing trawl wing spread measurements.
 #' 
