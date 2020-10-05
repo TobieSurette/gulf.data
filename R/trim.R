@@ -18,21 +18,16 @@ trim.NULL <- function(x, ...) return(NULL)
 #' @export 
 trim.data.frame <- function(x, range, ...){
    t <- time(x)
-   if (!is.null(t)){
-      x <- x[which((t >= range[1]) & (t <= range[2])), ]
-   }else{
-      return(x)
-   }
+   if (!is.null(t)) x <- x[which((t >= range[1]) & (t <= range[2])), ] else return(x)
 }
    
 #' @describeIn trim Removes time series data which lie beyond start and end times for a \code{probe} object.
 #' @export
 trim.probe <- function(x, start.time, end.time, buffer = 0, ...){
    # Define start and end time:
-   if (missing(start.time)) start.time <- start.time(x, ...)
-   if (missing(end.time)) end.time <- end.time(x, ...)   
-   
-   x <- trim.data.frame(x, range = c(start.time - buffer, end.time + buffer), ...)
+   if (missing(start.time)) start.time <- gulf.data::start.time(x, ...)
+   if (missing(end.time)) stop.time <- gulf.data::stop.time(x, ...)
+   x <- trim.data.frame(x, range = c(start.time - buffer, stop.time + buffer), ...)
    
    return(x)
 }

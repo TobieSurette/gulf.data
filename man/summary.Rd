@@ -13,9 +13,9 @@
 \method{summary}{esonar}(x, year, trim = TRUE, ...)
 }
 \arguments{
-\item{category}{Biological category string(s). See \code{\link{cagetory}} for more details.}
+\item{category}{Biological category string(s). See \code{\link{category}} for more details.}
 
-\item{by}{Character string(s) specifying which variables to group by when summararizing.}
+\item{by}{Character string(s) specifying which variables to group by when summarizing.}
 
 \item{weight}{Logical value specifying whether to return a summary by weights rather than counts.}
 }

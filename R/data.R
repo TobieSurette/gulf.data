@@ -1,6 +1,6 @@
 #' Reference and Example Data Sets
 #' 
-#' @name gulf.data-tables
+#' @name data
 #' 
 #' @description These are the reference and example data used in the \code{gulf.data} package.
 #' 

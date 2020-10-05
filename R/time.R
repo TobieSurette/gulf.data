@@ -50,10 +50,19 @@ start.time.scsset <- function(x, ...){
 #' @rawNamespace S3method(stop.time,scsset)
 stop.time.scsset <- function(x, ...){
    v <- rep("", nrow(x))
-   index <- which((deblank(x$end.time) != "")  &  !is.na(x$end.time))
+   
+   # Use 'stop.time' variables:
+   index <- which((deblank(x$stop.time) != "")  &  !is.na(x$stop.time))
+   v[index] <- x$stop.time[index]
+   index <- which((v == "") & (deblank(x$stop.time.logbook) != "")  &  !is.na(x$stop.time.logbook))
+   v[index] <- x$stop.time.logbook[index]
+   
+   # Use 'end.time' variables:
+   index <- which((v == "") & (deblank(x$end.time) != "")  &  !is.na(x$end.time))
    v[index] <- x$end.time[index]
    index <- which((v == "") & (deblank(x$end.time.logbook) != "")  &  !is.na(x$end.time.logbook))
    v[index] <- x$end.time.logbook[index]
+
    v <- as.POSIXct(paste(as.character(gulf.utils::date(x)), v))
    return(v)
 }
@@ -75,10 +84,10 @@ start.time.probe <- function(x, ...){
 #' @rawNamespace S3method(stop.time,probe) 
 stop.time.probe <- function(x, ...){
    if (gulf.metadata::project(x) == "scs"){
-      year <- as.numeric(format(gulf.utils::date(unique(x$date)), format="%Y"))
+      year <- unique(year(x))
       y <- data.frame(date = as.character(unique(gulf.utils::date(x))), tow.id = tow.id(x), stringsAsFactors = FALSE)
       z <- read.scsset(year)
-      r <- stop.time(z[match(y[key(z)], z[key(z)]), ])
+      r <- stop.time(z[gulf.utils::match(y[gulf.metadata::key(z)], z[key(z)]), ])
    }
    
    return(r)  

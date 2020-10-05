@@ -2,8 +2,8 @@
 #' 
 #' @description Functions that generate data summaries for various types of data objects.
 #' 
-#' @param by Character string(s) specifying which variables to group by when summararizing.
-#' @param category Biological category string(s). See \code{\link{cagetory}} for more details.
+#' @param by Character string(s) specifying which variables to group by when summarizing.
+#' @param category Biological category string(s). See \code{\link{category}} for more details.
 #' @param weight Logical value specifying whether to return a summary by weights rather than counts.
 #' 
 #' @examples 

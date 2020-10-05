@@ -81,5 +81,5 @@ species.foreign()
 
 }
 \seealso{
-\code{\link{gulf.data-data}}
+\code{\link{data}}
 }

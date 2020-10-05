@@ -52,7 +52,7 @@
 #' species()
 #' species.foreign()
 #' 
-#' @seealso \code{\link{gulf.data-data}}
+#' @seealso \code{\link{data}}
 #' 
  
 #' @export 
