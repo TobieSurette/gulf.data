@@ -8,87 +8,52 @@
 #' 
 #' @examples 
 #' x <- read.scsset(2020)
-#' start.time(x)
+#' time(x, "start")
 #' 
 #' x <- read.esonar(2020, tow.id = "GP354F")
-#' start.time(x)
-#' stop.time(x)
+#' time(x, "start")
+#' time(x, "stop")
 
-#' @describeIn time Generic \code{start.time} method. This is the time at which trawling is considered to have begun. 
-#' @export start.time
-start.time <- function(x, ...) UseMethod("start.time")
-
-#' @describeIn time Generic \code{stop.time} method. This is the time at which trawling is considered to have stopped. 
-#' @export stop.time
-stop.time <- function(x, ...) UseMethod("stop.time")
-
-#' @describeIn time Generic \code{touchdown.time} method. This is the time at which the trawl makes its initial bottom contact. 
-#' @export touchdown.time
-touchdown.time <- function(x, ...) UseMethod("touchdown.time")
-
-#' @describeIn time Generic \code{liftoff.time} method. This is the time at which the trawl makes is lifted off the bottom for hauling. 
-#' @export liftoff.time
-liftoff.time <- function(x, ...) UseMethod("liftoff.time")
-
-#' @describeIn time Generic \code{haul.time} method. This is the time at which the trawl is considered to have been hauled. 
-#' @export haul.time
-haul.time <- function(x, ...) UseMethod("haul.time")
-
-# @describeIn time Extract the trawl start time for snow crab set data.
-#' @rawNamespace S3method(start.time,scsset)
-start.time.scsset <- function(x, ...){
+# @describeIn time Extract event times for \code{scsset} data.
+#' @export
+time.scsset <- function(x, event = "start", ...){
+   event <- match.arg(tolower(event), c("start", "end", "stop", "haul", "touchdown", "liftoff"))
+   if (event == "end") if (length(intersect(grep("end", names(x)), grep("time", names(x)))) == 0) event <- "stop" 
+   
+   # Result variable:
    v <- rep("", nrow(x))
-   index <- which((deblank(x$start.time) != "")  &  !is.na(x$start.time))
-   v[index] <- x$start.time[index]
-   index <- which((v == "") & (deblank(x$start.time.logbook) != "")  &  !is.na(x$start.time.logbook))
-   v[index] <- x$start.time.logbook[index]
+   
+   # Regular naming:
+   var <- paste0(event, ".time")
+   if (var %in% names(x)){
+      index <- which((deblank(x[,var]) != "")  &  !is.na(x[,var]))
+      v[index] <- x[index,var]
+   }
+   
+   # Look in logbook variables:
+   var <- paste0(event, ".time.logbook")
+   if (var %in% names(x)){
+      index <- which((v == "") & (deblank(x[,var]) != "")  &  !is.na(x[,var]))
+      v[index] <- x[index,var]
+   }
+   
    v <- as.POSIXct(paste(as.character(gulf.utils::date(x)), v))
+   
    return(v)
 }
 
-# @describeIn time Extract the trawl stop time for snow crab set data.
-#' @rawNamespace S3method(stop.time,scsset)
-stop.time.scsset <- function(x, ...){
-   v <- rep("", nrow(x))
-   
-   # Use 'stop.time' variables:
-   index <- which((deblank(x$stop.time) != "")  &  !is.na(x$stop.time))
-   v[index] <- x$stop.time[index]
-   index <- which((v == "") & (deblank(x$stop.time.logbook) != "")  &  !is.na(x$stop.time.logbook))
-   v[index] <- x$stop.time.logbook[index]
-   
-   # Use 'end.time' variables:
-   index <- which((v == "") & (deblank(x$end.time) != "")  &  !is.na(x$end.time))
-   v[index] <- x$end.time[index]
-   index <- which((v == "") & (deblank(x$end.time.logbook) != "")  &  !is.na(x$end.time.logbook))
-   v[index] <- x$end.time.logbook[index]
-
-   v <- as.POSIXct(paste(as.character(gulf.utils::date(x)), v))
-   return(v)
-}
-
-# @describeIn time Extract start time for \code{probe} data.
-#' @rawNamespace S3method(start.time,probe)
-start.time.probe <- function(x, ...){
-   if (gulf.metadata::project(x) == "scs"){
+# @describeIn time Extract time stamps or event times for \code{probe} data.
+#' @export
+time.probe <- function(x, event, ...){
+   if ((gulf.metadata::project(x) == "scs") & !missing(event)){
       year <- unique(year(x))
       y <- data.frame(date = as.character(unique(gulf.utils::date(x))), tow.id = tow.id(x), stringsAsFactors = FALSE)
       z <- read.scsset(year)
-      r <- start.time(z[gulf.utils::match(y[gulf.metadata::key(z)], z[key(z)]), ])
+      r <- time(z[gulf.utils::match(y[gulf.metadata::key(z)], z[key(z)]), ], event = event, ...)
+   }else{
+      r <- gulf.utils::time(x, ...)
    }
    
    return(r)  
 }
 
-# @describeIn time Extract stop time for \code{probe} data.
-#' @rawNamespace S3method(stop.time,probe) 
-stop.time.probe <- function(x, ...){
-   if (gulf.metadata::project(x) == "scs"){
-      year <- unique(year(x))
-      y <- data.frame(date = as.character(unique(gulf.utils::date(x))), tow.id = tow.id(x), stringsAsFactors = FALSE)
-      z <- read.scsset(year)
-      r <- stop.time(z[gulf.utils::match(y[gulf.metadata::key(z)], z[key(z)]), ])
-   }
-   
-   return(r)  
-}
