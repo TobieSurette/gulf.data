@@ -10,7 +10,7 @@ trim(x, ...)
 
 \method{trim}{data.frame}(x, range, ...)
 
-\method{trim}{probe}(x, start.time, end.time, buffer = 0, ...)
+\method{trim}{probe}(x, range, start.time, end.time, buffer = 0, ...)
 }
 \arguments{
 \item{x}{Data object containing time series data.}

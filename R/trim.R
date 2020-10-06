@@ -23,10 +23,14 @@ trim.data.frame <- function(x, range, ...){
    
 #' @describeIn trim Removes time series data which lie beyond start and end times for a \code{probe} object.
 #' @export
-trim.probe <- function(x, start.time, end.time, buffer = 0, ...){
+trim.probe <- function(x, range, start.time, end.time, buffer = 0, ...){
    # Define start and end time:
-   if (missing(start.time)) start.time <- gulf.data::start.time(x, ...)
-   if (missing(end.time)) stop.time <- gulf.data::stop.time(x, ...)
+   if (!missing(range)){
+      start.time <- range[1]
+      end.time <- range[2]
+   }
+   if (missing(start.time)) start.time <- gulf.data::time(x, "start", ...)
+   if (missing(end.time)) stop.time <- gulf.data::time(x, "stop", ...)
    x <- trim.data.frame(x, range = c(start.time - buffer, stop.time + buffer), ...)
    
    return(x)

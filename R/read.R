@@ -267,7 +267,7 @@ read.star.oddi <- function(x, file, offset = 0, repeats = FALSE, ...){
    }
 
    # Create 'star.oddi' object:
-   v <- star.oddi(v, header = header, tow.id = tow.id, file.name = file.name)
+   v <- star.oddi(v, header = header, tow.id = tow.id, file.name = file.name, ...)
   
    # Define measurement units:
    index <- grep("[(]", names(v))

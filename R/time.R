@@ -45,13 +45,16 @@ time.scsset <- function(x, event = "start", ...){
 # @describeIn time Extract time stamps or event times for \code{probe} data.
 #' @export
 time.probe <- function(x, event, ...){
-   if ((gulf.metadata::project(x) == "scs") & !missing(event)){
-      year <- unique(year(x))
-      y <- data.frame(date = as.character(unique(gulf.utils::date(x))), tow.id = tow.id(x), stringsAsFactors = FALSE)
-      z <- read.scsset(year)
-      r <- time(z[gulf.utils::match(y[gulf.metadata::key(z)], z[key(z)]), ], event = event, ...)
+   if (!is.null(gulf.metadata::project(x))){
+      if ((gulf.metadata::project(x) == "scs") & !missing(event)){
+         year <- unique(gulf.utils::year(x))
+         y <- data.frame(date = as.character(unique(gulf.utils::date(x))), tow.id = tow.id(x), stringsAsFactors = FALSE)
+         z <- read.scsset(year)
+         r <- time(z[gulf.utils::match(y[gulf.metadata::key(z)], z[gulf.metadata::key(z)]), ], event = event, ...)
+         return(r)
+      }
    }else{
-      r <- gulf.utils::time(x, ...)
+      r <- gulf.utils::time(as.data.frame(x), ...)
    }
    
    return(r)  
