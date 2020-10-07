@@ -53,9 +53,9 @@ time.probe <- function(x, event, ...){
          r <- time(z[gulf.utils::match(y[gulf.metadata::key(z)], z[gulf.metadata::key(z)]), ], event = event, ...)
          return(r)
       }
-   }else{
-      r <- gulf.utils::time(as.data.frame(x), ...)
    }
+ 
+   r <- gulf.utils::time(as.data.frame(x), ...)
    
    return(r)  
 }
