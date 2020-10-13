@@ -36,7 +36,7 @@ locate.scsset <- function(x, year, source = "gulf.data", ...){
    }
 
    # Data source is 'gulf.data' package:
-   if (source == "gulf.data") file <- locate(package = "gulf.data", pattern = c("scs", "set", "csv"), ...)
+   if (source == "gulf.data") file <- locate(package = "gulf.data", file = c("scs", "set", "csv"), ...)
 
    # Year subset:
    if (!missing(year) & (length(file) > 0)){
@@ -66,11 +66,11 @@ locate.scsbio <- function(x, year, source = "gulf.data", remove = "bad", ...){
          path <- paste0(options()$gulf.path$snow.crab, "/Offshore Crab Common/Fishing Year ", year)
       }
       path <- paste0(path, "/Trawl Data/South Western Gulf/Raw Data")
-      file <- locate(path = path, pattern = "*.txt")
+      file <- locate(path = path, file = "*.txt")
    }
    
    # Data source is 'gulf.data' package:
-   if (source == "gulf.data") file <- locate(package = "gulf.data", pattern = c("scs", "bio", "csv"), ...)
+   if (source == "gulf.data") file <- locate(package = "gulf.data", file = c("scs", "bio", "csv"), ...)
 
    # Year subset:
    if (!missing(year) & (length(file) > 0)){
