@@ -73,24 +73,26 @@ freq.default <- function(x, n, index, by, fill = TRUE, step, range, ...){
    # # Use grouping variables to parse dataset:
    if (!missing(by)){
       if (is.vector(by)) by <- data.frame(group = by)
+      
       if (nrow(by) != length(x)) stop("'by' must have the same number of rows as elements in 'x'")
       groups <- unique(by)
-      
+
       # Calculate frequencies by grouping variables:
       f <- list()
       for (i in 1:nrow(groups)){
-         index <- rep(TRUE, length(n))  
-         for (j in 1:ncol(groups)) index <- index & (by[,j] == groups[i,j])
-         f[[i]] <- freq(x[index], n[index], fill = FALSE, ...)
+         ii <- rep(TRUE, length(n))  
+         for (j in 1:ncol(groups)) ii <- ii & (by[,j] == groups[i,j])
+         f[[i]] <- freq(x[ii], n[ii], fill = FALSE, ...)
       }
       
       # Square-off results into matrix form:
       values <- sort(as.numeric(unique(unlist(lapply(f, names)))))
       fnew <- matrix(0, nrow = nrow(groups), ncol = length(values))
       colnames(fnew) <- values
+
       for (i in 1:nrow(fnew)) fnew[i, names(f[[i]])] <- as.numeric(f[[i]])
       fnew <- as.data.frame(fnew)
-      
+     
       # Combine groups and frequency matrix:
       f <- cbind(groups, fnew)
    }
@@ -158,11 +160,10 @@ freq.default <- function(x, n, index, by, fill = TRUE, step, range, ...){
 #' @describeIn freq \code{scsbio} \code{freq} method.
 #' @export
 freq.scsbio <- function(x, category, by, step = 1, variable = "carapace.width", ...){
-   
-   var <- x[, variable]
-   
    # Remove NA values from data set:
+   var <- x[, variable]
    x <- x[!is.na(var), ]
+   var <- x[, variable]
    
    # Parse 'by' argument:
    if (!missing(by))
@@ -170,7 +171,9 @@ freq.scsbio <- function(x, category, by, step = 1, variable = "carapace.width", 
          if (!all(by %in% names(x))) stop("Some 'by' variables not variables in 'x'.") else by <- x[by]
 
    if (missing(category) & missing(by))  f <- freq(var, step = step, ...)
-   if (missing(category) & !missing(by)) f <- freq(var, by = by, step = step, ...)
+   if (missing(category) & !missing(by)){
+      f <- freq(var, by = by, step = step, ...)
+   }
    if (!missing(category) & missing(by)) f <- freq(var, index = is.category(x, category = category, drop = FALSE), step = step, ...)
 
    return(f)

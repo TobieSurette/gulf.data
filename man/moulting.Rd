@@ -53,11 +53,10 @@ Determines the carapace moult or hardness status.
 }
 
 \examples{
-# Read 2010 crab data:
-x <- read.scsbio(2010)
+# Read 2020 crab data:
+x <- read.scsbio(2020)
 index <- is.new.shell(x)    # Newly moulted crab.
 index <- is.soft.shell(x)   # Soft-shelled crab.
-index <- is.multiparous(x)  # Multiparous females.
 index <- is.skip.moulter(x) # Skip-moulters.
 
 }

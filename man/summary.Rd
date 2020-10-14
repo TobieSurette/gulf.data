@@ -32,5 +32,8 @@ Functions that generate data summaries for various types of data objects.
 }}
 
 \examples{
+b <- read.scsbio(2020)
+summary(b) # General summary.
+summary(b, category = c("m", "f"), by = "tow.id") # Male and female catch summary.
 
 }

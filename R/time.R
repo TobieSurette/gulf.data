@@ -50,7 +50,7 @@ time.probe <- function(x, event, ...){
          year <- unique(gulf.utils::year(x))
          y <- data.frame(date = as.character(unique(gulf.utils::date(x))), tow.id = tow.id(x), stringsAsFactors = FALSE)
          z <- read.scsset(year)
-         r <- time(z[gulf.utils::match(y[gulf.metadata::key(z)], z[gulf.metadata::key(z)]), ], event = event, ...)
+         r <- gulf.utils::time(z[gulf.utils::match(y[gulf.metadata::key(z)], z[gulf.metadata::key(z)]), ], event = event, ...)
          return(r)
       }
    }
