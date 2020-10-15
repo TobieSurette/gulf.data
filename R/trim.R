@@ -17,20 +17,28 @@ trim.NULL <- function(x, ...) return(NULL)
 #' @describeIn trim Removes time series data which lie beyond a specified time interval for a \code{data.frame} object.
 #' @export 
 trim.data.frame <- function(x, range, ...){
-   t <- time(x)
+   t <- gulf.utils::time(x)
    if (!is.null(t)) x <- x[which((t >= range[1]) & (t <= range[2])), ] else return(x)
 }
    
 #' @describeIn trim Removes time series data which lie beyond start and end times for a \code{probe} object.
 #' @export
-trim.probe <- function(x, range, start.time, end.time, buffer = 0, ...){
+trim.probe <- function(x, range, start.time, stop.time, buffer = 0, ...){
    # Define start and end time:
    if (!missing(range)){
       start.time <- range[1]
-      end.time <- range[2]
+      stop.time <- range[2]
    }
-   if (missing(start.time)) start.time <- gulf.data::time(x, "start", ...)
-   if (missing(end.time)) stop.time <- gulf.data::time(x, "stop", ...)
+   
+   if (missing(start.time)) start.time <- time(x, "touchdown", ...)
+   if (missing(stop.time) ) stop.time  <- time(x, "stop", ...)
+   
+   # Convert time from character to POSIX format:
+   if (is.character(start.time)) start.time <- as.POSIXct(paste(unique(gulf.utils::date(x)), start.time))
+   if (is.character(stop.time)) stop.time <- as.POSIXct(paste(unique(gulf.utils::date(x)), stop.time))
+      
+
+   # Trim data:
    x <- trim.data.frame(x, range = c(start.time - buffer, stop.time + buffer), ...)
    
    return(x)

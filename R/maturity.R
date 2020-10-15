@@ -103,10 +103,10 @@ is.primiparous.scsbio <- function(x, ...){
    # Contruct logical vextor:
    index <- rep(TRUE, dim(x)[1])
    names(x) <- tolower(names(x))
-   index <- index * is.mature(x, ...) * (x$sex == 2) * is.new(x)
+   index <- index * is.mature(x, ...) * (x$sex == 2) * is.new.shell(x)
    index[x$sex == 1] <- 0
    index[is.na(index) & (x$sex == 2) & !is.na(x$gonad.colour)] <- 0
-   index[is.na(index) & (x$sex == 2) & !is.na(x$egg.colour) & !is.na(x$eggs.remaining) & is.new(x)] <- 1
+   index[is.na(index) & (x$sex == 2) & !is.na(x$egg.colour) & !is.na(x$eggs.remaining) & is.new.shell(x)] <- 1
 
    # Convert to logical if there are no fractions:
    if (all((index[!is.na(index)] %% 1) == 0)) index <- (index == 1)

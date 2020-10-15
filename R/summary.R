@@ -7,6 +7,9 @@
 #' @param weight Logical value specifying whether to return a summary by weights rather than counts.
 #' 
 #' @examples 
+#' b <- read.scsbio(2020)
+#' summary(b) # General summary.
+#' summary(b, category = c("m", "f"), by = "tow.id") # Male and female catch summary.
 #' 
  
 #' @describeIn summary Generate summaries for snow crab survey set data.
@@ -15,25 +18,33 @@ summary.scsset <- function(x, ...){
    # Initialize result variable:
    res <- NULL
 
+   n <- function(x) if (is.data.frame(x)) return(nrow(x)) else return(length(x))
    for (i in 1:nrow(x)){
+      # Define time range:
+      range <- c(time(x[i, ], "touchdown"), time(x[i, ], "stop"))
+   
       # Read probe files:
-      esonar   <- trim(read.esonar(x[i, ]))
-      headline <- trim(read.star.oddi(x[i, ], probe = "headline"))
-      tilt     <- trim(read.star.oddi(x[i, ], probe = "footrope"))
+      esonar   <- trim(read.esonar(x[i, ]), range = range)
+      headline <- trim(read.star.oddi(x[i, ], probe = "headline"), range = range)
+      tilt     <- trim(read.star.oddi(x[i, ], probe = "footrope"), range = range)
 
       # Calculate minimum distance between eSonar coordinates and survey logbook coordinates:
       esonar.distance <- NA
-      if (length(esonar) > 0) esonar.distance <- min(distance(longitude(x[i,]), latitude(x[i,]), esonar$longitude, esonar$latitude))
+      if (length(esonar) > 0) esonar.distance <- 1000 * min(gulf.spatial::distance(gulf.spatial::lon(x[i,]), 
+                                                                                   gulf.spatial::lat(x[i,]), 
+                                                                                   gulf.spatial::lon(esonar), 
+                                                                                   gulf.spatial::lat(esonar)))
 
       # Counts of data records:
       tmp <- data.frame(date = x$date[i],
+                        tow.id = x$tow.id[i],
                         tow.number = x$tow.number[i],
                         valid = x$valid[i],
                         esonar = n(esonar),
-                        minilog = n(minilog),
                         headline = n(headline),
                         tilt = n(tilt),
-                        esonar.distance = esonar.distance)
+                        duration = as.numeric(difftime(range[2], range[1], units = "secs")),
+                        esonar.distance.meters = round(esonar.distance,1))
 
       # Apped results:
       res <- rbind(res, tmp)
@@ -46,11 +57,7 @@ summary.scsset <- function(x, ...){
 #' @export
 summary.scsbio <- function(x, category, ...){
    # Parse input arguments:
-   if (!missing(category)) if (!is.character(category)) stop("'category' must be a vector of character strings.")
-   if (!is.character(by)) stop("'by' must be a vector of character strings.")
-
-   # Get catch summary:
-   if (!missing(category)) return(catch(x, category = category, ...))  
+   if (!missing(category)) return(catch(b, category = category, ...))
 
    # Print data summary:
    describe(x)

@@ -10,11 +10,10 @@
 #' @return Logical vector.
 #' 
 #' @examples
-#' # Read 2010 crab data:
-#' x <- read.scsbio(2010)
+#' # Read 2020 crab data:
+#' x <- read.scsbio(2020)
 #' index <- is.new.shell(x)    # Newly moulted crab.
 #' index <- is.soft.shell(x)   # Soft-shelled crab.
-#' index <- is.multiparous(x)  # Multiparous females.
 #' index <- is.skip.moulter(x) # Skip-moulters.
 #' 
 #' @section Functions:
@@ -34,7 +33,7 @@
 is.new.shell <- function(x, ...) UseMethod("is.new.shell")
 
 #' @rdname moulting
-#' @export 
+#' @rawNamespace S3method(is.new.shell,scsbio)
 is.new.shell.scsbio <- function(x){
    index <- rep(FALSE, dim(x)[1])
    names(x) <- tolower(names(x))
@@ -49,7 +48,7 @@ is.new.shell.scsbio <- function(x){
 is.hard.shell <- function(x, ...) UseMethod("is.hard.shell")
 
 #' @rdname moulting
-#' @export
+#' @rawNamespace S3method(is.hard.shell,scsbio)
 is.hard.shell.scsbio <- function(x, durometer, shell.condition, zone, ...){
    # Parse input arguments:
    if (is.data.frame(x)) names(x) <- tolower(names(x))
@@ -97,7 +96,7 @@ is.hard.shell.scsbio <- function(x, durometer, shell.condition, zone, ...){
 }
 
 #' @rdname moulting
-#' @export
+#' @rawNamespace S3method(is.hard.shell,scsobs)
 is.hard.shell.scsobs <- function(x, durometer, shell.condition, zone, ...){
    # Parse input arguments:
    if (is.data.frame(x)) names(x) <- tolower(names(x))
@@ -162,7 +161,7 @@ is.soft.shell <- function(x, ...) return(!is.hard.shell(x, ...))
 is.skip.moulter <- function(x, ...) UseMethod("is.skip.moulter")
 
 #' @rdname moulting
-#' @export
+#' @rawNamespace S3method(is.skip.moulter,scsbio)
 is.skip.moulter.scsbio <- function(x, ...){
    # IS.SKIP.MOULTER - Returns whether a crab a skip moulter.
 

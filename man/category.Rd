@@ -110,7 +110,7 @@ but have no effect on the output. String syntax is as follows:
    \item{\code{category}}{Generic \code{category} method.}
    \item{\code{category.default}}{Default \code{category} method.}
    \item{\code{category.numeric}}{Return sets of pre-defined biological category strings.}
-   \item{\code{category.character}}{Return informal description or formal specification of a biological category string.}
+   \item{\code{category.character}}{Return formal and informal description or formal specification of a biological category string.}
    \item{\code{is.category}}{Generic \code{is.category} function.}
    \item{\code{is.category.scsbio}}{Returns whether an observation belongs to a specified snow crab biological category.}
    \item{\code{is.fish}}{Determine whether a species is an vertebrate fish species.}

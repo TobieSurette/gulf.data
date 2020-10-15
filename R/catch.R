@@ -7,7 +7,7 @@
 #' @param x Target object.
 #' @param value Object containing catch data to be assigned.
 #' @param by Character string(s) specifying which variables to group by when summararizing.
-#' @param category Biological category string(s). See \code{\link{cagetory}} for more details.
+#' @param category Biological category string(s). See \code{\link{category}} for more details.
 #' @param weight Logical value specifying whether to return a summary by weights rather than counts.
 #' @param ... Other parameters (not used).
 #' 
@@ -20,6 +20,21 @@
 #'    \item{\code{catch<-.scsset}}{Import catch data into an \code{\link{scsset}} object.}
 #' }
 #' 
+#' @examples
+#' s <- read.scsset(2020)  # Tow data.
+#' b <- read.scsbio(2020)  # Biological data.
+#' 
+#' # Generate catch summaries from biological data:
+#' catch(b) # Total crab.
+#' catch(b, category = c("M", "F"), by = c("date"))
+#' catch(b, category = c("COM"), by = c("date", "tow.id"))
+#' catch(b, category = category(1:10), by = c("date", "tow.id"))
+#' 
+#' # Import biolgical catches into set data:
+#' catch(s) <- catch(b, category = c("M", "F")) # Total males and females.
+#' 
+#' # Merge all default categories:
+#' catch(s) <- catch(b, category = category())
 
 #' @export
 "catch" <- function(x, ...) UseMethod("catch")
@@ -45,7 +60,13 @@ catch.scsbio <- function(x, by = key.scsset(), category, species, weight = FALSE
       if (weight) w <- gulf.utils::repvec(weight(x, ...), ncol = length(category)) else w <- 1 
       I <- is.category(x, category)
       res <- stats::aggregate(I * w, by = x[by], sum, na.rm = TRUE)
+      names(res) <- c(by, category)
       res <- sort(res, by = by)
+   }else{
+      if (weight) w <- gulf.utils::repvec(weight(x, ...), ncol = 1) else w <- rep(1, nrow(x)) 
+      res <- stats::aggregate(w, by = x[by], sum, na.rm = TRUE)
+      names(res) <- c(by, "total")
+      res <- sort(res, by = by)      
    }
    
    return(res)
@@ -56,15 +77,15 @@ catch.scsbio <- function(x, by = key.scsset(), category, species, weight = FALSE
 "catch<-" <- function(x, ...) UseMethod("catch<-")
 
 #' @rdname catch
-#' @export 
+#' @export
 "catch<-.scsset" <- function(x, value, ...){
-   keyvars <-  key.scsset()
-   
+   keyvars <-  gulf.metadata::key(x)
    if (!all(keyvars %in% names(value))) stop("Assigned catches must contain 'scsset' index key.")
    
    # Identify numeric variables
-   vars <- setdiff(names(x)[apply(value, is.numeric)], keyvars)
-   
+   vars <- names(value)[unlist(lapply(value, is.numeric))]
+
+   # Append results:
    if (length(vars) > 0){
       value <- aggregate(value[vars], by = value[keyvars], sum, na.rm = TRUE)
       index <- match(value[keyvars], x[keyvars])
