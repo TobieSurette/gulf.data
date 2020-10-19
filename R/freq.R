@@ -92,46 +92,44 @@ freq.default <- function(x, n, index, by, fill = TRUE, step, range, ...){
 
       for (i in 1:nrow(fnew)) fnew[i, names(f[[i]])] <- as.numeric(f[[i]])
       fnew <- as.data.frame(fnew)
-     
+
       # Combine groups and frequency matrix:
       f <- cbind(groups, fnew)
-   }
-
-   # Use logical indices to parse dataset:
-   if (!missing(index)){
-      if (is.vector(index)) index <- t(t(index))
-      index <- as.matrix(index)
-      
-      # Convert indices to logical values:
-      if (!is.logical(index)){
-         tmp <- NULL
-         for (i in 1:ncol(index)) tmp <- cbind(tmp, 1:length(x) %in% index[,i])
-         colnames(tmp) <- colnames(index)
-         index <- tmp
+   }else{
+      if missing(index)){
+         # Convert to frequencies:
+         r <- stats::aggregate(list(n = n), by = list(x = x), sum)
+         f <- r$n 
+         names(f) <- r$x      
+      }else{
+         if (is.vector(index)) index <- t(t(index))
+         index <- as.matrix(index)
+         
+         # Convert indices to logical values:
+         if (!is.logical(index)){
+            tmp <- NULL
+            for (i in 1:ncol(index)) tmp <- cbind(tmp, 1:length(x) %in% index[,i])
+            colnames(tmp) <- colnames(index)
+            index <- tmp
+         }
+         
+         # Calculate frequencies by grouping variables:
+         f <- list()
+         for (i in 1:ncol(index)) f[[i]] <- freq(x[which(index[,i])], n[which(index[,i])], fill = FALSE, ...)
+         
+         # Square-off results into matrix form:
+         values <- sort(as.numeric(unique(unlist(lapply(f, names)))))
+         fnew <- matrix(0, nrow = ncol(index), ncol = length(values))
+         colnames(fnew) <- values
+         for (i in 1:nrow(fnew)) fnew[i, names(f[[i]])] <- as.numeric(f[[i]])
+         fnew <- as.data.frame(fnew)
+         f <- fnew
+         
+         # Combine groups and frequency matrix:
+         if (!is.null(colnames(index))) f <- cbind(data.frame(category = colnames(index)), f) 
       }
-       
-      # Calculate frequencies by grouping variables:
-      f <- list()
-      for (i in 1:ncol(index)) f[[i]] <- freq(x[which(index[,i])], n[which(index[,i])], fill = FALSE, ...)
-
-      # Square-off results into matrix form:
-      values <- sort(as.numeric(unique(unlist(lapply(f, names)))))
-      fnew <- matrix(0, nrow = ncol(index), ncol = length(values))
-      colnames(fnew) <- values
-      for (i in 1:nrow(fnew)) fnew[i, names(f[[i]])] <- as.numeric(f[[i]])
-      fnew <- as.data.frame(fnew)
-      f <- fnew
-
-      # Combine groups and frequency matrix:
-      if (!is.null(colnames(index))) f <- cbind(data.frame(category = colnames(index)), f) 
    }
    
-   if (missing(by) & missing(index)){
-      # Convert to frequencies:
-      r <- stats::aggregate(list(n = n), by = list(x = x), sum)
-      f <- r$n; names(f) <- r$x      
-   }
-
    # Fill-in missing regular values with zeroes:
    if (fill){
       fvars <- names(f)[gsub("[-0-9.]", "", names(f)) == ""]
@@ -170,12 +168,11 @@ freq.scsbio <- function(x, category, by, step = 1, variable = "carapace.width", 
       if (is.character(by)) 
          if (!all(by %in% names(x))) stop("Some 'by' variables not variables in 'x'.") else by <- x[by]
 
-   if (missing(category) & missing(by))  f <- freq(var, step = step, ...)
-   if (missing(category) & !missing(by)){
-      f <- freq(var, by = by, step = step, ...)
-   }
-   if (!missing(category) & missing(by)) f <- freq(var, index = is.category(x, category = category, drop = FALSE), step = step, ...)
-
+   if (missing(category) & missing(by))   f <- freq(var, step = step, ...)
+   if (missing(category) & !missing(by))  f <- freq(var, by = by, step = step, ...)
+   if (!missing(category) & missing(by))  f <- freq(var, index = is.category(x, category = category, drop = FALSE), step = step, ...)
+   if (!missing(category) & !missing(by)) f <- freq(var, by = by, index = is.category(x, category = category, drop = FALSE), step = step, ...)
+   
    return(f)
 }
 
