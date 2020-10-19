@@ -2,21 +2,12 @@
 % Please edit documentation in R/catch.R
 \name{catch}
 \alias{catch}
-\alias{catch.scsset}
 \alias{catch.scsbio}
-\alias{catch<-}
-\alias{catch<-.scsset}
 \title{Catch Data}
 \usage{
 catch(x, ...)
 
-\method{catch}{scsset}(x, ...)
-
 \method{catch}{scsbio}(x, by = key.scsset(), category, species, weight = FALSE, ...)
-
-catch(x, ...) <- value
-
-\method{catch}{scsset}(x, ...) <- value
 }
 \arguments{
 \item{x}{Target object.}
@@ -32,18 +23,12 @@ catch(x, ...) <- value
 \item{value}{Object containing catch data to be assigned.}
 }
 \description{
-Extract or attach or catch data.
+Extract or generate catch data summaries.
 }
-\section{Functions}{
-
-\describe{
-   \item{\code{catch}}{Generic \code{catch} method.}
-   \item{\code{catch<-}}{Generic \code{catch} assignment method.}
-   \item{\code{catch.scsset}}{Generate catch data summary for an \code{\link{scsset}} object.}
-   \item{\code{catch.scsbio}}{Generate catch data summary for an \code{\link{scsbio}} object.}
-   \item{\code{catch<-.scsset}}{Import catch data into an \code{\link{scsset}} object.}
-}
-}
+\section{Methods (by class)}{
+\itemize{
+\item \code{scsbio}: Snow crab biological data catch summaries.
+}}
 
 \examples{
 s <- read.scsset(2020)  # Tow data.
@@ -54,10 +39,4 @@ catch(b) # Total crab.
 catch(b, category = c("M", "F"), by = c("date"))
 catch(b, category = c("COM"), by = c("date", "tow.id"))
 catch(b, category = category(1:10), by = c("date", "tow.id"))
-
-# Import biolgical catches into set data:
-catch(s) <- catch(b, category = c("M", "F")) # Total males and females.
-
-# Merge all default categories:
-catch(s) <- catch(b, category = category())
 }

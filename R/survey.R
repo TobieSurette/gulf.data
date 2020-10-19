@@ -1,9 +1,8 @@
 #' Survey Identifiers
 #'
-#' @name survey
-#' 
 #' @description Returns research survey codes and identifiers.
 #'
+#' @param x Object.
 #' @param year Survey year(s).
 #'
 #' @param survey Character string specifying the research survey. The input is passed onto the
@@ -34,28 +33,20 @@
 #' # Return the juvenile cod survey codes for a vector of years:
 #' survey(year = 1990:1995, survey = "juv")
 #' 
-#' @section Functions:
-#' \describe{
-#'   \item{\code{survey}}{Generic \code{survey} method.}
-#'   \item{\code{survey.default}}{Fetch survey identifiers.}
-#'   \item{\code{survey.character}}{Fetch survey identifiers and information.}
-#' } 
-#' 
- 
+#' # Snow crab survey type:
+#' x <- read.scsset(2019)
+#' survey(x) # Separates regular fall and comparative survey sets.
+
 #' @export
 survey <- function(x, ...) UseMethod("survey")
 
-#' @rdname survey
+#' @describeIn survey Fetch survey identifiers.
 #' @export
 survey.default <- function(x, year, project, ...){
-   file <- locate(package = "gulf.data", pattern = "survey.csv")
-   v <- read.csv(file, header = TRUE, stringsAsFactors = FALSE)
+   v <- read.csv(locate(package = "gulf.data", file = "survey.csv"), header = TRUE, stringsAsFactors = FALSE)
    
    # Subset by project:
-   if (!missing(project)){
-      project <- project(project)
-      v <- v[v$project %in% project, ]
-   }
+   if (!missing(project)) v <- v[v$project %in% project(project), ]
    
    # Subset by year:
    if (!missing(year)) v <- v[v$year %in% year, ]
@@ -69,6 +60,36 @@ survey.default <- function(x, year, project, ...){
          v <- v[index, ]
       }
    }
+   
+   return(v)
+}
+
+#' @describeIn survey Determine type of survey sampling for snow crab survey tows.
+#' @export
+survey.scsset <- function(x, ...){
+   month <- as.numeric(substr(x$date, 6, 7))
+   v <- rep("", nrow(x))
+   v[month %in% 4:5] <- "spring"
+   v[month %in% 6] <- "summer"
+   v[month %in% 7:10] <- "regular"
+   
+   index <- which((gulf.utils::year(x) == 2019) & (substr(x$tow.id,2,2) == "C"))
+   v[index] <- paste(v[index], "comparative")
+   
+   return(v)
+}
+
+#' @describeIn survey Determine type of survey sampling for snow crab survey biological data.
+#' @export
+survey.scsbio <- function(x, ...){
+   month <- as.numeric(substr(x$date, 6, 7))
+   v <- rep("", nrow(x))
+   v[month %in% 4:5] <- "spring"
+   v[month %in% 6] <- "summer"
+   v[month %in% 7:10] <- "regular"
+   
+   index <- which((gulf.utils::year(x) == 2019) & (substr(x$tow.id,2,2) == "C"))
+   v[index] <- paste(v[index], "comparative")
    
    return(v)
 }

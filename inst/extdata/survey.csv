@@ -1,1 +1,205 @@
-project,year,id,vessel,type,start.month,start.day,end.month,end.day,trawl.type,trawl.sensor,minilog,star-oddirvs,1970,P079,E.E. Prince,,,,,,Yankee 36,,,rvs,1971,P091,E.E. Prince,,,,,,Yankee 36,,,rvs,1972,P106,E.E. Prince,,,,,,Yankee 36,,,rvs,1973,P122,E.E. Prince,,,,,,Yankee 36,,,rvs,1974,P143,E.E. Prince,,,,,,Yankee 36,,,rvs,1975,P157,E.E. Prince,,,,,,Yankee 36,,,rvs,1976,P172,E.E. Prince,,,,,,Yankee 36,,,rvs,1977,P188,E.E. Prince,,,,,,Yankee 36,,,rvs,1978,P204,E.E. Prince,,,,,,Yankee 36,,,rvs,1979,P229,E.E. Prince,,,,,,Yankee 36,,,rvs,1980,P244,E.E. Prince,,,,,,Yankee 36,,,rvs,1981,P260,E.E. Prince,,,,,,Yankee 36,,,rvs,1982,P278,E.E. Prince,,,,,,Yankee 36,,,rvs,1983,P296,E.E. Prince,,,,,,Yankee 36,,,rvs,1984,P312,E.E. Prince,,,,,,Yankee 36,,,rvs,1985,P327,E.E. Prince,,,,,,Yankee 36,,,rvs,1985,H141,Lady Hammond,,,,,,Western IIA,,,rvs,1986,H159,Lady Hammond,,,,,,Western IIA,,,rvs,1987,H179,Lady Hammond,,,,,,Western IIA,,,rvs,1988,H192,Lady Hammond,,,,,,Western IIA,,,rvs,1989,H204,Lady Hammond,,,,,,Western IIA,,,rvs,1990,H219,Lady Hammond,,,,,,Western IIA,,,rvs,1991,H232,Lady Hammond,,,,,,Western IIA,,,rvs,1992,N176,CCGS Alfred Needler,,,,,,Western IIA,,,rvs,1992,N178,CCGS Alfred Needler,,,,,,Western IIA,,,rvs,1992,H245,Lady Hammond,,,,,,Western IIA,,,rvs,1993,N192,CCGS Alfred Needler,,,,,,Western IIA,,,rvs,1994,N210,CCGS Alfred Needler,,,,,,Western IIA,,,rvs,1995,N230,CCGS Alfred Needler,,,,,,Western IIA,,,rvs,1996,N249,CCGS Alfred Needler,,,,,,Western IIA,,,rvs,1997,N746,CCGS Alfred Needler,,,,,,Western IIA,,,rvs,1998,N846,CCGS Alfred Needler,,,,,,Western IIA,,,rvs,1999,N941,CCGS Alfred Needler,,,,,,Western IIA,,,rvs,2000,N045,CCGS Alfred Needler,,,,,,Western IIA,,,rvs,2001,N150,CCGS Alfred Needler,,,,,,Western IIA,,,rvs,2002,N251,CCGS Alfred Needler,,,,,,Western IIA,,,rvs,2003,T352,CCGS Wilfred Templeman,,,,,,Western IIA,,,rvs,2004,T434,CCGS Teleost,,,,,,Western IIA,,,rvs,2004,N446,CCGS Alfred Needler,,,,,,Western IIA,,,rvs,2005,T507,CCGS Teleost,,,,,,Western IIA,,,rvs,2005,N542,CCGS Teleost,,,,,,Western IIA,,,rvs,2006,T678,CCGS Teleost,,,,,,Western IIA,,,rvs,2007,T749,CCGS Teleost,,,,,,Western IIA,,,rvs,2008,T815,CCGS Teleost,,,,,,Western IIA,,,rvs,2009,T992,CCGS Teleost,,,,,,Western IIA,,,rvs,2010,T074,CCGS Teleost,,,,,,Western IIA,,,rvs,2011,T194,CCGS Teleost,,,,,,Western IIA,,,rvs,2012,T205,CCGS Teleost,,,,,,Western IIA,,,rvs,2013,T318,CCGS Teleost,,,,,,Western IIA,,,rvs,2014,T433,CCGS Teleost,,,,,,Western IIA,,,rvs,2015,T533,CCGS Teleost,,,,,,Western IIA,,,rvs,2016,T661,CCGS Teleost,,,,,,Western IIA,,,rvs,2017,T777,CCGS Teleost,,,,,,Western IIA,,,rvs,2018,T896,CCGS Teleost,,,,,,Western IIA,,,rvs,2019,T901,CCGS Teleost,,,,,,Western IIA,,,nss,1999,O901,CCGS Opilio,,,,,,,,,nss,2000,O024,CCGS Opilio,,,,,,,,,nss,2001,O139,CCGS Opilio,,,,,,,,,nss,2001,O160,CCGS Opilio,,,,,,,,,nss,2002,O241,CCGS Opilio,,,,,,,,,nss,2002,O218,CCGS Opilio,,,,,,,,,nss,2002,O263,CCGS Opilio,,,,,,,,,nss,2003,O341,CCGS Opilio,,,,,,,,,nss,2003,O320,CCGS Opilio,,,,,,,,,nss,2003,O365,CCGS Opilio,,,,,,,,,nss,2004,O434,CCGS Opilio,,,,,,,,,nss,2004,O456,CCGS Opilio,,,,,,,,,nss,2005,O536,CCGS Opilio,,,,,,,,,nss,2006,O637,CCGS Opilio,,,,,,,,,nss,2007,O030,CCGS Opilio,,,,,,,,,nss,2008,O022,CCGS Opilio,,,,,,,,,nss,2009,O029,CCGS Opilio,,,,,,,,,nss,2010,O103,CCGS Opilio,,,,,,,,,nss,2010,O104,CCGS Opilio,,,,,,,,,nss,2011,O129,CCGS Opilio,,,,,,,,,nss,2012,O026,CCGS Opilio,,,,,,,,,nss,2012,O048,CCGS Opilio,,,,,,,,,nss,2013,P126,CCGS Moses Pearly,,,,,,,,,nss,2014,P021,CCGS Moses Pearly,,,,,,,,,nss,2015,P521,CCGS Moses Pearly,,,,,,,,,nss,2016,P018,CCGS Moses Pearly,,,,,,,,,nss,2017,P024,CCGS Moses Pearly,,,,,,,,,nss,2017,P329,CCGS Moses Pearly,,,,,,,,,nss,2018,P041,CCGS Moses Pearly,,,,,,,,,nss,2018,P829,CCGS Moses Pearly,,,,,,,,,nss,2019,P140,CCGS Moses Pearly,,,,,,,,,nss,2019,P953,CCGS Moses Pearly,,,,,,,,,sens,2003,S001,,,,,,,,,,sens,2004,S002,,,,,,,,,,sens,2005,S003,,,,,,,,,,sens,2006,S004,,,,,,,,,,sens,2007,S005,,,,,,,,,,sens,2008,S006,,,,,,,,,,sens,2009,S007,,,,,,,,,,sens,2010,S008,,,,,,,,,,sens,2011,S009,,,,,,,,,,sens,2012,S010,,,,,,,,,,sens,2013,S011,,,,,,,,,,sens,2014,S012,,,,,,,,,,sens,2015,S013,,,,,,,,,,sens,2016,S014,,,,,,,,,,sens,2017,S015,,,,,,,,,,sens,2018,S016,,,,,,,,,,sens,2019,S017,,,,,,,,,,ins,1985,A001,,,,,,,,,,ins,1985,A002,,,,,,,,,,ins,1985,A003,,,,,,,,,,ins,1985,A004,,,,,,,,,,ins,1985,A005,,,,,,,,,,ins,1985,N012,,,,,,,,,,ins,1986,A010,,,,,,,,,,ins,1986,A011,,,,,,,,,,ins,1986,A012,,,,,,,,,,ins,1986,A013,,,,,,,,,,ins,1986,N014,,,,,,,,,,ins,1987,N017,,,,,,,,,,ins,1988,N028,,,,,,,,,,ins,1988,N038,,,,,,,,,,ins,1994,A021,,,,,,,,,,ins,1996,C043,,,,,,,,,,ins,1997,C038,,,,,,,,,,ins,1999,Y001,,,,,,,,,,ins,2000,Y002,,,,,,,,,,ins,2001,A031,,,,,,,,,,ins,2001,A032,,,,,,,,,,ins,2001,A033,,,,,,,,,,ins,2001,Y003,,,,,,,,,,jans,1994,N197,CCGS Alfred Needler,,,,,,,,,jans,1995,N214,CCGS Alfred Needler,,,,,,,,,jans,1996,T182,CCGS Wilfred Templeman,,,,,,,,,jans,1997,T201,CCGS Wilfred Templeman,,,,,,,,,jans,2003,N001,,,,,,,,,,juvs,1988,J046,,,,,,,,,,juvs,1989,N015,,,,,,,,,,juvs,1990,J088,,,,,,,,,,juvs,1991,JC91,,,,,,,,,,juvs,1991,JH01,,,,,,,,,,juvs,1992,P431,,,,,,,,,,juvs,1993,P446,,,,,,,,,,juvs,1994,J094,,,,,,,,,,juvs,1995,J095,,,,,,,,,,seas,1986,H059,,,,,,,,,,seas,1986,H166,,,,,,,,,,seas,1987,H079,,,,,,,,,,seas,1987,H172,,,,,,,,,,seas,1987,H174,,,,,,,,,,seas,1987,N073,,,,,,,,,,seas,1989,H209,,,,,,,,,,seas,1990,H215,,,,,,,,,,seas,1990,H223,,,,,,,,,,seas,1990,V036,,,,,,,,,,seas,1991,N151,,,,,,,,,,seas,1991,V137,,,,,,,,,,seas,1992,NV35,,,,,,,,,,scas,2012,O021,CCGS Opilio,,,,,,,,,scas,2013,P019,CCGS Moses Pearly,,,,,,,,,scas,2014,P047,CCGS Moses Pearly,,,,,,,,,scas,2015,P026,CCGS Moses Pearly,,,,,,,,,scas,2016,P621,CCGS Moses Pearly,,,,,,,,,scas,2018,P841,CCGS Moses Pearly,,,,,,,,,scas,2019,P201,CCGS Moses Pearly,,,,,,,,,scas,2019,P242,CCGS Moses Pearly,,,,,,,,,scs,1988,,Emy Serge D.,fall,8,5,11,13,Nephrops,,no,noscs,1989,,Emy Serge D.,fall,8,15,10,29,Nephrops,,no,noscs,1990,,Emy Serge D.,fall,6,18,10,8,Nephrops,Scanmar,yes,noscs,1991,,Emy Serge D.,fall,7,10,11,7,Nephrops,Scanmar,yes,noscs,1992,,Emy Serge D.,fall,7,13,10,21,Nephrops,Scanmar,yes,noscs,1993,,Emy Serge D.,fall,7,12,10,15,Nephrops,Scanmar,yes,noscs,1994,,Emy Serge D.,fall,7,12,10,9,Nephrops,Scanmar,yes,noscs,1995,,Emy Serge D.,fall,7,19,10,18,Nephrops,Scanmar,yes,noscs,1996,,Emy Serge D.,fall,8,21,10,11,Nephrops,Scanmar,yes,noscs,1997,,Emy Serge D.,fall,7,9,9,11,Nephrops,Scanmar,yes,noscs,1998,,Emy Serge D.,fall,7,7,9,14,Nephrops,Scanmar,yes,noscs,1999,,Den C. Martin,fall,7,9,9,10,Nephrops,Netmind,yes,noscs,2000,,Den C. Martin,fall,8,1,9,21,Nephrops,Netmind,yes,noscs,2001,,Den C. Martin,fall,8,9,10,2,Nephrops,Netmind,yes,noscs,2002,,Den C. Martin,summer,6,26,6,29,Nephrops,Netmind,yes,noscs,2002,,Den C. Martin,fall,7,8,9,19,Nephrops,Netmind,yes,noscs,2003,,Marco-Michel,fall,7,15,10,7,Nephrops,Netmind,yes,noscs,2004,,Marco-Michel,summer,6,22,6,26,Nephrops,Netmind,yes,noscs,2004,,Marco-Michel,fall,7,14,10,1,Nephrops,Netmind,yes,noscs,2005,,Marco-Michel,spring,4,26,5,4,Nephrops,Netmind,yes,noscs,2005,,Marco-Michel,summer,6,9,6,13,Nephrops,Netmind,yes,noscs,2005,,Marco-Michel,fall,7,13,9,20,Nephrops,Netmind,yes,noscs,2006,,Marco-Michel,summer,5,30,6,5,Nephrops,Netmind,yes,noscs,2006,,Marco-Michel,fall,8,2,10,18,Nephrops,Netmind,yes,noscs,2007,,Marco-Michel,summer,6,12,6,17,Nephrops,Netmind,yes,noscs,2007,,Marco-Michel,fall,7,10,9,22,Nephrops,Netmind,yes,noscs,2008,,Marco-Michel,summer,6,19,6,24,Nephrops,Netmind,yes,noscs,2008,,Marco-Michel,fall,7,16,9,25,Nephrops,Netmind,yes,noscs,2009,,Marco-Michel,summer,6,13,6,18,Nephrops,Netmind,yes,noscs,2009,,Marco-Michel,fall,7,16,9,27,Nephrops,Netmind,yes,noscs,2010,,Marco-Michel,fall,7,8,9,14,Nephrops,Netmind,yes,noscs,2011,,Marco-Michel,fall,7,13,10,4,Nephrops,Netmind,yes,noscs,2012,,Marco-Michel,fall,7,10,9,23,Nephrops,Netmind,yes,noscs,2013,,Jean-Mathieu,fall,7,9,10,14,Nephrops,eSonar,yes,noscs,2014,,Jean-Mathieu,fall,7,9,10,12,Nephrops,eSonar,yes,yesscs,2015,,Jean-Mathieu,fall,7,9,10,15,Nephrops,eSonar,yes,yesscs,2016,,Jean-Mathieu,fall,7,10,10,4,Nephrops,eSonar,yes,yesscs,2017,,Jean-Mathieu,fall,7,10,10,31,Nephrops,eSonar,yes,yesscs,2018,,Jean-Mathieu,fall,7,19,9,16,Nephrops,eSonar,yes,yesscs,2019,,Avalon Voyager II,fall,7,11,9,25,Nephrops,eSonar,no,yesscs,2019,,Jean-Mathieu,comparative,9,19,9,25,Nephrops,eSonar,no,yes
+project,year,id,vessel,type,start.month,start.day,end.month,end.day,trawl.type,trawl.sensor,minilog,star-oddi
+rvs,1970,P079,E.E. Prince,,,,,,Yankee 36,,,
+rvs,1971,P091,E.E. Prince,,,,,,Yankee 36,,,
+rvs,1972,P106,E.E. Prince,,,,,,Yankee 36,,,
+rvs,1973,P122,E.E. Prince,,,,,,Yankee 36,,,
+rvs,1974,P143,E.E. Prince,,,,,,Yankee 36,,,
+rvs,1975,P157,E.E. Prince,,,,,,Yankee 36,,,
+rvs,1976,P172,E.E. Prince,,,,,,Yankee 36,,,
+rvs,1977,P188,E.E. Prince,,,,,,Yankee 36,,,
+rvs,1978,P204,E.E. Prince,,,,,,Yankee 36,,,
+rvs,1979,P229,E.E. Prince,,,,,,Yankee 36,,,
+rvs,1980,P244,E.E. Prince,,,,,,Yankee 36,,,
+rvs,1981,P260,E.E. Prince,,,,,,Yankee 36,,,
+rvs,1982,P278,E.E. Prince,,,,,,Yankee 36,,,
+rvs,1983,P296,E.E. Prince,,,,,,Yankee 36,,,
+rvs,1984,P312,E.E. Prince,,,,,,Yankee 36,,,
+rvs,1985,P327,E.E. Prince,,,,,,Yankee 36,,,
+rvs,1985,H141,Lady Hammond,,,,,,Western IIA,,,
+rvs,1986,H159,Lady Hammond,,,,,,Western IIA,,,
+rvs,1987,H179,Lady Hammond,,,,,,Western IIA,,,
+rvs,1988,H192,Lady Hammond,,,,,,Western IIA,,,
+rvs,1989,H204,Lady Hammond,,,,,,Western IIA,,,
+rvs,1990,H219,Lady Hammond,,,,,,Western IIA,,,
+rvs,1991,H232,Lady Hammond,,,,,,Western IIA,,,
+rvs,1992,N176,CCGS Alfred Needler,,,,,,Western IIA,,,
+rvs,1992,N178,CCGS Alfred Needler,,,,,,Western IIA,,,
+rvs,1992,H245,Lady Hammond,,,,,,Western IIA,,,
+rvs,1993,N192,CCGS Alfred Needler,,,,,,Western IIA,,,
+rvs,1994,N210,CCGS Alfred Needler,,,,,,Western IIA,,,
+rvs,1995,N230,CCGS Alfred Needler,,,,,,Western IIA,,,
+rvs,1996,N249,CCGS Alfred Needler,,,,,,Western IIA,,,
+rvs,1997,N746,CCGS Alfred Needler,,,,,,Western IIA,,,
+rvs,1998,N846,CCGS Alfred Needler,,,,,,Western IIA,,,
+rvs,1999,N941,CCGS Alfred Needler,,,,,,Western IIA,,,
+rvs,2000,N045,CCGS Alfred Needler,,,,,,Western IIA,,,
+rvs,2001,N150,CCGS Alfred Needler,,,,,,Western IIA,,,
+rvs,2002,N251,CCGS Alfred Needler,,,,,,Western IIA,,,
+rvs,2003,T352,CCGS Wilfred Templeman,,,,,,Western IIA,,,
+rvs,2004,T434,CCGS Teleost,,,,,,Western IIA,,,
+rvs,2004,N446,CCGS Alfred Needler,,,,,,Western IIA,,,
+rvs,2005,T507,CCGS Teleost,,,,,,Western IIA,,,
+rvs,2005,N542,CCGS Teleost,,,,,,Western IIA,,,
+rvs,2006,T678,CCGS Teleost,,,,,,Western IIA,,,
+rvs,2007,T749,CCGS Teleost,,,,,,Western IIA,,,
+rvs,2008,T815,CCGS Teleost,,,,,,Western IIA,,,
+rvs,2009,T992,CCGS Teleost,,,,,,Western IIA,,,
+rvs,2010,T074,CCGS Teleost,,,,,,Western IIA,,,
+rvs,2011,T194,CCGS Teleost,,,,,,Western IIA,,,
+rvs,2012,T205,CCGS Teleost,,,,,,Western IIA,,,
+rvs,2013,T318,CCGS Teleost,,,,,,Western IIA,,,
+rvs,2014,T433,CCGS Teleost,,,,,,Western IIA,,,
+rvs,2015,T533,CCGS Teleost,,,,,,Western IIA,,,
+rvs,2016,T661,CCGS Teleost,,,,,,Western IIA,,,
+rvs,2017,T777,CCGS Teleost,,,,,,Western IIA,,,
+rvs,2018,T896,CCGS Teleost,,,,,,Western IIA,,,
+rvs,2019,T901,CCGS Teleost,,,,,,Western IIA,,,
+nss,1999,O901,CCGS Opilio,,,,,,,,,
+nss,2000,O024,CCGS Opilio,,,,,,,,,
+nss,2001,O139,CCGS Opilio,,,,,,,,,
+nss,2001,O160,CCGS Opilio,,,,,,,,,
+nss,2002,O241,CCGS Opilio,,,,,,,,,
+nss,2002,O218,CCGS Opilio,,,,,,,,,
+nss,2002,O263,CCGS Opilio,,,,,,,,,
+nss,2003,O341,CCGS Opilio,,,,,,,,,
+nss,2003,O320,CCGS Opilio,,,,,,,,,
+nss,2003,O365,CCGS Opilio,,,,,,,,,
+nss,2004,O434,CCGS Opilio,,,,,,,,,
+nss,2004,O456,CCGS Opilio,,,,,,,,,
+nss,2005,O536,CCGS Opilio,,,,,,,,,
+nss,2006,O637,CCGS Opilio,,,,,,,,,
+nss,2007,O030,CCGS Opilio,,,,,,,,,
+nss,2008,O022,CCGS Opilio,,,,,,,,,
+nss,2009,O029,CCGS Opilio,,,,,,,,,
+nss,2010,O103,CCGS Opilio,,,,,,,,,
+nss,2010,O104,CCGS Opilio,,,,,,,,,
+nss,2011,O129,CCGS Opilio,,,,,,,,,
+nss,2012,O026,CCGS Opilio,,,,,,,,,
+nss,2012,O048,CCGS Opilio,,,,,,,,,
+nss,2013,P126,CCGS Moses Pearly,,,,,,,,,
+nss,2014,P021,CCGS Moses Pearly,,,,,,,,,
+nss,2015,P521,CCGS Moses Pearly,,,,,,,,,
+nss,2016,P018,CCGS Moses Pearly,,,,,,,,,
+nss,2017,P024,CCGS Moses Pearly,,,,,,,,,
+nss,2017,P329,CCGS Moses Pearly,,,,,,,,,
+nss,2018,P041,CCGS Moses Pearly,,,,,,,,,
+nss,2018,P829,CCGS Moses Pearly,,,,,,,,,
+nss,2019,P140,CCGS Moses Pearly,,,,,,,,,
+nss,2019,P953,CCGS Moses Pearly,,,,,,,,,
+sens,2003,S001,,,,,,,,,,
+sens,2004,S002,,,,,,,,,,
+sens,2005,S003,,,,,,,,,,
+sens,2006,S004,,,,,,,,,,
+sens,2007,S005,,,,,,,,,,
+sens,2008,S006,,,,,,,,,,
+sens,2009,S007,,,,,,,,,,
+sens,2010,S008,,,,,,,,,,
+sens,2011,S009,,,,,,,,,,
+sens,2012,S010,,,,,,,,,,
+sens,2013,S011,,,,,,,,,,
+sens,2014,S012,,,,,,,,,,
+sens,2015,S013,,,,,,,,,,
+sens,2016,S014,,,,,,,,,,
+sens,2017,S015,,,,,,,,,,
+sens,2018,S016,,,,,,,,,,
+sens,2019,S017,,,,,,,,,,
+ins,1985,A001,,,,,,,,,,
+ins,1985,A002,,,,,,,,,,
+ins,1985,A003,,,,,,,,,,
+ins,1985,A004,,,,,,,,,,
+ins,1985,A005,,,,,,,,,,
+ins,1985,N012,,,,,,,,,,
+ins,1986,A010,,,,,,,,,,
+ins,1986,A011,,,,,,,,,,
+ins,1986,A012,,,,,,,,,,
+ins,1986,A013,,,,,,,,,,
+ins,1986,N014,,,,,,,,,,
+ins,1987,N017,,,,,,,,,,
+ins,1988,N028,,,,,,,,,,
+ins,1988,N038,,,,,,,,,,
+ins,1994,A021,,,,,,,,,,
+ins,1996,C043,,,,,,,,,,
+ins,1997,C038,,,,,,,,,,
+ins,1999,Y001,,,,,,,,,,
+ins,2000,Y002,,,,,,,,,,
+ins,2001,A031,,,,,,,,,,
+ins,2001,A032,,,,,,,,,,
+ins,2001,A033,,,,,,,,,,
+ins,2001,Y003,,,,,,,,,,
+jans,1994,N197,CCGS Alfred Needler,,,,,,,,,
+jans,1995,N214,CCGS Alfred Needler,,,,,,,,,
+jans,1996,T182,CCGS Wilfred Templeman,,,,,,,,,
+jans,1997,T201,CCGS Wilfred Templeman,,,,,,,,,
+jans,2003,N001,,,,,,,,,,
+juvs,1988,J046,,,,,,,,,,
+juvs,1989,N015,,,,,,,,,,
+juvs,1990,J088,,,,,,,,,,
+juvs,1991,JC91,,,,,,,,,,
+juvs,1991,JH01,,,,,,,,,,
+juvs,1992,P431,,,,,,,,,,
+juvs,1993,P446,,,,,,,,,,
+juvs,1994,J094,,,,,,,,,,
+juvs,1995,J095,,,,,,,,,,
+seas,1986,H059,,,,,,,,,,
+seas,1986,H166,,,,,,,,,,
+seas,1987,H079,,,,,,,,,,
+seas,1987,H172,,,,,,,,,,
+seas,1987,H174,,,,,,,,,,
+seas,1987,N073,,,,,,,,,,
+seas,1989,H209,,,,,,,,,,
+seas,1990,H215,,,,,,,,,,
+seas,1990,H223,,,,,,,,,,
+seas,1990,V036,,,,,,,,,,
+seas,1991,N151,,,,,,,,,,
+seas,1991,V137,,,,,,,,,,
+seas,1992,NV35,,,,,,,,,,
+scas,2012,O021,CCGS Opilio,,,,,,,,,
+scas,2013,P019,CCGS Moses Pearly,,,,,,,,,
+scas,2014,P047,CCGS Moses Pearly,,,,,,,,,
+scas,2015,P026,CCGS Moses Pearly,,,,,,,,,
+scas,2016,P621,CCGS Moses Pearly,,,,,,,,,
+scas,2018,P841,CCGS Moses Pearly,,,,,,,,,
+scas,2019,P201,CCGS Moses Pearly,,,,,,,,,
+scas,2019,P242,CCGS Moses Pearly,,,,,,,,,
+scs,1988,,Emy Serge D.,fall,8,5,11,13,Nephrops,,no,no
+scs,1989,,Emy Serge D.,fall,8,15,10,29,Nephrops,,no,no
+scs,1990,,Emy Serge D.,fall,6,18,10,8,Nephrops,Scanmar,yes,no
+scs,1991,,Emy Serge D.,fall,7,10,11,7,Nephrops,Scanmar,yes,no
+scs,1992,,Emy Serge D.,fall,7,13,10,21,Nephrops,Scanmar,yes,no
+scs,1993,,Emy Serge D.,fall,7,12,10,15,Nephrops,Scanmar,yes,no
+scs,1994,,Emy Serge D.,fall,7,12,10,9,Nephrops,Scanmar,yes,no
+scs,1995,,Emy Serge D.,fall,7,19,10,18,Nephrops,Scanmar,yes,no
+scs,1996,,Emy Serge D.,fall,8,21,10,11,Nephrops,Scanmar,yes,no
+scs,1997,,Emy Serge D.,fall,7,9,9,11,Nephrops,Scanmar,yes,no
+scs,1998,,Emy Serge D.,fall,7,7,9,14,Nephrops,Scanmar,yes,no
+scs,1999,,Den C. Martin,fall,7,9,9,10,Nephrops,Netmind,yes,no
+scs,2000,,Den C. Martin,fall,8,1,9,21,Nephrops,Netmind,yes,no
+scs,2001,,Den C. Martin,fall,8,9,10,2,Nephrops,Netmind,yes,no
+scs,2002,,Den C. Martin,summer,6,26,6,29,Nephrops,Netmind,yes,no
+scs,2002,,Den C. Martin,fall,7,8,9,19,Nephrops,Netmind,yes,no
+scs,2003,,Marco-Michel,fall,7,15,10,7,Nephrops,Netmind,yes,no
+scs,2004,,Marco-Michel,summer,6,22,6,26,Nephrops,Netmind,yes,no
+scs,2004,,Marco-Michel,fall,7,14,10,1,Nephrops,Netmind,yes,no
+scs,2005,,Marco-Michel,spring,4,26,5,4,Nephrops,Netmind,yes,no
+scs,2005,,Marco-Michel,summer,6,9,6,13,Nephrops,Netmind,yes,no
+scs,2005,,Marco-Michel,fall,7,13,9,20,Nephrops,Netmind,yes,no
+scs,2006,,Marco-Michel,summer,5,30,6,5,Nephrops,Netmind,yes,no
+scs,2006,,Marco-Michel,fall,8,2,10,18,Nephrops,Netmind,yes,no
+scs,2007,,Marco-Michel,summer,6,12,6,17,Nephrops,Netmind,yes,no
+scs,2007,,Marco-Michel,fall,7,10,9,22,Nephrops,Netmind,yes,no
+scs,2008,,Marco-Michel,summer,6,19,6,24,Nephrops,Netmind,yes,no
+scs,2008,,Marco-Michel,fall,7,16,9,25,Nephrops,Netmind,yes,no
+scs,2009,,Marco-Michel,summer,6,13,6,18,Nephrops,Netmind,yes,no
+scs,2009,,Marco-Michel,fall,7,16,9,27,Nephrops,Netmind,yes,no
+scs,2010,,Marco-Michel,fall,7,8,9,14,Nephrops,Netmind,yes,no
+scs,2011,,Marco-Michel,fall,7,13,10,4,Nephrops,Netmind,yes,no
+scs,2012,,Marco-Michel,fall,7,10,9,23,Nephrops,Netmind,yes,no
+scs,2013,,Jean-Mathieu,fall,7,9,10,14,Nephrops,eSonar,yes,no
+scs,2014,,Jean-Mathieu,fall,7,9,10,12,Nephrops,eSonar,yes,yes
+scs,2015,,Jean-Mathieu,fall,7,9,10,15,Nephrops,eSonar,yes,yes
+scs,2016,,Jean-Mathieu,fall,7,10,10,4,Nephrops,eSonar,yes,yes
+scs,2017,,Jean-Mathieu,fall,7,10,10,31,Nephrops,eSonar,yes,yes
+scs,2018,,Jean-Mathieu,fall,7,19,9,16,Nephrops,eSonar,yes,yes
+scs,2019,,Avalon Voyager II,fall,7,11,9,25,Nephrops,eSonar,no,yes
+scs,2019,,Jean-Mathieu,comparative,9,19,9,25,Nephrops,eSonar,no,yes
+scs,2020,,Avalon Voyager II,fall,7,13,9,10,Nephrops,eSonar,no,yes

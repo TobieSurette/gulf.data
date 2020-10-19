@@ -3,13 +3,21 @@
 \name{survey}
 \alias{survey}
 \alias{survey.default}
+\alias{survey.scsset}
+\alias{survey.scsbio}
 \title{Survey Identifiers}
 \usage{
 survey(x, ...)
 
 \method{survey}{default}(x, year, project, ...)
+
+\method{survey}{scsset}(x, ...)
+
+\method{survey}{scsbio}(x, ...)
 }
 \arguments{
+\item{x}{Object.}
+
 \item{year}{Survey year(s).}
 
 \item{survey}{Character string specifying the research survey. The input is passed onto the
@@ -21,14 +29,14 @@ run \code{survey()}.}
 \description{
 Returns research survey codes and identifiers.
 }
-\section{Functions}{
+\section{Methods (by class)}{
+\itemize{
+\item \code{default}: Fetch survey identifiers.
 
-\describe{
-  \item{\code{survey}}{Generic \code{survey} method.}
-  \item{\code{survey.default}}{Fetch survey identifiers.}
-  \item{\code{survey.character}}{Fetch survey identifiers and information.}
-}
-}
+\item \code{scsset}: Determine type of survey sampling for snow crab survey tows.
+
+\item \code{scsbio}: Determine type of survey sampling for snow crab survey biological data.
+}}
 
 \examples{
 # Complete lists survey codes:
@@ -51,4 +59,7 @@ survey(year = 2000:2009, survey = "ns")
 # Return the juvenile cod survey codes for a vector of years:
 survey(year = 1990:1995, survey = "juv")
 
+# Snow crab survey type:
+x <- read.scsset(2019)
+survey(x) # Separates regular fall and comparative survey sets.
 }
