@@ -62,10 +62,13 @@ freq(x$carapace.width, step = 0.5) # Size-frequencies using half-millimeter bins
 freq(x$carapace.width, by = x["sex"], step = 0.5) # Size-frequencies by sex.
 freq(x$carapace.width, by = x[c("sex", "shell.condition")], step = 0.5) # Size-frequencies by sex and shell condition.
 freq(x$carapace.width, index = is.category(x, c("MM", "FM")), step = 1) # Size-frequencies for mature male and mature females.
+freq(x$carapace.width, index = is.category(x, category()), step = 1)    # All default categories.
 
 # 'scsbio' frequency function examples:
 freq(x) # Size-frequencies.
 freq(x, by = "sex") # Size-frequencies by sex.
 freq(x, by = c("sex", "shell.condition")) # Size-frequencies by sex and shell condition.
 freq(x, category = c("MM", "FM")) # Size-frequencies for mature male and mature females.
+freq(x, by = c("date" "tow.id"), category = c("MM", "FM")) # Size-frequencies for mature male and mature females.
+
 }
