@@ -37,8 +37,8 @@ is.new.shell <- function(x, ...) UseMethod("is.new.shell")
 is.new.shell.scsbio <- function(x){
    index <- rep(FALSE, dim(x)[1])
    names(x) <- tolower(names(x))
-   index[(x$year <= 1991) & (x$shell.condition == 1)] <- TRUE
-   index[(x$year > 1991) & (x$shell.condition %in% 1:2)] <- TRUE
+   index[(gulf.utils::year(x) <= 1991) & (x$shell.condition == 1)] <- TRUE
+   index[(gulf.utils::year(x) > 1991) & (x$shell.condition %in% 1:2)] <- TRUE
 
    return(index)
 }

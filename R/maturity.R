@@ -73,14 +73,14 @@ is.mature.scsbio <- function(x, probability = FALSE, ...){
 
    # Perform GAM regressions for individuals with NA maturity values:
    if (probability){
-      years <- sort(unique(x$year))
+      years <- sort(unique(gulf.utils::year(x)))
       for (i in 1:length(years)){
-         index <- !is.na(mat) & (x$year == years[i]) & !is.na(x$carapace.width) & !is.na(x$sex)
+         index <- !is.na(mat) & (gulf.utils::year(x) == years[i]) & !is.na(x$carapace.width) & !is.na(x$sex)
          sexf <- as.factor(x$sex)
          mat <- as.numeric(mat)
          y <- data.frame(mat = mat[index], cw = x$carapace.width[index], sex = sexf[index])
          model <- mgcv::gam(mat ~ s(cw, by = sex), family = binomial, data = y)
-         index <- is.na(mat) & (x$year == years[i]) & !is.na(x$carapace.width) & !is.na(x$sex)
+         index <- is.na(mat) & (gulf.utils::year(x) == years[i]) & !is.na(x$carapace.width) & !is.na(x$sex)
          newdata <- data.frame(cw = x$carapace.width[index], sex = sexf[index])
          mat[index] <- predict(model, newdata = newdata)
          mat[index] <- exp(mat[index]) / (1 + exp(mat[index]))
@@ -158,7 +158,7 @@ is.senile.scsbio <- function(x, ...){
    maturity <- is.mature(x, ...)
    
    # Set variable:
-   temp <- (x$year <= 1991)
+   temp <- (gulf.utils::year(x) <= 1991)
    index[temp] <- maturity[temp] * (x$sex[temp] == 2) * (x$shell.condition[temp] %in% 3) * (x$eggs.remaining[temp] %in% 0:1)
    index[!temp] <- maturity[!temp] * (x$sex[!temp] == 2) * (x$shell.condition[!temp] %in% 4:5) * (x$eggs.remaining[!temp] %in% 0:1)
    index[x$sex == 1] <- 0
