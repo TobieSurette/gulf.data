@@ -73,7 +73,7 @@ is.mature.scsbio <- function(x, probability = FALSE, ...){
 
    # Perform GAM regressions for individuals with NA maturity values:
    if (probability){
-      years <- sort(unique(x$year))
+      years <- sort(unique(gulf.utils::year(x)))
       for (i in 1:length(years)){
          index <- !is.na(mat) & (gulf.utils::year(x) == years[i]) & !is.na(x$carapace.width) & !is.na(x$sex)
          sexf <- as.factor(x$sex)

@@ -426,11 +426,11 @@ describe.category <- function(x, language = "english", ...){
       if (!is.null(r$sex)){
          if (r$sex == 1){
             if (language == "english") str <- paste(str, "males")
-            if (language == "french")  str <- paste(str, "mâles")
+            if (language == "french")  str <- paste("mâles", str)
          }
          if (r$sex == 2){
             if (language == "english") str <- paste(str, "females")
-            if (language == "french")  str <- paste(str, "femelles")
+            if (language == "french")  str <- paste("femelles", str)
          }
       }
       str <- paste(str, ",", sep = "")
