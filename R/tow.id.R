@@ -26,7 +26,7 @@ tow.id <- function(x, ...) UseMethod("tow.id")
 #' @rawNamespace S3method(tow.id,default)
 tow.id.default <- function(x, ...){
    v <- attr(x, "tow.id")
-   if (is.null(v)) v <- x$tow.id
+   if (is.null(v)) if ("tow.id" %in% names(x)) v <- x$tow.id
    return(v)
 } 
 
@@ -65,4 +65,14 @@ tow.id.probe <- function(x, method, ...){
    return(v)
 }
 
-
+#' @rawNamespace S3method(tow.id,scsbio)
+tow.id.scsbio <- function(x, ...){
+   if (is.null(x$tow.id)) x$tow.id <- NA
+   if (all(is.na(x$tow.id))){
+      year <- as.numeric(unique(substr(unique(x$date), 1, 4)))
+      s <- read.scsset(year = year)
+      x$tow.id <- s$tow.id[gulf.utils::match(x[c("date", "tow.number")], s[c("date", "tow.number")])]
+   }
+   
+   return(x$tow.id)
+}

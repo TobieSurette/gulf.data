@@ -31,9 +31,9 @@
    
    # Append results:
    if (length(vars) > 0){
-      index <- gulf.utils::match(value[by], x[by])
+      index <- gulf.utils::match(x[by], value[by])
       x[vars] <- NA
-      x[index, vars] <- value[vars]
+      x[vars] <- value[index, vars]
    }
 
    return(x)

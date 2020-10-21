@@ -232,7 +232,7 @@ weight.scsbio <- function(x, category, by, hard.shelled, units = "g", ...){
    # Parse 'hard.shelled' argument:
    if (!missing(hard.shelled)){
       if (!is.logical(hard.shelled)) stop("'hard.shelled' must be a logical value.")
-      if (hard.shelled) y$shell.condition <- 3
+      if (hard.shelled) x$shell.condition <- 3
    }else{
       hard.shelled <- FALSE
    }
