@@ -73,6 +73,21 @@ survey.scsset <- function(x, ...){
    v[month %in% 6] <- "summer"
    v[month %in% 7:10] <- "regular"
    
+   # 2002 catchability study:
+   index <- which(substr(x$date,1,10) %in% c("2002-09-24", "2002-09-25"))
+   v[index] <- "catchability"
+   
+   # 2004 catchability study:
+   index <- which(substr(x$date,1,10) %in% c("2004-10-18", "2004-10-24", "2004-10-25"))
+   v[index] <- "catchability"
+   
+   # 2005 special studies:
+   index <- which(substr(x$date,1,10) %in% c("2005-10-04", "2005-10-05", "2005-10-06"))
+   v[index] <- "catchability"
+   index <- which(substr(x$date,1,10) %in% "2005-10-12")
+   v[index] <- "selectivity"
+
+   # 2019 comparative study:
    index <- which((gulf.utils::year(x) == 2019) & (substr(x$tow.id,2,2) == "C"))
    v[index] <- paste(v[index], "comparative")
    
@@ -88,6 +103,21 @@ survey.scsbio <- function(x, ...){
    v[month %in% 6] <- "summer"
    v[month %in% 7:10] <- "regular"
    
+   # 2002 catchability study:
+   index <- which(substr(x$date,1,10) %in% c("2002-09-24", "2002-09-25"))
+   v[index] <- "catchability"
+   
+   # 2004 catchability study:
+   index <- which(substr(x$date,1,10) %in% c("2004-10-18", "2004-10-24", "2004-10-25"))
+   v[index] <- "catchability"
+   
+   # 2005 special studies:
+   index <- which(substr(x$date,1,10) %in% c("2005-10-04", "2005-10-05", "2005-10-06"))
+   v[index] <- "catchability"
+   index <- which(substr(x$date,1,10) %in% "2005-10-12")
+   v[index] <- "selectivity"
+   
+   # 2019 comparative study:
    index <- which((gulf.utils::year(x) == 2019) & (substr(x$tow.id,2,2) == "C"))
    v[index] <- paste(v[index], "comparative")
    
