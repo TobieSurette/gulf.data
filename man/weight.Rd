@@ -16,21 +16,20 @@ weight(x, ...)
 \method{weight}{scobs}(x, ...)
 }
 \arguments{
-\item{x}{A numerical vector of organism lengths, or alternatively, a
-frequency table or a data frame of length-frequencies as produced by
-\code{\link[gulf]{freq}} or \code{\link[gulf]{lenfreq}}. The presence of
-\sQuote{species}, \sQuote{sex} or \sQuote{year} fields in the data frame
-will be passed onto the corresponding function arguments.}
+\item{x}{A numerical vector of organism lengths, or alternatively, a frequency table or a 
+data frame of length-frequencies as produced by \code{\link{freq}}. The presence 
+of \sQuote{species}, \sQuote{sex} or \sQuote{year} fields in the data frame will 
+be passed onto the corresponding function arguments.}
 
-\item{...}{Arguments passed onto the \code{\link[gulf]{length.weight}}.}
+\item{...}{Futher arguments.}
 
 \item{species}{Species code.}
 
 \item{sex}{Numerical code specifying sex.}
 
-\item{coefficients}{A two-element numerical vector specifying the a and b coefficients, 
-respectively. The the \sQuote{a} coefficient is assumed to be on the 
-log-10 scale and the units in grams.}
+\item{coefficients}{A two-element numerical vector specifying the \code{a} and \code{b} 
+coefficients, respectively. The the \sQuote{a} coefficient is assumed 
+to be on the log-10 scale and the units in grams.}
 
 \item{units}{Units of the weight vector to be returned. It may be either in grams 
 (\code{units = "g"}) or kilograms (\code{units = "kg"}).}
@@ -42,9 +41,9 @@ log-10 scale and the units in grams.}
 \item{year}{Survey years to use as data when calculating the length-weight coefficients. 
 If left unspecified, a table of default values are used.}
 
-\item{probability}{Logical value specifying whether maturity values are to
-be filled in with probabilties when morphometric values are unavailable. In
-this case, the numbers returned may be non-integer values.}
+\item{probability}{Logical value specifying whether maturity values are to be filled in with 
+probabilities when morphometric values are unavailable. In this case, the 
+numbers returned may be non-integer values.}
 }
 \value{
 Returns a numerical vector the same size as \code{length} containing the expected weight 
@@ -61,15 +60,14 @@ Returns an estimate of the weight of individual organisms for a specified length
              If \code{year} is specified, then survey data is loaded and the length-weight 
              coefficients are calculated directly.
 }
-\section{Functions}{
+\section{Methods (by class)}{
+\itemize{
+\item \code{default}: Default weight function.
 
-\describe{
-  \item{\code{weight}}{Generic \code{weight} method.}
-  \item{\code{weight.default}}{Returns the expected weight for a given organism length.}
-  \item{\code{weight.scsbio}}{Returns expected weight for an \code{scsbio} object.}
-  \item{\code{weight.scobs}}{Returns expected weight for a snow crab from an \code{scobs} observer data object.}
-}
-}
+\item \code{scsbio}: Weight function for \code{scsbio} objects.
+
+\item \code{scobs}: Weight function for \code{scobs} objects.
+}}
 
 \examples{
 # Weights for Atlantic cod:
@@ -110,5 +108,4 @@ weight(x, by = "tow.number")
 
 # Calculate total weights by day:
 weight(x, by = c("year", "month", "day"), category = c("TM", "TMM", "TMSC12", "TMSC345"))
-
 }
