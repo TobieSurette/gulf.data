@@ -61,9 +61,9 @@ Converts species codes to corresponding species names and vice versa.
 # Miscellaneous queries:
 species(10)  # Code for "Atlantic cod".
 species(c(10, 12, 40:43), language = "latin") # Latin names for common species.
-species(101, coding = "nafo") 
-species(145, coding = "stacac") 
-species(41, coding = "com") # Commercial file prefix for Witch flounder:
+species(101, coding = "nafo")   # NAFO species codes.
+species(145, coding = "stacac") # STACAC species codes.
+species(41, coding = "com")     # Commercial file prefix for Witch flounder.
 
 # Search for two key words:
 species("cod atl")
@@ -72,7 +72,7 @@ species("cod atl")
 v <- species(c("cod atl", "witch", "wint fl"))
 species(v) # Extract names.
 
-# Species with the word "Atlantic" in their name:
+# Species entries with the word "Atlantic" in their name:
 species(species("atlantic"))
 
 # Extract entire species tables:

@@ -8,18 +8,8 @@
 #'
 #' @param year Survey year(s) to be loaded.
 #'
-#' @examples
-#' # Read snow crab survey set data files:
-#' x <- read.scsset()                 # Read all available data.
-#' x <- read.scsset(year = 2019)      # Read single year.
-#' x <- read.scsset(year = 2010:2015) # Read range of years.
-#' 
-#' # Read specific tow data:
-#' x <- read.scsset(2020, valid = 1)  # Load only valid tows.
-#' x <- read.scsset(2020, tow.id = "GP354F")
-#' x <- read.scsset(2020, date = "2020-07-13")
-#' x <- read.scsset(2020, zone = "F")
-#' 
+#' @seealso \code{\link[gulf.data]{read.scsset}}
+
 #' @seealso \code{\link{scsbio}}, \code{\link{tow.id}}
 
 #' @export scsset

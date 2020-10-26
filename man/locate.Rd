@@ -36,13 +36,13 @@ Functions to locate various data file(s) from different studies and surveys.
 }}
 
 \examples{
-locate.scsset()      # All snow crab survey set data files.
-locate.scsset(2020)  # Load specific year(s).
-
+locate.scsset()          # Find all snow crab survey set data files.
+locate.scsset(2020)      # Find specific year.
+locate.scsset(2010:2020) # Find set of years.
+ 
 locate.esonar(2020) # Find snow crab survey eSonar data from 2020.
 locate.esonar(2020, tow.id = "GP354F")
 
 locate.star.oddi(2020, probe = "headline", source = 'ascii') 
 locate.star.oddi(2020, probe = "footrope", source = 'ascii', tow.id = "GP354F")
-
 }

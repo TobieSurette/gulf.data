@@ -5,17 +5,30 @@
 #' @param x Survey year or file name.
 #' @param file File name(s). 
 #' @param year Survey year(s).
+#' @param survey Survey type, as determined by the \link{survey.scsset} function.
 #' @param tow.id Numeric value or character string specifying the ID corresponding to a particular tow sampling station.
 #' @param offset Numeric value specifying the offset time (in minutes) to include as a corrective in the data time stamps.
 #' @param repeats Logical value specifying whether to keep or average out data records with identical time stamps.
 #' @param ... Other parameters passed onto \code{locate} functions or used to subset data.
 #' 
 #' @examples  
-#' x <- read.alsi(year = 2010, species = 2550)
-
+#' # Read snow crab survey set data files:
+#' x <- read.scsset()                 # Read all available data.
+#' x <- read.scsset(year = 2019)      # Read single year.
+#' x <- read.scsset(year = 2010:2015) # Read range of years.
+#' 
+#' # Read specific tow data:
+#' x <- read.scsset(2020, valid = 1)  # Load only valid tows.
+#' x <- read.scsset(2020, tow.id = "GP354F")
+#' x <- read.scsset(2020, date = "2020-07-13")
+#' x <- read.scsset(2020, zone = "F")
+#' 
+#' @seealso \code{\link[gulf.data]{scsset}}
+#' @seealso \code{\link[gulf.data]{scsbio}}
+#' 
 #' @describeIn read Read southern Gulf of Saint Lawrence snow crab survey set data.
 #' @export read.scsset
-read.scsset <- function(x, file, ...){
+read.scsset <- function(x, file, survey, ...){
    # Determine files to load:
    if (!missing(x) & missing(file)) if (is.character(x)) file = x 
    if (missing(file)) file <- locate.scsset(x, ...)
@@ -69,12 +82,15 @@ read.scsset <- function(x, file, ...){
    # Convert to 'scsset' object:
    v <- scsset(v)
 
+   # Subset by survey type:
+   if (!missing(survey)) v <- v[survey(v) %in% survey, ]
+   
    return(v)
 }
 
 #' @describeIn read Read southern Gulf of Saint Lawrence snow crab survey biological data.
 #' @export read.scsbio
-read.scsbio <- function(x, file, ...){
+read.scsbio <- function(x, file, survey, ...){
    # Define file(s) to be read:
    if (!missing(x) & missing(file)) if (is.character(x)) file = x 
    if (missing(file)) file <- locate.scsbio(x, ...)
@@ -149,6 +165,9 @@ read.scsbio <- function(x, file, ...){
    # Convert to 'scsset' object:
    v <- scsbio(v)
       
+   # Subset by survey type:
+   if (!missing(survey)) v <- v[survey(v) %in% survey, ]
+   
    return(v)
 }
 
