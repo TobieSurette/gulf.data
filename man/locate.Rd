@@ -3,11 +3,17 @@
 \name{locate.scsset}
 \alias{locate.scsset}
 \alias{locate.scsbio}
+\alias{locate.scscat}
+\alias{locate.scslen}
 \title{Locate Gulf Data Files}
 \usage{
 \method{locate}{scsset}(x, year, source = "gulf.data", ...)
 
 \method{locate}{scsbio}(x, year, source = "gulf.data", remove = "bad", ...)
+
+\method{locate}{scscat}(x, year, source = "gulf.data", remove = "bad", ...)
+
+\method{locate}{scslen}(x, year, source = "gulf.data", remove = "bad", ...)
 }
 \arguments{
 \item{x}{Data object.}
@@ -33,16 +39,20 @@ Functions to locate various data file(s) from different studies and surveys.
 \item \code{scsset}: Locate snow crab survey set data files.
 
 \item \code{scsbio}: Locate snow crab survey biological data files.
+
+\item \code{scscat}: Locate snow crab survey biological data files.
+
+\item \code{scslen}: Locate snow crab survey biological data files.
 }}
 
 \examples{
-locate.scsset()      # All snow crab survey set data files.
-locate.scsset(2020)  # Load specific year(s).
-
+locate.scsset()          # Find all snow crab survey set data files.
+locate.scsset(2020)      # Find specific year.
+locate.scsset(2010:2020) # Find set of years.
+ 
 locate.esonar(2020) # Find snow crab survey eSonar data from 2020.
 locate.esonar(2020, tow.id = "GP354F")
 
 locate.star.oddi(2020, probe = "headline", source = 'ascii') 
 locate.star.oddi(2020, probe = "footrope", source = 'ascii', tow.id = "GP354F")
-
 }

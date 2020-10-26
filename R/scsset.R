@@ -28,16 +28,22 @@ scsset <- function(x, ...) UseMethod("scsset")
 #' @describeIn scsset Create an \code{scsset} object.
 #' @export
 scsset.default <- function(x, ...){
-   if ("scsset" %in% class(x)) return(x)
-
    # Define attributes:
    gulf.metadata::project(x) <- "scs"
    gulf.metadata::key(x) <- key.scsset()
    gulf.metadata::units(x, "swept.area") <- "square.meters"
    gulf.metadata::units(x, c("depth", "warp")) <- "fathoms"
    gulf.metadata::units(x, "bottom.temperature") <- "degreesC"
-   gulf.metadata::fmt(x, c("start.time", "end.time", "start.time.logbook", "end.time.logbook")) <- "hh:mm:ss"
+   gulf.metadata::fmt(x, names(x)[grep("time", names(x))]) <- "hh:mm:ss"
 
+   # Reorder variables:
+   vars <- c("date", "year", "month", "day", "tow.id", "tow.number", "valid", "zone",
+             names(x)[grep("time", names(x))],
+             names(x)[grep("longitude", names(x))], names(x)[grep("latitude", names(x))])
+   vars <- vars[vars %in% names(x)]
+   vars <- c(vars, setdiff(names(x), vars))
+   x <- x[vars]
+   
    # Define class:
    class(x) <- unique(c("scsset", class(x)))
 

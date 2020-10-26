@@ -3,7 +3,7 @@
 \name{scsbio}
 \alias{scsbio}
 \alias{scsbio.default}
-\title{Snow Crab Biological Data}
+\title{Snow Crab Survey Biological Data}
 \usage{
 scsbio(x, ...)
 
@@ -26,14 +26,11 @@ The \code{scsbio} class is a container for Snow Crab Survey Biological data, i.e
 }}
 
 \examples{
-# Create empty 'scsbio' object:
-x <- scsbio()
-   
 # Create 'scsbio' object with specified 'tow.number' and 'sex' fields:
 x <- scsbio(data.frame(tow.number = 1:10, sex = 1))
 
 # Read data:    
-x <- read.scsbio()                 # Read all avaliable data.
+x <- read.scsbio()                 # Read all available data.
 x <- read.scsbio(year = 2019)      # Read single year.
 x <- read.scsbio(year = 2010:2015) # Read range of years.
 

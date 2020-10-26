@@ -3,7 +3,7 @@
 \name{scsset}
 \alias{scsset}
 \alias{scsset.default}
-\title{Snow Crab Set/Tow Data}
+\title{Snow Crab Survey Set/Tow Data}
 \usage{
 scsset(x, ...)
 
@@ -25,14 +25,16 @@ The \code{scsset} class is a container for Snow Crab Survey Set/Tow data, i.e.
 }}
 
 \examples{
-# Locate snow crab survey set data files:
-locate.scsset()
-locate.scsset(1988)
-locate.scsset(2010:2020)
 # Read snow crab survey set data files:
-x <- read.scsset()                 # Read all avaliable data.
+x <- read.scsset()                 # Read all available data.
 x <- read.scsset(year = 2019)      # Read single year.
 x <- read.scsset(year = 2010:2015) # Read range of years.
+
+# Read specific tow data:
+x <- read.scsset(2020, valid = 1)  # Load only valid tows.
+x <- read.scsset(2020, tow.id = "GP354F")
+x <- read.scsset(2020, date = "2020-07-13")
+x <- read.scsset(2020, zone = "F")
 
 }
 \seealso{
