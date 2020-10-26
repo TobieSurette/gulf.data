@@ -3,11 +3,17 @@
 \name{locate.scsset}
 \alias{locate.scsset}
 \alias{locate.scsbio}
+\alias{locate.scscat}
+\alias{locate.scslen}
 \title{Locate Gulf Data Files}
 \usage{
 \method{locate}{scsset}(x, year, source = "gulf.data", ...)
 
 \method{locate}{scsbio}(x, year, source = "gulf.data", remove = "bad", ...)
+
+\method{locate}{scscat}(x, year, source = "gulf.data", remove = "bad", ...)
+
+\method{locate}{scslen}(x, year, source = "gulf.data", remove = "bad", ...)
 }
 \arguments{
 \item{x}{Data object.}
@@ -33,6 +39,10 @@ Functions to locate various data file(s) from different studies and surveys.
 \item \code{scsset}: Locate snow crab survey set data files.
 
 \item \code{scsbio}: Locate snow crab survey biological data files.
+
+\item \code{scscat}: Locate snow crab survey biological data files.
+
+\item \code{scslen}: Locate snow crab survey biological data files.
 }}
 
 \examples{

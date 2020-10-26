@@ -1,4 +1,4 @@
-#' Snow Crab Biological Data
+#' Snow Crab Survey Biological Data
 #' 
 #' @description The \code{scsbio} class is a container for Snow Crab Survey Biological data, i.e. information 
 #'              about individual organisms sampled on the snow crab annual survey. 
@@ -10,14 +10,11 @@
 #' @param ... Other parameters (not used).
 #' 
 #' @examples
-#' # Create empty 'scsbio' object:
-#' x <- scsbio()
-#'    
 #' # Create 'scsbio' object with specified 'tow.number' and 'sex' fields:
 #' x <- scsbio(data.frame(tow.number = 1:10, sex = 1))
 #' 
 #' # Read data:    
-#' x <- read.scsbio()                 # Read all avaliable data.
+#' x <- read.scsbio()                 # Read all available data.
 #' x <- read.scsbio(year = 2019)      # Read single year.
 #' x <- read.scsbio(year = 2010:2015) # Read range of years.
 #' 
@@ -29,8 +26,6 @@ scsbio <- function(x, ...) UseMethod("scsbio")
 #' @describeIn scsbio Create an \code{scsbio} object.
 #' @export
 scsbio.default <- function(x, ...){
-   if ("scsbio" %in% class(x)) return(x)
-
    # Define attributes:
    gulf.metadata::project(x) <- "scs"
    gulf.metadata::units(x, c("carapace.width", "chela.height", "abdomen.width")) <- "millimeters"
