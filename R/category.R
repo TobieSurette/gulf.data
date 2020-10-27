@@ -85,7 +85,7 @@
 #' # Parse category strings:
 #' category("MM", parse = TRUE)         # Mature males.
 #' category("MIG95", parse = TRUE)      # Immature males larger than 95mm.
-#' category("FPBT35TO60", parse = TRUE) # Primiparous females larger between 35 and 60mm.
+#' category("FPBT35TO60", parse = TRUE) # Primiparous females between 35 and 60mm.
 #'        
 #' # Snow crab biological data example:
 #' x <- read.scsbio(year = 2012)
@@ -408,7 +408,7 @@ describe.category <- function(x, language = "english", ...){
    # Parse character string 'x' argument:
    if (length(x) == 0) return(str)
    if (length(x) > 1){
-      for (i in 1:length(x)) str <- c(str, describe.category(x[i]))
+      for (i in 1:length(x)) str <- c(str, describe.category(x[i], language = language, ...))
    }else{
       # Extract formal specifications:
       r <- parse.category(x)
@@ -519,12 +519,19 @@ describe.category <- function(x, language = "english", ...){
          }
       }
 
-      # Remove leading space:
-      if (substr(str, 1, 1) == " ") str <- substr(str, 2, nchar(str))
-         
-      # Remove trailing comma:
-      if (substr(str, nchar(str), nchar(str)) == ",") str <- substr(str, 1, nchar(str)-1)
-
+      if (language == "french"){
+         str <- gsub("multiparous", "multipares", str)
+         str <- gsub("primiparous", "primipares", str)
+         str <- gsub("immatures*", "immatures", str)
+         str <- gsub("matures*", "matures", str)
+         str <- gsub("seniles*", "seniles", str)
+      }
+      
+      # Remove leading space & trailing comma:
+      str <- gsub(",$", "", deblank(str))
+      str <- gsub(" +", " ", str)
+      str <- gsub(" ,", ",", str)
+      
       # Capitalize first letter:
       str <- paste(toupper(substr(str, 1, 1)), substr(str, 2, nchar(str)), sep = "")
    }
