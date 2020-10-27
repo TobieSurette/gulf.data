@@ -25,7 +25,5 @@ The \code{scsset} class is a container for Snow Crab Survey Set/Tow data, i.e.
 }}
 
 \seealso{
-\code{\link[gulf.data]{read.scsset}}
-
-\code{\link{scsbio}}, \code{\link{tow.id}}
+\code{\link{read.scsset}}, \code{\link{scsbio}}, \code{\link{tow.id}}
 }

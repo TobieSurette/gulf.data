@@ -8,9 +8,7 @@
 #'
 #' @param year Survey year(s) to be loaded.
 #'
-#' @seealso \code{\link[gulf.data]{read.scsset}}
-
-#' @seealso \code{\link{scsbio}}, \code{\link{tow.id}}
+#' @seealso \code{\link{read.scsset}}, \code{\link{scsbio}}, \code{\link{tow.id}}
 
 #' @export scsset
 scsset <- function(x, ...) UseMethod("scsset")

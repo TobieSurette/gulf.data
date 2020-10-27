@@ -141,7 +141,7 @@ category(c("FM", "FMULTGNO", "MG65ML"))
 # Parse category strings:
 category("MM", parse = TRUE)         # Mature males.
 category("MIG95", parse = TRUE)      # Immature males larger than 95mm.
-category("FPBT35TO60", parse = TRUE) # Primiparous females larger between 35 and 60mm.
+category("FPBT35TO60", parse = TRUE) # Primiparous females between 35 and 60mm.
        
 # Snow crab biological data example:
 x <- read.scsbio(year = 2012)
