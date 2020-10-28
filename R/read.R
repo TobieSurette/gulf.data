@@ -23,6 +23,9 @@
 #' x <- read.scsset(2020, date = "2020-07-13")
 #' x <- read.scsset(2020, zone = "F")
 #' 
+#' # Using snow crab set data to specify corresponding biological data:
+#' b <- read.scsbio(read.scsset(2020, valid = 1, zone = "F"))
+#' 
 #' @seealso \code{\link[gulf.data]{scsset}}
 #' @seealso \code{\link[gulf.data]{scsbio}}
 #' 
@@ -32,12 +35,6 @@ read.scsset <- function(x, file, survey, ...){
    # Determine files to load:
    if (!missing(x) & missing(file)) if (is.character(x)) file = x 
    if (missing(file)) file <- locate.scsset(x, ...)
-   if (length(file) == 0) return(NULL)
-
-   # Load data:
-   v <- NULL
-   
-   # No file read:
    if (length(file) == 0) return(NULL)
    
    # Read multiple files:
@@ -118,12 +115,6 @@ read.scsbio <- function(x, file, survey, ...){
    if (missing(file)) file <- locate.scsbio(x, ...)
    if (length(file) == 0) return(NULL)
 
-   # Load data:
-   v <- NULL
-   
-   # No file read:
-   if (length(file) == 0) return(NULL)
-   
    # Read multiple files:
    if (length(file) > 1){
       v <- NULL
@@ -149,7 +140,6 @@ read.scsbio <- function(x, file, survey, ...){
       # Determine file extension:
       ext <- tolower(unlist(lapply(strsplit(file, "[.]"), function(x) x[length(x)])))
 
-      v <- NULL
       # Read fixed-width file:
       if (ext == "txt"){
          v <- read.fortran(file = file, 
@@ -192,7 +182,7 @@ read.scsbio <- function(x, file, survey, ...){
          v <- cbind(v[c("date")], v[setdiff(names(v), c("date", "year", "month", "day"))])
       }
    }
-   
+
    # Delete empty data rows:
    index <- (v$carapace.width > 0) | !is.na(v$abdomen.width) | !is.na(v$chela.height) | !is.na(v$shell.condition) | 
             !is.na(v$gonad.colour) | !is.na(v$egg.colour) | !is.na(v$eggs.remaining) 
@@ -206,9 +196,9 @@ read.scsbio <- function(x, file, survey, ...){
       for (i in 1:length(args)) index <- index & (v[,names(args)[i]] %in% args[[i]])
       v <- v[index, ]
    }
-   
+
    # Subset if 'scsset' object was given:
-   if (!missing(x)) if ("scsset" %in% class(x)) v <- v[!is.na(match(v[key.scsset()], x[key.scsset()])), ]
+   if (!missing(x)) if ("scsset" %in% class(x)) v <- v[!is.na(gulf.utils::match(v[key.scsset()], x[key.scsset()])), ]
    
    # Convert to 'scsset' object:
    v <- scsbio(v)

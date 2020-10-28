@@ -74,6 +74,9 @@ x <- read.scsset(2020, tow.id = "GP354F")
 x <- read.scsset(2020, date = "2020-07-13")
 x <- read.scsset(2020, zone = "F")
 
+# Using sno crab set data to specify corresponding biological data:
+b <- read.scsbio(read.scsset(2020, valid = 1, zone = "F"))
+
 }
 \seealso{
 \code{\link[gulf.data]{scsset}}

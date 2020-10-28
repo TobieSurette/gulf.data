@@ -210,19 +210,19 @@ weight.default <- function(x, species, sex, coefficients, units = "kg",  ...){
 
 #' @describeIn weight Weight function for \code{scsbio} objects.
 #' @export
-weight.scsbio <- function(x, category, by, hard.shelled, units = "g", ...){
+weight.scsbio <- function(x, category, by, as.hard.shelled, units = "g", ...){
    # Parse input arguments:
    units <- match.arg(tolower(units), c("g", "kg", "grams", "kilograms", "tons", "tonnes", "mt", "t"))
    if (units %in% c("tons", "tonnes", "mt")) units <- "t"
    if (units == "kilograms") units <- "kg"
    if (units == "grams") units <- "g"
 
-   # Parse 'hard.shelled' argument:
-   if (!missing(hard.shelled)){
-      if (!is.logical(hard.shelled)) stop("'hard.shelled' must be a logical value.")
-      if (hard.shelled) x$shell.condition <- 3
+   # Parse 'as.hard.shelled' argument:
+   if (!missing(as.hard.shelled)){
+      if (!is.logical(as.hard.shelled)) stop("'as.hard.shelled' must be a logical value.")
+      if (as.hard.shelled) x$shell.condition <- 3
    }else{
-      hard.shelled <- FALSE
+      as.hard.shelled <- FALSE
    }
 
    if (missing(category) & missing(by)){

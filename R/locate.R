@@ -54,8 +54,7 @@ locate.scsset <- function(x, year, source = "gulf.data", ...){
 locate.scsbio <- function(x, year, source = "gulf.data", remove = "bad", ...){
    if (!missing(x) & missing(year)){
       if (is.numeric(x)) year <- x
-      if ("year" %in% names(x)) year <- sort(unique(x$year))
-      if ("date" %in% names(x)) year <- as.numeric(substr(x$date, 1, 4))
+      if (missing(year)) year <- gulf.utils::year(x)
    }
    
    # Use 'gulf.data' as data source:

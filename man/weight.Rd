@@ -11,7 +11,7 @@ weight(x, ...)
 
 \method{weight}{default}(x, species, sex, coefficients, units = "kg", ...)
 
-\method{weight}{scsbio}(x, category, by, hard.shelled, units = "g", ...)
+\method{weight}{scsbio}(x, category, by, as.hard.shelled, units = "g", ...)
 
 \method{weight}{scobs}(x, ...)
 }

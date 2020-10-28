@@ -132,34 +132,34 @@ category.numeric <- function(x, sex, group, ...){
    if (!missing(group)) group <- match.arg(tolower(as.character(group)), c("other", "all")) 
    
    # Define short male category codes:
-   male.str <- c("TM", "TMM", "TMI", "TMGE95", "TMMGE95",
-                 "TMMNEW", "TMMMEDIUM", "TMMOLD",
-                 "TMMGE95SC12345", "TMMGE95SC1", "TMMGE95SC2", "TMMGE95SC3", "TMMGE95SC4", "TMMGE95SC5",
-                 "TMMGE95ML", "TMMGE95SC12", "TMMGE95SC345",
+   male.str <- c("M", "MM", "MI", "MGE95", "MMGE95",
+                 "MMNEW", "MMMEDIUM", "MMOLD",
+                 "MMGE95SC12345", "MMGE95SC1", "MMGE95SC2", "MMGE95SC3", "MMGE95SC4", "MMGE95SC5",
+                 "MMGE95ML", "MMGE95SC12", "MMGE95SC345",
                  "COMLT102", "COMLT102SC1", "COMLT102SC2", "COMLT102SC3", "COMLT102SC4", "COMLT102SC5",
-                 "COMLT102ML", "TMMGE102",
-                 "TMMGE102SC1", "TMMGE102SC2", "TMMGE102SC3", "TMMGE102SC4", "TMMGE102SC5", "TMMGE102ML",
-                 "TMIGE95SC12", "TMIGE95SC345", "TMIGE95",
-                 "TML95", "TMML95SC12", "TMML95SC345", "TMML95",
-                 "TML35", "TMGE35L95", "TMIGE56", "TMIGE76",
-                 "TMIL95SC12", "TMIL95SC345", "TMIL95")
+                 "COMLT102ML", "MMGE102",
+                 "MMGE102SC1", "MMGE102SC2", "MMGE102SC3", "MMGE102SC4", "MMGE102SC5", "MMGE102ML",
+                 "MIGE95SC12", "MIGE95SC345", "MIGE95",
+                 "ML95", "MML95SC12", "MML95SC345", "MML95",
+                 "ML35", "MGE35L95", "MIGE56", "MIGE76",
+                 "MIL95SC12", "MIL95SC345", "MIL95")
 
    # Define short male category codes:
-   female.str <- c("TF", "TFM", "TFI", # Total females, mature females, immature females.
-                   "TFIGNW", "TFIGNB", "TFIGNO", # Gonad colour: white, beige, orange
-                   "TFP",         # Mature, sc12
-                   "TFPELO",      # Mature, sc12, eggs Light Orange
-                   "TFPEDO",      # Mature, sc12, eggs Dark Orange
-                   "TFPEB",       # Mature, sc12, eggs Brown
-                   "TFPEL50P",    # Mature, sc12, Eggs Remaining < 50%
-                   "TFPEG50P",    # Mature, sc12, Eggs Remaining > 50%
-                   "TFMULT",      # Mature, sc34
-                   "TFMULTELO",   # Mature, sc34, eggs light orange.
-                   "TFMULTEDO",   # Mature, sc34, eggs dark orange.
-                   "TFMULTEB",    # Mature, sc34, black eggs.
-                   "TFMULTEL50P", # Mature, sc34, less than 50% eggs.
-                   "TFMULTEG50P", # Mature, sc34, more than 50% eggs.
-                   "TFSENILE")    # Mature, sc5
+   female.str <- c("F", "FM", "FI", # Total females, mature females, immature females.
+                   "FIGNW", "TFIGNB", "TFIGNO", # Gonad colour: white, beige, orange
+                   "FP",         # Mature, sc12
+                   "FPELO",      # Mature, sc12, eggs Light Orange
+                   "FPEDO",      # Mature, sc12, eggs Dark Orange
+                   "FPEB",       # Mature, sc12, eggs Brown
+                   "FPEL50P",    # Mature, sc12, Eggs Remaining < 50%
+                   "FPEG50P",    # Mature, sc12, Eggs Remaining > 50%
+                   "FMULT",      # Mature, sc34
+                   "FMULTELO",   # Mature, sc34, eggs light orange.
+                   "FMULTEDO",   # Mature, sc34, eggs dark orange.
+                   "FMULTEB",    # Mature, sc34, black eggs.
+                   "FMULTEL50P", # Mature, sc34, less than 50% eggs.
+                   "FMULTEG50P", # Mature, sc34, more than 50% eggs.
+                   "FSENILE")    # Mature, sc5
 
    # Define other categories:
    other.male.str <- c('MIGE34L45SC1','MIGE34L45SC2','MIGE34L45SC3','MIGE34L45SC4',
@@ -253,14 +253,17 @@ parse.category <- function(x){
       fun <- c(fun, "is.hard.shell")
       x <- gsub("hard", "", x)
    }
-         
-   # Check for commercial identifier:
-   x <- gsub("com", "mmge95", x)
+   
+   # Commercial crab.      
+   if (length(grep("com", x)) > 0){
+      x <- gsub("com", "", x) 
+      x <- paste0("mmge95", x)
+   }
    
    # Substitute 'bt' for 'g':
    x <- gsub("bt", "ge", x)
    
-   # Substitute 'from' for 'g':
+   # Substitute 'from' for 'ge':
    x <- gsub("from", "ge", x)
    
    # Substitute 'to' for 'l':
@@ -397,7 +400,7 @@ parse.category <- function(x){
 }
 
 # Internal string category description function:
-describe.category <- function(x, language = "english", ...){
+describe.category <- function(x, language = "english", symbols = TRUE, simplify = TRUE, ...){
    # Parse 'language' argument:
    language <- match.arg(tolower(language), c("english", "french", "français"))
    if (language == "français") language <- "french"
@@ -408,19 +411,72 @@ describe.category <- function(x, language = "english", ...){
    # Parse character string 'x' argument:
    if (length(x) == 0) return(str)
    if (length(x) > 1){
-      for (i in 1:length(x)) str <- c(str, describe.category(x[i], language = language, ...))
+      for (i in 1:length(x)) str <- c(str, describe.category(x[i], language = language, symbols = symbols, ...))
    }else{
       # Extract formal specifications:
       r <- parse.category(x)
 
+      # Check for special cases:
+      if (simplify){
+         # Commercial crab:
+         index <- (r$maturity == 1) & (r$sex == 1) & (r$carapace.width[1] == 95) & (r$carapace.width.flag[1])
+         if (length(index) == 1){
+            if (index){
+               if (language == "english") str <- paste(str, "commercial crab ")
+               if (language == "french") str <- paste(str, "crabes commerciaux ")
+               r$sex <- NULL
+               r$maturity <- NULL
+               r$carapace.width[1] <- NA
+               r$carapace.width.flag[1] <- NA
+            }
+         }
+         
+         # Skip-moulters crab:
+         index <- (r$maturity == 2) & all(r$shell.condition %in% 3:5)
+         if (length(index) == 1){
+            if (index){
+               if (language == "english") str <- paste(str, "skip-moulter ")
+               if (language == "french") str <- paste(str, "saute-mue ")
+               r$maturity <- NULL
+               r$shell.condition <- NULL
+            }
+         }
+         
+         # Sub-legals:
+         index <- (r$sex == 1) & (r$carapace.width[2] == 95)
+         index <- index[!is.na(index)]
+         if (length(index) == 1){
+            if (index){
+               if (language == "english") str <- paste(str, "sub-legal ")
+               if (language == "french") str <- paste(str, "sous-legaux ")
+               r$carapace.width[2] <- NA
+            }
+         } 
+         
+         # Legal-sized:
+         index <- (r$sex == 1) & (r$carapace.width[1] == 95) & (r$carapace.width.flag[1])
+         index <- index[!is.na(index)]
+         if (length(index) == 1){
+            if (index){
+               if (language == "english") str <- paste(str, "legal-sized ")
+               if (language == "french") str <- paste(str, "taille légal")
+               r$carapace.width[1] <- NA
+            }
+         }           
+      }
+
       # Maturity:
       if (!is.null(r$maturity)){
-         if (r$maturity == 1) str <- paste(str, "mature", sep = "")
-         if (r$maturity == 2) str <- paste(str, "immature", sep = "")
+         if (r$maturity == 1) str <- paste0(str, "mature")
+         if (r$maturity == 2) str <- paste0(str, "immature")
       }
 
       # Extract function string:
-      if (!is.null(r$fun)) str <- paste(str, gsub("is.", "", r$fun))
+      if (!is.null(r$fun)){
+         tmp <- gsub("^is[.]", "", r$fun)
+         tmp <- gsub("[.]", " ", tmp)
+         str <- paste(str, tmp)
+      } 
 
       # Sex:
       if (!is.null(r$sex)){
@@ -436,37 +492,19 @@ describe.category <- function(x, language = "english", ...){
       str <- paste(str, ",", sep = "")
 
       # Carapace width:
+      if (language == "english") cw.str <- "cw"
+      if (language == "french") cw.str <- "lc"
+      if (symbols){
+         signs <- list(c(">=", ">"), c("<=", "<"))
+      }else{
+         if (language == "english") signs <- list(c("larger or equal to", "larger than"), c("smaller or equal to", "smaller than"))
+         if (language == "french") signs <- list(c("plus grand ou egal à", "plus grand que"), c("plus petit ou egal à", "plus grand que"))
+      } 
       if (!is.null(r$carapace.width)){
-         if (!is.na(r$carapace.width[1])){
-            if (language == "english"){
-               if (r$carapace.width.flag[1]){
-                  str <- paste(str, " cw >= ", r$carapace.width[1], "mm,", sep = "")
-               }else{
-                  str <- paste(str, " cw > ", r$carapace.width[1], "mm,", sep = "")
-               }
-            }
-            if (language == "french"){
-               if (r$carapace.width.flag[1]){
-                  str <- paste(str, " lc >= ", r$carapace.width[1], "mm,", sep = "")
-               }else{
-                  str <- paste(str, " lc > ", r$carapace.width[1], "mm,", sep = "")
-               }
-            }
-         }
-         if (!is.na(r$carapace.width[2])){
-            if (language == "english"){
-               if (r$carapace.width.flag[2]){
-                  str <- paste(str, " cw <= ", r$carapace.width[2], "mm,", sep = "")
-               }else{
-                  str <- paste(str, " cw < ", r$carapace.width[2], "mm,", sep = "")
-               }
-            }
-            if (language == "french"){
-               if (r$carapace.width.flag[2]){
-                  str <- paste(str, " lc <= ", r$carapace.width[2], "mm,", sep = "")
-               }else{
-                  str <- paste(str, " lc < ", r$carapace.width[2], "mm,", sep = "")
-               }
+         for (i in 1:2){
+            if (!is.na(r$carapace.width[i])){
+               str <- paste(str, cw.str, signs[[i]][(2-r$carapace.width.flag[i])], r$carapace.width[i])
+               str <- paste0(str, "mm,")
             }
          }
       }
@@ -480,22 +518,22 @@ describe.category <- function(x, language = "english", ...){
       # Missing legs:
       if (!is.null(r$missing.legs)){
          if (r$missing.legs){
-            if (language == "english") str <- paste(str, " with missing legs,", sep = "")
-            if (language == "french")  str <- paste(str, " avec pattes manquantes,", sep = "")
+            if (language == "english") str <- paste(str, "with missing legs,")
+            if (language == "french")  str <- paste(str, "avec pattes manquantes,")
          }
       }
 
       # Gonad colour:
       if (!is.null(r$gonad.colour)){
          if (language == "english"){
-            if (r$gonad.colour == 1) str <- paste(str, " white gonads,", sep = "")
-            if (r$gonad.colour == 2) str <- paste(str, " beige gonads,", sep = "")
-            if (r$gonad.colour == 3) str <- paste(str, " orange gonads,", sep = "")
+            if (r$gonad.colour == 1) str <- paste(str, "white gonads,")
+            if (r$gonad.colour == 2) str <- paste(str, "beige gonads,")
+            if (r$gonad.colour == 3) str <- paste(str, "orange gonads,")
          }
          if (language == "french"){
-            if (r$gonad.colour == 1) str <- paste(str, " gonade blanche,", sep = "")
-            if (r$gonad.colour == 2) str <- paste(str, " gonade beige,", sep = "")
-            if (r$gonad.colour == 3) str <- paste(str, " gonade orange,", sep = "")
+            if (r$gonad.colour == 1) str <- paste(str, "gonade blanche,")
+            if (r$gonad.colour == 2) str <- paste(str, "gonade beige,")
+            if (r$gonad.colour == 3) str <- paste(str, "gonade orange,")
          }
       }
 
