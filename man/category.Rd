@@ -55,6 +55,10 @@ when only a single category is specified in \code{is.category.scsbio}.}
 \item{language}{A character string specifying the language in which category code descriptions 
 are to be returned. Either english (\code{language = "english"}), 
 french (\code{language = "french"} or \code{language = "français"}).}
+
+\item{symbols}{Logical value specifying whether arithmetic operators are to be used in category descriptions.}
+
+\item{simplify}{Logical value specifying whether to simplify category descriptions where possible (e.g. 'skip-moulters').}
 }
 \value{
 Returns a vector of character strings containing the descriptions for a specified vector 
@@ -122,15 +126,17 @@ but have no effect on the output. String syntax is as follows:
 
 \examples{
 # Default biological category strings:
-category()  # All.
+category()  # All common categories.
+category(group = "other")  # Other pre-defined categories.
 category(sex = "female") # Female category strings.
 category(1:10, sex = "male") # First 10 elements of male category strings:
 
-# Get long form description for mature males with carapace width larger than 95mm:
-category("MMG95")
+# Get long form description for mature males with carapace width larger or equal to 95mm:
+category("MMGE95")
 
-# Mature males, large than 95mm with shell condition 3,4 or 5 (spaces are ignored):
-category("M M G95 SC345")
+# Mature males, greater or equal than 95mm with shell condition 3,4 or 5 (spaces are ignored):
+category("M M GE95 SC345", simplify = FALSE) # Long definition of commercial males.
+category("M M GE95 SC345", simplify = TRUE)  # Short definition of commercial males.
 
 # Multiparous females with orange gonads:
 category("FMULTGNO")
@@ -144,11 +150,15 @@ category("MIG95", parse = TRUE)      # Immature males larger than 95mm.
 category("FPBT35TO60", parse = TRUE) # Primiparous females between 35 and 60mm.
        
 # Snow crab biological data example:
-x <- read.scsbio(year = 2012)
+x <- read.scsbio(year = 2020)
 index <- is.category(x, "TMMG95")  # Mature males greater than 95mm: 
 
 # Get number of observations per category:
 index <- is.category(x, c("T", "TM", "TF", "TMIL95SC12", "TMMG95", "TFMULT"))
 apply(index, 2, sum, na.rm = TRUE)
+
+# Use 'catch' function to generate catch summaries:
+catch(x, category = c("T", "M", "F", "MIL95SC12", "MMG95", "FMULT"))
+catch(x, category = c("T", "M", "F", "MIL95SC12", "MMG95", "FMULT"), by = "date")
 
 }
