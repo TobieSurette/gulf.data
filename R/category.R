@@ -440,7 +440,7 @@ describe.category <- function(x, language = "english", symbols = TRUE, simplify 
          }
          
          # Skip-moulters crab:
-         index <- (r$maturity == 2) & all(r$shell.condition %in% 3:5)
+         index <- (r$maturity == 2) & !is.null(r$shell.condition) & all(r$shell.condition %in% 3:5)
          if (length(index) == 1){
             if (index){
                if (language == "english") str <- paste(str, "skip-moulter ")
