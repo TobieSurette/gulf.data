@@ -577,6 +577,7 @@ describe.category <- function(x, language = "english", symbols = TRUE, simplify 
       str <- gsub(",$", "", deblank(str))
       str <- gsub(" +", " ", str)
       str <- gsub(" ,", ",", str)
+      str <- deblank(str)
       
       # Capitalize first letter:
       str <- paste(toupper(substr(str, 1, 1)), substr(str, 2, nchar(str)), sep = "")
