@@ -49,6 +49,50 @@ locate.scsset <- function(x, year, source = "gulf.data", ...){
    if (length(file ) == 0)  return(NULL) else return(file)
 }
 
+#' @describeIn locate Locate Northumberland Strait survey set data files.
+#' @export locate.nssset
+locate.nssset <- function(x, year, source = "gulf.data", cruise, ...){
+   if (!missing(x)) if (is.numeric(x)) year <- x
+   
+   file <- NULL
+   
+   # Data source is 'gulf.data' package:
+   if (source == "gulf.data") file <- locate(package = "gulf.data", file = c("nss", "set", "csv"), ...)
+   
+   # Use DFO drive as data source:
+   if (length(file) == 0) source <- "ascii"
+   if (source == "ascii") file <- dir(path = options()$gulf.path$nss, pattern = "^rv.[0-9]+s.new", full.names = TRUE)
+   
+   # Subset by year:
+   if (!missing(year)){
+      if (source == "ascii"){ 
+         id <- survey("nss", year = year)$id 
+         index <- NULL
+         for (i in 1:length(id)) index <- c(index, grep(toupper(id[i]), toupper(file)))
+         file <- file[index]
+      }
+      if (source == "gulf.data"){ 
+         if (length(file) > 0){
+            index <- rep(FALSE, length(file))
+            for (i in 1:length(year)) index[grep(year[i], file)] <- TRUE
+            file <- file[index]         
+         }
+      }
+   }
+   
+   # Find cruise:
+   if (!missing(cruise)){
+      if (source == "ascii"){ 
+         index <- NULL
+         for (i in 1:length(cruise)) index <- c(index, grep(toupper(cruise[i]), toupper(file)))
+         file <- file[index] 
+      }
+   }
+      
+   # Empty search:
+   if (length(file) == 0)  return(NULL) else return(file)
+}
+
 #' @describeIn locate Locate snow crab survey biological data files.
 #' @export locate.scsbio
 locate.scsbio <- function(x, year, source = "gulf.data", remove = "bad", ...){

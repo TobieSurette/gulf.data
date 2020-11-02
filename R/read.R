@@ -28,7 +28,7 @@
 #' 
 #' @seealso \code{\link[gulf.data]{scsset}}
 #' @seealso \code{\link[gulf.data]{scsbio}}
-#' 
+
 #' @describeIn read Read southern Gulf of Saint Lawrence snow crab survey set data.
 #' @export read.scsset
 read.scsset <- function(x, file, survey, ...){
@@ -101,6 +101,112 @@ read.scsset <- function(x, file, survey, ...){
    # Convert to 'scsset' object:
    v <- scsset(v)
 
+   # Subset by survey type:
+   if (!missing(survey)) v <- v[survey(v) %in% survey, ]
+   
+   return(v)
+}
+
+#' @describeIn read Read southern Gulf of Saint Lawrence Northumberland Strait survey set data.
+#' @export read.nssset
+read.nssset <- function(x, file, survey, ...){
+   # Determine files to load:
+   if (!missing(x) & missing(file)) if (is.character(x)) file = x 
+   if (missing(file)) file <- locate.nssset(x, ...)
+   if (length(file) == 0) return(NULL)
+   
+   # Read multiple files:
+   if (length(file) > 1){
+      v <- NULL
+      for (i in 1:length(file)){
+         # Append data:
+         tmp <- read.nssset(file = file[i], ...)
+         
+         # Make previous and current data tables uniform: 
+         vars <- union(names(tmp), names(v))
+         tmp[setdiff(vars, names(tmp))] <- NA
+         if (!is.null(v)) v[setdiff(vars, names(v))] <- NA
+         
+         # Append data tables:
+         v <- rbind(v[vars], tmp[vars])  
+         
+         # Convert NA strings to empty strings:
+         for (j in 1:ncol(v)) if (is.character(v[,j])) v[is.na(v[,j]), j] <- ""
+      }
+   }
+   
+   # Read single file:
+   if (length(file) == 1){
+      # Determine file extension:
+      ext <- tolower(unlist(lapply(strsplit(file, "[.]"), function(x) x[length(x)])))
+      
+      v <- NULL
+      # Read fixed-width file:
+      if (ext %in% c("new", "txt")){
+         v <- read.fortran(file = file, format = c('I1','A1','A3','I3','I3','I4','I2','I2','I3','I1','I2','I2','I0','I2','I3','I1',
+                                                   'F3.1','I1','F6.2','F6.2','F6.2','F6.2','I3','I3','F3.2','I1',
+                                                   'I1','I1','I1','F3.1','F3.1','F3.1','I3','I3','I3','I1','I2','I2','I4','A3','I4','A1',
+                                                   'I4','A1','I6','A1','A12','I3','A4','A255'))
+         
+         names(v) <- c('card.type', 'vessel.code', 'cruise.number', 'stratum', 'set.number', 'year', 'month', 'day', 'unit.area', 
+                       'experiment', 'start.hour', 'start.minute', 'start.second', 'duration', 'gear', 'auxiliary', 'speed', 'speed.method', 
+                       'latitude.start', 'longitude.start', 'latitude.end', 'longitude.end', 'depth.start', 'depth.end', 'distance', 
+                       'distance.method', 'wind.direction', 'wind.force', 'tide', 'surface.temperature', 'bottom.temperature', 'bottom.salinity', 
+                       'light', 'btslide', 'hydrostation', 'bottom.type', 'species.fish.number', 'species.invertebrate.number', 'catch.total.weight', 
+                       'blank1', 'warp.port', 'blank2', 'warp.starboard', 'blank3', 'cfvn', 'blank4', 'expedition.number', 'block.number', 
+                       'station', 'comment')
+         
+         # Remove blank spaces:
+         for (j in 1:ncol(v)) if (is.character(v[, j])) v[,j] <- gulf.utils::deblank(v[,j])
+         
+         # Remove blank columns:
+         v <- v[, -grep("blank", names(v))]
+         
+         # Define cruise:
+         v$cruise <- toupper(paste0(v$vessel.code, v$cruise.number))
+         
+         # Remove irrelevant fields:
+         remove <- c("species.fish.number", "species.invertebrate.number", "catch.total.weight", "cfvn", "expedition.number", 
+                     "light", "btslide", "hydrostation", "bottom.type", "bottom.salinity", "distance.method", "speed.method", 
+                     "unit.area", "vessel.code", "cruise.number")
+         v <- v[, !(names(v) %in% remove)]
+         
+         # Tow validity:
+         v$valid <- as.numeric(v$experiment != 3)
+         
+         # Subtitute commas by semi-colons in comments:
+         v$comment <- gsub(",", ";", v$comment)
+      }
+      
+      # Read comma-delimited file:
+      if (ext == "csv") v <- read.csv(file, header = TRUE, stringsAsFactors = FALSE)
+      
+      # Compress date variables:
+      if (all(c("year", "month", "day") %in% names(v))){
+         v$date <- as.character(gulf.utils::date(v))
+         v <- cbind(v[c("date")], v[setdiff(names(v), c("date", "year", "month", "day"))])
+      }
+      
+      # Compress time variables:
+      if (all(c("start.hour", "start.minute", "start.second") %in% names(v))){
+         v$start.second[is.na(v$start.second)] <- 0
+         v$start.time <- gulf.utils::time(paste0(v$start.hour, ":", v$start.minute, ":", v$start.second))
+         v <- cbind(v[c("date", "start.time")], v[setdiff(names(v), c("date", "start.time", "start.hour", "start.minute", "start.second"))])
+      }   
+   }
+   
+   # Subset by specified variables:
+   args <- list(...)
+   args <- args[names(args) %in% names(v)]
+   if (length(args) > 0){
+      index <- rep(TRUE, nrow(v))
+      for (i in 1:length(args)) index <- index & (v[,names(args)[i]] %in% args[[i]])
+      v <- v[index, ]
+   }
+   
+   # Convert to 'nssset' object:
+   v <- nssset(v)
+   
    # Subset by survey type:
    if (!missing(survey)) v <- v[survey(v) %in% survey, ]
    

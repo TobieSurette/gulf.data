@@ -14,6 +14,11 @@
 #' @export
 key.scsset <- function(x, ...) if (missing(x)) return(c("date", "tow.id")) else return(gulf.metadata::key.default(x))
 
+#' @describeIn key Fetch \code{nssset} index key.
+#' @export key.nssset
+#' @export
+key.nssset <- function(x, ...) if (missing(x)) return(c("date", "cruise", "set.number")) else return(gulf.metadata::key.default(x))
+
 #' @describeIn key Fetch \code{scsbio} index key.
 #' @export key.scsbio
 #' @export
