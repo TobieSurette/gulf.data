@@ -19,7 +19,7 @@
    # Main drive paths:
    path$hd2 <- "//mon02uni01a/Science/Hd2/"
    path$hd3 <- "//mon02uni01a/Science/Hd3/"
-   path$snow.crab <- "//mon02uni01a/AquaRes_Common$/Crab"
+   path$snow.crab <- "//mon02uni01a/AquaRes_Common$/Crab/"
 
    # Groundfish data directories:
    path$com  <- paste0(path$hd2, "commercial/")              # Commercial data directory.
@@ -27,7 +27,7 @@
    path$rvs  <- paste0(path$hd2, "research/groundfish/")     # Research vessel survey data directory.
    path$sens <- paste0(path$hd2, "research/sentinel/")       # Sentinel survey data directory.
    path$nss  <- paste0(path$hd2, "research/northumberland/") # Northumberland Strait survey data directory..
-   path$ins  <- paste0(.gulf.path$root, "research/inshore/") # Inshore survey data directory.
+   path$ins  <- paste0(path$hd2, "research/inshore/")        # Inshore survey data directory.
    path$jans <- paste0(path$hd2, "research/january/")        # January survey data directory.
    path$juvs <- paste0(path$hd2, "research/juvenile/")       # Juvenile survey data directory.
    path$seas <- paste0(path$hd2, "research/seasonal/")       # Seasonal survey data directory.
@@ -42,7 +42,7 @@
    path$ns.scanmar   <- paste0(path$ns, "scanmar/") # Northumberland Strait survey scanmar data directory.
    
    # Snow crab data paths:
-   path$scs  <- paste0(path$snow.crab, "//mon02uni01a/AquaRes_Common$/Crab/Offshore Crab Common/")
+   path$scs  <- paste0(path$snow.crab, "Offshore Crab Common/")
    
    # Herring data paths:
    path$herring.phone <- paste0(path$root, "herring/phone/")

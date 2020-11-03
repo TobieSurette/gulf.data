@@ -2,6 +2,7 @@
 % Please edit documentation in R/read.R
 \name{read.scsset}
 \alias{read.scsset}
+\alias{read.nssset}
 \alias{read.scsbio}
 \alias{read.scscat}
 \alias{read.star.oddi}
@@ -11,6 +12,8 @@
 \title{Read \strong{gulf} data sets.}
 \usage{
 read.scsset(x, file, survey, ...)
+
+read.nssset(x, file, survey, ...)
 
 read.scsbio(x, file, survey, ...)
 
@@ -47,6 +50,8 @@ Functions to read Gulf of Saint-Lawrence data sets.
 \section{Functions}{
 \itemize{
 \item \code{read.scsset}: Read southern Gulf of Saint Lawrence snow crab survey set data.
+
+\item \code{read.nssset}: Read southern Gulf of Saint Lawrence Northumberland Strait survey set data.
 
 \item \code{read.scsbio}: Read southern Gulf of Saint Lawrence snow crab survey biological data.
 

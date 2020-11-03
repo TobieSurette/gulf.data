@@ -13,6 +13,9 @@
 #' @export scsset
 scsset <- function(x, ...) UseMethod("scsset")
 
+#' @export as.scsset
+as.scsset <- scsset
+
 #' @describeIn scsset Create an \code{scsset} object.
 #' @export
 scsset.default <- function(x, ...){

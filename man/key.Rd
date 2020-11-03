@@ -2,12 +2,15 @@
 % Please edit documentation in R/key.R
 \name{key.scsset}
 \alias{key.scsset}
+\alias{key.nssset}
 \alias{key.scsbio}
 \alias{key.star.oddi}
 \alias{key.esonar}
 \title{\strong{gulf.data} Index Keys}
 \usage{
 \method{key}{scsset}(x, ...)
+
+\method{key}{nssset}(x, ...)
 
 \method{key}{scsbio}(x, ...)
 
@@ -24,6 +27,8 @@ Define or extract index keys for various \code{gulf.data} objects.
 \section{Methods (by class)}{
 \itemize{
 \item \code{scsset}: Fetch \code{scsset} index key.
+
+\item \code{nssset}: Fetch \code{nssset} index key.
 
 \item \code{scsbio}: Fetch \code{scsbio} index key.
 

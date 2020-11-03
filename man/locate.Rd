@@ -2,12 +2,15 @@
 % Please edit documentation in R/locate.R
 \name{locate.scsset}
 \alias{locate.scsset}
+\alias{locate.nssset}
 \alias{locate.scsbio}
 \alias{locate.scscat}
 \alias{locate.scslen}
 \title{Locate Gulf Data Files}
 \usage{
 \method{locate}{scsset}(x, year, source = "gulf.data", ...)
+
+\method{locate}{nssset}(x, year, source = "gulf.data", cruise, ...)
 
 \method{locate}{scsbio}(x, year, source = "gulf.data", remove = "bad", ...)
 
@@ -37,6 +40,8 @@ Functions to locate various data file(s) from different studies and surveys.
 \section{Methods (by class)}{
 \itemize{
 \item \code{scsset}: Locate snow crab survey set data files.
+
+\item \code{nssset}: Locate Northumberland Strait survey set data files.
 
 \item \code{scsbio}: Locate snow crab survey biological data files.
 

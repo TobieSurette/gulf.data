@@ -48,7 +48,10 @@ sampler.default <- function(x, project, ...){
 #' @rdname sampler
 #' @export sampler.scs
 sampler.scs <- function(x){
-   v <- toupper(x)
+   ux <- unique(x)    # Unique values of x.
+   ix <- match(x, ux) # Index to 'ux'.
+   
+   v <- toupper(ux)
    v <- gsub("?", "E", v, fixed = TRUE)
    v <- gsub("^ ", "", v)
    v <- gsub(" $", "", v)
@@ -150,7 +153,8 @@ sampler.scs <- function(x){
    v <- gsub("[.]", " ", v)
    v <- gsub("[;]", ",", v)
    v <- gsub("[/]$", "", v)
-
+   v <- gsub("[/]", ", ", v)
+   
    # Ad hoc corrections:
    v <- gsub("ALBERT, GIONET, D.GIONET", "ALBERT, DANIEL GIONET", v, fixed = TRUE)
    v <- gsub("ALBERT, GIONET", "ALBERT, DANIEL GIONET", v, fixed = TRUE)
@@ -158,8 +162,11 @@ sampler.scs <- function(x){
    v <- gsub("GIONET, D.GIONET,", "DANIEL GIONET,", v, fixed = TRUE)
    
    # Re-order samplers:
-   v <- unlist(lapply(lapply(strsplit(v, ", "), sort), paste, collapse = ","))
+   v <- unlist(lapply(lapply(strsplit(v, ", "), function(x) return(sort(unique(x)))), paste, collapse = ", "))
 
+   # Expand to original vector:
+   v <- v[ix]
+   
    return(v)
 }  
 
