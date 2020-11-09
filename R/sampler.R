@@ -51,6 +51,9 @@ sampler.scs <- function(x){
    ux <- unique(x)    # Unique values of x.
    ix <- match(x, ux) # Index to 'ux'.
    
+   # Unicode substitutions:
+   ux <- gsub("[\xc9]", "E", ux)
+   
    v <- toupper(ux)
    v <- gsub("?", "E", v, fixed = TRUE)
    v <- gsub("^ ", "", v)
@@ -148,7 +151,8 @@ sampler.scs <- function(x){
    v <- gsub("J.CHIASSON", "JULES CHIASSON", v, fixed = TRUE) 
    v <- gsub("BOBBY.H", "BOBBY HACHE", v, fixed = TRUE)      
    v <- gsub("F.PAULIN", "FRANCOIS PAULIN", v, fixed = TRUE)  
-   
+   v <- gsub("MARCEL/RICHARD", "MARCEL HEBERT, RICHARD RUEST", v, fixed = TRUE)
+      
    v[v == "*"] <- ""
    v <- gsub("[.]", " ", v)
    v <- gsub("[;]", ",", v)
@@ -160,10 +164,18 @@ sampler.scs <- function(x){
    v <- gsub("ALBERT, GIONET", "ALBERT, DANIEL GIONET", v, fixed = TRUE)
    v <- gsub("S.HEBERT, B.HEBERT", "STEPHANE ALBERT, BOBBY HACHE", v, fixed = TRUE) 
    v <- gsub("GIONET, D.GIONET,", "DANIEL GIONET,", v, fixed = TRUE)
+   v <- gsub("D GIONET", "DANIEL GIONET,", v, fixed = TRUE)
+   v <- gsub("STEPHANE ALBERTLBERT", "STEPHANE ALBERT", v, fixed = TRUE) 
+   v <- gsub("JF LANDRY", "JEAN-FRANCOIS LANDRY", v, fixed = TRUE)
    
    # Re-order samplers:
    v <- unlist(lapply(lapply(strsplit(v, ", "), function(x) return(sort(unique(x)))), paste, collapse = ", "))
 
+   v <- gsub("[,]$", "", v)
+   v <- gsub(" ,", ",", v)
+   
+   v <- gsub("DAVID, MARCEL", "DAVID GIARD, MARCEL HEBERT", v, fixed = TRUE) 
+   
    # Expand to original vector:
    v <- v[ix]
    
@@ -432,3 +444,5 @@ sampler.sco <- function(x){
    
    return(x)
 }
+
+
