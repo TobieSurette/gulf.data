@@ -11,23 +11,25 @@
 #' growth rate.
 #' 
 #' @param x Specimen size, length-frequency or other object.
+#' @param species Species.
+#' @param sex Biological sex.
 #' @param n Length-frequencies 
+#' @param theta Named parameter for growth model.
+#' @param error Logical value specifying whether to return the estimated standard error associated with growth. 
+#'              Note that this does not correspond to estimation error, but rather the prediction error.
 #' 
-#' @details Crustacean growth-at-moult models have just three parameters, an initial slope
-#' parameter, a transition window width (exp(log.w)) and a transition point xp. These 
-#' functions generate the expected values for a given set of parameters. Also the assumed
-#' error was assumed to be increasing with size.
-#' 
-#' @return 
-#' 
-#' If \code{x} is left unspecified, then a function is returned which can be used to 
-#' evaluate growth if given inputs.
+#' @return If \code{x} is left unspecified, then a function is returned which can be used for evaluating 
+#'         growth for given size inputs. 
+#'         
+#' @note Note that growth increments are returned rather than the new size.
+#'         
 
-#' @export grow
-grow <- function(x, ...) UseMethod("grow")
+#' @export growth
+growth <- function(x, ...) UseMethod("growth")
 
+#' @describeIn growth Default growth function.
 #' @export
-grow.default <- function(x, species, sex, theta, error = FALSE, ...){
+growth.default <- function(x, species, sex, theta, error = FALSE, ...){
    # Define growth parameters for various species:
    if (missing(theta)){
       if (missing(species)) stop("'species' must be specified.")
@@ -42,6 +44,10 @@ grow.default <- function(x, species, sex, theta, error = FALSE, ...){
    # Define mean function:
    mu <- splm(theta = theta)
 
+   names(theta) <- tolower(theta)
+   if (length(grep("sigma", names(theta))) == 0) error <- FALSE
+   
+   if (grep(names(theta)))
    if (!error){
       if (missing(x)) return(mu) else return(mu(x))
    }else{
@@ -69,7 +75,3 @@ grow.default <- function(x, species, sex, theta, error = FALSE, ...){
    
    return(v)
 }
-
-#' @export
-grow.scsbio <- function(x, ...) return(grow(x$carapace.width, species = 2526, ...))
-   
