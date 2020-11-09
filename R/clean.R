@@ -8,7 +8,7 @@
 #' @export
 clean <- function(x, ...) UseMethod("clean")
 
-#' @description 
+#' @describeIn clean Standardize data for \code{scsbio} object. 
 #' @export
 clean.scsbio <- function(x, ...){
    ix <- unlist(lapply(x, function(x) return(all(is.na(x)))))
