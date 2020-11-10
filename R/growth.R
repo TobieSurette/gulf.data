@@ -41,11 +41,15 @@ growth.default <- function(x, species, sex, theta, error = FALSE, as.matrix = FA
       if (missing(species)) stop("'species' must be specified.")
       
       # Default parameters:
-      if (species == 2526) theta <- c(intercept = 0.276, transition = 38.2, slope = c(0.32, 0.126), window = 1.6, log_sigma = -2) # Snow crab.
-      if (species == 2550) theta <- c(intercept = 0.168, transition = 40.63, slope = c(0.242, 0.242), window = 3.69, log_sigma = -2) # American lobster.
+      if (species == 2526) theta <- c(intercept = 0.276, transition = 38.2, slope = c(0.32, 0.126), window = 1.6, sigma = 0.135) # Snow crab.
+      if (species == 2550) theta <- c(intercept = 0.168, transition = 40.6, slope = c(0.24, 0.10), window = 3.69, sigma = 0.1)   # American lobster.
    }
 
+   # Parse parameter vector:
    names(theta) <- tolower(names(theta))
+   ix <- grep("^log_", names(theta))
+   theta[ix] <- exp(theta[ix])
+   names(theta) <- gsub("^log_", "", names(theta))
    
    # Define mean function:
    mu <- splm(theta = theta)
@@ -57,7 +61,7 @@ growth.default <- function(x, species, sex, theta, error = FALSE, as.matrix = FA
    # Define error function:
    sigma <- function(x){
       # Logistic transition:
-      window <- exp(theta[sort(names(theta)[grep("window", names(theta))])])
+      window <- theta[sort(names(theta)[grep("window", names(theta))])]
 
       eta <- (x - theta[["transition"]]) / window   
       p <-  1 / (1 + exp(-eta))   
@@ -65,7 +69,6 @@ growth.default <- function(x, species, sex, theta, error = FALSE, as.matrix = FA
       # Evaluate error portion:
       sigma <- theta[grep("sigma", names(theta))]
       sigma[order(names(sigma))]
-      sigma <- exp(sigma)
       if (length(sigma) == 1) sigma <- rep(sigma, 2)
 
       # Logistic-weighted error:
@@ -116,8 +119,8 @@ growth.matrix <- function(x, theta, ymax, ...){
    dimnames(G) <- list(x = x0, y = y0)
    for (i in 1:length(x0)){
       z <- seq(x0[i], as.numeric(y0[length(y0)-1]), by = dx)
-      G[i,as.character(z)] <- pgamma(z-x0[i]+dx/2, k[i], 1/phi[i]) - pgamma(z-x0[i]-dx/2, k[i], 1/phi[i]) 
-      G[i,as.character(y0[length(y0)])] <- 1 - pgamma(y0[length(y0)]-x0[i]-dx/2, k[i], 1/phi[i]) 
+      G[i,as.character(z)] <- pgamma(z-x0[i]+dx/2, k[i], 1/phi[i]) - pgamma(z - x0[i] - dx/2, k[i], 1/phi[i]) 
+      G[i,as.character(y0[length(y0)])] <- 1 - pgamma(y0[length(y0)] - x0[i] - dx/2, k[i], 1/phi[i]) 
     }
    
    return(G)
