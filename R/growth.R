@@ -57,7 +57,9 @@ growth.default <- function(x, species, sex, theta, error = FALSE, as.matrix = FA
    # Define error function:
    sigma <- function(x){
       # Logistic transition:
-      eta <- (x - theta[["transition"]]) / exp(theta[["window"]])   
+      window <- exp(theta[sort(names(theta)[grep("window", names(theta))])])
+
+      eta <- (x - theta[["transition"]]) / window   
       p <-  1 / (1 + exp(-eta))   
          
       # Evaluate error portion:
@@ -65,9 +67,11 @@ growth.default <- function(x, species, sex, theta, error = FALSE, as.matrix = FA
       sigma[order(names(sigma))]
       sigma <- exp(sigma)
       if (length(sigma) == 1) sigma <- rep(sigma, 2)
-      v <- p * sigma[[1]] + (1-p) * sigma[[2]]
+
+      # Logistic-weighted error:
+      v <- (1-p) * sigma[[1]] + p * sigma[[2]]
          
-      return(v)
+      return(v * mu(x))
    }
       
    # Evaluate function and error:
@@ -81,14 +85,15 @@ growth.default <- function(x, species, sex, theta, error = FALSE, as.matrix = FA
          }
       }
       
-      if (!error) return(mu(x)) else return(data.frame(mu = mu(x), sigma = sigma(x) * mu(x))) 
+      if (!error) return(mu(x)) else return(data.frame(mu = mu(x), sigma = sigma(x))) 
    }else{
       return(sigma)
    }
 }
 
-growth.matrix <- function(x, y0, theta, ...){
+growth.matrix <- function(x, theta, ymax, ...){
    ux <- sort(unique(x))
+   xmax <- max(ux)
    dx <- min(diff(ux))
    x0 <- seq(min(ux), max(ux), by = dx)
    if (length(x0) > 1000) stop("Growth matrix dimensions exceed 1000x1000.")
@@ -96,33 +101,24 @@ growth.matrix <- function(x, y0, theta, ...){
    # Define growth means and standard errors:
    m <- growth(theta = theta)(x0) 
    s <- growth(theta = theta, error = TRUE)(x0)
-   s <- s * m # Error proportional to mean.
-   
+
    # Calculate corresponding gamma parameters:
    phi <- s^2 / m # Scale parameter.
    k <- m^2 / s^2 # Shape parameter.
    
    # Define growth output vector:
-   if (missing(y0)) y0 <- seq(0, max(m + 3 * s), by = dx) 
-   
-   # Growth increment matrix:
-   I <- matrix(NA, nrow = length(x0), ncol = length(y0))
-   dimnames(I) <- list(x = x0, y = y0)
-   for (i in 1:length(x0)){
-      p <- pgamma(y0+dx/2, k[i], 1/phi[i]) - pgamma(y0-dx/2, k[i], 1/phi[i])
-      I[i,] <- pgamma(y0+dx/2, k[i], 1/phi[i]) - pgamma(y0-dx/2, k[i], 1/phi[i])
-   }
+   if (missing(ymax)) ymax <- xmax + max(m + 3 * s) 
    
    # Map growth increments onto growth matrix:
-   G <- matrix(0, nrow = length(x0), ncol = length(seq(min(x0), max(x0) + max(y0), by = dx)))
-   dimnames(G) <- list(x = x0, y = seq(min(x0), max(x0) + max(y0), by = dx))
+   y0 <- seq(min(x0), ymax, by = dx)
+   ymax <- y0[length(y0)]
+   G <- matrix(0, nrow = length(x0), ncol = length(y0))
+   dimnames(G) <- list(x = x0, y = y0)
    for (i in 1:length(x0)){
-      gvars <- as.character(seq(x0[i], x0[i] + max(y0), by = dx))
-      vvars <- as.character(seq(0, max(y0), by = dx))
-      index <- gvars %in% colnames(G)
-      G[i,gvars[index]] <- I[i,vvars[index]]
-      
-   }
+      z <- seq(x0[i], as.numeric(y0[length(y0)-1]), by = dx)
+      G[i,as.character(z)] <- pgamma(z-x0[i]+dx/2, k[i], 1/phi[i]) - pgamma(z-x0[i]-dx/2, k[i], 1/phi[i]) 
+      G[i,as.character(y0[length(y0)])] <- 1 - pgamma(y0[length(y0)]-x0[i]-dx/2, k[i], 1/phi[i]) 
+    }
    
    return(G)
 }
