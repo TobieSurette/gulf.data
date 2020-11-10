@@ -121,6 +121,7 @@ growth.matrix <- function(x, y0, theta, ...){
       vvars <- as.character(seq(0, max(y0), by = dx))
       index <- gvars %in% colnames(G)
       G[i,gvars[index]] <- I[i,vvars[index]]
+      
    }
    
    return(G)
