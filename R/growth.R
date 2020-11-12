@@ -61,7 +61,7 @@ growth.default <- function(x, species, sex, theta, error = FALSE, as.matrix = FA
    # Define error function:
    sigma <- function(x){
       # Logistic transition:
-      window <- theta[sort(names(theta)[grep("window", names(theta))])]
+      window <- as.numeric(theta[sort(names(theta)[grep("window", names(theta))])])
 
       eta <- (x - theta[["transition"]]) / window   
       p <-  1 / (1 + exp(-eta))   
