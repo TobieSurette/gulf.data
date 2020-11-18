@@ -28,6 +28,7 @@ scscat <- function(x, ...) UseMethod("scscat")
 scscat.default <- function(x, ...){
    # Define attributes:
    gulf.metadata::project(x) <- "scs"
+   gulf.metadata::key(x) <- key.scscat()
    
    # Define class:
    class(x) <- unique(c("scscat", class(x))) 

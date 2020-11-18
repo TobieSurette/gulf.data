@@ -1,0 +1,200 @@
+"code"	"english"	"french"	"stacac"	"nafo"
+10	"Atlantic cod"	"Morue atlantique"	100	101
+118	"Greenland/rock cod"	"Morue de roche"	101	NA
+110	"Arctic cod"	"Saida"	102	NA
+NA	"Ling cod"	"Julienne"	103	NA
+11	"Haddock"	"Aiglefin"	110	102
+23	"Redfish"	"Sebaste"	120	103
+122	"Cunner"	"Tanche-tautogue"	121	NA
+30	"Atlantic halibut"	"Flétan atltantique"	130	120
+40	"American plaice"	"Plie canadienne"	140	112
+42	"Yellowtail flounder"	"Limande à queue jaune"	141	116
+41	"Witch flounder/greysole"	"Plie grise"	142	114
+43	"Winter flounder"	"Plie rouge"	143	122
+31	"Greenland halibut/turbot"	"Fletan du groenland"	144	118
+143	"Windowpane"	"Turbot de sable"	145	NA
+49	"Flounder unspecified"	"Plies non-identifiées"	149	129
+211	"Skate"	"Raie"	160	479
+274	"Dogfish"	"Aiguillat"	161	459
+221	"Black dogfish"	"Aiguillat noir"	162	NA
+701	"Butterfish/dollarfish"	"Stromate"	166	NA
+16	"Pollock"	"Goberge"	170	106
+12	"White hake"	"Merluche blanche"	171	186
+14	"Silver hake"	"Merluche argentée"	172	104
+15	"Cusk"	"Brosme"	173	144
+59	"Wolffish"	"Loup de mer"	174	188
+17	"Tomcod"	"Poulamon"	175	138
+501	"Lumpfish"	"Lompe"	176	154
+400	"Monkfish"	"Baudroie"	177	NA
+610	"Sandlance"	"Lan_on d'amérique"	178	172
+414	"Roundnose grenadier"	"Grenadier de roche"	179	168
+13	"Red hake"	"Merluche rouge"	180	105
+309	"Sculpin"	"Chaboisseau"	181	NA
+411	"Roughhead grenadier"	"Grenadier berglax"	182	NA
+640	"Oceanpout"	"Loquette d'amérique"	183	NA
+242	"Chimaera"	"Chimère"	184	NA
+630	"Wrymouth"	"Terrassier"	185	NA
+NA	"Snakeblenny"	"Lompénie serpent"	186	NA
+NA	"Northern catfish"	"Barbue de rivière"	187	NA
+NA	"Blue hake"	"Hoki"	188	NA
+NA	"Tilefish"	"Tile"	190	NA
+50	"Striped wolffish"	"Loup atlantique"	192	NA
+241	"Hagfish"	"Myxine"	197	NA
+NA	"Scalefish"	"Poisson ecailles"	198	NA
+NA	"Groundfish unsp."	"Poisson de fond non-specifie"	199	199
+60	"Atlantic herring"	"Hareng atlantique"	200	202
+NA	"Herring / mackerel"	"Hareng / maquereau"	202	NA
+164	"Menhaden"	"Alose tyran"	210	NA
+NA	"Anchovy"	"Anchois"	215	NA
+70	"Atlantic mackerel"	"Maquereau"	250	204
+72	"Swordfish"	"Espadon"	251	264
+190	"Albacore tuna"	"Germon atlantique"	252	272
+192	"Bigeye tuna"	"Thon ventru"	253	278
+71	"Bluefin tuna"	"Thon rouge"	254	280
+172	"Skipjack tuna"	"Bonite à ventre rayé"	255	282
+191	"Yellowfin tuna"	"Albacore à nageoires jaunes"	256	284
+NA	"Tuna restricted"	"Thon restreint"	257	NA
+NA	"Tuna unspecified"	"Thon non-spécifié"	259	289
+NA	"Billfish"	"Balaou"	260	NA
+33	"Blue marlin"	"Makaire bleu"	261	NA
+32	"White marlin"	"Makaire blanc"	262	NA
+NA	"Mahi mahi (dolphin)"	"Mahi -mahi (coryph?ne)"	263	NA
+NA	"Escolar"	""	270	NA
+NA	"Pelagic unspecified"	"Poisson pélagique non-spécifié"	299	299
+62	"Alewife/gaspareau"	"Gaspareau"	350	302
+160	"Argentine"	"Grande argentine"	351	312
+440	"Eel"	"Anguille"	352	308
+65	"Salmon"	"Saumon"	354	318
+61	"Atlantic shad"	"Alose savoureuse"	355	310
+63	"Atlantic smelt"	"Éperlan atlantique"	357	NA
+24	"Striped bass"	"Bar rayé"	358	420
+272	"Sturgeon"	"Esturgeon"	359	422
+64	"Capelin"	"Capelan"	360	340
+76	"Arctic char"	"Omble chevalier"	361	342
+273	"Trout"	"Truite"	363	432
+770	"Silverside"	"Capucette"	364	320
+120	"White perch"	"Baret"	365	NA
+NA	"Pickerel"	"Brochet"	366	NA
+NA	"Suckers (mullet etc)"	"Meuniers"	367	370
+67	"Whitefish"	"Cisco"	368	NA
+230	"Shark porbeagle/mackerel"	"Mara?che/maquereau"	369	NA
+237	"Shark greenland"	"Requin du groenland"	370	NA
+233	"Shark basking"	"Requin-p?pélerin"	371	NA
+231	"Shark blue"	"Requin bleu"	372	NA
+238	"Shark mako"	"Requin-taupe bleu"	375	NA
+236	"Hammerhead shark"	"Requin marteau"	376	NA
+592	"Shark unspecified"	"Requin non-spécifié"	379	469
+565	"Baracudina"	"Lussion"	385	NA
+69	"Rainbow trout"	"Truite arc-en-ciel"	388	NA
+NA	"Netdevil anglerfish"	"Beaudroie commune"	394	NA
+NA	"Other finfish unspecified"	"Poissons osseux non-spécifiés"	399	499
+NA	"Species at risk"	"Esp_ce en péril"	400	NA
+4317	"Bar clam"	"Mactre de l'atlantique"	600	NA
+4318	"Softshell clam"	"Myes comestibles"	601	NA
+4311	"Quahaug"	"Palourde américaine"	602	NA
+4315	"Razor clam"	"Couteau"	603	NA
+NA	"Propellor clam"	"Pitot"	606	NA
+4304	"Ocean quahaug"	"Quahog nordique"	607	NA
+4355	"Stimpson surf clam"	"Mactre de stimpson"	608	NA
+4310	"Clams unspecified"	"Coques non-spécifiées"	609	NA
+4330	"Mussels"	"Moules"	610	NA
+4326	"American oysters"	"Huitres"	611	NA
+4321	"Sea scallop"	"Pépétoncle"	612	NA
+NA	"Illex squid"	"Calmar illex"	613	NA
+4250	"Periwinkles"	"Bigorneau"	614	NA
+4210	"Whelks"	"Buccin"	615	NA
+4340	"Cockle"	"Coque"	616	NA
+4322	"Iceland scallop"	"Pépétoncle d'islande"	617	NA
+4320	"Scallop unspecified"	"Pépétoncle non-spécifiée"	618	NA
+6600	"Sea cucumber"	"Concombre de mer"	619	NA
+4221	"Moonsnail"	"Natice"	620	NA
+NA	"Scallop roe"	"Rave de pepétoncle"	622	NA
+NA	"Sea scallop meat with roe"	"Corail et chair de p?pétoncle"	623	NA
+4514	"Squid unspecified"	"Calmar"	626	NA
+NA	"Red squid; lolligo"	"Calmar rouge / lolligo"	627	NA
+6400	"Sea urchin"	"Oursin commun"	650	NA
+4000	"Mollusk unspecified"	"Mollusques non-spécifiées"	699	NA
+2550	"American lobster"	"Homard atlantique"	700	NA
+2520	"Toad crab"	"Crabe hyas"	701	NA
+2211	"Northern shrimp"	"Crevette nordique"	702	NA
+2511	"Jonah crab"	"Crabe nordique"	703	NA
+2513	"Rock crab"	"Crabe commun"	704	NA
+2526	"Snow crab"	"Crabe des neiges"	705	NA
+2532	"Red crab"	"Crabe rouge"	706	NA
+2507	"Crab unspecified"	"Crabe non-identifié"	707	NA
+2523	"Stone crab"	"Crabe royal"	708	NA
+2525	"Spiny crab"	"Crabe épineux"	709	NA
+2528	"Porcupine crab"	"Araigné de mer"	710	NA
+2531	"Green crab"	"Crabe vert"	711	NA
+NA	"Shrimp pandalus montagui"	"Crevette ?sope"	712	NA
+NA	"Shrimp pink glass"	"Crevette blanche"	713	NA
+NA	"Shrimp unspecified"	"Crevette non spécifié"	720	NA
+NA	"Hard-shell clam"	"Palourdes"	741	NA
+NA	"Offshore/multi crabs (lic only)"	"Crabes"	742	NA
+NA	"Jonah/rock"	"Crabe jonah/roche"	743	NA
+NA	"Crustaceans unspecified"	"Crustac?s non spécifiés"	799	NA
+NA	"Seal skins/harp/white coat (no.)"	"Peaux de phoque (no.) phoque du groenland blanc"	800	NA
+NA	"Seal skins/harp/rag.jacket (no.)"	"Peaux de phoque (no.) phoque du groenland gueni"	801	NA
+NA	"Seal skins/harp/beater (no.)"	"Peaux de phoque (no.) phoque du groenland brass"	802	NA
+NA	"Seal skins/harp/bedlamer (no.)"	"Peaux de phoque (no.) phoque du groenland juv?n"	803	NA
+NA	"Seal skins/harp/old (no.)"	"Peaux de phoque (no.) phoque du groenland coeur"	804	NA
+NA	"Seal skins/harp/unspecified (no.)"	"Peaux de phoque (no.) phoque du groenland non-s"	805	NA
+NA	"Seal skins/hood/young (no.)"	"Peaux de phoque phoque ? capuchon jeune"	806	NA
+NA	"Seal skins/hood/old (no.)"	"Peaux de phoque phoque ? capuchon adulte"	807	NA
+NA	"Seal skins hood unspecified (no.)"	"Peaux de phoque phoque ? capuchon non-spécifié"	809	NA
+NA	"Seal square flipper"	"Phoque barbu"	810	NA
+NA	"Seal skins/harbour (no.)"	"Peaux de phoque phoque commun"	811	NA
+NA	"Seal skins/grey (no.)"	"Peaux de phoque phoque gris"	812	NA
+NA	"Seal skins/ringed/jar (no.)"	"<seal skins/ringed/jar (no.)>"	813	NA
+NA	"Seal skins/bearded (no.)"	"<seal skins/bearded (no.)>"	814	NA
+NA	"Seal skins/greenland (no.)"	"<seal skins/greenland (no.)>"	815	NA
+NA	"Seal skins/unspecified (no.)"	"Peaux de phoque (no.) non-spécifié"	825	NA
+NA	"Seal whole (no.)"	"Peaux de phoque (no.) entier"	845	NA
+NA	"Seal penis (no.)"	"Phoque (no.) pornis"	846	NA
+NA	"Seal flippers (no.)"	"<seal flippers (no.)>"	847	NA
+NA	"Seal daddles"	"Nageoires  posterieures de phoque"	848	NA
+NA	"Seal hearts"	"Coeurs de phoque"	860	NA
+NA	"Seal livers"	"Foies de phoque"	861	NA
+NA	"Seal shoulders"	"?paules de phoque"	862	NA
+NA	"Seal oil"	"Huile de phoque"	866	NA
+NA	"Seal products unspecified"	"Produits de phoque non-spécifié"	870	NA
+NA	"Porpoise harbour"	"Marsouin commun"	875	NA
+NA	"Dolphinwhite-beaked"	"Dauphin a nez blanc"	876	NA
+NA	"Fin whale"	"Rorqual commun"	885	NA
+NA	"Sei whale"	"Rorqual boreal"	886	NA
+NA	"Sperm whale"	"Cachalot"	887	NA
+NA	"Whales other baleen"	"Baleines autres especes"	888	NA
+NA	"Minke whale"	"Petit rorqual"	889	NA
+NA	"Pothead whale"	"Cetaces globicephale noir"	890	NA
+NA	"Dulse"	"Algue rouge"	900	NA
+9332	"Irish moss"	"Mousse d'irlande"	901	NA
+9300	"Kelp"	"Laminaire"	902	NA
+NA	"Fundy moss"	"Gigartina"	903	NA
+NA	"Wireweed/horsetail"	""	904	NA
+NA	"Moss unspecified"	"Mousse non-spécifiée"	905	NA
+NA	"Rockweed"	"Ascophylle"	906	NA
+NA	"Marine plant"	"Plante marine"	907	NA
+NA	"Nori moss"	"Porphyre"	908	NA
+NA	"Herring scales"	"Écailles de hareng"	921	NA
+NA	"Roe"	"Oeufs"	922	NA
+NA	"Caviar"	"Caviar"	927	NA
+NA	"Lumpfish roe"	"Oeufs de lompe"	928	NA
+NA	"Sea urchin roe"	"Oeufs d'oursin commun"	930	NA
+NA	"Herring roe"	"Oeufs de hareng"	931	NA
+NA	"Cod roe"	"Rogues de morue"	933	NA
+NA	"Seals/hood/jar"	"Phoque a capuchon barbu"	937	NA
+NA	"Bait worms"	"Vers d'appât"	940	NA
+NA	"Cod livers"	"Foies de morue"	941	NA
+NA	"Cod livers preserved"	"Foies de morue en conserve"	942	NA
+NA	"Shark livers"	"Foies de requin"	943	NA
+NA	"Livers unspecified"	"Foies non specifies"	944	NA
+NA	"Shark tail"	"Queue de requin"	950	NA
+NA	"Clams stimpson surf mantle"	"<clams stimpson surf mantle>"	951	NA
+NA	"Tongue sounds and cheeks"	"Langues noues joues"	952	NA
+NA	"Squid tentacles"	"Tentacules d?encornet"	954	NA
+NA	"Fish fins unspecified"	"Nageoires de poisson non spécifiés"	956	NA
+NA	"Shark fins"	"Ailerons de requin"	957	NA
+NA	"Mackerel head"	"Tête de maquereau"	960	NA
+NA	"Cod liver oil"	"Huile de foie de morue"	961	NA
+NA	"Liver oil unspecified"	"Huile de foie non-spécifiées"	962	NA
+NA	"Items unspecified"	"Produits non-spécifiées"	999	NA

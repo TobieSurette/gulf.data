@@ -5,6 +5,7 @@
 \alias{read.nssset}
 \alias{read.scsbio}
 \alias{read.scscat}
+\alias{read.nsscat}
 \alias{read.star.oddi}
 \alias{read.esonar}
 \alias{read.notus}
@@ -17,7 +18,9 @@ read.nssset(x, file, survey, ...)
 
 read.scsbio(x, file, survey, ...)
 
-read.scscat(x, file, ...)
+read.scscat(x, file, species, ...)
+
+read.nsscat(x, file, survey, species, ...)
 
 read.star.oddi(x, file, offset = 0, repeats = FALSE, ...)
 
@@ -56,6 +59,8 @@ Functions to read Gulf of Saint-Lawrence data sets.
 \item \code{read.scsbio}: Read southern Gulf of Saint Lawrence snow crab survey biological data.
 
 \item \code{read.scscat}: Read southern Gulf of Saint Lawrence snow crab survey by-catch data.
+
+\item \code{read.nsscat}: Read southern Gulf of Saint Lawrence Northumberland Strait survey catch data.
 
 \item \code{read.star.oddi}: Read Star Oddi probe data.
 

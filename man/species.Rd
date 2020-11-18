@@ -17,9 +17,9 @@ species(x, ...)
 
 \method{species}{list}(x, ...)
 
-\method{species}{numeric}(x, language = "english", coding = "rv", source, ...)
+\method{species}{numeric}(x, language = "english", coding = "code", ...)
 
-\method{species}{character}(x, language = "english", input = "stacac", output = "rv", ...)
+\method{species}{character}(x, language = "english", coding = "code", ...)
 }
 \arguments{
 \item{x}{Numerical species code(s) or species name(s).}
@@ -33,8 +33,6 @@ research survey coding \code{\sQuote{rv}} (or equivalently \code{\sQuote{researc
 Coordinating Committee for the Atlantic Coast (STACAC) coding \code{\sQuote{stacac}}, the North 
 American Fisheries Organization (NAFO) coding \code{\sQuote{nafo}}, and the observer and commercial 
 file name prefix coding \code{\sQuote{observer}} and \code{\sQuote{commercial}}.}
-
-\item{oracle}{Logical value specifying whether to use the Oracle database as a source. Default is \code{FALSE}.}
 }
 \value{
 Vector of character strings containing species names. For multiple species name searches, a list of

@@ -13,7 +13,6 @@
 #'               Coordinating Committee for the Atlantic Coast (STACAC) coding \code{\sQuote{stacac}}, the North 
 #'               American Fisheries Organization (NAFO) coding \code{\sQuote{nafo}}, and the observer and commercial 
 #'               file name prefix coding \code{\sQuote{observer}} and \code{\sQuote{commercial}}.
-#' @param oracle Logical value specifying whether to use the Oracle database as a source. Default is \code{FALSE}.
 #' 
 #' @return Vector of character strings containing species names. For multiple species name searches, a list of
 #'         search results are returned.
@@ -61,8 +60,8 @@ species <- function(x, ...) UseMethod("species") # Generic function.
 #' @rdname species
 #' @export species.foreign
 species.foreign <- function(x, ...){
-   file <- system.file("extdata", "species.foreign.csv", package = "gulf.data")
-   x <- read.csv(file, header = TRUE, stringsAsFactors = FALSE)
+   file <- system.file("extdata", "species.foreign.tab", package = "gulf.data")
+   x <- read.table(file = file, sep = "\t", header = TRUE, fileEncoding = "utf-8", stringsAsFactors = FALSE)
    return(x)
 }
 
@@ -70,8 +69,8 @@ species.foreign <- function(x, ...){
 #' @export
 species.default <- function(x, ...){
    if (missing(x)){
-      file <- system.file("extdata", "species.csv", package = "gulf.data")
-      x <- read.csv(file, header = TRUE, stringsAsFactors = FALSE)
+      file <- system.file("extdata", "species.tab", package = "gulf.data")
+      x <- read.table(file = file, sep = "\t", header = TRUE, fileEncoding = "utf-8", stringsAsFactors = FALSE)
       return(x)
    }
    if (all(is.na(x))) return(x)
@@ -84,60 +83,25 @@ species.list <- function(x, ...) return(lapply(x, species))
 
 #' @rdname species
 #' @export
-species.numeric <- function(x, language = "english", coding = "rv", source, ...){
+species.numeric <- function(x, language = "english", coding = "code", ...){
    # Parse input arguments:
-   language <- match.arg(tolower(language), c("english", "french", "latin" , "any"))
-   coding <-  match.arg(tolower(coding), c("rv", "research", "commercial", "observer", "stacac", "nafo"))
-   if (coding == "research") coding <- "rv"
-
-   # Define language table:
-   language.table <- data.frame(name   = c("english", "french", "latin"),
-                                oracle = c("COMM", "COMM_FR", "SPEC"),
-                                prefix = c("en", "fr", "latin"), 
-                                stringsAsFactors = FALSE)
-   index <- match(language, language.table$name) 
-   if (!is.na(index)) language.table <- language.table[index, ]
+   language <- language(language)
+   coding <-  match.arg(tolower(coding), c("code", "rv", "research", "commercial", "observer", "stacac", "nafo"))
+   if (coding %in% c("rv", "research")) coding <- "code"
    
    # Initialize result variable:
    result <- NULL
    
    # Gulf research survey codes:
-   if (coding == "rv"){    
-      if (missing(source)){
-         tab <- species()
-         result <- tab[match(x, tab$code), paste0("name_", language.table$prefix)]
-      }else{ 
-         if (source == "oracle"){ 
-            fieldtoreturn <- paste0("l.list CODE, ", paste0(language.table$oracle, collapse = ", "))
-
-            channel = oracle.open()
-            
-            # This query will return the species names in the same order as the code vector (unsorted)       
-            ux <- unique(x[!is.na(code)])
-            if (length(ux) > 500){
-               query = paste0(" SELECT * FROM GSSPECIES")      
-               result = oracle.query(channel, query)
-               result <- result[match(ux, result$CODE), oracle.lang]
-            }else{
-               # Translate code vector into character string for Oracle query
-               query = paste("SELECT ",fieldtoreturn," 
-                             FROM GSSPECIES s
-                             ,(select rownum r, list from (SELECT trim(REGEXP_SUBSTR('", paste0(ux, collapse = ","), "', '[^,]+', 1, LEVEL)) AS list FROM dual CONNECT BY INSTR('",code.str,"', ',', 1, LEVEL-1) > 0)) l
-                             WHERE s.CODE(+) = l.list
-                             ORDER BY l.r", sep = "")
-               
-               result <- oracle.query(channel, query)
-               result <- result[match(x, ux), ]
-            }
-            oracle.close()
-         }  
-      }
+   if (coding == "code"){    
+      tab <- species()
+      result <- tab[match(x, tab$code), language]
    }
   
    # Define species names and STACAC and NAFO codes:
    if (coding %in% c("stacac", "nafo")){
        tab <- species.foreign()
-       result <- tab[match(x, tab[, coding]), paste0("name_", language.table$prefix)]
+       result <- tab[match(x, tab[, coding]), language]
    }
 
    # Return species file strings for observer data species codes:
@@ -153,60 +117,42 @@ species.numeric <- function(x, language = "english", coding = "rv", source, ...)
 
 #' @rdname species
 #' @export
-species.character <- function(x, language = "english", input = "stacac", output = "rv", ...){
+species.character <- function(x, language = "english", coding = "code", drop = TRUE, ...){
    # Languages:
-   language <- match.arg(tolower(language), c("", "any", "english", "french", "latin"))
+   language <- language(language)
    if (language == "any") language <- ""
    
    # Input coding:
-   input <- match.arg(tolower(input), c("rv", "research", "nafo", "stacac"))
-   if (input == "research") input <- "rv"
+   coding <- match.arg(tolower(coding), c("code", "rv", "research", "nafo", "stacac"))
+   if (coding %in% c("rv", "research")) coding <- "code"
    
-   # Output coding:
-   output <- match.arg(tolower(output), c("rv", "research", "nafo", "stacac"))
-   if (output == "research") output <- "rv"
-   
-   # Numeric species code match:
-   if (is.numeric(x)){
-      # Read species table:
-      data <- species.foreign()                       
-      return(data[match(x, data[, input]), output])
-   }                                                                                                              
-  
    # Character species string match:
-   if (is.character(x)){
-      ux <- unique(x[!is.na(x) & (x != "")])  
+   ux <- unique(x[!is.na(x) & (x != "")])  
       
-      # Species table:
-      if (output != "rv"){
-         tab <- species.foreign() 
-      }else{
-         tab <- species()
-         output <- "code"        
-      } 
+   # Species table:
+   if (coding != "code"){
+      tab <- species.foreign() 
+   }else{
+      tab <- species()
+   } 
       
-      # Define data fields to search:
-      if (language == "english") var <- "name_en"
-      if (language == "french")  var <- "name_fr"
-      if (language == "latin")   var <- "name_latin"
-      if (language == "")        var <- names(x)[grep("^name", names(x))]
-      
-      # Loop over key words:
-      v <- rep(list(NULL), length(x))
-      for (i in 1:length(ux)){
-         words <- tolower(strsplit(ux[i], "[ ,;]")[[1]])
-         for (j in 1:length(var)){
-            r <- 1:nrow(tab)
-            for (k in 1:length(words)) r <- intersect(r, grep(words[k], tolower(tab[, var[j]])))
-         }
-         v[[i]] <- tab[r, output]
+   # Loop over key words:
+   v <- rep(list(NULL), length(ux))
+   for (i in 1:length(ux)){
+      words <- tolower(strsplit(ux[i], "[ ,;]")[[1]])
+      for (j in 1:length(language)){
+         r <- 1:nrow(tab)
+         for (k in 1:length(words)) r <- intersect(r, grep(words[k], tolower(tab[, language[j]])))
       }
-      
-      # Drop list:
-      if (length(v) == 1) v <- v[[1]]
-      
-      return(v)
+      v[[i]] <- tab[r, coding]
+      v[[i]] <- v[[i]][!is.na(v[[i]])]
    }
+   v <- v[match(x, ux)]
+      
+   # Drop list:
+   if (drop & (length(v) == 1)) v <- v[[1]]
+      
+   return(v)
 }
 
 #' @export species.str

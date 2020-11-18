@@ -14,10 +14,20 @@
 #' @export
 key.scsset <- function(x, ...) if (missing(x)) return(c("date", "tow.id")) else return(gulf.metadata::key.default(x))
 
-#' @describeIn key Fetch \code{nssset} index key.
+#' @describeIn key Index key for Northumberland Strait catch set (\code{nsscat}).
 #' @export key.nssset
 #' @export
 key.nssset <- function(x, ...) if (missing(x)) return(c("date", "cruise", "set.number")) else return(gulf.metadata::key.default(x))
+
+#' @describeIn key Index key for Northumberland Strait catch data (\code{nsscat}).
+#' @export key.nsscat
+#' @export
+key.nsscat <- function(x, ...) if (missing(x)) return(c("date", "cruise", "set.number", "species")) else return(gulf.metadata::key.default(x))
+
+#' @describeIn key Index key for snow crab survey by-catch data (\code{scscat}).
+#' @export key.scscat
+#' @export
+key.scscat <- function(x, ...) if (missing(x)) return(c("date", "tow.id", "species")) else return(gulf.metadata::key.default(x))
 
 #' @describeIn key Fetch \code{scsbio} index key.
 #' @export key.scsbio
