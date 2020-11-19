@@ -8,9 +8,9 @@
 \usage{
 import(x, ...) <- value
 
-\method{import}{data.frame}(x, by, ...) <- value
+\method{import}{data.frame}(x, by, variables, fill.na, ...) <- value
 
-\method{import}{scsset}(x, fill.na, ...) <- value
+\method{import}{scsset}(x, ...) <- value
 }
 \arguments{
 \item{x}{Target object.}
@@ -20,6 +20,10 @@ import(x, ...) <- value
 \item{value}{Object containing catch data to be assigned.}
 
 \item{by}{Character string(s) specifying which variables use as an index key.}
+
+\item{variables}{Character string(s) specifying the fields to import from the source object.}
+
+\item{fill.na}{Value to be used to fill in target field entries with no matching source entries.}
 }
 \description{
 Import from one object into another.

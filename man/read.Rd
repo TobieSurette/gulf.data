@@ -6,10 +6,6 @@
 \alias{read.scsbio}
 \alias{read.scscat}
 \alias{read.nsscat}
-\alias{read.star.oddi}
-\alias{read.esonar}
-\alias{read.notus}
-\alias{read.alsi}
 \title{Read \strong{gulf} data sets.}
 \usage{
 read.scsset(x, file, survey, ...)
@@ -21,14 +17,6 @@ read.scsbio(x, file, survey, ...)
 read.scscat(x, file, species, ...)
 
 read.nsscat(x, file, survey, species, ...)
-
-read.star.oddi(x, file, offset = 0, repeats = FALSE, ...)
-
-read.esonar(x, file, offset = -3 * 60, repeats = FALSE, ...)
-
-read.notus(file)
-
-read.alsi(year, site, species, type, ...)
 }
 \arguments{
 \item{x}{Survey year or file name.}
@@ -39,13 +27,15 @@ read.alsi(year, site, species, type, ...)
 
 \item{...}{Other parameters passed onto \code{locate} functions or used to subset data.}
 
-\item{offset}{Numeric value specifying the offset time (in minutes) to include as a corrective in the data time stamps.}
-
-\item{repeats}{Logical value specifying whether to keep or average out data records with identical time stamps.}
+\item{species}{Species code or name.}
 
 \item{year}{Survey year(s).}
 
 \item{tow.id}{Numeric value or character string specifying the ID corresponding to a particular tow sampling station.}
+
+\item{offset}{Numeric value specifying the offset time (in minutes) to include as a corrective in the data time stamps.}
+
+\item{repeats}{Logical value specifying whether to keep or average out data records with identical time stamps.}
 }
 \description{
 Functions to read Gulf of Saint-Lawrence data sets.
@@ -61,14 +51,6 @@ Functions to read Gulf of Saint-Lawrence data sets.
 \item \code{read.scscat}: Read southern Gulf of Saint Lawrence snow crab survey by-catch data.
 
 \item \code{read.nsscat}: Read southern Gulf of Saint Lawrence Northumberland Strait survey catch data.
-
-\item \code{read.star.oddi}: Read Star Oddi probe data.
-
-\item \code{read.esonar}: Read \strong{eSonar} trawl acoustic monitoring data.
-
-\item \code{read.notus}: \strong{Notus} trawl acoustic monitoring data.
-
-\item \code{read.alsi}: Read data from the Altantic Lobster Stock-recruitment Index. Larvae collectors are used to mainly provide recruitment indices for lobster and rock crab.
 }}
 
 \examples{

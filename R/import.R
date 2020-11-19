@@ -5,6 +5,8 @@
 #' @param x Target object.
 #' @param value Object containing catch data to be assigned.
 #' @param by Character string(s) specifying which variables use as an index key.
+#' @param variables Character string(s) specifying the fields to import from the source object.
+#' @param fill.na Value to be used to fill in target field entries with no matching source entries.
 #' @param ... Other parameters (not used).
 #' 
 #' @examples 
@@ -18,7 +20,7 @@
 
 #' @describeIn import-set Import assignment method for data frames.
 #' @export
-"import<-.data.frame" <- function(x, value, by, ...){
+"import<-.data.frame" <- function(x, value, by, variables, fill.na, ...){
    # Check input arguments or determine index key:
    if (missing(by)) if (!is.null(key(x))) by <- gulf.metadata::key(x)
    if (missing(by)) by <- intersect(names(x), names(value))
@@ -27,34 +29,38 @@
    if (any(duplicated(value[by]))) stop("Duplicate index keys in the source object.")
    
    # Identify variables to import:
-   vars <- setdiff(names(value), by)
+   if (missing(variables)) variables <- setdiff(names(value), by)
+   variables <- variables[variables %in% names(value)]
+   if (length(variables) == 0){
+      warning("No matching variables to import from source object.") 
+      return(x)
+   }   
    
    # Append results:
-   if (length(vars) > 0){
+   if (length(variables) > 0){
       index <- gulf.utils::match(x[by], value[by])
-      x[vars] <- NA
-      x[vars] <- value[index, vars]
+      x[variables] <- NA
+      x[variables] <- value[index, variables]
    }
 
+   # Fill NA values:
+   if (!missing(fill.na)){
+      tmp <- x[variables]
+      tmp[is.na(tmp)] <- fill.na
+      x[variables] <- tmp
+   }
+   
    return(x)
 }
 
 #' @describeIn import-set Snow crab set import assignment method.
 #' @export
-"import<-.scsset" <- function(x, value, fill.na, ...){
+"import<-.scsset" <- function(x, value, ...){
    names <- names(x)
    class <- class(x)
    class(x) <- "data.frame"
    import(x, ...) <- value
    class(x) <- class
-   
-   # Fill NA values:
-   if (!missing(fill.na)){
-      vars <- setdiff(names(value), gulf.metadata::key(x))
-      tmp <- x[vars]
-      tmp[is.na(tmp)] <- fill.na
-      x[vars] <- tmp
-   }
    
    return(x)
 }

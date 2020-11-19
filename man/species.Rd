@@ -19,7 +19,7 @@ species(x, ...)
 
 \method{species}{numeric}(x, language = "english", coding = "code", ...)
 
-\method{species}{character}(x, language = "english", coding = "code", ...)
+\method{species}{character}(x, language = "english", coding = "code", drop = TRUE, ...)
 }
 \arguments{
 \item{x}{Numerical species code(s) or species name(s).}

@@ -26,13 +26,22 @@ The \code{scscat} class is a container for Snow Crab Survey by-catch data, i.e. 
 }}
 
 \examples{
-# Create 'scsbio' object with specified 'tow.number' and 'sex' fields:
-x <- scscat(data.frame(tow.number = 1, species = 10, number.caught = 144))
+# Create 'scscat' object from a data frame:
+x <- scscat(data.frame(date = "2020-07-19", tow.id = "GP001F", tow.number = 1, species = 10, number.caught = 144))
+key(x)
 
 # Read data:    
 x <- read.scscat()                 # Read all available data.
 x <- read.scscat(year = 2019)      # Read single year.
-x <- read.scscat(year = 2010:2015) # Read range of years.
+x <- read.scscat(year = 2010:2015, species = 10) # Load cod data for range of years.
+x <- read.scscat(species = "Cod") # Load cod data using species name search for all years.
 
-summary(x)
+# Attach catches to tow data:
+x <- read.scsset(2020, valid = 1, survey = "regular") # Read tow data.
+y <- read.scscat(2020, species = "plaice")            # Read American plaice data.
+import(x, var = "number.caught", fill = 0) <- y       # Attach number of specimens caught.
+
+}
+\seealso{
+\code{\link{read.scsset}},  \code{\link{read.scscat}}
 }
