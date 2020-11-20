@@ -130,11 +130,7 @@ species.character <- function(x, language = "english", coding = "code", drop = T
    ux <- unique(x[!is.na(x) & (x != "")])  
       
    # Species table:
-   if (coding != "code"){
-      tab <- species.foreign() 
-   }else{
-      tab <- species()
-   } 
+   if (coding == "code") tab <- species() else tab <- species.foreign()
       
    # Loop over key words:
    v <- rep(list(NULL), length(ux))
@@ -143,6 +139,10 @@ species.character <- function(x, language = "english", coding = "code", drop = T
       for (j in 1:length(language)){
          r <- 1:nrow(tab)
          for (k in 1:length(words)) r <- intersect(r, grep(words[k], tolower(tab[, language[j]])))
+         ix <- grep("eggs", tolower(tab[r, language[j]]))
+         ix <- c(ix, grep("larva", tolower(tab[r, language[j]])))
+         ix <- sort(ix)
+         r <- c(r[-ix], r[ix])
       }
       v[[i]] <- tab[r, coding]
       v[[i]] <- v[[i]][!is.na(v[[i]])]
