@@ -31,6 +31,7 @@ grow.default <- function(x, species, sex, theta, error = FALSE, ...){
    # Define growth parameters for various species:
    if (missing(theta)){
       if (missing(species)) stop("'species' must be specified.")
+      species <- species(species)
       
       # Snow crab:
       if (species == 2526) theta <- c(intercept = 0.276, transition = 38.2, slope = c(0.32, 0.126), window = 1.6) 
