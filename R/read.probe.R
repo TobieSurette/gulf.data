@@ -11,6 +11,96 @@
 #' @param repeats Logical value specifying whether to keep or average out data records with identical time stamps.
 #' @param ... Other parameters passed onto \code{locate} functions or used to subset data.
 
+#' @describeIn read.probe Read Minilog probe data.
+#' @export read.minilog
+read.minilog <- function(x, file, offset = 0, repeats = FALSE, ...){
+   # Define file(s) to be read:
+   if (!missing(x) & missing(file)) if (is.character(x)) file = x
+   if (missing(file)) file <- locate.minilog(x, ...)
+   if (length(file) == 0) return(NULL)
+   
+   # Read multiple netmind files and concatenate them:
+   if (length(file) > 1){
+      x <- NULL
+      for (i in 1:length(file)){
+         cat(paste(i, ") Reading: '", file[i], "'\n", sep = ""))
+         temp <- read.minilog(file[i])
+         information <- header(temp)
+         for (j in 1:length(information)) temp[, names(information)[j]] <- information[[names(information)[j]]]
+         
+         if (!is.null(x)){
+            # Create NA-valued columns if new variables appear:
+            index <- setdiff(names(x), names(temp))
+            if (length(index) > 0) temp[index] <- NA
+            index <- setdiff(names(temp), names(x))
+            if (length(index) > 0) x[index] <- NA
+            
+            # Order new file properly:
+            temp <- temp[names(x)]
+         }
+         
+         x <- rbind(x, temp)
+      }
+      temp <- attributes(x)
+      temp <- temp[setdiff(names(temp), names(header(x)))]
+      attributes(x) <- temp
+      
+      return(x)
+   }
+   
+   # Empty file:
+   if (length(file) == 0) return(NULL)
+   
+   # Read and parse header info:
+   y <- read.table(file = file, colClasses = "character", comment.char = "", sep = "\n",
+                   blank.lines.skip = FALSE, fileEncoding = "Windows-1252")[[1]]
+   y <- gulf.utils::deblank(y)
+   k <- min(grep("^[0-9]", y)) - 1
+   fields <- y[k] 
+   x <- y[(k+1):length(y)]   
+   y <- y[1:(k-1)]   
+   
+   # Parse header:
+   str <- strsplit(y, ":")
+   header <- gulf.utils::deblank(unlist(lapply(str, function(x) paste0(x[2:length(x)], collapse = ":"))))
+   names(header) <- deblank(unlist(lapply(str, function(x) x[1])))
+   
+   # Extract file name:
+   file.name <- lapply(strsplit(file, "/"), function(x) x[length(x)])[[1]]
+   
+   # Define variable names:
+   fields <- strsplit(gsub("[()]", " ", fields), ",")[[1]]
+   fields <- gsub(" +", " ", fields)
+   units <- lapply(strsplit(fields, " "), function(x) x[2])
+   units <- gsub("°", "degrees", units)
+   fields <- tolower(unlist(lapply(strsplit(fields, " "), function(x) x[1])))
+   names(units) <- fields
+   
+   # Read E-Sonar data:
+   tmp <- data.frame(unlist(lapply(strsplit(x, ","), function(x) x[1])), stringsAsFactors = FALSE)
+   for (i in 2:length(fields)) tmp <- cbind(tmp, data.frame(unlist(lapply(strsplit(x, ","), function(x) x[i])), stringsAsFactors = FALSE))  
+   names(tmp) <- fields
+   x <- tmp
+   
+   # Numeric conversion:
+   for (i in 3:length(fields)) x[,i] <- as.numeric(x[,i])
+   
+   # Modify time by specified offset:
+   if (offset != 0){
+      tmp <- gulf.utils::time(x) + offset * 60
+      x$date <- unlist(lapply(strsplit(as.character(tmp), " "), function(x) x[1]))
+      x$time <- unlist(lapply(strsplit(as.character(tmp), " "), function(x) x[2]))
+   }
+   
+   # Create 'minilog' object:
+   x <- minilog(x, header = header, file.name = file.name, ...)
+   
+   # Attach units:
+   gulf.metadata::units(x) <- units
+   
+   return(x)
+}
+
 #' @describeIn read.probe Read Star Oddi probe data.
 #' @export read.star.oddi
 read.star.oddi <- function(x, file, offset = 0, repeats = FALSE, ...){
