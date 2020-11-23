@@ -493,3 +493,142 @@ read.nsscat <- function(x, file, survey, species, ...){
    
    return(v)
 }
+
+#' @describeIn read Read southern Gulf of Saint Lawrence Northumberland Strait survey length data.
+#' @export read.nsslen
+read.nsslen <- function(x, file, survey, species, ...){
+   # Determine files to load:
+   if (!missing(x) & missing(file)) if (is.character(x)) file = x 
+   if (missing(file)) file <- locate.nsslen(x, ...)
+   if (length(file) == 0) return(NULL)
+   
+   # Read multiple files:
+   if (length(file) > 1){
+      v <- NULL
+      for (i in 1:length(file)){
+         # Append data:
+         tmp <- read.nsslen(file = file[i], ...)
+         
+         # Make previous and current data tables uniform: 
+         vars <- union(names(tmp), names(v))
+         tmp[setdiff(vars, names(tmp))] <- NA
+         if (!is.null(v)) v[setdiff(vars, names(v))] <- NA
+         
+         # Append data tables:
+         v <- rbind(v[vars], tmp[vars])  
+         
+         # Convert NA strings to empty strings:
+         for (j in 1:ncol(v)) if (is.character(v[,j])) v[is.na(v[,j]), j] <- ""
+      }
+   }
+   
+   # Read single file:
+   if (length(file) == 1){
+      # Determine file extension:
+      ext <- tolower(unlist(lapply(strsplit(file, "[.]"), function(x) x[length(x)])))
+      
+      v <- NULL
+      # Read fixed-width file:
+      if (ext %in% c("new", "txt")){
+         v <- read.fortran(file = file, format = c('I1', 'A1', 'A3', 'I3', 'I3', 'I4', 'I2', 'I2', 'I3', 'I1', 'I4', 'I4', 
+                                                   'A1', 'F9.9', 'I1', 'I1', 'I1', 'I1', 'I1', 'I3', 'I3', 'I3', 'I3', 'I3', 'I3',
+                                                   'I3', 'I3', 'I3', 'I3', 'I3', 'I3', 'I3', 'I3', 'I3', 'A3', 'I6', 'A1', 'A12', 
+                                                   'I3', 'A4'))
+         
+         names(v) <- c('card.type', 'vessel.code', 'cruise.number', 'stratum', 'set.number', 'year', 'month', 'day', 'unit.area',
+                       'experiment', 'species', 'number.length', 'ratio.decimal', 'ratio', 'sex', 'length.interval', 'length.unit',
+                       'record.number', 'group', 'start.length', 'freq0', 'freq1', 'freq2', 'freq3', 'freq4', 'freq5', 'freq6', 
+                       'freq7', 'freq8', 'freq9', 'freq10', 'freq11', 'freq12', 'freq13', 'blank3', 'cfvn', 'blank4', 
+                       'expedition.number', 'block.number', 'station.number')
+         
+         # Remove blank spaces:
+         for (j in 1:ncol(v)) if (is.character(v[, j])) v[,j] <- gulf.utils::deblank(v[,j])
+         
+         # Remove blank columns:
+         v <- v[, -grep("blank", names(v))]
+         
+         # Define cruise:
+         v$cruise <- toupper(paste0(v$vessel.code, v$cruise.number))
+         v$size.class <- v$group
+         
+         v$length.unit <- c("cm", "mm")[v$length.unit]
+         v$length.interval <- 1 / v$length.interval
+         
+         # Create data field:
+         v$date <- as.character(gulf.utils::date(year = v$year, month = v$month, day = v$day))
+         
+         # Remove irrelevant fields:
+         remove <- c("year", "month", "day", "expedition.number", "card.type", "depth", "bottom.temperature", "start.hour", "start.minute", "start.second", "light", "btslide", "hydrostation",
+                     "record.number", "group", "bottom.type", "number.length", "bottom.salinity", "unit.area", "vessel.code", "duration", "cruise.number", "stratum", "cfvn", "block.number", "station.number", 
+                     "ratio.decimal", "number.length", "number.sex", "number.maturity", "number.weight", "number.otolith", "number.parasite", "number.stomach", "weight.calculated")
+         v <- v[, !(names(v) %in% remove)]
+         
+         # Sampling ratio fix:
+         v$ratio[v$ratio == 0] <- 1
+         
+         # Subtitute commas by semi-colons in comments:
+         if (!("comment" %in% names(v))) v$comment <- ""
+         v$comment <- gsub(",", ";", v$comment)
+         v$comment <- gulf.utils::deblank(v$comment)
+         
+         # Length-frequency categories:
+         fvars <- names(v)[grep("^freq", names(v))]
+         
+         # Define frequencies:
+         f <- round(v[, fvars])
+         f[is.na(f)] <- 0 
+         fvars <- fvars[apply(f, 2, sum) > 0]
+         f <- f[, fvars]
+         f <- as.vector(as.matrix(f)) #Linearize
+         
+         # Define length matrix:
+         l <- gulf.utils::repvec(v$start.length, ncol = length(fvars) ) + repvec(0:(length(fvars) -1), nrow = nrow(v)) * repvec(v$length.interval, ncol = length(fvars) )
+         
+         # Create data frame of biological card variables:
+         fields <- names(v)[-grep("^freq", names(v))]
+         tmp <- data.frame(set.number = rep(as.vector(repvec(v[, "set.number"], ncol = length(fvars))), f))
+         for (i in 1:length(fields)) tmp[, fields[i]] <- rep(as.vector(repvec(v[, fields[i]], ncol = length(fvars))), f)
+         tmp$length <- rep(as.vector(l), f)
+         
+         # Re-order variables:
+         vars <- c("date", "cruise", "set.number", "experiment", "species", "size.class", "sex", "ratio", "length") 
+         v <- tmp[c(vars, setdiff(names(tmp), c(vars, "length.interval", "start.length")))]
+         
+         # Sort data:
+         v <- sort(v, by = vars)
+         rownames(v) <- NULL
+      }
+      
+      # Read comma-delimited file:
+      if (ext == "csv") v <- read.csv(file, header = TRUE, stringsAsFactors = FALSE)
+      
+      # Compress date variables:
+      if (all(c("year", "month", "day") %in% names(v))){
+         v$date <- as.character(gulf.utils::date(v))
+         v <- cbind(v[c("date")], v[setdiff(names(v), c("date", "year", "month", "day"))])
+      }
+   }
+   
+   # Subset by species:
+   if (!missing(species)){
+      if (is.character(species)) species <- unlist(lapply(species(species, drop = FALSE), function(x) return(x[1]))) # Pick first match.
+      v <- v[v$species %in% species, ]
+   }
+   
+   # Subset by specified variables:
+   args <- list(...)
+   args <- args[names(args) %in% names(v)]
+   if (length(args) > 0){
+      index <- rep(TRUE, nrow(v))
+      for (i in 1:length(args)) index <- index & (v[,names(args)[i]] %in% args[[i]])
+      v <- v[index, ]
+   }
+   
+   # Convert to 'nsslen' object:
+   v <- nsslen(v)
+   
+   # Subset by survey type:
+   if (!missing(survey)) v <- v[survey(v) %in% survey, ]
+   
+   return(v)
+}

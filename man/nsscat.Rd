@@ -15,7 +15,7 @@ nsscat(x, ...)
 \item{year}{Survey year(s) to be loaded.}
 }
 \description{
-The \code{nsscat} class is a container for Northumberland Strait survey set/tow data, 
+The \code{nsscat} class is a container for Northumberland Strait survey catch data, 
              i.e. detailed information about individual tows performed during the annual Northumberland Strait
              survey.
 }

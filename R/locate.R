@@ -188,7 +188,10 @@ locate.nsscat <- function(x, year, source = "gulf.data", cruise, ...){
    
    # Use DFO drive as data source:
    if (length(file) == 0) source <- "ascii"
-   if (source == "ascii") file <- dir(path = options()$gulf.path$nss, pattern = "^rv.[0-9]+c.new", full.names = TRUE)
+   if (source == "ascii"){
+      if ("path" %in% names(list(...))) path <- list(...)$path else path <- options()$gulf.path$nss
+      file <- dir(path = path, pattern = "^rv.[0-9]+c.new", full.names = TRUE)
+   } 
    
    # Subset by year:
    if (!missing(year)){
@@ -259,6 +262,55 @@ locate.scslen <- function(x, year, source = "gulf.data", remove = "bad", ...){
    
    # Empty search:
    if (length(file ) == 0)  return(NULL) else return(file)
+}
+
+#' @describeIn locate Locate Northumberland Strait survey length data files.
+#' @export locate.nsslen
+locate.nsslen <- function(x, year, source = "gulf.data", cruise, ...){
+   file <- NULL
+   if (!missing(x)){
+      if (is.numeric(x)) year <- x
+      if (is.character(x)) file <- x
+   }
+   
+   # Data source is 'gulf.data' package:
+   if ((length(file) == 0) & (source == "gulf.data")) file <- locate(package = "gulf.data", file = c("nss", "len", "csv"), ...)
+   
+   # Use DFO drive as data source:
+   if (length(file) == 0) source <- "ascii"
+   if (source == "ascii"){
+      if ("path" %in% names(list(...))) path <- list(...)$path else path <- options()$gulf.path$nss
+      file <- dir(path = path, pattern = "^rv.[0-9]+l.new", full.names = TRUE)
+   } 
+   
+   # Subset by year:
+   if (!missing(year)){
+      if (source == "ascii"){ 
+         id <- survey("nss", year = year)$id 
+         index <- NULL
+         for (i in 1:length(id)) index <- c(index, grep(toupper(id[i]), toupper(file)))
+         file <- file[index]
+      }
+      if (source == "gulf.data"){ 
+         if (length(file) > 0){
+            index <- rep(FALSE, length(file))
+            for (i in 1:length(year)) index[grep(year[i], file)] <- TRUE
+            file <- file[index]         
+         }
+      }
+   }
+   
+   # Find cruise:
+   if (!missing(cruise)){
+      if (source == "ascii"){ 
+         index <- NULL
+         for (i in 1:length(cruise)) index <- c(index, grep(toupper(cruise[i]), toupper(file)))
+         file <- file[index] 
+      }
+   }
+   
+   # Empty search:
+   if (length(file) == 0)  return(NULL) else return(file)
 }
 
 #' @export locate.star.oddi

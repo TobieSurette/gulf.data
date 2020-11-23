@@ -4,6 +4,7 @@
 \alias{key.scsset}
 \alias{key.nssset}
 \alias{key.nsscat}
+\alias{key.nsslen}
 \alias{key.scscat}
 \alias{key.scsbio}
 \alias{key.star.oddi}
@@ -15,6 +16,8 @@
 \method{key}{nssset}(x, ...)
 
 \method{key}{nsscat}(x, ...)
+
+\method{key}{nsslen}(x, ...)
 
 \method{key}{scscat}(x, ...)
 
@@ -37,6 +40,8 @@ Define or extract index keys for various \code{gulf.data} objects.
 \item \code{nssset}: Index key for Northumberland Strait catch set (\code{nsscat}).
 
 \item \code{nsscat}: Index key for Northumberland Strait catch data (\code{nsscat}).
+
+\item \code{nsslen}: Index key for Northumberland Strait length data (\code{nsslen}).
 
 \item \code{scscat}: Index key for snow crab survey by-catch data (\code{scscat}).
 

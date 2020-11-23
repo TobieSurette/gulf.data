@@ -1,6 +1,6 @@
 #' Northumberland Strait Survey Set/Tow Data
 #'
-#' @description The \code{nsscat} class is a container for Northumberland Strait survey set/tow data, 
+#' @description The \code{nsscat} class is a container for Northumberland Strait survey catch data, 
 #'              i.e. detailed information about individual tows performed during the annual Northumberland Strait
 #'              survey.
 #'

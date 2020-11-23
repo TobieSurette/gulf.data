@@ -24,6 +24,11 @@ key.nssset <- function(x, ...) if (missing(x)) return(c("date", "cruise", "set.n
 #' @export
 key.nsscat <- function(x, ...) if (missing(x)) return(c("date", "cruise", "set.number", "species")) else return(gulf.metadata::key.default(x))
 
+#' @describeIn key Index key for Northumberland Strait length data (\code{nsslen}).
+#' @export key.nsslen
+#' @export
+key.nsslen <- function(x, ...) if (missing(x)) return(c("date", "cruise", "set.number", "species", "size.class", "sex", "length")) else return(gulf.metadata::key.default(x))
+
 #' @describeIn key Index key for snow crab survey by-catch data (\code{scscat}).
 #' @export key.scscat
 #' @export
