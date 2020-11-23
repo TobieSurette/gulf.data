@@ -27,9 +27,9 @@ nssset.default <- function(x, ...){
    # Define attributes:
    gulf.metadata::project(x) <- "nss"
    gulf.metadata::key(x) <- key.nssset()
-   gulf.metadata::units(x, "speed") <- "knots"
+   #gulf.metadata::units(x, "speed") <- "knots"
    gulf.metadata::units(x, names(x)[c(grep("depth", names(x)), grep("warp", names(x)))]) <- "meters"
-   gulf.metadata::units(x, names(x)[grep("temperature", names(x))]) <- "degreesC"
+   #gulf.metadata::units(x, names(x)[grep("temperature", names(x))]) <- "degreesC"
    gulf.metadata::fmt(x, names(x)[grep("time", names(x))]) <- "hh:mm:ss"
    
    # Define class:

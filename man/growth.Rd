@@ -7,7 +7,7 @@
 \usage{
 growth(x, ...)
 
-\method{growth}{default}(x, species, sex, theta, error = FALSE, as.matrix = FALSE, ...)
+\method{growth}{default}(x, species, sex, theta, error = FALSE, density = FALSE, ...)
 }
 \arguments{
 \item{x}{Specimen size, length-frequency or other object.}

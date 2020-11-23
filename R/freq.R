@@ -207,3 +207,21 @@ freq.scsbio <- function(x, category, by, step = 1, variable = "carapace.width", 
    return(f)
 }
 
+#' @describeIn freq \code{scsbio} \code{freq} method.
+#' @export
+freq.nsslen <- function(x, variable = "length", by, ...){
+   # Remove NA values from data set:
+   x <- x[!is.na(x[, variable]), ]
+   
+   # Parse 'by' argument:
+   if (!missing(by)){
+      if (is.character(by)) if (!all(by %in% names(x))) stop("Some 'by' variables not variables in 'x'.") else by <- x[by]
+   }
+   
+   # Process all different combinations:
+   if (missing(by)) f <- freq(x[, variable], ...)  else f <- freq(x[, variable], by = by, ...)
+   
+   return(f)
+}
+
+

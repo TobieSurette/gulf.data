@@ -35,12 +35,13 @@ growth <- function(x, ...) UseMethod("growth")
 
 #' @describeIn growth Default growth function.
 #' @export
-growth.default <- function(x, species, sex, theta, error = FALSE, as.matrix = FALSE, ...){
+growth.default <- function(x, species, sex, theta, error = FALSE, density = FALSE, ...){
    # Define growth parameters for various species:
    if (missing(theta)){
       if (missing(species)) stop("'species' must be specified.")
-      species <- species(species)
-      
+      if (is.character(species)) species <- species(species)[1]
+      if (length(species) != 1) stop("'species' must be of length one.")
+         
       # Default parameters:
       if (species == 2526) theta <- c(intercept = 0.276, transition = 38.2, slope = c(0.32, 0.126), window = 1.6, sigma = 0.135) # Snow crab.
       if (species == 2550) theta <- c(intercept = 0.168, transition = 40.6, slope = c(0.24, 0.10), window = 3.69, sigma = 0.1)   # American lobster.
@@ -53,7 +54,7 @@ growth.default <- function(x, species, sex, theta, error = FALSE, as.matrix = FA
    names(theta) <- gsub("^log_", "", names(theta))
    
    # Define mean function:
-   mu <- splm(theta = theta)
+   mu <- gulf.stats::splm(theta = theta)
    if (length(grep("sigma", names(theta))) == 0) error <- FALSE
    
    # Return mean:
@@ -64,6 +65,7 @@ growth.default <- function(x, species, sex, theta, error = FALSE, as.matrix = FA
       # Logistic transition:
       window <- as.numeric(theta[sort(names(theta)[grep("window", names(theta))])])
 
+      # Evaluate logistic transition:
       eta <- (x - theta[["transition"]]) / window   
       p <-  1 / (1 + exp(-eta))   
          
@@ -80,6 +82,9 @@ growth.default <- function(x, species, sex, theta, error = FALSE, as.matrix = FA
       
    # Evaluate function and error:
    if (!missing(x)){
+      # Direct growth:
+      if (!error) return(mu(x)) else return(data.frame(mu = mu(x), sigma = sigma(x))) 
+      
       # Check if inputs are size-frequencies:
       if (!is.null(names(x))){
          if (all(gsub("[0-9.-]", "", names(x)) == "")){
@@ -88,8 +93,6 @@ growth.default <- function(x, species, sex, theta, error = FALSE, as.matrix = FA
             return(v)
          }
       }
-      
-      if (!error) return(mu(x)) else return(data.frame(mu = mu(x), sigma = sigma(x))) 
    }else{
       return(sigma)
    }

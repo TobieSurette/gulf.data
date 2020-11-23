@@ -4,6 +4,7 @@
 \alias{freq}
 \alias{freq.default}
 \alias{freq.scsbio}
+\alias{freq.nsslen}
 \title{Frequency Functions}
 \usage{
 freq(x, ...)
@@ -11,6 +12,8 @@ freq(x, ...)
 \method{freq}{default}(x, n, index, by, fill = TRUE, step, range, ...)
 
 \method{freq}{scsbio}(x, category, by, step = 1, variable = "carapace.width", ...)
+
+\method{freq}{nsslen}(x, variable = "length", by, ...)
 }
 \arguments{
 \item{x}{Vector of numeric values.}
@@ -40,6 +43,8 @@ Functions to generate size-frequency distributions.
 \item \code{default}: Default \code{freq} method.
 
 \item \code{scsbio}: \code{scsbio} \code{freq} method.
+
+\item \code{nsslen}: \code{scsbio} \code{freq} method.
 }}
 
 \examples{
