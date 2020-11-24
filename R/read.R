@@ -216,7 +216,7 @@ read.nssset <- function(x, file, survey, ...){
 
 #' @describeIn read Read southern Gulf of Saint Lawrence snow crab survey biological data.
 #' @export read.scsbio
-read.scsbio <- function(x, file, survey, ...){
+read.scsbio <- function(x, file, survey, category, ...){
    # Define file(s) to be read:
    if (!missing(x) & missing(file)) if (is.character(x)) file = x 
    if (missing(file)) file <- locate.scsbio(x, ...)
@@ -307,9 +307,12 @@ read.scsbio <- function(x, file, survey, ...){
    # Subset if 'scsset' object was given:
    if (!missing(x)) if ("scsset" %in% class(x)) v <- v[!is.na(gulf.utils::match(v[key.scsset()], x[key.scsset()])), ]
    
+   # Subset by biological category:
+   if (!missing(category)) v <- v[which(is.category(scsbio(v), category)), ]
+   
    # Convert to 'scsset' object:
    v <- scsbio(v)
-      
+   
    # Subset by survey type:
    if (!missing(survey)) v <- v[survey(v) %in% survey, ]
    
@@ -487,6 +490,125 @@ read.nsscat <- function(x, file, survey, species, ...){
    
    # Convert to 'nsscat' object:
    v <- nsscat(v)
+   
+   # Subset by survey type:
+   if (!missing(survey)) v <- v[survey(v) %in% survey, ]
+   
+   return(v)
+}
+
+#' @describeIn read Read southern Gulf of Saint Lawrence Northumberland Strait survey biological data.
+#' @export read.nssbio
+read.nssbio <- function(x, file, survey, species, ...){
+   # Determine files to load:
+   if (!missing(x) & missing(file)) if (is.character(x)) file = x 
+   if (missing(file)) file <- locate.nssbio(x, ...)
+   if (length(file) == 0) return(NULL)
+   
+   # Read multiple files:
+   if (length(file) > 1){
+      v <- NULL
+      for (i in 1:length(file)){
+         # Append data:
+         tmp <- read.nssbio(file = file[i], ...)
+         
+         # Make previous and current data tables uniform: 
+         vars <- union(names(tmp), names(v))
+         tmp[setdiff(vars, names(tmp))] <- NA
+         if (!is.null(v)) v[setdiff(vars, names(v))] <- NA
+         
+         # Append data tables:
+         v <- rbind(v[vars], tmp[vars])  
+         
+         # Convert NA strings to empty strings:
+         for (j in 1:ncol(v)) if (is.character(v[,j])) v[is.na(v[,j]), j] <- ""
+      }
+   }
+   
+   # Read single file:
+   if (length(file) == 1){
+      # Determine file extension:
+      ext <- tolower(unlist(lapply(strsplit(file, "[.]"), function(x) x[length(x)])))
+      
+      v <- NULL
+      # Read fixed-width file:
+      if (ext %in% c("new", "txt")){
+         v <- read.fortran(file = file, format = c('I1', 'A1', 'A3', 'I3', 'I3', 'I4', 'I2', 'I2', 'I3', 'I1', 'I1', 'I4', 'I1', 'I4', 'I3', 
+                                                   'I1', 'I1', 'F5.0', 'I1', 'F5.1', 'I2', 'I2', 'F4.0', 'I1', 'I2', 'I1', 'A3', 'I2', 'I2', 
+                                                   'A1', 'I3', 'A6', 'A1', 'A12', 'A255', 'I1', 'I1', 'F5.2', 'F5.2', 'I3', 'A4', 'A10', 'I3', 
+                                                   'I1', 'I10', 'A4', 'I4'))
+         
+         names(v) <- c('card.type', 'vessel.code', 'cruise.number', 'stratum', 'set.number', 'year', 'month', 'day', 
+                       'unit.area', 'experiment', 'bottom.type', 'species', 'record.number', 'fish.number', 'length', 
+                       'sex', 'maturity', 'weight', 'stomach.type', 'stomach.weight', 'stomach.full', 'stomach.part', 
+                       'weight.gonad', 'age.material', 'annuli', 'edge.type', 'age.check', 'age', 'year.class', 'ager', 
+                       'parasite', 'field.definition', 'blank3', 'expedition.number', 'comment', 'shell.condition', 
+                       'egg.condition', 'chela', 'abdomen', 'block.number', 'station.number', 'missing.legs', 'disc.width',
+                       'bobtail', 'specimen', 'photo.id', 'gonad.vial.number')
+         
+         # Remove blank spaces:
+         for (j in 1:ncol(v)) if (is.character(v[, j])) v[,j] <- gulf.utils::deblank(v[,j])
+         
+         # Remove blank columns:
+         v <- v[, -grep("blank", names(v))]
+         
+         # Define cruise:
+         v$cruise <- toupper(paste0(v$vessel.code, v$cruise.number))
+         
+         # Create data field:
+         v$date <- as.character(gulf.utils::date(year = v$year, month = v$month, day = v$day))
+         
+         # Remove empty columns:
+         v <- squeeze(v)
+         
+         # Remove irrelevant fields:
+         remove <- c("year", "month", "day", "stratum", "card.type", "vessel.code", "record.number", "experiment", "station.number", "cruise.number")
+         v <- v[, !(names(v) %in% remove)]
+         
+         # Weight fixes:
+         v$weight[v$weight == 0] <- NA
+         
+         # Subtitute commas by semi-colons in comments:
+         if (!("comment" %in% names(v))) v$comment <- ""
+         v$comment <- gsub(",", ";", v$comment)
+         v$comment <- gulf.utils::deblank(v$comment)
+         
+         # Re-order variables:
+         vars <- c("date", "cruise", "set.number",  "species", "specimen", "length", "weight", "sex") 
+         v <- v[c(vars, setdiff(names(v), vars))]
+         
+         # Sort data:
+         v <- sort(v, by = c("date", "cruise", "set.number",  "species", "specimen"))
+         rownames(v) <- NULL
+      }
+      
+      # Read comma-delimited file:
+      if (ext == "csv") v <- read.csv(file, header = TRUE, stringsAsFactors = FALSE)
+      
+      # Compress date variables:
+      if (all(c("year", "month", "day") %in% names(v))){
+         v$date <- as.character(gulf.utils::date(v))
+         v <- cbind(v[c("date")], v[setdiff(names(v), c("date", "year", "month", "day"))])
+      }
+   }
+   
+   # Subset by species:
+   if (!missing(species)){
+      if (is.character(species)) species <- unlist(lapply(species(species, drop = FALSE), function(x) return(x[1]))) # Pick first match.
+      v <- v[v$species %in% species, ]
+   }
+   
+   # Subset by specified variables:
+   args <- list(...)
+   args <- args[names(args) %in% names(v)]
+   if (length(args) > 0){
+      index <- rep(TRUE, nrow(v))
+      for (i in 1:length(args)) index <- index & (v[,names(args)[i]] %in% args[[i]])
+      v <- v[index, ]
+   }
+   
+   # Convert to 'nssbio' object:
+   v <- nssbio(v)
    
    # Subset by survey type:
    if (!missing(survey)) v <- v[survey(v) %in% survey, ]

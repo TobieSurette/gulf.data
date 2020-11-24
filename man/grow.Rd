@@ -2,33 +2,22 @@
 % Please edit documentation in R/grow.R
 \name{grow}
 \alias{grow}
-\title{Biological Growth Functions}
+\title{Project Growth}
 \usage{
 grow(x, ...)
 }
 \arguments{
-\item{x}{Specimen size, length-frequency or other object.}
+\item{x}{Specimen size or length-frequency.}
 
-\item{n}{Length-frequencies}
+\item{x0}{}
+
+\item{n}{Numeric value(s) specifying the number of iterations to apply the growth functions. In crustaceans, 
+the number of iterations can be thought as the number of moults. Non-integer values are allowed.}
 }
 \value{
 If \code{x} is left unspecified, then a function is returned which can be used to 
 evaluate growth if given inputs.
 }
 \description{
-Animal growth can be expressed in various ways. Fish species growth is 
-generally modeled as length-at-age, while crustacean growth is normally modeled as
-growth-at-moult size increment, i.e. the expected size increase. An common example 
-of a fish growth model is the von Bertalanffy curve. For crustaceans, the discrete 
-nature of growth and maturation frequently induce a stepwise behaviour. Thus, crustacean 
-growth-at-moult increments are well modeled by a two-component piecewise linear model, 
-with the first component describing immature growth, which is relatively fast, and the 
-second component describing adolescent and mature growth, which has a lower relative 
-growth rate.
-}
-\details{
-Crustacean growth-at-moult models have just three parameters, an initial slope
-parameter, a transition window width (exp(log.w)) and a transition point xp. These 
-functions generate the expected values for a given set of parameters. Also the assumed
-error was assumed to be increasing with size.
+
 }

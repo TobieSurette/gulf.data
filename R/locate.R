@@ -224,7 +224,7 @@ locate.nsscat <- function(x, year, source = "gulf.data", cruise, ...){
 }
 
 #' @describeIn locate Locate snow crab survey biological data files.
-#' @export locate.scsbio
+#' @export locate.scslen
 locate.scslen <- function(x, year, source = "gulf.data", remove = "bad", ...){
    if (!missing(x) & missing(year)){
       if (is.numeric(x)) year <- x
@@ -281,6 +281,55 @@ locate.nsslen <- function(x, year, source = "gulf.data", cruise, ...){
    if (source == "ascii"){
       if ("path" %in% names(list(...))) path <- list(...)$path else path <- options()$gulf.path$nss
       file <- dir(path = path, pattern = "^rv.[0-9]+l.new", full.names = TRUE)
+   } 
+   
+   # Subset by year:
+   if (!missing(year)){
+      if (source == "ascii"){ 
+         id <- survey("nss", year = year)$id 
+         index <- NULL
+         for (i in 1:length(id)) index <- c(index, grep(toupper(id[i]), toupper(file)))
+         file <- file[index]
+      }
+      if (source == "gulf.data"){ 
+         if (length(file) > 0){
+            index <- rep(FALSE, length(file))
+            for (i in 1:length(year)) index[grep(year[i], file)] <- TRUE
+            file <- file[index]         
+         }
+      }
+   }
+   
+   # Find cruise:
+   if (!missing(cruise)){
+      if (source == "ascii"){ 
+         index <- NULL
+         for (i in 1:length(cruise)) index <- c(index, grep(toupper(cruise[i]), toupper(file)))
+         file <- file[index] 
+      }
+   }
+   
+   # Empty search:
+   if (length(file) == 0)  return(NULL) else return(file)
+}
+
+#' @describeIn locate Locate Northumberland Strait survey biological data files.
+#' @export locate.nssbio
+locate.nssbio <- function(x, year, source = "gulf.data", cruise, ...){
+   file <- NULL
+   if (!missing(x)){
+      if (is.numeric(x)) year <- x
+      if (is.character(x)) file <- x
+   }
+   
+   # Data source is 'gulf.data' package:
+   if ((length(file) == 0) & (source == "gulf.data")) file <- locate(package = "gulf.data", file = c("nss", "bio", "csv"), ...)
+   
+   # Use DFO drive as data source:
+   if (length(file) == 0) source <- "ascii"
+   if (source == "ascii"){
+      if ("path" %in% names(list(...))) path <- list(...)$path else path <- options()$gulf.path$nss
+      file <- dir(path = path, pattern = "^rv.[0-9]+b.new", full.names = TRUE)
    } 
    
    # Subset by year:
