@@ -562,10 +562,12 @@ read.nssbio <- function(x, file, survey, species, ...){
          v <- squeeze(v)
          
          # Remove irrelevant fields:
-         remove <- c("year", "month", "day", "stratum", "card.type", "vessel.code", "record.number", "experiment", "station.number", "cruise.number")
+         remove <- c("year", "month", "day", "unit.area", "stratum", "card.type", "vessel.code", "record.number", 
+                     "experiment", "station.number", "cruise.number", "bottom.type", "block.number", "missing.legs")
          v <- v[, !(names(v) %in% remove)]
          
          # Weight fixes:
+         if (!("weight" %in% names(v))) v$weight <- NA
          v$weight[v$weight == 0] <- NA
          
          # Subtitute commas by semi-colons in comments:
@@ -573,13 +575,20 @@ read.nssbio <- function(x, file, survey, species, ...){
          v$comment <- gsub(",", ";", v$comment)
          v$comment <- gulf.utils::deblank(v$comment)
          
-         # Re-order variables:
-         vars <- c("date", "cruise", "set.number",  "species", "specimen", "length", "weight", "sex") 
-         v <- v[c(vars, setdiff(names(v), vars))]
+         # Specimen number fix:
+         if (!("specimen" %in% names(v)) & ("fish.number" %in% names(v))) v$specimen <- v$fish.number 
+         if (!("specimen" %in% names(v))){
+            vars <- c("date", "cruise", "set.number",  "species")
+            ix <- match(v[vars], unique(v[vars]))
+            for (i in 1:max(ix)) v$specimen[ix == i] <- 1:sum(ix == i)
+         }
          
          # Sort data:
-         v <- sort(v, by = c("date", "cruise", "set.number",  "species", "specimen"))
-         rownames(v) <- NULL
+         vars <- c("date", "cruise", "set.number",  "species", "specimen")
+         if (!any(is.na(v[vars]))){
+            v <- sort(v, by = vars)
+            rownames(v) <- NULL
+         }
       }
       
       # Read comma-delimited file:
@@ -717,8 +726,10 @@ read.nsslen <- function(x, file, survey, species, ...){
          v <- tmp[c(vars, setdiff(names(tmp), c(vars, "length.interval", "start.length")))]
          
          # Sort data:
-         v <- sort(v, by = vars)
-         rownames(v) <- NULL
+         if (!any(is.na(v[vars]))){
+            v <- sort(v, by = vars)
+            rownames(v) <- NULL
+         }
       }
       
       # Read comma-delimited file:

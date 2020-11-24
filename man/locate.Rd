@@ -8,6 +8,7 @@
 \alias{locate.nsscat}
 \alias{locate.scslen}
 \alias{locate.nsslen}
+\alias{locate.nssbio}
 \title{Locate Gulf Data Files}
 \usage{
 \method{locate}{scsset}(x, year, source = "gulf.data", ...)
@@ -23,6 +24,8 @@
 \method{locate}{scslen}(x, year, source = "gulf.data", remove = "bad", ...)
 
 \method{locate}{nsslen}(x, year, source = "gulf.data", cruise, ...)
+
+\method{locate}{nssbio}(x, year, source = "gulf.data", cruise, ...)
 }
 \arguments{
 \item{x}{Data object.}
@@ -58,6 +61,8 @@ Functions to locate various data file(s) from different studies and surveys.
 \item \code{scslen}: Locate snow crab survey biological data files.
 
 \item \code{nsslen}: Locate Northumberland Strait survey length data files.
+
+\item \code{nssbio}: Locate Northumberland Strait survey biological data files.
 }}
 
 \examples{

@@ -329,7 +329,9 @@ locate.nssbio <- function(x, year, source = "gulf.data", cruise, ...){
    if (length(file) == 0) source <- "ascii"
    if (source == "ascii"){
       if ("path" %in% names(list(...))) path <- list(...)$path else path <- options()$gulf.path$nss
-      file <- dir(path = path, pattern = "^rv.[0-9]+b.new", full.names = TRUE)
+      print(path)
+      if (!file.exists(path)) path <- getwd()
+      file <- dir(path = path, recursive = TRUE, pattern = "^rv.[0-9]+b.new", full.names = TRUE)
    } 
    
    # Subset by year:

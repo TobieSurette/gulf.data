@@ -7,17 +7,45 @@
 grow(x, ...)
 }
 \arguments{
-\item{x}{Specimen size or length-frequency.}
+\item{x}{Specimen size or length-frequency. Fish size units are usually in centimeters while those of crustaceans are 
+generally in millimeters. \code{x} may be a frequency table.}
 
-\item{x0}{}
+\item{x0}{Numeric value(s) at which probabilistic growth frequencies are to be estimated. Note that using 
+\code{x0} signals the function to use a probabilistic projection of growth, rather than a deterministic one.
+See examples.}
 
-\item{n}{Numeric value(s) specifying the number of iterations to apply the growth functions. In crustaceans, 
-the number of iterations can be thought as the number of moults. Non-integer values are allowed.}
-}
-\value{
-If \code{x} is left unspecified, then a function is returned which can be used to 
-evaluate growth if given inputs.
+\item{n}{Numeric value(s) specifying the number of iterations (e.g. number of moults) to apply the growth functions. 
+Non-integer values are allowed.}
 }
 \description{
+Functions to estimate the deterministic or probabilistic future size of an organism.
+}
+\examples{
+# Deterministic growth:
+grow(60, species = "lobster")         # Post-moult size for a 60mm CL lobster.
+grow(30:100, species = "lobster")     # Post-moult size for a range of lobster CL sizes.
+grow(30:100, species = "snow crab")   # Post-moult size for a range of lobster CW sizes.
 
+# Probabilistic growth:
+x0 <- seq(60, 100, len = 1000)        # Post-moult size values at which we wish to know the probability density.
+y0 <- grow(60, x0 = x0, species = "snow crab") # Estimate post-moult size probability densities for a single 60mm crab.
+plot(x0, y0, type = "l", xlab = "Carapace width (mm)", ylab = "Probability density")
+
+# Probabilistic growth for multiple observations:
+x0 <- seq(60, 100, len = 1000)        # Post-moult size values at which we wish to know the probability density.
+y0 <- grow(c(60, 60, 70, 75), x0 = x0, species = "snow crab") # Estimate post-moult size probability densities for a single 60mm crab.
+plot(x0, y0, type = "l", xlab = "Carapace width (mm)", ylab = "Probability density")
+
+# Probabilistic growth for large sample:
+x <- read.scsbio(2020, category = "MI") # Immature males.
+x0 <- seq(0, 140, len = 1000)
+grow(x$carapace.width, species = "snow crab") # Deterministic.
+plot(x0, grow(x$carapace.width, x0, species = "snow crab"), 
+     type = "l", xlab = "Carapace width (mm)", ylab = "Frequency")
+     
+# Control number of moults:
+grow(60, n = 0, species = "snow crab") # No moult.
+grow(60, n = 1, species = "snow crab") # One moult (default).
+grow(60, n = 2, species = "snow crab") # Two moults.
+grow(c(60, 70, 80), n = c(0,1,2), species = "snow crab") # Three sizes with 0, 1 and 2 moults.
 }

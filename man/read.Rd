@@ -6,6 +6,7 @@
 \alias{read.scsbio}
 \alias{read.scscat}
 \alias{read.nsscat}
+\alias{read.nssbio}
 \alias{read.nsslen}
 \title{Read \strong{gulf} data sets.}
 \usage{
@@ -13,11 +14,13 @@ read.scsset(x, file, survey, ...)
 
 read.nssset(x, file, survey, ...)
 
-read.scsbio(x, file, survey, ...)
+read.scsbio(x, file, survey, category, ...)
 
 read.scscat(x, file, species, ...)
 
 read.nsscat(x, file, survey, species, ...)
+
+read.nssbio(x, file, survey, species, ...)
 
 read.nsslen(x, file, survey, species, ...)
 }
@@ -54,6 +57,8 @@ Functions to read Gulf of Saint-Lawrence data sets.
 \item \code{read.scscat}: Read southern Gulf of Saint Lawrence snow crab survey by-catch data.
 
 \item \code{read.nsscat}: Read southern Gulf of Saint Lawrence Northumberland Strait survey catch data.
+
+\item \code{read.nssbio}: Read southern Gulf of Saint Lawrence Northumberland Strait survey biological data.
 
 \item \code{read.nsslen}: Read southern Gulf of Saint Lawrence Northumberland Strait survey length data.
 }}

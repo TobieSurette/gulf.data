@@ -26,9 +26,9 @@ nssbio <- function(x, ...) UseMethod("nssbio")
 #' @export
 nssbio.default <- function(x, ...){
    # Re-order variables:
-   vars <- c("date", "set.number", "experiment", "species", "size.class", "sex", "ratio", "length", "length.unit", "comment")
+   vars <- c("date", "cruise", "set.number",  "species", "specimen", "sex", "length", "weight")
    vars <- vars[vars %in% names(x)]
-   vars <- c(vars, setdiff(names(x), vars))
+   vars <- c(vars, setdiff(names(x), c(vars, "comment")), "comment")
    x <- x[vars]
    
    # Define attributes:
