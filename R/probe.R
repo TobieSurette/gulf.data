@@ -2,7 +2,6 @@
 #' 
 #' @description Measurement probe data class definition and methods.
 #'
-#'
 #' @param x Probe data object.
 #' @param header File header data.
 #' @param buffer Extra time, in seconds, to be included beyond the start and end time specifications when truncating data.
@@ -48,5 +47,4 @@ probe.default <- function(x, header, ...){
    
    return(v)
 }
-
 

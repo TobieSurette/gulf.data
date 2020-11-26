@@ -3,14 +3,11 @@
 \name{import<-}
 \alias{import<-}
 \alias{import<-.data.frame}
-\alias{import<-.scsset}
 \title{Import Data}
 \usage{
 import(x, ...) <- value
 
 \method{import}{data.frame}(x, by, variables, fill.na, ...) <- value
-
-\method{import}{scsset}(x, ...) <- value
 }
 \arguments{
 \item{x}{Target object.}
@@ -31,8 +28,6 @@ Import from one object into another.
 \section{Functions}{
 \itemize{
 \item \code{import<-.data.frame}: Import assignment method for data frames.
-
-\item \code{import<-.scsset}: Snow crab set import assignment method.
 }}
 
 \examples{

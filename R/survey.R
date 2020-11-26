@@ -64,63 +64,74 @@ survey.default <- function(x, year, project, ...){
    return(v)
 }
 
+scs.survey <- function(x, ...){
+   month <- as.numeric(substr(x$date, 6, 7))
+   v <- rep("", nrow(x))
+   v[month %in% 4:5] <- "spring"
+   v[month %in% 6] <- "summer"
+   v[month %in% 7:10] <- "regular"
+   
+   # 2002 catchability study:
+   index <- which(substr(x$date,1,10) %in% c("2002-09-24", "2002-09-25"))
+   v[index] <- "catchability"
+   
+   # 2004 catchability study:
+   index <- which(substr(x$date,1,10) %in% c("2004-10-18", "2004-10-24", "2004-10-25"))
+   v[index] <- "catchability"
+   
+   # 2005 special studies:
+   index <- which(substr(x$date,1,10) %in% c("2005-10-04", "2005-10-05", "2005-10-06"))
+   v[index] <- "catchability"
+   index <- which(substr(x$date,1,10) %in% "2005-10-12")
+   v[index] <- "selectivity"
+
+   # 2019 comparative study:
+   index <- which((gulf.utils::year(x) == 2019) & (substr(x$tow.id,2,2) == "C"))
+   v[index] <- paste(v[index], "comparative")
+   
+   return(v)
+}
+
 #' @describeIn survey Determine type of survey sampling for snow crab survey tows.
 #' @export
-survey.scsset <- function(x, ...){
-   month <- as.numeric(substr(x$date, 6, 7))
-   v <- rep("", nrow(x))
-   v[month %in% 4:5] <- "spring"
-   v[month %in% 6] <- "summer"
-   v[month %in% 7:10] <- "regular"
-   
-   # 2002 catchability study:
-   index <- which(substr(x$date,1,10) %in% c("2002-09-24", "2002-09-25"))
-   v[index] <- "catchability"
-   
-   # 2004 catchability study:
-   index <- which(substr(x$date,1,10) %in% c("2004-10-18", "2004-10-24", "2004-10-25"))
-   v[index] <- "catchability"
-   
-   # 2005 special studies:
-   index <- which(substr(x$date,1,10) %in% c("2005-10-04", "2005-10-05", "2005-10-06"))
-   v[index] <- "catchability"
-   index <- which(substr(x$date,1,10) %in% "2005-10-12")
-   v[index] <- "selectivity"
+survey.scsset <- function(x, ...) return(scs.survey(x))
 
-   # 2019 comparative study:
-   index <- which((gulf.utils::year(x) == 2019) & (substr(x$tow.id,2,2) == "C"))
-   v[index] <- paste(v[index], "comparative")
-   
-   return(v)
-}
-
-#' @describeIn survey Determine type of survey sampling for snow crab survey biological data.
 #' @export
-survey.scsbio <- function(x, ...){
-   month <- as.numeric(substr(x$date, 6, 7))
+survey.scscat <- function(x, ...) return(scs.survey(x))
+
+#' @export
+survey.scsbio <- function(x, ...) return(scs.survey(x))
+
+nss.survey <- function(x){
+   # Define regular survey cruises:
+   regular <- c("O901", "O024", "O139", "O241", "O341", "O434", "O536", "O637", "O030", "O022", "O029", "O103", "O129",
+                "O026", "P126", "P021", "P521", "P018", "P024", "P041", "P140", "P150")
+   fall <- c("O160", "O263", "O365", "O456", "P329", "P829")
+   tagging <- "P953"
+   spring <- c("O218", "O320")
+   test <- "O104"
+
+   # Do assignment:
    v <- rep("", nrow(x))
-   v[month %in% 4:5] <- "spring"
-   v[month %in% 6] <- "summer"
-   v[month %in% 7:10] <- "regular"
-   
-   # 2002 catchability study:
-   index <- which(substr(x$date,1,10) %in% c("2002-09-24", "2002-09-25"))
-   v[index] <- "catchability"
-   
-   # 2004 catchability study:
-   index <- which(substr(x$date,1,10) %in% c("2004-10-18", "2004-10-24", "2004-10-25"))
-   v[index] <- "catchability"
-   
-   # 2005 special studies:
-   index <- which(substr(x$date,1,10) %in% c("2005-10-04", "2005-10-05", "2005-10-06"))
-   v[index] <- "catchability"
-   index <- which(substr(x$date,1,10) %in% "2005-10-12")
-   v[index] <- "selectivity"
-   
-   # 2019 comparative study:
-   index <- which((gulf.utils::year(x) == 2019) & (substr(x$tow.id,2,2) == "C"))
-   v[index] <- paste(v[index], "comparative")
+   v[x$cruise %in% regular] <- "regular"
+   v[x$cruise %in% fall] <- "fall"
+   v[x$cruise %in% tagging] <- "tagging"
+   v[x$cruise %in% spring] <- "spring"
+   v[x$cruise %in% test] <- "trawl test"
    
    return(v)
 }
+
+#' @describeIn survey Determine type of survey sampling for Northumberland Strait survey tows.
+#' @export
+survey.nssset <- function(x, ...) return(nss.survey(x))
+
+#' @export
+survey.nsscat <- function(x, ...) return(nss.survey(x))
+
+#' @export
+survey.nssbio <- function(x, ...) return(nss.survey(x))
+
+#' @export
+survey.nsslen <- function(x, ...) return(nss.survey(x))
 

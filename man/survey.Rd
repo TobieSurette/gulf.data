@@ -4,7 +4,7 @@
 \alias{survey}
 \alias{survey.default}
 \alias{survey.scsset}
-\alias{survey.scsbio}
+\alias{survey.nssset}
 \title{Survey Identifiers}
 \usage{
 survey(x, ...)
@@ -13,7 +13,7 @@ survey(x, ...)
 
 \method{survey}{scsset}(x, ...)
 
-\method{survey}{scsbio}(x, ...)
+\method{survey}{nssset}(x, ...)
 }
 \arguments{
 \item{x}{Object.}
@@ -35,7 +35,7 @@ Returns research survey codes and identifiers.
 
 \item \code{scsset}: Determine type of survey sampling for snow crab survey tows.
 
-\item \code{scsbio}: Determine type of survey sampling for snow crab survey biological data.
+\item \code{nssset}: Determine type of survey sampling for Northumberland Strait survey tows.
 }}
 
 \examples{

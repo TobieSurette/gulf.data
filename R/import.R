@@ -52,15 +52,3 @@
    
    return(x)
 }
-
-#' @describeIn import-set Snow crab set import assignment method.
-#' @export
-"import<-.scsset" <- function(x, value, ...){
-   names <- names(x)
-   class <- class(x)
-   class(x) <- "data.frame"
-   import(x, ...) <- value
-   class(x) <- class
-   
-   return(x)
-}
