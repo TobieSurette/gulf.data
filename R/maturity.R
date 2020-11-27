@@ -12,7 +12,7 @@
 #'                    performed on the observations by year and the predicted probabilties are 
 #'                    returned.
 #' @param year Survey year.
-#' @param species Numeric species code.
+#' @param species Species name or code.
 #' @param ... Further arguments passed onto internal functions.
 #' 
 #' @return Logical vector, probability (when \code{probability = TRUE}), or character string.
