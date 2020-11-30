@@ -49,7 +49,7 @@ returned.}
 
 \item{year}{Survey year.}
 
-\item{species}{Numeric species code.}
+\item{species}{Species name or code.}
 }
 \value{
 Logical vector, probability (when \code{probability = TRUE}), or character string.
