@@ -114,10 +114,10 @@ nss.survey <- function(x){
    # Do assignment:
    v <- rep("", nrow(x))
    v[x$cruise %in% regular] <- "regular"
-   v[x$cruise %in% fall] <- "fall"
+   v[x$cruise %in% fall]    <- "fall"
    v[x$cruise %in% tagging] <- "tagging"
-   v[x$cruise %in% spring] <- "spring"
-   v[x$cruise %in% test] <- "trawl test"
+   v[x$cruise %in% spring]  <- "spring"
+   v[x$cruise %in% test]    <- "trawl test"
    
    return(v)
 }

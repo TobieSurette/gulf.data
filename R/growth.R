@@ -44,7 +44,7 @@ growth.default <- function(x, species, sex, theta, error = FALSE, density = FALS
          
       # Default parameters:
       if (species == 2526) theta <- c(intercept = 0.276, transition = 38.2, slope = c(0.32, 0.126), window = 1.6, sigma = 0.135) # Snow crab.
-      if (species == 2550) theta <- c(intercept = 0.168, transition = 40.6, slope = c(0.24, 0.10), window = 3.69, sigma = 0.1)   # American lobster.
+      if (species == 2550) theta <- c(intercept = 0.168, transition = 40.6, slope = c(0.243, 0.00), window = 1, sigma = 0.1)   # American lobster.
    }
 
    # Parse parameter vector:
