@@ -67,11 +67,12 @@ tow.id.probe <- function(x, method, ...){
 
 #' @rawNamespace S3method(tow.id,scsbio)
 tow.id.scsbio <- function(x, ...){
-   if (is.null(x$tow.id)) x$tow.id <- NA
-   if (all(is.na(x$tow.id))){
-      year <- as.numeric(unique(substr(unique(x$date), 1, 4)))
-      s <- read.scsset(year = year)
-      x$tow.id <- s$tow.id[gulf.utils::match(x[c("date", "tow.number")], s[c("date", "tow.number")])]
+   if (is.null(x$tow.id)) x$tow.id <- ""
+   x$tow.id[is.na(x$tow.id)] <- ""
+   ix <- x$tow.id == ""
+   if (any(ix)){
+      s <- read.scsset(year = as.numeric(unique(substr(unique(x$date[ix]), 1, 4))))
+      x$tow.id[ix] <- s$tow.id[gulf.utils::match(x[ix, c("date", "tow.number")], s[c("date", "tow.number")])]
    }
    
    return(x$tow.id)
