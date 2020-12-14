@@ -25,19 +25,19 @@
 "import<-.data.frame" <- function(x, value, variables, fill.na, ...){
    if (missing(variables)) variables <- names(value)
    
-   variables <- variables[variables %in% names(value)]
-   
    # Remove indexing variables:
    variables <- setdiff(variables, list(...)$by)
    variables <- setdiff(variables, list(...)$key)
    variables <- setdiff(variables, key(value))
+   variables <- setdiff(variables, key(x))
+   variables <- variables[variables %in% names(value)]
    if (length(variables) == 0) stop("No matching variables to import from source object.") 
 
    # Append results:
    if (length(variables) > 0){
-      index <- gulf.utils::match(x, value, ...)
+      ix <- gulf.utils::match(x, value, ...)
       x[variables] <- NA
-      x[variables] <- value[index, variables]
+      x[variables] <- value[ix, variables]
    }
 
    # Fill NA values:
