@@ -102,6 +102,9 @@ survey.scscat <- function(x, ...) return(scs.survey(x))
 #' @export
 survey.scsbio <- function(x, ...) return(scs.survey(x))
 
+#' @export
+survey.scslen <- function(x, ...) return(scs.survey(x))
+
 nss.survey <- function(x){
    # Define regular survey cruises:
    regular <- c("O901", "O024", "O139", "O241", "O341", "O434", "O536", "O637", "O030", "O022", "O029", "O103", "O129",

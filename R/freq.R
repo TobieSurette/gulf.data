@@ -207,11 +207,48 @@ freq.scsbio <- function(x, category, by, step = 1, variable = "carapace.width", 
    return(f)
 }
 
-#' @describeIn freq \code{scsbio} \code{freq} method.
+#' @describeIn freq \code{scslen} \code{freq} method.
 #' @export
-freq.nsslen <- function(x, variable = "length", by, ...){
+freq.scslen <- function(x, variable = "length", by, units = "cm", ...){
    # Remove NA values from data set:
    x <- x[!is.na(x[, variable]), ]
+
+   # Unit conversions:
+   if (units == "cm"){
+      ix <- which(x$length.unit == "mm")
+      x[ix, variable] <- x[ix, variable] / 10
+   }
+   if (units == "mm"){
+      ix <- which(x$length.unit == "cm")
+      x[ix, variable] <- x[ix, variable] * 10      
+   }
+   
+   # Parse 'by' argument:
+   if (!missing(by)){
+      if (is.character(by)) if (!all(by %in% names(x))) stop("Some 'by' variables not variables in 'x'.") else by <- x[by]
+   }
+   
+   # Process all different combinations:
+   if (missing(by)) f <- freq(x[, variable], ...)  else f <- freq(x[, variable], by = by, ...)
+   
+   return(f)
+}
+
+#' @describeIn freq \code{nsslen} \code{freq} method.
+#' @export
+freq.nsslen <- function(x, variable = "length", by, units = "cm", ...){
+   # Remove NA values from data set:
+   x <- x[!is.na(x[, variable]), ]
+   
+   # Unit conversions:
+   if (units == "cm"){
+      ix <- which(x$length.unit == "mm")
+      x[ix, variable] <- x[ix, variable] / 10
+   }
+   if (units == "mm"){
+      ix <- which(x$length.unit == "cm")
+      x[ix, variable] <- x[ix, variable] * 10      
+   }
    
    # Parse 'by' argument:
    if (!missing(by)){

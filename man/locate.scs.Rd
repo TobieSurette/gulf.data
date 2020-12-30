@@ -5,7 +5,7 @@
 \alias{locate.scscat}
 \alias{locate.scsbio}
 \alias{locate.scslen}
-\title{Locate Gulf Data Files}
+\title{Locate Snow Crab Survey Data}
 \usage{
 \method{locate}{scsset}(x, year, source = "gulf.data", ...)
 
@@ -18,7 +18,7 @@
 \arguments{
 \item{x}{Data object.}
 
-\item{year}{Study or survey year.}
+\item{year}{Survey year.}
 
 \item{source}{Character string specifying the data source for data files. Options are \sQuote{ascii} or a gulf 
 package name (e.g. \sQuote{gulf.data}).}
@@ -29,7 +29,7 @@ are removed from the search results.}
 \item{tow.id}{Character string(s) specifying a tow identifier(s) (e.g. \sQuote{GP354F}).}
 }
 \description{
-Functions to locate various data file(s) from different studies and surveys.
+Functions to locate various data file(s) from the Snow Crab Survey.
 }
 \section{Functions}{
 \itemize{
@@ -39,7 +39,7 @@ Functions to locate various data file(s) from different studies and surveys.
 
 \item \code{locate.scsbio}: Locate snow crab survey biological data files.
 
-\item \code{locate.scslen}: Locate snow crab survey biological data files.
+\item \code{locate.scslen}: Locate snow crab survey by-catch length data files.
 }}
 
 \examples{

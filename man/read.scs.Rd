@@ -4,6 +4,7 @@
 \alias{read.scsset}
 \alias{read.scscat}
 \alias{read.scsbio}
+\alias{read.scslen}
 \title{Read Snow Crab Survey Data}
 \usage{
 read.scsset(x, file, survey, ...)
@@ -11,6 +12,8 @@ read.scsset(x, file, survey, ...)
 read.scscat(x, file, survey, species, ...)
 
 read.scsbio(x, file, survey, category, ...)
+
+read.scslen(x, file, survey, species, ...)
 }
 \arguments{
 \item{x}{Survey year or file name.}
@@ -37,6 +40,8 @@ Functions to read snow crab survey data.
 \item \code{read.scscat}: Read southern Gulf of Saint Lawrence snow crab survey by-catch data.
 
 \item \code{read.scsbio}: Read southern Gulf of Saint Lawrence snow crab survey biological data.
+
+\item \code{read.scslen}: Read southern Gulf of Saint Lawrence snow crab survey by-catch length data.
 }}
 
 \examples{
@@ -59,6 +64,8 @@ b <- read.scsbio(2020, category = "MI")
 }
 \seealso{
 \code{\link[gulf.data]{scs}}
+
+\code{\link[gulf.data]{locate.scs}}
 
 \code{\link[gulf.data]{read.nss}}
 

@@ -9,27 +9,28 @@ A number of data tables are included in the package.
   - Research project description table.
   - Research survey description table.
   - Survey vessel description table.
-  - Snow crab survey tow/set data.
-  - Snow crab survey biological data.
+  - Snow crab survey tow/set, biological and by-catch data.
+  - Northumberland Strait survey set, catch and biological data.
   
 ## Data Access:
 
-Functions to access, read and load southern Gulf of Saint Lawrence research data are also provided.
+The package contains functions to find and access southern Gulf of Saint Lawrence research data.
 
 ### Survey data:
   - Snow crab annual survey. 
-```
-   x <- read.scsset(2020, valid = 1, survey = "regular") # Read valid regular survey tows for 2020.
-   x <- read.scsbio(2020, category = "COM")              # Read commercial snow crab biological data for 2020.
-   x <- read.scscat(2020, species = c("cod", "plaice"))  # Read Atlantic cod and American plaice data for 2020.
-```
+   ```
+      x <- read.scsset(2020, valid = 1, survey = "regular") # Read valid regular survey tows for 2020.
+      x <- read.scsbio(2020, category = "COM")              # Read commercial snow crab biological data for 2020.
+      x <- read.scscat(2020, species = c("cod", "plaice"))  # Read Atlantic cod and American plaice data for 2020.
+      x <- read.scslen(2020, species = c("cod", "plaice"))  # Read Atlantic cod and American plaice data for 2020.
+   ```
   - September multi-species annual survey.
   - Northumberland Strait annual survey.
-```
-   x <- read.nssset(2019, experiment = 1)                # Read valid regular survey tows for 2019.
-   x <- read.nssbio(2019, species = "american lobster")  # Read biological data for American lobster in 2019.
-   x <- read.nsscat(2019, species = c("cod", "plaice"))  # Read Atlantic cod and American plaice data for 2020.
-```
+  ```
+     x <- read.nssset(2019, experiment = 1)                # Read valid regular survey tows for 2019.
+     x <- read.nssbio(2019, species = "american lobster")  # Read biological data for American lobster in 2019.
+     x <- read.nsscat(2019, species = c("cod", "plaice"))  # Read Atlantic cod and American plaice data for 2020.
+   ```
   
 ### Probe data:
   - Trawl net acoustic monitoring data (Scanmar, Netmind, eSonar and Notus).

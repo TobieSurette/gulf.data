@@ -44,6 +44,11 @@ key.scscat <- function(x, ...) if (missing(x)) return(c("date", "tow.id", "speci
 #' @export
 key.scsbio <- function(x, ...) if (missing(x)) return(c("date", "tow.id", "crab.number")) else return(gulf.metadata::key.default(x))
 
+#' @describeIn key Fetch \code{scslen} index key.
+#' @export key.scslen
+#' @export
+key.scslen <- function(x, ...) if (missing(x)) return(NULL) else return(gulf.metadata::key.default(x))
+
 #' @describeIn key Fetch \code{star.oddi} index key.
 #' @export key.star.oddi
 #' @rawNamespace S3method(key,star.oddi)

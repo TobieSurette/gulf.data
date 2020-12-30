@@ -27,9 +27,11 @@
 #' b <- read.scsbio(2020, category = "MI")
 #' 
 #' @seealso \code{\link[gulf.data]{scs}}
+#' @seealso \code{\link[gulf.data]{locate.scs}}
 #' @seealso \code{\link[gulf.data]{read.nss}}
 #' @seealso \code{\link[gulf.data]{read.probe}}
 
+#' 
 #' @describeIn read.scs Read southern Gulf of Saint Lawrence snow crab survey set data.
 #' @export read.scsset
 read.scsset <- function(x, file, survey, ...){
@@ -284,6 +286,109 @@ read.scsbio <- function(x, file, survey, category, ...){
    
    # Convert to 'scsset' object:
    v <- scsbio(v)
+   
+   # Subset by survey type:
+   if (!missing(survey)) v <- v[survey(v) %in% survey, ]
+   
+   return(v)
+}
+
+#' @describeIn read.scs Read southern Gulf of Saint Lawrence snow crab survey by-catch length data.
+#' @export read.scslen
+read.scslen <- function(x, file, survey, species, ...){
+   # Define file(s) to be read:
+   if (!missing(x) & missing(file)) if (is.character(x)) file = x 
+   if (missing(file)) file <- locate.scslen(x, ...)
+   if (length(file) == 0) return(NULL)
+
+   # Read multiple files:
+   if (length(file) > 1){
+      v <- NULL
+      for (i in 1:length(file)){
+         # Append data:
+         tmp <- read.scslen(file = file[i], ...)
+         
+         # Make previous and current data tables uniform: 
+         vars <- union(names(tmp), names(v))
+         tmp[setdiff(vars, names(tmp))] <- NA
+         if (!is.null(v)) v[setdiff(vars, names(v))] <- NA
+         
+         # Append data tables:
+         v <- rbind(v[vars], tmp[vars])  
+         
+         # Convert NA strings to empty strings:
+         for (j in 1:ncol(v)) if (is.character(v[,j])) v[is.na(v[,j]), j] <- ""
+      }
+   }
+   
+   # Read single file:
+   if (length(file) == 1){
+      # Determine file extension:
+      ext <- tolower(unlist(lapply(strsplit(file, "[.]"), function(x) x[length(x)])))
+
+      # Read fixed-width file:
+      if (ext == "txt"){
+         v <- read.fortran(file = file, 
+                           format = c("A1", "A2", "A2", "A4", "A1", "A2", "A1", "A3", "A1", "A1", "A3", "A4", "A1", "A1", "A6", 
+                                      "A5", "A1", "A5", "A1", "A1", "A1", "A1", "A2", "A1", "A1", "A1", "A8", "A1", "A10", "A1",
+                                      "A2", "A1", "A8", "A1", "A8", "A1", "A3", "A1", "A1", "A3", "A1", "A4", "A7", "A21", "A6",  
+                                      "A1", "A25", "A8"))
+
+         names(v) <- c("blank1",  "day", "month", "year", "blank2",  "zone",  "subzone", "blank3", "data.type", 
+                       "blank4", "tow.number", "crab.number", "blank5", "sex", "carapace.width", "abdomen.width", 
+                       "blank6", "chela.height", "maturity", "blank7",  "shell.condition", "shell.condition.mossy", 
+                       "gonad.colour", "blank8", "egg.colour", "eggs.remaining", "tag.number", "blank9", "missing.legs", 
+                       "blank10", "position.type", "blank11", "latitude.start", "blank12", "longitude.start", "blank13", 
+                       "depth", "blank14", "soak.days", "durometer", "blank15", "trap.code",  "blank16", "samplers",   
+                       "weight", "blank17", "comments", "tow.id")  
+         
+         # Remove blank columns:
+         v <- v[, -grep("blank", names(v))]
+         
+         # Remove blank leading and trailing spaces:
+         for (j in 1:ncol(v)) if (is.character(v[, j])) v[, j] <- deblank(v[, j])
+          
+         # Convert to date:
+         v$date <- as.character(gulf.utils::date(v[c("day", "month", "year")]))
+         
+         # Numeric conversions:
+         nvars <- c("tow.number", "crab.number", "carapace.width", "abdomen.width", 
+                    "chela.height", "shell.condition", "gonad.colour", "egg.colour", "latitude.start", "longitude.start",
+                    "soak.days", "depth", "weight")
+         f <- function(x) return(as.numeric(gsub("[*]", "", x)))
+         for (j in 1:length(nvars)) v[, nvars[j]] <- f(v[, nvars[j]])
+      }
+      
+      # Read comma-delimited file:
+      if (ext == "csv") v <- read.csv(file, header = TRUE, stringsAsFactors = FALSE)
+      
+      # Compress date variables:
+      if (all(c("year", "month", "day") %in% names(v))){
+         v$date <- as.character(gulf.utils::date(v))
+         v <- cbind(v[c("date")], v[setdiff(names(v), c("date", "year", "month", "day"))])
+      }
+   }
+   
+   # Subset by species:
+   if (!missing(species)){
+      if (is.character(species)) species <- unlist(lapply(species(species, drop = FALSE), function(x) return(x[1]))) # Pick first match.
+      v <- v[v$species %in% species, ]
+   }
+   
+   # Subset by specified variables:
+   args <- list(...)
+   args <- args[names(args) %in% names(v)]
+   if (length(args) > 0){
+      index <- rep(TRUE, nrow(v))
+      for (i in 1:length(args)) index <- index & (v[,names(args)[i]] %in% args[[i]])
+      v <- v[index, ]
+   }
+
+   # Subset if 'scsset' object was given:
+   if (!missing(x)) if ("scsset" %in% class(x)) v <- v[!is.na(gulf.utils::match(v[key.scsset()], x[key.scsset()])), ]
+
+   # Convert to 'scsset' object:
+   v <- scslen(v)
    
    # Subset by survey type:
    if (!missing(survey)) v <- v[survey(v) %in% survey, ]

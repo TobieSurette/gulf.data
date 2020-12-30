@@ -34,6 +34,10 @@ scscat <- function(x, ...) UseMethod("scscat")
 #' @export
 scsbio <- function(x, ...) UseMethod("scsbio")
 
+#' @describeIn scs Generic \code{scslen} method.
+#' @export
+scslen <- function(x, ...) UseMethod("scslen")
+
 #' @describeIn scs Create an \code{scsset} object.
 #' @export
 scsset.default <- function(x, ...){
@@ -86,6 +90,19 @@ scsbio.default <- function(x, ...){
    
    # Define class:
    class(x) <- unique(c("scsbio", class(x))) 
+   
+   return(x)
+}
+
+#' @describeIn scs Create an \code{scslen} object.
+#' @export
+scslen.default <- function(x, ...){
+   # Define attributes:
+   gulf.metadata::project(x) <- "scs"
+   gulf.metadata::key(x) <- key.scslen()
+   
+   # Define class:
+   class(x) <- unique(c("scslen", class(x))) 
    
    return(x)
 }

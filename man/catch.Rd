@@ -3,11 +3,14 @@
 \name{catch}
 \alias{catch}
 \alias{catch.scsbio}
+\alias{catch.scslen}
 \title{Catch Data}
 \usage{
 catch(x, ...)
 
 \method{catch}{scsbio}(x, by = key.scsset(), category, species, weight = FALSE, ...)
+
+\method{catch}{scslen}(x, by = key.scslen(), species, ...)
 }
 \arguments{
 \item{x}{Target object.}
@@ -28,6 +31,8 @@ Extract or generate catch data summaries.
 \section{Methods (by class)}{
 \itemize{
 \item \code{scsbio}: Snow crab biological data catch summaries.
+
+\item \code{scslen}: Snow crab by-catch length data catch summaries.
 }}
 
 \examples{

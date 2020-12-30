@@ -1,9 +1,9 @@
-#' Locate Gulf Data Files
+#' Locate Snow Crab Survey Data
 #' 
-#' @description Functions to locate various data file(s) from different studies and surveys.
+#' @description Functions to locate various data file(s) from the Snow Crab Survey.
 #' 
 #' @param x Data object.
-#' @param year Study or survey year.
+#' @param year Survey year.
 #' @param source Character string specifying the data source for data files. Options are \sQuote{ascii} or a gulf 
 #'               package name (e.g. \sQuote{gulf.data}).
 #' @param remove Character string vector specifying a list of key words, which if found in the data path or file name, 
@@ -125,7 +125,7 @@ locate.scsbio <- function(x, year, source = "gulf.data", remove = "bad", ...){
    if (length(file ) == 0)  return(NULL) else return(file)
 }
 
-#' @describeIn locate.scs Locate snow crab survey biological data files.
+#' @describeIn locate.scs Locate snow crab survey by-catch length data files.
 #' @export locate.scslen
 locate.scslen <- function(x, year, source = "gulf.data", remove = "bad", ...){
    if (!missing(x) & missing(year)){
@@ -146,7 +146,7 @@ locate.scslen <- function(x, year, source = "gulf.data", remove = "bad", ...){
    }
    
    # Data source is 'gulf.data' package:
-   if (source == "gulf.data") file <- locate(package = "gulf.data", file = c("scs", "cat", "csv"), ...)
+   if (source == "gulf.data") file <- locate(package = "gulf.data", file = c("scs", "len", "csv"), ...)
    
    # Year subset:
    if (!missing(year) & (length(file) > 0)){
@@ -165,4 +165,3 @@ locate.scslen <- function(x, year, source = "gulf.data", remove = "bad", ...){
    # Empty search:
    if (length(file ) == 0)  return(NULL) else return(file)
 }
-

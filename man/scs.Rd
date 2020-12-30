@@ -4,9 +4,11 @@
 \alias{scsset}
 \alias{scscat}
 \alias{scsbio}
+\alias{scslen}
 \alias{scsset.default}
 \alias{scscat.default}
 \alias{scsbio.default}
+\alias{scslen.default}
 \title{Snow Crab Survey Data Classes}
 \usage{
 scsset(x, ...)
@@ -15,11 +17,15 @@ scscat(x, ...)
 
 scsbio(x, ...)
 
+scslen(x, ...)
+
 \method{scsset}{default}(x, ...)
 
 \method{scscat}{default}(x, ...)
 
 \method{scsbio}{default}(x, ...)
+
+\method{scslen}{default}(x, ...)
 }
 \arguments{
 \item{x}{A \code{data.frame} object containing data fields to be mapped onto a corresponding snow crab survey data object.}
@@ -37,11 +43,15 @@ Class containers for snow crab survey data.
 
 \item \code{scsbio}: Generic \code{scsbio} method.
 
+\item \code{scslen}: Generic \code{scslen} method.
+
 \item \code{scsset.default}: Create an \code{scsset} object.
 
 \item \code{scscat.default}: Create an \code{scscat} object.
 
 \item \code{scsbio.default}: Create an \code{scsbio} object.
+
+\item \code{scslen.default}: Create an \code{scslen} object.
 }}
 
 \examples{

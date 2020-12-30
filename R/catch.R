@@ -42,3 +42,14 @@ catch.scsbio <- function(x, by = key.scsset(), category, species, weight = FALSE
    
    return(res)
 }
+
+#' @describeIn catch Snow crab by-catch length data catch summaries.
+#' @export
+catch.scslen <- function(x, by = key.scslen(), species, ...){
+   res <- stats::aggregate(w, by = x[by], sum, na.rm = TRUE)
+   names(res) <- c(by, "total")
+   res <- sort(res, by = by)      
+
+   return(res)
+}
+

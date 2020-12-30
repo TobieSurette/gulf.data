@@ -8,6 +8,7 @@
 \alias{key.nsslen}
 \alias{key.scscat}
 \alias{key.scsbio}
+\alias{key.scslen}
 \alias{key.star.oddi}
 \alias{key.esonar}
 \title{\strong{gulf.data} Index Keys}
@@ -25,6 +26,8 @@
 \method{key}{scscat}(x, ...)
 
 \method{key}{scsbio}(x, ...)
+
+\method{key}{scslen}(x, ...)
 
 \method{key}{star.oddi}(x, ...)
 
@@ -51,6 +54,8 @@ Define or extract index keys for various \code{gulf.data} objects.
 \item \code{scscat}: Index key for snow crab survey by-catch data (\code{scscat}).
 
 \item \code{scsbio}: Fetch \code{scsbio} index key.
+
+\item \code{scslen}: Fetch \code{scslen} index key.
 
 \item \code{star.oddi}: Fetch \code{star.oddi} index key.
 
