@@ -116,7 +116,16 @@ locate.esonar.default <- function(x, year, tow.id, remove = "test", ...){
 
    # Load set of file names:
    files <- locate(pattern = "*.csv", keywords = "esonar", ...)
-
+   
+   # Target year:
+   if (!missing(year)){
+      if (!is.numeric(year)) stop("'year' must be a numeric integer.")
+      year <- sort(year)
+      index <- NULL
+      for (i in 1:length(year)) index <- c(index, grep(year[i], files))
+      files <- unique(files[index])
+   }
+   
    # Search Shared drive:
    if (length(files) == 0){
       if (file.exists(options()$gulf.path$snow.crab)){
@@ -126,6 +135,7 @@ locate.esonar.default <- function(x, year, tow.id, remove = "test", ...){
       }
    }
 
+   print(files)
    # Target year:
    if (!missing(year)){
       if (!is.numeric(year)) stop("'year' must be a numeric integer.")
