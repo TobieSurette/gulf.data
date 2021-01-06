@@ -20,6 +20,10 @@ time.scsset <- function(x, event = "start", ...){
    event <- match.arg(tolower(event), c("start", "end", "stop", "haul", "touchdown", "liftoff"))
    if (event == "end") if (length(intersect(grep("end", names(x)), grep("time", names(x)))) == 0) event <- "stop" 
    
+   # Treat 'stop' and 'end' as synonyms:
+   names(x) <- gsub("end", "stop", names(x))
+   event <- gsub("end", "stop", event)
+   
    # Result variable:
    v <- rep("", nrow(x))
    
