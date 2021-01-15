@@ -87,7 +87,7 @@ scs.survey <- function(x, ...){
 
    # 2019 comparative study:
    index <- which((gulf.utils::year(x) == 2019) & (substr(x$tow.id,2,2) == "C"))
-   v[index] <- paste(v[index], "comparative")
+   v[index] <-"comparative"
    
    return(v)
 }
