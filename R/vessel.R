@@ -28,7 +28,7 @@ vessel <- function(x, ...) UseMethod("vessel")
 #' @rdname vessel
 #' @export
 vessel.default <- function(x, ...){
-   file <- locate(package = "gulf.data", pattern = "vessel.csv")
+   file <- locate(package = "gulf.data", file = "vessel.csv")
    v <- read.csv(file, header = TRUE, stringsAsFactors = FALSE)
    return(v)
 }
