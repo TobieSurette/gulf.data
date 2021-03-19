@@ -1,5 +1,7 @@
 #' Read Snow Crab Survey Data
 #' 
+#' @aliases read.scs
+#' 
 #' @description Functions to read snow crab survey data.
 #' 
 #' @param x Survey year or file name.

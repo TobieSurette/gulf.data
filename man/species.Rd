@@ -17,7 +17,7 @@ species(x, ...)
 
 \method{species}{list}(x, ...)
 
-\method{species}{numeric}(x, language = "english", coding = "code", ...)
+\method{species}{numeric}(x, language = "english", coding = "code", output, ...)
 
 \method{species}{character}(x, language = "english", coding = "code", drop = TRUE, ...)
 }
@@ -31,7 +31,8 @@ language and coding combinations are available.}
 \item{coding, input, output}{Character string specifying the type of species coding being used. Options are the standard 
 research survey coding \code{\sQuote{rv}} (or equivalently \code{\sQuote{research}}), the Statistical
 Coordinating Committee for the Atlantic Coast (STACAC) coding \code{\sQuote{stacac}}, the North 
-American Fisheries Organization (NAFO) coding \code{\sQuote{nafo}}, and the observer and commercial 
+American Fisheries Organization (NAFO) coding \code{\sQuote{nafo}}, World Repository of Marine Species (WoRMS) 
+coding \code{\sQuote{WoRMS}} or \code{\sQuote{aphiaID}},  and the observer and commercial 
 file name prefix coding \code{\sQuote{observer}} and \code{\sQuote{commercial}}.}
 }
 \value{
@@ -59,9 +60,18 @@ Converts species codes to corresponding species names and vice versa.
 # Miscellaneous queries:
 species(10)  # Code for "Atlantic cod".
 species(c(10, 12, 40:43), language = "latin") # Latin names for common species.
-species(101, coding = "nafo")   # NAFO species codes.
-species(145, coding = "stacac") # STACAC species codes.
-species(41, coding = "com")     # Commercial file prefix for Witch flounder.
+species(101, coding = "nafo")     # NAFO species codes.
+species(145, coding = "stacac")   # STACAC species codes.
+species(41, coding = "com")       # Commercial file prefix for Witch flounder.
+species(126436, coding = "WoRMS") # WoRMS species codes.
+
+# Converting between species codes:
+species(10, output = "WoRMS") # DFO to WoRMS coding.
+species(126436, coding = "worms", output = "code")
+species(10, output = "stacac")
+species(10, output = "stacac")
+species(10, output = "nafo")
+species(101, coding = "nafo", output = "stacac")
 
 # Search for two key words:
 species("cod atl")

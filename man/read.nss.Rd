@@ -2,6 +2,7 @@
 % Please edit documentation in R/read.nss.R
 \name{read.nssset}
 \alias{read.nssset}
+\alias{read.nss}
 \alias{read.nsscat}
 \alias{read.nssbio}
 \alias{read.nsslen}

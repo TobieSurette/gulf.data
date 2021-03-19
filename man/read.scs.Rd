@@ -2,6 +2,7 @@
 % Please edit documentation in R/read.scs.R
 \name{read.scsset}
 \alias{read.scsset}
+\alias{read.scs}
 \alias{read.scscat}
 \alias{read.scsbio}
 \alias{read.scslen}

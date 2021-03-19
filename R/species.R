@@ -11,7 +11,8 @@
 #' @param coding,input,output Character string specifying the type of species coding being used. Options are the standard 
 #'               research survey coding \code{\sQuote{rv}} (or equivalently \code{\sQuote{research}}), the Statistical
 #'               Coordinating Committee for the Atlantic Coast (STACAC) coding \code{\sQuote{stacac}}, the North 
-#'               American Fisheries Organization (NAFO) coding \code{\sQuote{nafo}}, and the observer and commercial 
+#'               American Fisheries Organization (NAFO) coding \code{\sQuote{nafo}}, World Repository of Marine Species (WoRMS) 
+#'               coding \code{\sQuote{WoRMS}} or \code{\sQuote{aphiaID}},  and the observer and commercial 
 #'               file name prefix coding \code{\sQuote{observer}} and \code{\sQuote{commercial}}.
 #' 
 #' @return Vector of character strings containing species names. For multiple species name searches, a list of
@@ -33,10 +34,19 @@
 #' # Miscellaneous queries:
 #' species(10)  # Code for "Atlantic cod".
 #' species(c(10, 12, 40:43), language = "latin") # Latin names for common species.
-#' species(101, coding = "nafo")   # NAFO species codes.
-#' species(145, coding = "stacac") # STACAC species codes.
-#' species(41, coding = "com")     # Commercial file prefix for Witch flounder.
+#' species(101, coding = "nafo")     # NAFO species codes.
+#' species(145, coding = "stacac")   # STACAC species codes.
+#' species(41, coding = "com")       # Commercial file prefix for Witch flounder.
+#' species(126436, coding = "WoRMS") # WoRMS species codes.
 #' 
+#' # Converting between species codes:
+#' species(10, output = "WoRMS") # DFO to WoRMS coding.
+#' species(126436, coding = "worms", output = "code")
+#' species(10, output = "stacac")
+#' species(10, output = "stacac")
+#' species(10, output = "nafo")
+#' species(101, coding = "nafo", output = "stacac")
+#'
 #' # Search for two key words:
 #' species("cod atl")
 #' 
@@ -83,35 +93,49 @@ species.list <- function(x, ...) return(lapply(x, species))
 
 #' @rdname species
 #' @export
-species.numeric <- function(x, language = "english", coding = "code", ...){
+species.numeric <- function(x, language = "english", coding = "code", output, ...){
    # Parse input arguments:
    language <- language(language)
-   coding <-  match.arg(tolower(coding), c("code", "rv", "research", "commercial", "observer", "stacac", "nafo"))
+   
+   # Parse input coding: 
+   coding <- gulf.utils::deblank(gsub("[._]", "", tolower(coding)))
+   coding <- match.arg(coding, c("code", "rv", "research", "nafo", "stacac", "aphiaid", "worms", "commercial", "observer"))
    if (coding %in% c("rv", "research")) coding <- "code"
+   if (coding %in% c("worms"))          coding <- "aphiaid"
+   if (coding == "aphiaid")             coding <- "aphia.id"
    
    # Initialize result variable:
    result <- NULL
    
-   # Gulf research survey codes:
-   if (coding == "code"){    
-      tab <- species()
-      result <- tab[match(x, tab$code), language]
+   # Load species code tables:
+   if (coding %in% c("code", "aphia.id")) tab <- species()          # Gulf research survey codes.
+   if (coding %in% c("stacac", "nafo"))   tab <- species.foreign()  # STACAC and NAFO species codes:
+   
+   # Parse output coding: 
+   if (!missing(output)){
+      output <- gulf.utils::deblank(gsub("[._]", "", tolower(output)))
+      output <- match.arg(output, c("code", "rv", "research", "nafo", "stacac", "aphiaid", "worms"))
+      if (output %in% c("rv", "research")) output <- "code"
+      if (output %in% c("worms"))          output <- "aphiaid"
+      if (output == "aphiaid")             output <- "aphia.id"
+      
+      if (output %in% c("stacac", "nafo")) tab <- species.foreign()  # STACAC and NAFO species codes:
+   }else{
+      output <- language
    }
-  
-   # Define species names and STACAC and NAFO codes:
-   if (coding %in% c("stacac", "nafo")){
-       tab <- species.foreign()
-       result <- tab[match(x, tab[, coding]), language]
-   }
-
-   # Return species file strings for observer data species codes:
+   
+   # Return species file strings for observer and commercial data species codes:
    if (coding %in% c("commercial", "observer")){
-     tab <- data.frame(code = c(10,11, 12, 16, 23, 30, 31, 40, 41, 42, 43, 60, 64, 70, 220, 720, 2211),
-                       name = c("cod","had", "wh", "pol", "red", "hal", "turb", "pla", "wit", "yel", "wf", "her", "cap", "mack","dog", "sau", "shri"),
-                       stringsAsFactors = FALSE)
-     result <- tab$name[match(x, tab$code)]
+      tab <- data.frame(code = c(10,11, 12, 16, 23, 30, 31, 40, 41, 42, 43, 60, 64, 70, 220, 720, 2211),
+                        name = c("cod","had", "wh", "pol", "red", "hal", "turb", "pla", "wit", "yel", "wf", "her", "cap", "mack","dog", "sau", "shri"),
+                        stringsAsFactors = FALSE)
+      coding <- "code"
+      output <- "name"
    }   
 
+   # Look-up species codes:
+   result <- tab[match(x, tab[, coding]), output] 
+   
    return(result)
 }
 
@@ -123,14 +147,17 @@ species.character <- function(x, language = "english", coding = "code", drop = T
    if (language == "any") language <- ""
    
    # Input coding:
-   coding <- match.arg(tolower(coding), c("code", "rv", "research", "nafo", "stacac"))
+   coding <- gulf.utils::deblank(gsub("[._]", "", tolower(coding)))
+   coding <- match.arg(coding, c("code", "rv", "research", "nafo", "stacac", "aphiaid", "worms"))
    if (coding %in% c("rv", "research")) coding <- "code"
+   if (coding %in% c("worms"))          coding <- "aphiaid"
+   if (coding == "aphiaid")             coding <- "aphia.id"
    
    # Character species string match:
    ux <- unique(x[!is.na(x) & (x != "")])  
       
    # Species table:
-   if (coding == "code") tab <- species() else tab <- species.foreign()
+   if (coding %in% c("code", "aphia.id")) tab <- species() else tab <- species.foreign()
 
    # Loop over key words:
    v <- rep(list(NULL), length(ux))

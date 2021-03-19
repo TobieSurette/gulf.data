@@ -1,5 +1,7 @@
 #' Read Northumberland Strait Survey Data
 #' 
+#' @aliases read.nss
+#' 
 #' @description Functions to Northumberland Strait survey  data sets.
 #' 
 #' @param x Survey year or file name.
