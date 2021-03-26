@@ -36,13 +36,15 @@ vessel.default <- function(x, ...){
 #' @rdname vessel
 #' @export 
 vessel.character <- function(x, verbose = FALSE, ...){
+   v <- vessel() # Load vessel table.
+   
    ux <- unique(x)
    ux <- ux[which(!is.na(ux) & ux != "")]
    
    if (length(ux) == 0) return(NULL)
    
-   index <- NULL
-   for (i in 1:length(ux)) index <- c(index, grep(tolower(ux[i]), tolower(v$name)))
+   ix <- NULL
+   for (i in 1:length(ux)) ix <- c(ix, grep(tolower(ux[i]), tolower(v$name)))
   
-   return(v$name[index])
+   return(v$name[ix])
 }
