@@ -107,6 +107,7 @@ freq.default <- function(x, n, index, by, fill = TRUE, step, range, ...){
 
       # Combine groups and frequency matrix:
       f <- cbind(groups, fnew)
+      gulf.metadata::key(f) <- names(groups)
    }
    
    if (!missing(index)){ 
@@ -159,7 +160,9 @@ freq.default <- function(x, n, index, by, fill = TRUE, step, range, ...){
       }
       f <- fnew
    }
-
+   
+   key <- key(f)
+   
    # Fill-in missing regular values with zeroes:
    if (fill){
       fvars <- names(f)[gsub("[-0-9.]", "", names(f)) == ""]
@@ -181,6 +184,8 @@ freq.default <- function(x, n, index, by, fill = TRUE, step, range, ...){
    }
    
    rownames(f) <- NULL
+   
+   key(f) <- key
    
    return(f)
 }
