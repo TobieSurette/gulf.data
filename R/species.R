@@ -17,7 +17,7 @@
 #' 
 #' @return Vector of character strings containing species names. For multiple species name searches, a list of
 #'         search results are returned.
-#'         
+#'
 #' @section Functions:
 #' \describe{
 #'   \item{\code{species}}{Generic \code{species} method.}

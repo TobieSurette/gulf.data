@@ -33,7 +33,6 @@
 #' @seealso \code{\link[gulf.data]{read.nss}}
 #' @seealso \code{\link[gulf.data]{read.probe}}
 
-#' 
 #' @describeIn read.scs Read southern Gulf of Saint Lawrence snow crab survey set data.
 #' @export read.scsset
 read.scsset <- function(x, file, survey, ...){
