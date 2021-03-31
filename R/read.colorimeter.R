@@ -55,6 +55,12 @@ read.colorimeter <- function(...){
       }
    }
    
+   # Shell condition formatting:
+   x$shell.condition <- toupper(x$shell.condition)
+   
+   # Define index key:
+   key(x) <- key.scsbio()
+  
    return(x)
 }
 
