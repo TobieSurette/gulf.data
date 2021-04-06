@@ -74,6 +74,9 @@ sampler.scs <- function(x){
    v <- gsub("M.H.", "MARCEL HEBERT", v, fixed = TRUE)
    v[v == "MARCEL.HEBERT"] <- "MARCEL HEBERT"   
    v <- gsub("/HEBERT/", "/MARCEL HEBERT/", v, fixed = TRUE)
+   v <- gsub("M.H/", "MARCEL HEBERT/", v, fixed = TRUE) 
+   v <- gsub("M.H$", "MARCEL HEBERT", v) 
+   v <- gsub("MARCEL/", "MARCEL HEBERT/", v) 
    
    # Claude Albert:
    v <- gsub("CLAU$", "CLAUDE ALBERT", v)
@@ -119,7 +122,29 @@ sampler.scs <- function(x){
    v <- gsub("^PIERRE[/]", "PIERRE DEGRACE/", v)  
    v <- gsub("PIERRE.DEGRACE", "PIERRE DEGRACE/", v, fixed = TRUE) 
    v <- gsub("P.D.G.", "PIERRE DEGRACE", v, fixed = TRUE) 
+   v <- gsub("P[. ]D", "PIERRE D", v, fixed = TRUE) 
+   v <- gsub("PIERRE D$", "PIERRE DEGRACE", v, fixed = TRUE) 
+   v <- gsub("P.D/", "PIERRE DEGRACE/", v, fixed = TRUE)
+   v <- gsub("P.D$", "PIERRE DEGRACE", v)
+   v <- gsub("PIERRE.D/", "PIERRE DEGRACE/", v) 
+   v <- gsub("P.D.", "PIERRE DEGRACE", v, fixed = TRUE)   
    
+   # Helene Chiasson:
+   v <- gsub("H.CHIASSON", "HELENE CHIASSON", v, fixed = TRUE)
+   v <- gsub("H C", "HELENE CHIASSON", v, fixed = TRUE)
+   v <- gsub("H.C/", "HELENE CHIASSON/", v, fixed = TRUE)
+   v <- gsub("HELENE[.]C$", "HELENE CHIASSON", v)
+   v <- gsub("H[.]C$", "HELENE CHIASSON", v)  
+   
+   # Renald Hache:
+   v <- gsub("R.H.", "RENALD HACHE", v, fixed = TRUE)
+   v <- gsub("R.H$", "RENALD HACHE", v)
+   v <- gsub("R.H/", "RENALD HACHE/", v)
+   v <- gsub("R HACHE", "RENALD HACHE", v, fixed = TRUE)
+   v <- gsub("RH/", "RENALD HACHE/", v, fixed = TRUE)
+   v <- gsub("R.HACHE", "RENALD HACHE", v, fixed = TRUE) 
+   v <- gsub("RENALD$", "RENALD HACHE", v) 
+
    # Christine Sabean:
    v <- gsub("CHRISTINE", "CHRISTINE SABEAN", v)
    v <- gsub("/CHRISTI/", "/CHRISTINE SABEAN/", v, fixed = TRUE)
@@ -144,6 +169,8 @@ sampler.scs <- function(x){
    v <- gsub("D.LAPIERRE", "DANNY LAPIERRE", v, fixed = TRUE)
    v <- gsub("J.BOURGEOIS", "JULES BOURGEOIS", v, fixed = TRUE)
    
+   
+   v <- gsub("G.ROBICHAUD", "GUY ROBICHAUD", v, fixed = TRUE)  
    v <- gsub("A.DUGUAY", "ALBAN DUGUAY", v, fixed = TRUE)  
    v <- gsub("AD$", "ALBAN DUGUAY", v)  
    v <- gsub("D.G.", "PIERRE DEGRACE", v, fixed = TRUE) 

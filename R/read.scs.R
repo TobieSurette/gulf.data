@@ -10,6 +10,7 @@
 #' @param species Species code or name.
 #' @param survey Survey type, as determined by the \link{survey.scsset} function.
 #' @param tow.id Numeric value or character string specifying the ID corresponding to a particular tow sampling station.
+#' @param drop Logical value specifying whether to remove empty data rows.
 #' @param ... Other parameters passed onto \code{locate} functions or used to subset data.
 #' 
 #' @examples  
@@ -191,7 +192,7 @@ read.scscat <- function(x, file, survey, species, ...){
 
 #' @describeIn read.scs Read southern Gulf of Saint Lawrence snow crab survey biological data.
 #' @export read.scsbio
-read.scsbio <- function(x, file, survey, category, ...){
+read.scsbio <- function(x, file, survey, category, drop = TRUE, ...){
    # Define file(s) to be read:
    if (!missing(x) & missing(file)) if (is.character(x)) file = x 
    if (missing(file)) file <- locate.scsbio(x, ...)
@@ -202,7 +203,7 @@ read.scsbio <- function(x, file, survey, category, ...){
       v <- NULL
       for (i in 1:length(file)){
          # Append data:
-         tmp <- read.scsbio(file = file[i], ...)
+         tmp <- read.scsbio(file = file[i], drop = drop, ...)
          
          # Make previous and current data tables uniform: 
          vars <- union(names(tmp), names(v))
@@ -253,6 +254,13 @@ read.scsbio <- function(x, file, survey, category, ...){
                     "soak.days", "depth", "weight")
          f <- function(x) return(as.numeric(gsub("[*]", "", x)))
          for (j in 1:length(nvars)) v[, nvars[j]] <- f(v[, nvars[j]])
+         
+         # Delete empty data rows:
+         if (drop){
+            index <- (v$carapace.width > 0) | !is.na(v$abdomen.width) | !is.na(v$chela.height) | !is.na(v$shell.condition) | 
+                     !is.na(v$gonad.colour) | !is.na(v$egg.colour) | !is.na(v$eggs.remaining) 
+            v <- v[which(index), ]
+         }
       }
       
       # Read comma-delimited file:
@@ -265,11 +273,6 @@ read.scsbio <- function(x, file, survey, category, ...){
       }
    }
 
-   # Delete empty data rows:
-   index <- (v$carapace.width > 0) | !is.na(v$abdomen.width) | !is.na(v$chela.height) | !is.na(v$shell.condition) | 
-            !is.na(v$gonad.colour) | !is.na(v$egg.colour) | !is.na(v$eggs.remaining) 
-   v <- v[which(index), ]
-   
    # Subset by specified variables:
    args <- list(...)
    args <- args[names(args) %in% names(v)]
