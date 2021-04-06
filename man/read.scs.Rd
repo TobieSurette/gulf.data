@@ -12,7 +12,7 @@ read.scsset(x, file, survey, ...)
 
 read.scscat(x, file, survey, species, ...)
 
-read.scsbio(x, file, survey, category, ...)
+read.scsbio(x, file, survey, category, drop = TRUE, ...)
 
 read.scslen(x, file, survey, species, ...)
 }
@@ -26,6 +26,8 @@ read.scslen(x, file, survey, species, ...)
 \item{...}{Other parameters passed onto \code{locate} functions or used to subset data.}
 
 \item{species}{Species code or name.}
+
+\item{drop}{Logical value specifying whether to remove empty data rows.}
 
 \item{year}{Survey year(s).}
 

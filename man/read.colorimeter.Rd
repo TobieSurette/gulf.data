@@ -5,16 +5,16 @@
 \alias{locate.colorimeter}
 \title{Locate and Read Colorimetry Data}
 \usage{
-read.colorimeter(year = NULL, ...)
+read.colorimeter(...)
 
 \method{locate}{colorimeter}(x, year, source = "gulf.data", ...)
 }
 \arguments{
-\item{year}{Survey year.}
-
 \item{x}{Data object.}
 
-\item{tow.id}{Character string(s) specifying a tow identifier(s) (e.g. \sQuote{GP354F}).}
+\item{year}{Survey year.}
+
+\item{tow.id}{Character string(s) specifying a tow identifier(s) (e.g. \sQuote{GP313F}).}
 }
 \description{
 Functions to find and access colour meter data from the snow crab survey.
@@ -25,9 +25,15 @@ Functions to find and access colour meter data from the snow crab survey.
 }}
 
 \examples{
+# Locate data files:
 locate.colorimeter()          # Find all snow crab colorimeter data files.
 locate.colorimeter(2020)      # Find specific year.
 locate.colorimeter(2017:2019) # Find set of years.
+
+# Read data:
+x <- read.colorimeter()
+x <- read.colorimeter(2020)
+x <- read.colorimeter(tow.id = "GP313F")
 
 }
 \seealso{
