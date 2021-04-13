@@ -57,6 +57,16 @@ Function           | Description
 `read.colorimeter` | Read colorimeter measurement data.
 `read.alsi`        | Read Atlantic Lobster Settlement Index data.
 
+### Metadata tables:
+
+Function           | Description
+------------------ | --------------------------------------------------
+`species`          | Species codes data table.
+`species.foreign`  | Foreign species codes data table.
+`survey`           | Science survey data table.
+`project`          | Data project definition and description data table.
+`glossary`         | Science and data term glossary data table.
+
 ### Data Field Functions:
 
 Function           | Description
@@ -69,6 +79,7 @@ Function           | Description
 `maturity`         | Determine or extract animal maturity data.
 `sampler`          | Extract or format field sampler data. 
 `sex`              | Extract or format biological sex data. 
+`species`          | Extract or convert species identification data. 
 `tow.id`           | Extract survey tow identification data.
 `trip`             | Extract field trip data. 
 `vessel`           | Extract sampling or fishing vessel data.
