@@ -38,7 +38,7 @@ sampler.default <- function(x, project, ...){
    if ("observer" %in% names(x)) x <- x$observer
    x <- as.character(x)
    
-   # Apply proper function by reasearch project:
+   # Apply proper function by reseearch project:
    if (project == "scs") return(sampler.scs(x))
    if (project == "sco") return(sampler.sco(x))
    
