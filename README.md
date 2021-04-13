@@ -57,16 +57,6 @@ Function           | Description
 `read.colorimeter` | Read colorimeter measurement data.
 `read.alsi`        | Read Atlantic Lobster Settlement Index data.
 
-### Metadata tables:
-
-Function           | Description
------------------- | --------------------------------------------------
-`species`          | Species codes data table.
-`species.foreign`  | Foreign species codes data table.
-`survey`           | Science survey data table.
-`project`          | Data project definition and description data table.
-`glossary`         | Science and data term glossary data table.
-
 ### Data Field Functions:
 
 Function           | Description
@@ -101,6 +91,16 @@ Function           | Description
 `is.soft.shell`    | Determine if crustacean has a soft shell. 
 `is.hard.shell`    | Determine if crustacean has a hard shell (i.e. not soft moult). 
 `is.skip.moulter`  | Determine if crustacean has skipped a moult. 
+
+### Metadata tables:
+
+Function           | Description
+------------------ | --------------------------------------------------
+`species`          | Species codes data table.
+`species.foreign`  | Foreign species codes data table.
+`survey`           | Science survey data table.
+`project`          | Data project definition and description data table.
+`glossary`         | Science and data term glossary data table.
 
 ## Examples:
 
