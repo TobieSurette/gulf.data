@@ -61,18 +61,18 @@ Function           | Description
 
 Function           | Description
 ------------------ | --------------------------------------------------
-`maturity`         | Read snow crab survey set/tow data.
-`category`         | Read snow crab survey set/tow data.
-`sex`              | Extract or format biological sex data. 
-`weight`           | Extract or calculate catch or sample weight data. 
-`sampler`          | Extract or format field sampler data. 
-`trip`             | Extract field trip data. 
+`category`         | Determine or extract animal category data.
+`egg.condition`    | Extract egg condition data.
 `gear`             | Extract sampling gear data. 
 `grow`             | Predict growth.
 `key`              | Extract index key for a data set.
-`egg.condition`    | Extract egg condition data.
-`vessel`           | Extract sampling or fishing vessel data.
+`maturity`         | Determine or extract animal maturity data.
+`sampler`          | Extract or format field sampler data. 
+`sex`              | Extract or format biological sex data. 
 `tow.id`           | Extract survey tow identification data.
+`trip`             | Extract field trip data. 
+`vessel`           | Extract sampling or fishing vessel data.
+`weight`           | Extract or calculate catch or sample weight data. 
 `wingspread`       | Extract trawl wing spread data.
 
 ### Data Summary Functions:
