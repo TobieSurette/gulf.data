@@ -56,7 +56,7 @@ Function           | Description
 `freq`             | Generate size-frequency data summary.
 `summary`          | Generate data summary.
 
-## Moult stage Functions:
+## Moult Stage Functions:
 
 Function           | Description
 ------------------ | ---------------------------------------------------------------
