@@ -56,14 +56,21 @@ Function           | Description
 `freq`             | Generate size-frequency data summary.
 `summary`          | Generate data summary.
 
-## Moult Stage Functions:
+## Moulting, Maturity and Taxonomic Group Functions:
 
 Function           | Description
------------------- | ---------------------------------------------------------------
+------------------ | ------------------------------------------------------------------------------------
+`is.mature`        | Determine if animal is sexually mature.
+`is.primiparous`   | Determine if female is primiparous, i.e. is carrying first clutch of eggs.
+`is.multiparous`   | Determine if female is multiparous, i.e. is carrying second or more clutch of eggs.
+`is.senile`        | Determine if crustacean is sexually senile.
 `is.new.shell`     | Determine if crustacean has new shell (i.e. new moult). 
 `is.soft.shell`    | Determine if crustacean has a soft shell. 
 `is.hard.shell`    | Determine if crustacean has a hard shell (i.e. not soft moult). 
 `is.skip.moulter`  | Determine if crustacean has skipped a moult. 
+`is.fish`          | Determine if female is multiparous, i.e. is carrying second or more clutch of eggs.
+`is.invertebrate`  | Determine if animal is invertbrate.       
+`is.shrimp`        | Determine if animal species is a type of shrimp. 
 
 ## Metadata tables:
 
