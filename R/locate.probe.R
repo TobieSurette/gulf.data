@@ -21,10 +21,6 @@
 #' @export locate.star.oddi
 locate.star.oddi <- function(x, ...) UseMethod("locate.star.oddi")
 
-#' @describeIn locate.probe Generic method for locating eSonar data files.
-#' @export locate.esonar
-locate.esonar <- function(x, ...) UseMethod("locate.esonar")
-
 #' @describeIn locate.probe Default method for locating Star Oddi data files.
 #' @rawNamespace S3method(locate.star.oddi,default)
 locate.star.oddi.default <- function(x, year, tow.id, full.names = TRUE, probe, remove = c("test", "lost", "NA"), ...){
@@ -102,6 +98,70 @@ locate.star.oddi.default <- function(x, year, tow.id, full.names = TRUE, probe, 
 #' @rawNamespace S3method(locate.star.oddi,scsset)
 locate.star.oddi.scsset <- function(x, ...) return(locate.star.oddi(year = as.numeric(substr(gulf.utils::date(x), 1, 4)), tow.id = x$tow.id, ...))
 
+#' @describeIn locate.probe Generic method for locating Scanmar data files.
+#' @export locate.scanmar
+locate.scanmar <- function(x, ...) UseMethod("locate.scanmar")
+
+#' @describeIn locate.probe Default method for locating Scanmar acoustic data files.
+#' @rawNamespace S3method(locate.scanmar,default)
+locate.scanmar.default <- function(x, year, tow.id, remove = "test", ...){
+   # Parse 'x' argument:
+   if (!missing(x)){
+      if (is.numeric(x)) year <- x
+      if (is.character(x)){
+         if (any(file.exists(x))) return(x[file.exists(x)])
+         tow.id <- x
+      }
+   }
+   
+   # Load set of file names:
+   files <- locate(pattern = "*.csv", keywords = "scanmar", ...)
+   
+   # Target year:
+   if (!missing(year)){
+      if (!is.numeric(year)) stop("'year' must be a numeric integer.")
+      year <- sort(year)
+      index <- NULL
+      for (i in 1:length(year)) index <- c(index, grep(year[i], files))
+      files <- unique(files[index])
+   }
+   
+   # Target year:
+   if (!missing(year)){
+      if (!is.numeric(year)) stop("'year' must be a numeric integer.")
+      year <- sort(year)
+      index <- NULL
+      for (i in 1:length(year)) index <- c(index, grep(year[i], files))
+      files <- unique(files[index])
+   }
+   
+   # Target tow ID:
+   if (!missing(tow.id)){
+      tow.id <- as.character(tow.id)
+      index <- NULL
+      for (i in 1:length(tow.id)) index <- c(index, grep(tolower(tow.id[i]), tolower(files)))
+      files <- unique(files[index])
+   }
+   
+   # Remove files:
+   if (!missing(remove)) if (length(remove) == 1) if (remove == FALSE) remove <- NULL
+   if (!missing(remove)) remove <- remove[remove != "" & !is.na(remove)]
+   if ((length(files) > 0) & (length(remove) > 0)) {
+      index <- NULL
+      for (i in 1:length(remove)) index <- c(index, grep(tolower(remove[i]), tolower(files)))
+      if (length(index) > 0) files <- files[-index]
+   }
+   
+   # Only keep unique file names:
+   files <- unique(files)
+   
+   return(files)
+}
+
+#' @describeIn locate.probe Generic method for locating eSonar data files.
+#' @export locate.esonar
+locate.esonar <- function(x, ...) UseMethod("locate.esonar")
+
 #' @describeIn locate.probe Default method for locating eSonar data files.
 #' @rawNamespace S3method(locate.esonar,default)
 locate.esonar.default <- function(x, year, tow.id, remove = "test", ...){
@@ -168,3 +228,4 @@ locate.esonar.default <- function(x, year, tow.id, remove = "test", ...){
 #' @describeIn locate.probe \code{scsset} method for locating eSonar data files.
 #' @rawNamespace S3method(locate.esonar,scsset)
 locate.esonar.scsset <- function(x, ...) return(locate.esonar(year = unique(year(x)), tow.id = unique(x$tow.id, ...)))
+
