@@ -3,14 +3,11 @@
 \name{esonar}
 \alias{esonar}
 \alias{esonar.default}
-\alias{describe.esonar}
 \title{\strong{eSonar} Data}
 \usage{
 esonar(x, ...)
 
 \method{esonar}{default}(x, ...)
-
-\method{describe}{esonar}(x, ...)
 }
 \arguments{
 \item{x}{An \code{esonar} object, data file, survey year or keyword search term.}
@@ -23,8 +20,6 @@ Create \strong{eSonar} trawl acoustic monitoring probe data objects.
 \section{Methods (by class)}{
 \itemize{
 \item \code{default}: Create an \code{esonar} object.
-
-\item \code{esonar}: Describe an \code{esonar} object.
 }}
 
 \examples{

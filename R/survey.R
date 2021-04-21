@@ -53,11 +53,11 @@ survey.default <- function(x, year, project, ...){
    
    if (!missing(x)){
       if (length(x) > 0){
-         index <- NULL
-         for (i in 1:length(x)) index <- c(index, grep(tolower(x[i]), tolower(v$project)))
-         for (i in 1:length(x)) index <- c(index, grep(tolower(x[i]), tolower(v$id)))
-         index <- sort(unique(index))
-         v <- v[index, ]
+         ix <- NULL
+         for (i in 1:length(x)) ix <- c(ix, grep(tolower(x[i]), tolower(v$project)))
+         for (i in 1:length(x)) ix <- c(ix, grep(tolower(x[i]), tolower(v$id)))
+         ix <- sort(unique(ix))
+         v <- v[ix, ]
       }
    }
    
@@ -67,27 +67,25 @@ survey.default <- function(x, year, project, ...){
 scs.survey <- function(x, ...){
    month <- as.numeric(substr(x$date, 6, 7))
    v <- rep("", nrow(x))
-   v[month %in% 4:5] <- "spring"
-   v[month %in% 6] <- "summer"
+   v[month %in% 4:5]  <- "spring"
+   v[month %in% 6]    <- "summer"
    v[month %in% 7:10] <- "regular"
    
+   # 1988 cross study:
+   v[which((year(x) == 1988) & gulf.utils::date(x) >= gulf.utils::date("1988-10-31"))] <- "study"
+   
    # 2002 catchability study:
-   index <- which(substr(x$date,1,10) %in% c("2002-09-24", "2002-09-25"))
-   v[index] <- "catchability"
+   v[which(substr(x$date,1,10) %in% c("2002-09-24", "2002-09-25"))] <- "catchability"
    
    # 2004 catchability study:
-   index <- which(substr(x$date,1,10) %in% c("2004-10-18", "2004-10-24", "2004-10-25"))
-   v[index] <- "catchability"
+   v[which(substr(x$date,1,10) %in% c("2004-10-18", "2004-10-24", "2004-10-25"))] <- "catchability"
    
    # 2005 special studies:
-   index <- which(substr(x$date,1,10) %in% c("2005-10-04", "2005-10-05", "2005-10-06"))
-   v[index] <- "catchability"
-   index <- which(substr(x$date,1,10) %in% "2005-10-12")
-   v[index] <- "selectivity"
+   v[which(substr(x$date,1,10) %in% c("2005-10-04", "2005-10-05", "2005-10-06"))] <- "catchability"
+   v[which(substr(x$date,1,10) %in% "2005-10-12")] <- "selectivity"
 
    # 2019 comparative study:
-   index <- which((gulf.utils::year(x) == 2019) & (substr(x$tow.id,2,2) == "C"))
-   v[index] <-"comparative"
+   v[which((gulf.utils::year(x) == 2019) & (substr(x$tow.id,2,2) == "C"))] <-"comparative"
    
    return(v)
 }

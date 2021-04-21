@@ -2,16 +2,16 @@
 % Please edit documentation in R/locate.probe.R
 \name{locate.star.oddi}
 \alias{locate.star.oddi}
-\alias{locate.esonar}
 \alias{locate.star.oddi.default}
 \alias{locate.star.oddi.scsset}
+\alias{locate.scanmar}
+\alias{locate.scanmar.default}
+\alias{locate.esonar}
 \alias{locate.esonar.default}
 \alias{locate.esonar.scsset}
 \title{Locate Probe Data}
 \usage{
 locate.star.oddi(x, ...)
-
-locate.esonar(x, ...)
 
 \method{locate}{star.oddi.default}(
   x,
@@ -24,6 +24,12 @@ locate.esonar(x, ...)
 )
 
 \method{locate}{star.oddi.scsset}(x, ...)
+
+locate.scanmar(x, ...)
+
+\method{locate}{scanmar.default}(x, year, tow.id, remove = "test", ...)
+
+locate.esonar(x, ...)
 
 \method{locate}{esonar.default}(x, year, tow.id, remove = "test", ...)
 
@@ -49,11 +55,15 @@ Functions to locate probe data from different projects and surveys.
 \itemize{
 \item \code{locate.star.oddi}: Generic method for locating Star Oddi data files.
 
-\item \code{locate.esonar}: Generic method for locating eSonar data files.
-
 \item \code{locate.star.oddi.default}: Default method for locating Star Oddi data files.
 
 \item \code{locate.star.oddi.scsset}: \code{scsset} method for locating Star Oddi data files.
+
+\item \code{locate.scanmar}: Generic method for locating Scanmar data files.
+
+\item \code{locate.scanmar.default}: Default method for locating Scanmar acoustic data files.
+
+\item \code{locate.esonar}: Generic method for locating eSonar data files.
 
 \item \code{locate.esonar.default}: Default method for locating eSonar data files.
 

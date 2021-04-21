@@ -41,7 +41,7 @@ read.colorimeter <- function(...){
    }
 
    # Date conversion:
-   x <- cbind(data.frame(date = as.character(date(x))), x[setdiff(names(x), c("year", "month", "day", "date"))])
+   x <- cbind(data.frame(date = as.character(gulf.utils::date(x))), x[setdiff(names(x), c("year", "month", "day", "date"))])
    
    # Subset data:
    p <- list(...)
