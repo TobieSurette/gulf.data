@@ -36,15 +36,26 @@ vessel.default <- function(x, ...){
 #' @rdname vessel
 #' @export 
 vessel.character <- function(x, verbose = FALSE, ...){
-   v <- vessel() # Load vessel table.
+   tab <- vessel() # Load vessel table.
    
+   # Spot corrections:
+   x <- gulf.utils::deblank(x)
+   x <- gsub(" +", " ", x)
+   x <- gsub("j[ae][ea]n[ ]*mat[h]*ieu.*", "jean-mathieu", tolower(x))
+   x <- gsub("[a]+v[ea]lon[ ]*voyage[u]*r.*", "avalon voyager", tolower(x))
+   
+   # Treat only unique cases:
    ux <- unique(x)
    ux <- ux[which(!is.na(ux) & ux != "")]
-   
    if (length(ux) == 0) return(NULL)
    
-   ix <- NULL
-   for (i in 1:length(ux)) ix <- c(ix, grep(tolower(ux[i]), tolower(v$name)))
-  
-   return(v$name[ix])
+   # Find matches:
+   vx <- rep(NA, length(ux))
+   for (i in 1:length(ux)){
+      ix <- grep(tolower(ux[i]), tolower(tab$name))
+      if (length(ix) > 1) ix <- ix[1]
+      if (length(ix) == 1) vx[i] <- tab$name[ix]
+   }
+   
+   return(vx[match(x, ux)])
 }
