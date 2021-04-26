@@ -22,9 +22,11 @@ Function           | Description
 `read.nsslen`      | Read Northumberland Strait survey animal length data.
 `read.minilog`     | Read Minilog probe data.
 `read.star.oddi`   | Read Star Oddi probe data.
+`read.scanmar`     | Read Scanmar acoustic trawl monitoring data.
+`read.netmind`     | Read Netmind acoustic trawl monitoring data.
+`read.esonar`      | Read eSonar acoustic trawl monitoring data.
+`read.notus`       | Read Notus acoustic trawl monitoring data.
 `read.gps`         | Read GPS track data.
-`read.esonar`      | Read eSonar acoustic trawl probe data.
-`read.notus`       | Read Notus acoustic trawl probe data.
 `read.colorimeter` | Read colorimeter measurement data.
 `read.alsi`        | Read Atlantic Lobster Settlement Index data.
 
@@ -42,7 +44,9 @@ Function           | Description
 `sampler`          | Extract or format field sampler data. 
 `sex`              | Extract or format biological sex data. 
 `species`          | Extract or convert species identification data. 
+`taxon`            | Extract taxonomic identification data. 
 `tow.id`           | Extract survey tow identification data.
+`tow.number`       | Extract survey trawl tow number data.
 `trip`             | Extract field trip data. 
 `vessel`           | Extract sampling or fishing vessel data.
 `weight`           | Extract or calculate catch or sample weight data. 
