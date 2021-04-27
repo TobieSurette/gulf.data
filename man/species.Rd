@@ -89,5 +89,5 @@ species.foreign()
 
 }
 \seealso{
-\code{\link{data}}
+\code{\link{taxon}}, \code{\link{data}}
 }

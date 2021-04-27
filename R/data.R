@@ -39,6 +39,7 @@
 #'   \item{date}{Date when the measurement was made.}
 #'   \item{time}{Time when the measurement was made.}
 #'   \item{temperature}{Temperature in degrees Celsius.}
+#'   \item{depth}{Temperature in degrees Celsius.}
 #' }
 #' 
 #' @section \code{species.csv}: 
@@ -51,6 +52,7 @@
 #'   \item{name_en}{English species names.}
 #'   \item{name_fr}{French species names.}
 #'   \item{name_latin}{Latin species names.}
+#'   \item{aphia.id}{WoRMS toaxonomic coding.}
 #' }
 #'   
 #' @section \code{species.foreign.csv}:

@@ -61,7 +61,7 @@
 #' species()
 #' species.foreign()
 #' 
-#' @seealso \code{\link{data}}
+#' @seealso \code{\link{taxon}}, \code{\link{data}}
 #' 
  
 #' @export 

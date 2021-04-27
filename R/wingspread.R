@@ -20,3 +20,5 @@ wingspread.esonar <- function(x, ...){
    return(v)
 } 
 
+#' @export
+wing.spread <- wingspread

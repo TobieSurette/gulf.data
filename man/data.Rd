@@ -42,6 +42,7 @@ A Minilog text file with the following variables:
   \item{date}{Date when the measurement was made.}
   \item{time}{Time when the measurement was made.}
   \item{temperature}{Temperature in degrees Celsius.}
+  \item{depth}{Temperature in degrees Celsius.}
 }
 }
 
@@ -56,6 +57,7 @@ A \sQuote{csv} (comma-separated) file with the following variables:
   \item{name_en}{English species names.}
   \item{name_fr}{French species names.}
   \item{name_latin}{Latin species names.}
+  \item{aphia.id}{WoRMS toaxonomic coding.}
 }
 }
 

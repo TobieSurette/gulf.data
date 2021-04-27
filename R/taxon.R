@@ -12,36 +12,41 @@
 #' taxon(10:100, "family")   # Family names.
 #' taxon(10:100, c("class", "order", "family")) # Class, order and family names.
 #' 
-#' @seealso species
+#' @seealso \code{\link{taxon}}, \code{\link{data}}
 
 #' @export
 taxon <- function(x, ...) UseMethod("taxon")
 
 #' @export 
-taxon.default <- function(x, rank = "species", aphia.id, ...){
-   
+taxon.default <- function(x, rank, aphia.id, drop = TRUE, ...){
    # Load species taxonomic information table:
    tab <- species()
    
+   # Default 'rank': 
+   remove <- c("code", "english", "latin", "french", "aphia.id")
+   if (missing(rank)) rank <- setdiff(names(tab), remove) else drop <- FALSE
+   
+   # Initialize variables:   
+   ix <- NULL
+   v <- NULL
+   
    # Match using RV species coding:
-   if (!missing(x)){
-      if (is.numeric(x)){
-         ix <- match(x, tab$code)
-         rank <- rank[rank %in% names(tab)]
-         return(tab[ix, rank])
-      } 
-   }
+   if (!missing(x)) if (is.numeric(x)) ix <- match(x, tab$code)
    
    # Match using WoRMS aphia ID codes:
-   if (!missing(aphia.id)){
-      if (is.numeric(aphia.id)){
-         ix <- match(aphia.id, tab$code)
-         rank <- rank[rank %in% names(tab)]
-         return(tab[ix, rank])
-      } 
+   if (!missing(aphia.id)) if (is.numeric(aphia.id)) ix <- match(aphia.id, tab$code)
+   
+   # Extract taxonomic information:
+   if (length(ix) > 0){
+      rank <- rank[rank %in% names(tab)]
+      v <- tab[ix, rank]
+      if (drop) v <- v[unlist(lapply(v, function(x) any(x != "")))]
    }
    
-   return(rep("", length(x)))
+   # Expand empty result:
+   if (length(v) == 0) v <- rep("", length(x))
+   
+   return(v)
 }
 
 
