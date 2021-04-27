@@ -81,6 +81,7 @@ Function           | Description
 Function           | Description
 ------------------ | --------------------------------------------------
 `glossary`         | Science and data terms glossary data table.
+`probe`            | Data probe list and descriptions table.
 `project`          | Data project definitions and descriptions data table.
 `species`          | Species codes data table.
 `species.foreign`  | Foreign species codes data table.
