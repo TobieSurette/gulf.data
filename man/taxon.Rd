@@ -23,4 +23,6 @@ taxon(10:100, "family")   # Family names.
 taxon(10:100, c("class", "order", "family")) # Class, order and family names.
 
 }
-
+\seealso{
+\code{\link{taxon}}, \code{\link{data}}
+}

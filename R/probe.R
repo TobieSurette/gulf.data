@@ -1,25 +1,51 @@
-#' Probe Data Class
+#' @title Project Identifiers
 #' 
-#' @description Measurement probe data class definition and methods.
+#' @description Functions to retrieve survey probe information or create a probe data object.
 #'
-#' @param x Probe data object.
-#' @param header File header data.
-#' @param buffer Extra time, in seconds, to be included beyond the start and end time specifications when truncating data.
+#' @param x Character search string.
+#' @param header File header information.
+#' @param ... Other arguments (not used).
 #' 
-#' @section Methods:
-#' \describe{
-#'    \item{\code{probe}}{Generic \code{probe} method.}
-#'    \item{\code{probe.default}}{Create a \code{probe} object.}
-#' }
-#' 
-#' @seealso \code{\link{tow.id}}
+#' @examples 
+#' probe()            # Load complete data probe table.
+#' probe("min")       # Search for probe name.
+#  probe("st")        # Search for probe name.
 
 #' @export
 probe <- function(x, ...) UseMethod("probe")
 
-#' @describeIn probe Create a \code{probe} class object.
+#' @describeIn probe Load data probe description table.
 #' @export
-probe.default <- function(x, header, ...){
+probe.default <- function(x, ...){
+   file <- locate(package = "gulf.data", file = "probe.csv")
+   v <- read.csv(file, header = TRUE, stringsAsFactors = FALSE)
+   return(v)
+}
+
+#' @describeIn probe Find a data probe by name.
+#' @export 
+probe.character <- function(x, ...){
+   tab <- probe() # Load probe table.
+   
+   # Treat only unique cases:
+   ux <- unique(x)
+   ux <- ux[which(!is.na(ux) & ux != "")]
+   if (length(ux) == 0) return(NULL)
+   
+   # Find matches:
+   vx <- rep(NA, length(ux))
+   for (i in 1:length(ux)){
+      ix <- grep(tolower(ux[i]), tolower(tab$name))
+      if (length(ix) > 1) ix <- ix[1]
+      if (length(ix) == 1) vx[i] <- tab$name[ix]
+   }
+   
+   return(vx[match(x, ux)])
+}
+
+#' @describeIn probe Create a \code{probe} class object.
+#' @rawNamespace S3method(probe,data.frame)
+probe.data.frame<- function(x, header, ...){
    # Store date and time stamp:
    v <- data.frame(date = as.character(gulf.utils::date(x)),
                    time = unlist(lapply(strsplit(as.character(gulf.utils::time(x)), " "), function(x) x[2])), 
@@ -48,3 +74,4 @@ probe.default <- function(x, header, ...){
    return(v)
 }
 
+   

@@ -3,35 +3,38 @@
 \name{probe}
 \alias{probe}
 \alias{probe.default}
-\title{Probe Data Class}
+\alias{probe.character}
+\alias{probe.data.frame}
+\title{Project Identifiers}
 \usage{
 probe(x, ...)
 
-\method{probe}{default}(x, header, ...)
+\method{probe}{default}(x, ...)
+
+\method{probe}{character}(x, ...)
+
+\method{probe}{data.frame}(x, header, ...)
 }
 \arguments{
-\item{x}{Probe data object.}
+\item{x}{Character search string.}
 
-\item{header}{File header data.}
+\item{...}{Other arguments (not used).}
 
-\item{buffer}{Extra time, in seconds, to be included beyond the start and end time specifications when truncating data.}
+\item{header}{File header information.}
 }
 \description{
-Measurement probe data class definition and methods.
+Functions to retrieve survey probe information or create a probe data object.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{default}: Create a \code{probe} class object.
+\item \code{default}: Load data probe description table.
+
+\item \code{character}: Find a data probe by name.
+
+\item \code{data.frame}: Create a \code{probe} class object.
 }}
 
-\section{Methods}{
-
-\describe{
-   \item{\code{probe}}{Generic \code{probe} method.}
-   \item{\code{probe.default}}{Create a \code{probe} object.}
-}
-}
-
-\seealso{
-\code{\link{tow.id}}
+\examples{
+probe()            # Load complete data probe table.
+probe("min")       # Search for probe name.
 }
