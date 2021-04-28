@@ -44,7 +44,6 @@ Function           | Description
 `sampler`          | Extract or format field sampler data. 
 `sex`              | Extract or format biological sex data. 
 `species`          | Extract or convert species identification data. 
-`taxon`            | Extract taxonomic identification data. 
 `tow.id`           | Extract survey tow identification data.
 `tow.number`       | Extract survey trawl tow number data.
 `trip`             | Extract field trip data. 
@@ -64,6 +63,8 @@ Function           | Description
 
 Function           | Description
 ------------------ | ------------------------------------------------------------------------------------
+`species`          | Extract or convert species identification data. 
+`taxon`            | Extract taxonomic identification data. 
 `is.mature`        | Determine if animal is sexually mature.
 `is.primiparous`   | Determine if female is primiparous, i.e. is carrying first clutch of eggs.
 `is.multiparous`   | Determine if female is multiparous, i.e. is carrying second or more clutch of eggs.
