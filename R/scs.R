@@ -20,7 +20,6 @@
 #'                        sex = 1))
 #' 
 #' @seealso \code{\link{read.scs}}
-#' @seealso \code{\link{read.probe}}
              
 #' @describeIn scs Generic \code{scsset} method.
 #' @export scsset

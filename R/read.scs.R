@@ -32,7 +32,6 @@
 #' @seealso \code{\link[gulf.data]{scs}}
 #' @seealso \code{\link[gulf.data]{locate.scs}}
 #' @seealso \code{\link[gulf.data]{read.nss}}
-#' @seealso \code{\link[gulf.data]{read.probe}}
 
 #' @describeIn read.scs Read southern Gulf of Saint Lawrence snow crab survey set data.
 #' @export read.scsset

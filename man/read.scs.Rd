@@ -71,6 +71,4 @@ b <- read.scsbio(2020, category = "MI")
 \code{\link[gulf.data]{locate.scs}}
 
 \code{\link[gulf.data]{read.nss}}
-
-\code{\link[gulf.data]{read.probe}}
 }

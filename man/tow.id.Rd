@@ -4,6 +4,8 @@
 \alias{tow.id}
 \alias{tow.id.default}
 \alias{tow.id.probe}
+\alias{tow.id.minilog}
+\alias{tow.id.scsbio}
 \title{Extract Tow Identifier}
 \usage{
 tow.id(x, ...)
@@ -11,25 +13,36 @@ tow.id(x, ...)
 \method{tow.id}{default}(x, ...)
 
 \method{tow.id}{probe}(x, method, ...)
+
+\method{tow.id}{minilog}(x, method = "observed")
+
+\method{tow.id}{scsbio}(x, ...)
 }
 \arguments{
 \item{x}{Data object.}
 
 \item{method}{Character string specifying the method to be used when determining the tow identification number for a 
-\code{probe} object. Available methods are \sQuote{time} and \sQuote{latlong}.}
+\code{probe} object. Available methods are \sQuote{time} and \sQuote{latlong}. Available options are 
+\sQuote{observed}, \sQuote{file name}, \sQuote{header}, and \sQuote{time}.}
 
 \item{max.distance}{Numeric valiue specifying the maximum distance tolerance (in kilometers) when determining the tow 
-identification number for a \code{probe} object from lat-lon coordinates.}
+                    identification number for a \code{probe} object from lat-lon coordinates.         
+
+#' @examples 
+files <- locate.minilog(2018)
+tow.id(read.minilog(files[200]))}
 }
 \description{
 Functions to extract or determine trawl tow identifiers.
 }
-\section{Methods}{
+\section{Methods (by class)}{
+\itemize{
+\item \code{default}: Default \sQuote{tow.id} method.
 
-\describe{
-   \item{\code{tow.id}}{Generic \code{tow.id} method.}
-   \item{\code{tow.id.default}}{Default \code{tow.id} method.}
-   \item{\code{tow.id.probe}}{Determine tow ID for a \code{probe} object.}
-}
-}
+\item \code{probe}: \sQuote{tow.id} probe method.
+
+\item \code{minilog}: \sQuote{tow.id} \sQuote{minilog} method.
+
+\item \code{scsbio}: \sQuote{tow.id} \sQuote{scsbio} method.
+}}
 

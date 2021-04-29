@@ -23,7 +23,6 @@
 #' 
 #' @seealso \code{\link[gulf.data]{nss}}
 #' @seealso \code{\link[gulf.data]{read.scs}}
-#' @seealso \code{\link[gulf.data]{read.probe}}
 
 #' @describeIn read.nss Read southern Gulf of Saint Lawrence Northumberland Strait survey set data.
 #' @export read.nssset

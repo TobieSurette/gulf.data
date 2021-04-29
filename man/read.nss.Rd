@@ -59,6 +59,4 @@ x <- read.scsset(2020, species = "lobster")
 \code{\link[gulf.data]{nss}}
 
 \code{\link[gulf.data]{read.scs}}
-
-\code{\link[gulf.data]{read.probe}}
 }

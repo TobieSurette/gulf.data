@@ -1,28 +1,23 @@
-#' Extract Tow Identifier
-#' 
-#' @name tow.id
+#' @title Extract Tow Identifier
 #' 
 #' @description Functions to extract or determine trawl tow identifiers.
 #' 
 #' @param x Data object.
 #' @param method Character string specifying the method to be used when determining the tow identification number for a 
-#'               \code{probe} object. Available methods are \sQuote{time} and \sQuote{latlong}.
+#'               \code{probe} object. Available methods are \sQuote{time} and \sQuote{latlong}. Available options are 
+#'               \sQuote{observed}, \sQuote{file name}, \sQuote{header}, and \sQuote{time}. 
 #' @param max.distance Numeric valiue specifying the maximum distance tolerance (in kilometers) when determining the tow 
 #'                     identification number for a \code{probe} object from lat-lon coordinates.         
-#'
-#' @section Methods:
-#' \describe{
-#'    \item{\code{tow.id}}{Generic \code{tow.id} method.}
-#'    \item{\code{tow.id.default}}{Default \code{tow.id} method.}
-#'    \item{\code{tow.id.probe}}{Determine tow ID for a \code{probe} object.}
-#' }
+#' 
+#' #' @examples 
+#' files <- locate.minilog(2018)
+#' tow.id(read.minilog(files[200]))          
 #' 
 
-#' @rdname tow.id
 #' @export tow.id
 tow.id <- function(x, ...) UseMethod("tow.id")
 
-#' @rdname tow.id
+#' @describeIn tow.id Default \sQuote{tow.id} method.
 #' @rawNamespace S3method(tow.id,default)
 tow.id.default <- function(x, ...){
    v <- attr(x, "tow.id")
@@ -30,7 +25,7 @@ tow.id.default <- function(x, ...){
    return(v)
 } 
 
-#' @rdname tow.id
+#' @describeIn tow.id \sQuote{tow.id} probe method.
 #' @rawNamespace S3method(tow.id,probe)
 tow.id.probe <- function(x, method, ...){
    if (missing(method)) return(tow.id.default(x,))
@@ -65,6 +60,81 @@ tow.id.probe <- function(x, method, ...){
    return(v)
 }
 
+#' @describeIn tow.id \sQuote{tow.id} \sQuote{minilog} method.
+#' @rawNamespace S3method(tow.id,minilog)
+tow.id.minilog <- function(x, method = "observed"){
+   # method = "time"
+   
+   # Parse 'method' argument:
+   if (missing(method)) method <- "observed"
+   method <- match.arg(gsub(" +", ".", tolower(method)), c("observed", "file.name", "header", "time")) 
+   
+   # Extract tow ID from header information:
+   if (method %in% c("observed", "header")){
+      if (!is.null(gulf.metadata::header(x))) v <- as.data.frame(t(gulf.metadata::header(x))) else v <- x
+      y <- rep("", nrow(v)) # Result variable.
+      
+      # Parse study ID:
+      ix <- grep("study.id", tolower(names(v)))
+      if (length(ix) > 0){
+         iv <- (y == "") & (v[, ix] != "") & !is.na(v[, ix])
+         y[iv] <- v[iv, ix]
+      }
+      
+      # Parse study description:
+      ix <- grep("study.description", tolower(names(v)))
+      if (length(ix) > 0){
+         iv <- (y == "") & (v[, ix] != "") & !is.na(v[, ix])
+         y[iv] <- v[iv, ix]
+      }
+      
+      # Formatting adjustments:
+      y <- gsub("[(].*[)]", "", y)
+      y <- gulf.utils::deblank(toupper(y))
+      
+      # Spot corrections:
+      y[which(y == "ZONE - F  385-S")] <- "GP385S"
+      v <- y
+   }
+   
+   # Determine tow ID from file name:
+   if (method == "file.name"){
+      ix <- grep("file.name", tolower(names(x)))
+      if (length(ix) > 0){
+         iy <- grep("GP[0-9]+", toupper(x[, ix]))
+         v <- rep("", nrow(x))
+         v[iy] <- toupper(x[iy, ix])
+         v[iy] <- unlist(lapply(strsplit(v, "GP"), function(x) x[2]))
+         v[iy] <- unlist(lapply(strsplit(v, "[.]"), function(x) x[1]))
+         v[iy] <- paste0("GP", v[iy])
+      }
+   }
+   
+   if (method == "time"){
+      # Load scs tow data:
+      y <- read.scsset(year = unique(year(x)))
+      x <- gulf.utils::expand(x)
+      
+      # Define grouping variables:
+      if ("file.name" %in% names(x)) vars <- c("date", "file.name") else vars <- c("date", names(x)[grep("study", names(x))])
+      
+      # Find tow ID from survey tows using time match:
+      ux <- unique(x[vars])
+      v <- rep(NA, nrow(ux))
+      for (i in 1:nrow(ux)){
+         xx <- x[which(x[, vars[1]] == ux[i, vars[1]] & x[, vars[2]] == ux[i, vars[2]]), ]
+         d <- abs(difftime(median(time(xx[xx$depth > 20, ])), time(y), units = "mins"))
+         if (min(d) < 60) v[i] <- y$tow.id[which.min(d)]
+      }
+      
+      ix <- match(x[vars], ux)
+      v <- v[ix]
+   }
+   
+   return(v)
+}
+
+#' @describeIn tow.id \sQuote{tow.id} \sQuote{scsbio} method.
 #' @rawNamespace S3method(tow.id,scsbio)
 tow.id.scsbio <- function(x, ...){
    if (is.null(x$tow.id)) x$tow.id <- ""
@@ -77,3 +147,4 @@ tow.id.scsbio <- function(x, ...){
    
    return(x$tow.id)
 }
+
