@@ -70,6 +70,4 @@ x <- scsbio(data.frame(date = "2020-07-19",
 }
 \seealso{
 \code{\link{read.scs}}
-
-\code{\link{read.probe}}
 }

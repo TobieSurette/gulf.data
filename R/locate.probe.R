@@ -47,7 +47,7 @@
 #' locate.esonar(2020) # Find snow crab survey eSonar data from 2020.
 #' locate.esonar(2020, tow.id = "GP354F")
 #' 
-#' @seealso code{\link[gulf.metadata]{project}}, code{\link[gulf.data]{probe}}
+#' @seealso \code{\link[gulf.metadata]{project}}, \code{\link[gulf.data]{probe}}
 
 #' @export
 locate.probe <- function(x, probe, project = "scs", location = "headline", remove, year, tow.id, ...){
@@ -60,7 +60,7 @@ locate.probe <- function(x, probe, project = "scs", location = "headline", remov
       }
    }
    
-   #' Parse arguments:
+   # Parse arguments:
    probe   <- probe(probe)
    project <- project(project)
    location <- match.arg(tolower(location), c("headline", "footrope", "tilt"))
