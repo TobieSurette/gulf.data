@@ -85,7 +85,9 @@ scsbio.default <- function(x, ...){
    if ("chela.height" %in% names(x)) gulf.metadata::units(x,  "chela.height") <- "millimeters"
    if ("abdomen.width" %in% names(x)) gulf.metadata::units(x, "abdomen.width") <- "millimeters"
    if ("weight" %in% names(x)) gulf.metadata::units(x, "weight") <- "grams"
-   gulf.metadata::key(x) <- c("date", "tow.id", "crab.number")
+
+   if ("tow.number" %in% names(x))  gulf.metadata::key(x) <- c("date", "tow.number", "crab.number")
+   if ("tow.id" %in% names(x))      gulf.metadata::key(x) <- c("date", "tow.id", "crab.number")
    
    # Define class:
    class(x) <- unique(c("scsbio", class(x))) 

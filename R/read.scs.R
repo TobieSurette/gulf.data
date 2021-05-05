@@ -191,7 +191,7 @@ read.scscat <- function(x, file, survey, species, ...){
 
 #' @describeIn read.scs Read southern Gulf of Saint Lawrence snow crab survey biological data.
 #' @export read.scsbio
-read.scsbio <- function(x, file, survey, category, drop = TRUE, ...){
+read.scsbio <- function(x, file, survey, category, drop = TRUE, verbose = FALSE, ...){
    # Define file(s) to be read:
    if (!missing(x) & missing(file)) if (is.character(x)) file = x 
    if (missing(file)) file <- locate.scsbio(x, ...)
@@ -201,6 +201,8 @@ read.scsbio <- function(x, file, survey, category, drop = TRUE, ...){
    if (length(file) > 1){
       v <- NULL
       for (i in 1:length(file)){
+         if (verbose) cat(paste0("Reading: '", file[i], "'\n"))
+            
          # Append data:
          tmp <- read.scsbio(file = file[i], drop = drop, ...)
          

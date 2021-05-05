@@ -12,7 +12,7 @@ read.scsset(x, file, survey, ...)
 
 read.scscat(x, file, survey, species, ...)
 
-read.scsbio(x, file, survey, category, drop = TRUE, ...)
+read.scsbio(x, file, survey, category, drop = TRUE, verbose = FALSE, ...)
 
 read.scslen(x, file, survey, species, ...)
 }
