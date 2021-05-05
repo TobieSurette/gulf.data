@@ -115,5 +115,5 @@ locate.esonar(2020, tow.id = "GP354F")
 
 }
 \seealso{
-code{\link[gulf.metadata]{project}}, code{\link[gulf.data]{probe}}
+\code{\link[gulf.metadata]{project}}, \code{\link[gulf.data]{probe}}
 }
