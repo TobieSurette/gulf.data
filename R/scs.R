@@ -68,7 +68,7 @@ scsset.default <- function(x, ...){
 scscat.default <- function(x, ...){
    # Define attributes:
    gulf.metadata::project(x) <- "scs"
-   gulf.metadata::key(x) <- key.scscat()
+  #  gulf.metadata::key(x) <- key.scscat()
    
    # Define class:
    class(x) <- unique(c("scscat", class(x))) 

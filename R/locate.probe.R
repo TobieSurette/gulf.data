@@ -4,7 +4,7 @@
 #' 
 #' @param x Study year, data file name or tow identification tag.
 #' @param probe Probe name. See \code{\link[gulf.data]{probe}} for available options.
-#' @param project Project name. See \code{\link[gulf.data]{project}} for available options.
+#' @param project Project name. See \code{\link[gulf.metadata]{project}} for available options.
 #' @param location Probe location. For trawl probes, options are \code{headline} and \code{footrope}.
 #' @param remove Character string specifying terms to remove from search results.
 #' @param year Study year.
