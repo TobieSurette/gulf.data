@@ -59,7 +59,7 @@ Function           | Description
 `freq`             | Generate size-frequency data summary.
 `summary`          | Generate data summary.
 
-## Moulting, Maturity and Taxonomic Group Functions:
+## Taxonomic, Maturity and Moult Stage Functions:
 
 Function           | Description
 ------------------ | ------------------------------------------------------------------------------------
