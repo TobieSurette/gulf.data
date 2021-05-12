@@ -44,7 +44,7 @@
 
 \item{probe}{Probe name. See \code{\link[gulf.data]{probe}} for available options.}
 
-\item{project}{Project name. See \code{\link[gulf.data]{project}} for available options.}
+\item{project}{Project name. See \code{\link[gulf.metadata]{project}} for available options.}
 
 \item{location}{Probe location. For trawl probes, options are \code{headline} and \code{footrope}.}
 
