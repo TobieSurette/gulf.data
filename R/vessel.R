@@ -1,20 +1,9 @@
-#' Project Identifiers
-#' 
-#' @name vessel
+#' @title Project Identifiers
 #' 
 #' @description Functions to retrieve survey vessel information.
 #'
 #' @param x Character search string.
 #' @param ... Other arguments (not used).
-#' 
-#' @return An object with a \code{project} attribute attached to it.
-#' 
-#' @section Methods:
-#' \describe{
-#'    \item{\code{vessel}}{Generic \code{vessel} method.}
-#'    \item{\code{vessel.default}}{Default \code{vessel} method. Returns the \code{vessel.csv} data table.}
-#'    \item{\code{vessel.character}}{Search for vessel name and return vessel specifications.}
-#' }
 #' 
 #' @examples 
 #' vessel()               # Survey vessel table.
@@ -25,7 +14,7 @@
 #' @export
 vessel <- function(x, ...) UseMethod("vessel")
 
-#' @rdname vessel
+#' @describeIn vessel Default \code{vessel} method. Returns the complete vessel data table.
 #' @export
 vessel.default <- function(x, ...){
    file <- locate(package = "gulf.data", file = "vessel.csv")
@@ -33,7 +22,7 @@ vessel.default <- function(x, ...){
    return(v)
 }
 
-#' @rdname vessel
+#' @describeIn vessel Search for vessel name and return vessel specifications.
 #' @export 
 vessel.character <- function(x, verbose = FALSE, ...){
    tab <- vessel() # Load vessel table.

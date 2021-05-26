@@ -17,20 +17,15 @@ vessel(x, ...)
 
 \item{...}{Other arguments (not used).}
 }
-\value{
-An object with a \code{project} attribute attached to it.
-}
 \description{
 Functions to retrieve survey vessel information.
 }
-\section{Methods}{
+\section{Methods (by class)}{
+\itemize{
+\item \code{default}: Default \code{vessel} method. Returns the complete vessel data table.
 
-\describe{
-   \item{\code{vessel}}{Generic \code{vessel} method.}
-   \item{\code{vessel.default}}{Default \code{vessel} method. Returns the \code{vessel.csv} data table.}
-   \item{\code{vessel.character}}{Search for vessel name and return vessel specifications.}
-}
-}
+\item \code{character}: Search for vessel name and return vessel specifications.
+}}
 
 \examples{
 vessel()               # Survey vessel table.
