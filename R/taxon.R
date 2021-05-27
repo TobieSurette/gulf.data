@@ -11,16 +11,34 @@
 #' taxon(10:100, "phylum")   # Phylum names.
 #' taxon(10:100, "family")   # Family names.
 #' taxon(10:100, c("class", "order", "family")) # Class, order and family names.
+#' taxon(family = "gadidae") # Extract taxonomic table for a specified rank.
+#' 
+#' #' Check if species code is part of family 'Gadidae':
+#' is.taxon(1:100, family = "Gadidae")
 #' 
 #' @seealso \code{\link{taxon}}, \code{\link{data}}
 
 #' @export
 taxon <- function(x, ...) UseMethod("taxon")
 
+#' @describeIn taxon Default taxon function.
 #' @export 
 taxon.default <- function(x, rank, aphia.id, drop = TRUE, ...){
    # Load species taxonomic information table:
    tab <- species()
+   if (!missing(aphia.id)) tab$code <- tab$aphia.id
+   
+   # Taxonomic rank is specified:
+   rank <- list(...)
+   if (is.list(rank)){
+      rank <- rank[tolower(names(rank)) %in% names(tab)]
+      if (length(rank) == 0) return(NULL)
+      
+      ix <- 1:nrow(tab)
+      for (i in 1:length(rank)) ix <- intersect(ix, which(tolower(tab[, names(rank)[i]]) %in% tolower(rank[[i]])))    
+      
+      if (missing(x)) return(tab[ix, ])
+   }
    
    # Default 'rank': 
    remove <- c("code", "english", "latin", "french", "aphia.id")
@@ -30,17 +48,16 @@ taxon.default <- function(x, rank, aphia.id, drop = TRUE, ...){
    ix <- NULL
    v <- NULL
    
-   # Match using RV species coding:
-   if (!missing(x)) if (is.numeric(x)) ix <- match(x, tab$code)
-   
-   # Match using WoRMS aphia ID codes:
-   if (!missing(aphia.id)) if (is.numeric(aphia.id)) ix <- match(aphia.id, tab$code)
-   
+   # Match using appropriate coding:
+
+   tab <- tab[!is.na(tab$code), ]
+   if (!missing(x)) if (is.numeric(x)) ix <- match(x, tab$code)  
+
    # Extract taxonomic information:
    if (length(ix) > 0){
       rank <- rank[rank %in% names(tab)]
       v <- tab[ix, rank]
-      if (drop) v <- v[unlist(lapply(v, function(x) any(x != "")))]
+      if (drop) v <- v[which(unlist(lapply(v, function(x) any(x != ""))))]
    }
    
    # Expand empty result:
@@ -49,4 +66,31 @@ taxon.default <- function(x, rank, aphia.id, drop = TRUE, ...){
    return(v)
 }
 
+#' @export
+taxon.NULL <- species
 
+#' @export
+is.taxon <- function(x, ...) UseMethod("is.taxon")
+
+#' @describeIn taxon Check taxonomic membership.
+#' @rawNamespace S3method(is.taxon,default)
+is.taxon.default <- function(x, ..., aphia.id){
+   rank <- list(...)
+   tab <- taxon()
+   if (!missing(aphia.id)) tab$code <- tab$aphia.id
+   rank <- rank[tolower(names(rank)) %in% names(tab)]
+   if (length(rank) == 0) return(NULL)
+  
+   ix <- 1:nrow(tab)
+   for (i in 1:length(rank)) ix <- intersect(ix, which(tolower(tab[, names(rank)[i]]) == tolower(rank[[i]])))
+      
+   if (missing(x)) stop("'x' species code must be specified.")
+   v <- rep(FALSE, length(x))
+   v[which(x %in% tab$code[ix])] <- TRUE      
+
+   return(v)
+}
+   
+
+
+   

@@ -2,25 +2,42 @@
 % Please edit documentation in R/taxon.R
 \name{taxon}
 \alias{taxon}
+\alias{taxon.default}
+\alias{is.taxon.default}
 \title{Retrieve Taxonomic Information}
 \usage{
 taxon(x, ...)
+
+\method{taxon}{default}(x, rank, aphia.id, drop = TRUE, ...)
+
+\method{is.taxon}{default}(x, ..., aphia.id)
 }
 \arguments{
 \item{x}{Species code.}
 
-\item{aphia.id}{Aphia taxonomic identification codes.}
-
 \item{rank}{Taxonomic rank (e.g. "kingdom", "phylum", "genus", etc ...).}
+
+\item{aphia.id}{Aphia taxonomic identification codes.}
 }
 \description{
 Retrieve taxonomic information associated with identification codes.
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{default}: Default taxon function.
+
+\item \code{default}: Check taxonomic membership.
+}}
+
 \examples{
 taxon(10:100)             # Latin genus + species names.
 taxon(10:100, "phylum")   # Phylum names.
 taxon(10:100, "family")   # Family names.
 taxon(10:100, c("class", "order", "family")) # Class, order and family names.
+taxon(family = "gadidae") # Extract taxonomic table for a specified rank.
+
+#' Check if species code is part of family 'Gadidae':
+is.taxon(1:100, family = "Gadidae")
 
 }
 \seealso{
