@@ -58,7 +58,7 @@ read.star.oddi <- function(x, file, offset = 0, repeats = FALSE, verbose = FALSE
    }
 
    # Read file header information:
-   header <- read.star.oddi.header(file)
+   header <- header.star.oddi(file)
    
    # Define variable names:
    fields <- header[grep("Channel ", names(header))]
