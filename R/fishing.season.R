@@ -26,4 +26,3 @@ fishing.season.default <- function(x, species = "snow crab", year, zone, ...){
    
    return(v)
 }
-
