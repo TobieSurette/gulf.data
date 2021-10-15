@@ -123,11 +123,13 @@ read.esonar.default <- function(x, file, offset = -3*60, repeats = FALSE, verbos
    # Parse sensor values into separate columns:
    str <- unique(v$sensor)
    str <- sort(str[str != ""])
-   for (i in 1:length(str)){
-      v[tolower(str[i])] <- NA
-      v[[tolower(str[i])]][v$sensor == str[i]] <- v$value[v$sensor == str[i]]
+   if (length(str) > 0){
+      for (i in 1:length(str)){
+         v[tolower(str[i])] <- NA
+         v[[tolower(str[i])]][v$sensor == str[i]] <- v$value[v$sensor == str[i]]
+      }
    }
-
+   
    # Set NULL values to zero, and zeroes to NA:
    vars <- c("depth", "doormaster", "headline")
    v[setdiff(vars, names(v))] <- NA

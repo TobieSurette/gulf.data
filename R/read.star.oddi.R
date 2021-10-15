@@ -14,8 +14,9 @@
 #' @export read.star.oddi
 read.star.oddi <- function(x, ...) UseMethod("read.star.oddi")
 
-#' @export read.star.oddi
-read.star.oddi <- function(x, file, offset = 0, repeats = FALSE, verbose = FALSE, ...){
+#' @describeIn read.minilog Read a Star Oddi data file.
+#' @rawNamespace S3method(read.star.oddi,default)
+read.star.oddi.default <- function(x, file, offset = 0, repeats = FALSE, verbose = FALSE, ...){
    # Define file(s) to be read:
    if (!missing(x) & missing(file)) if (is.character(x)) file = x
    if (missing(file)){
@@ -93,6 +94,10 @@ read.star.oddi <- function(x, file, offset = 0, repeats = FALSE, verbose = FALSE
       v$date <- unlist(lapply(strsplit(as.character(t), " "), function(x) x[1]))
       v$time <- unlist(lapply(strsplit(as.character(t), " "), function(x) x[2]))
    }
+   
+   # Store file name:
+   file <- unlist(lapply(strsplit(file, "/"), function(x) x[length(x)]))
+   if (length(file) > 0) header <- c(file.name = file, header)
    
    # Convert to 'star.oddi' object:
    v <- star.oddi(v)

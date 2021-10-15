@@ -4,7 +4,7 @@
 \alias{time.scsset}
 \title{Trawl Event Times}
 \usage{
-\method{time}{scsset}(x, event = "start", ...)
+\method{time}{scsset}(x, event = "start", location, position, probe, ...)
 }
 \arguments{
 \item{x}{Data object.}

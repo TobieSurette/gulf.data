@@ -41,7 +41,7 @@ scslen <- function(x, ...) UseMethod("scslen")
 #' @export
 scsset.default <- function(x, ...){
    # Re-order variables:
-   vars <- c("date", "year", "month", "day", "tow.id", "tow.number", "valid", "zone",
+   vars <- c("date", "year", "month", "day", "tow.id", "tow.number", "valid", "station.type", "zone",
              names(x)[grep("time", names(x))],
              names(x)[grep("longitude", names(x))], names(x)[grep("latitude", names(x))])
    vars <- vars[vars %in% names(x)]

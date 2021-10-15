@@ -13,11 +13,11 @@
 #' 
 #' @examples 
 #' # Read snow crab survey Netmind data from 1990 to 1994:
-#' x <- read.scanmar(1990:1994)
+#' x <- read.netmind(1990:1994)
 #' 
 
 #' @export read.netmind
-read.netmind <- function(x, file, offset = 0, repeats = FALSE, ...){
+read.netmind <- function(x, file, offset = 0, repeats = FALSE, verbose = FALSE, ...){
    # Define file(s) to be read:
    if (!missing(x) & missing(file)) if (is.character(x)) file = x
    if (missing(file)){

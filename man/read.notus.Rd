@@ -4,10 +4,12 @@
 \alias{read.notus}
 \title{Read Notus Acoustic Trawl Data.}
 \usage{
-read.notus(file)
+read.notus(file, ...)
 }
 \arguments{
 \item{file}{File name(s).}
+
+\item{...}{Other parameters passed onto \code{locate} functions or used to subset data.}
 
 \item{x}{Survey year or file name.}
 
@@ -20,8 +22,6 @@ read.notus(file)
 \item{offset}{Numeric value specifying the offset time (in minutes) to include as a corrective in the data time stamps.}
 
 \item{repeats}{Logical value specifying whether to keep or average out data records with identical time stamps.}
-
-\item{...}{Other parameters passed onto \code{locate} functions or used to subset data.}
 }
 \description{
 Functions to read Notus acoustic trawl data, such as depth/temperature or acoustic trawl monitoring data.

@@ -34,7 +34,7 @@ star.oddi.default <- function(x, ...){
    # Define as probe data object:
    #x <- probe(x, ...)
    
-   # Add 'esonar' class tag:
+   # Add 'star.oddi' class tag:
    class(x) <- unique(c("star.oddi", class(x)))
    
    return(x)

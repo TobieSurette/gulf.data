@@ -16,7 +16,8 @@
 
 # @describeIn time Extract event times for \code{scsset} data.
 #' @export
-time.scsset <- function(x, event = "start", ...){
+time.scsset <- function(x, event = "start", location, position, probe, ...){
+   # Parse 'event' argument:
    event <- match.arg(tolower(event), c("start", "end", "stop", "haul", "touchdown", "liftoff"))
    if (event == "end") if (length(intersect(grep("end", names(x)), grep("time", names(x)))) == 0) event <- "stop" 
    
@@ -24,26 +25,51 @@ time.scsset <- function(x, event = "start", ...){
    names(x) <- gsub("end", "stop", names(x))
    event <- gsub("end", "stop", event)
    
+   # Attach touchdown times:
+   if ((event == "touchdown") & (length(grep("touchdown", names(x))) == 0)){
+      file <- locate(package = "gulf.data", keywords = c(unique(year(x)), "event", "times"))
+      t <- read.csv(file)
+      t <- t[t$location == "footrope" & (t$position == "center") & t$event == "touchdown", ]
+      ix <- match(x[c("date", "tow.id")], t[c("date", "tow.id")])
+      t <- t$time[ix]
+      t[is.na(t)] <- ""
+      x$touchdown.time <- t
+   }
+      
+   # Attach liftoff times:
+   if ((event == "liftoff") & (length(grep("liftoff", names(x))) == 0)){
+      file <- locate(package = "gulf.data", keywords = c(unique(year(x)), "event", "times"))
+      t <- read.csv(file)
+      t <- t[t$location == "footrope" & (t$position == "center") & t$event == "liftoff", ]
+      ix <- match(x[c("date", "tow.id")], t[c("date", "tow.id")])
+      t <- t$time[ix]
+      t[is.na(t)] <- ""
+      x$liftoff.time <- t
+   }   
+   
    # Result variable:
    v <- rep("", nrow(x))
    
    # Regular naming:
    var <- paste0(event, ".time")
    if (var %in% names(x)){
-      index <- which((deblank(x[,var]) != "")  &  !is.na(x[,var]))
-      v[index] <- x[index,var]
+      ix <- which((deblank(x[,var]) != "")  &  !is.na(x[,var]))
+      v[ix] <- x[ix,var]
    }
    
    # Look in logbook variables:
    var <- paste0(event, ".time.logbook")
    if (var %in% names(x)){
-      index <- which((v == "") & (deblank(x[,var]) != "")  &  !is.na(x[,var]))
-      v[index] <- x[index,var]
+      ix <- which((v == "") & (deblank(x[,var]) != "")  &  !is.na(x[,var]))
+      v[ix] <- x[ix,var]
    }
    
-   v <- as.POSIXct(paste(as.character(gulf.utils::date(x)), v))
+   # Convert to time class:
+   ix <- gsub(" ", "", v) != ""
+   r <- as.POSIXct(rep(NA, length(v)))
+   r[ix] <- as.POSIXct(paste(as.character(gulf.utils::date(x[ix, ])), v[ix]))
    
-   return(v)
+   return(r)
 }
 
 # @describeIn time Extract time stamps or event times for \code{probe} data.

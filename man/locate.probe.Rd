@@ -10,6 +10,7 @@
 \alias{locate.netmind.default}
 \alias{locate.esonar.default}
 \alias{locate.esonar.scsset}
+\alias{locate.winch.default}
 \title{Locate Probe Data}
 \usage{
 \method{locate}{probe}(
@@ -38,6 +39,8 @@
 \method{locate}{esonar.default}(x, ...)
 
 \method{locate}{esonar.scsset}(x, ...)
+
+\method{locate}{winch.default}(x, ...)
 }
 \arguments{
 \item{x}{Study year, data file name or tow identification tag.}
@@ -74,6 +77,8 @@ Locate data files for various types of probes.
 \item \code{locate.esonar.default}: Default method for locating eSonar data files.
 
 \item \code{locate.esonar.scsset}: \code{scsset} method for locating eSonar data files.
+
+\item \code{locate.winch.default}: Default method for locating trawl winch speed and warp files.
 }}
 
 \examples{
@@ -86,7 +91,7 @@ locate.minilog()                     # Find all available Minilog data files.
 locate.minilog(1997)                 # Find Minilog data files for the 1997 snow crab survey.
 locate.minilog(1997:1999)            # Find Minilog data files for the 1997-1997 snow crab survey.
 
-locate.star.oddi(2020, probe = "headline") 
+locate.star.oddi(2020, position = "headline") 
 locate.star.oddi(2020, probe = "tilt", tow.id = "GP354F")
 
 #' # Global searches:

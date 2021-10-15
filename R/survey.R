@@ -87,6 +87,9 @@ scs.survey <- function(x, ...){
    # 2019 comparative study:
    v[which((gulf.utils::year(x) == 2019) & (substr(x$tow.id,2,2) == "C"))] <-"comparative"
    
+   # 2021 trawl experiment:
+   v[which((gulf.utils::year(x) == 2021) & (substr(x$tow.id,1,2) == "XP"))] <-"trawl experiment"
+
    return(v)
 }
 

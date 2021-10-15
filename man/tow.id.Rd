@@ -4,6 +4,7 @@
 \alias{tow.id}
 \alias{tow.id.default}
 \alias{tow.id.probe}
+\alias{tow.id.star.oddi}
 \alias{tow.id.minilog}
 \alias{tow.id.scsbio}
 \title{Extract Tow Identifier}
@@ -13,6 +14,8 @@ tow.id(x, ...)
 \method{tow.id}{default}(x, ...)
 
 \method{tow.id}{probe}(x, method, ...)
+
+\method{tow.id}{star.oddi}(x, method, ...)
 
 \method{tow.id}{minilog}(x, method = "observed")
 
@@ -39,7 +42,9 @@ Functions to extract or determine trawl tow identifiers.
 \itemize{
 \item \code{default}: Default \sQuote{tow.id} method.
 
-\item \code{probe}: \sQuote{tow.id} probe method.
+\item \code{probe}: \sQuote{tow.id} \sQuote{probe} method.
+
+\item \code{star.oddi}: \sQuote{tow.id} sQuote{star.oddi} method.
 
 \item \code{minilog}: \sQuote{tow.id} \sQuote{minilog} method.
 

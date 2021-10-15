@@ -20,7 +20,7 @@
 #' locate.minilog(1997)                 # Find Minilog data files for the 1997 snow crab survey.
 #' locate.minilog(1997:1999)            # Find Minilog data files for the 1997-1997 snow crab survey.
 #'
-#' locate.star.oddi(2020, probe = "headline") 
+#' locate.star.oddi(2020, position = "headline") 
 #' locate.star.oddi(2020, probe = "tilt", tow.id = "GP354F")
 #' 
 #' #' # Global searches:
@@ -49,7 +49,7 @@
 #' 
 #' @seealso \code{\link[gulf.metadata]{project}}, \code{\link[gulf.data]{probe}}
 
-#' @export
+#' @export locate.probe
 locate.probe <- function(x, probe, project = "scs", location = "headline", remove, year, tow.id, ...){
    # Parse 'x' argument:
    if (!missing(x)){
@@ -62,13 +62,13 @@ locate.probe <- function(x, probe, project = "scs", location = "headline", remov
    
    # Parse arguments:
    probe   <- probe(probe)
-   project <- project(project)
+   project <- gulf.metadata::project(project)
    location <- match.arg(tolower(location), c("headline", "footrope", "tilt"))
    
    # Minilog 
    if (probe == "minilog"){
       if (project == "scs"){
-         files <- locate(package = "gulf.trawl.data", keywords = c("minilog"), ...)
+         files <- locate(package = "gulf.probe.data", keywords = c("minilog"), ...)
          files <- files[union(grep("asc", tolower(files)), grep(".csv$", tolower(files)))]    
       }
    }
@@ -80,11 +80,13 @@ locate.probe <- function(x, probe, project = "scs", location = "headline", remov
       # Parse 'location' argument:
       location <- tolower(gsub("[. ]", "", location))
       location <- location[location %in% c("headline", "footrope", "tilt")]
-   
+      if ("tilt" %in% location) location <- unique(c(location, "footrope"))
+      if ("footrope" %in% location) location <- unique(c(location, "tilt"))
+         
       # Locate candidate files:
       files <- NULL
       for (i in 1:length(location)){
-         files <- c(files, locate(package = "gulf.trawl.data", file = "*.DAT", keywords = c(project, "star", "oddi", location[i]), ...))
+         files <- c(files, locate(package = "gulf.probe.data", file = "*.DAT", keywords = c(project, "star", "oddi", location[i]), ...))
       }
    }
    
@@ -92,7 +94,7 @@ locate.probe <- function(x, probe, project = "scs", location = "headline", remov
    if (probe == "scanmar"){
       if (project == "scs"){
          # Load set of file names:
-         files <- locate(package = "gulf.trawl.data", keywords = c("scanmar"), ...)
+         files <- locate(package = "gulf.probe.data", keywords = c("scanmar"), ...)
          ix <- unique(c(grep("[.]txt", tolower(files)), grep("[.]scd", tolower(files)), grep("[.]csv", tolower(files))))
          files <- files[ix]
    
@@ -109,7 +111,7 @@ locate.probe <- function(x, probe, project = "scs", location = "headline", remov
    if (probe == "netmind"){
       if (project == "scs"){
          # Load set of file names:
-         files <- locate(package = "gulf.trawl.data", keywords = c("netmind"), ...)
+         files <- locate(package = "gulf.probe.data", keywords = c("netmind"), ...)
          ix <- unique(c(grep("[.]txt", tolower(files)), grep("[.]scd", tolower(files)), grep("[.]csv", tolower(files))))
          files <- files[ix]
    
@@ -127,7 +129,12 @@ locate.probe <- function(x, probe, project = "scs", location = "headline", remov
    if (probe == "esonar"){
       if (project == "scs"){  
          # Load set of file names:
-         files <- locate(package = "gulf.trawl.data", file = "*.csv", keywords = c("scs", "esonar"), ...)
+         files <- locate(package = "gulf.probe.data", file = "*.csv", keywords = c("scs", "esonar"), ...)
+         ix <- grep("headline", files)
+         ix <- c(ix, grep("depth", files))
+         ix <- c(ix, grep("wingspread", files))
+         ix <- c(ix, grep("symmetry", files))
+         if (length(ix) > 0) files <- files[-ix]
       }
    }
    
@@ -135,7 +142,15 @@ locate.probe <- function(x, probe, project = "scs", location = "headline", remov
    if (probe == "notus"){
       if (project == "scs"){  
          # Load set of file names:
-         files <- locate(package = "gulf.trawl.data", file = "*.txt", keywords = c("nss", "notus"), ...)
+         files <- locate(package = "gulf.probe.data", file = "*.txt", keywords = c("nss", "notus"), ...)
+      }
+   }
+   
+   # Trawl winch speed and warp files:
+   if (probe == "winch"){
+      if (project == "scs"){  
+         # Load set of file names:
+         files <- locate(package = "gulf.probe.data", file = "*.csv", keywords = c("scs", "winch"), ...)
       }
    }
    
@@ -212,16 +227,51 @@ locate.probe <- function(x, probe, project = "scs", location = "headline", remov
 #' @export locate.scanmar
 #' @export locate.netmind
 #' @export locate.esonar
+#' @export locate.winch
 locate.minilog   <- function(x, ...) UseMethod("locate.minilog")
 locate.star.oddi <- function(x, ...) UseMethod("locate.star.oddi")
 locate.scanmar   <- function(x, ...) UseMethod("locate.scanmar")
 locate.netmind   <- function(x, ...) UseMethod("locate.netmind")
 locate.esonar    <- function(x, ...) UseMethod("locate.esonar")
 locate.notus     <- function(x, ...) UseMethod("locate.notus")
+locate.winch     <- function(x, ...) UseMethod("locate.winch")
 
 #' @describeIn locate.probe Default method for locating Minilog probe data files.
 #' @rawNamespace S3method(locate.minilog,default)
-locate.minilog.default <- function(x, ...) return(locate.probe(x, probe = "minilog", remove = c("reject", "test", "invalid", "DS_Store"), ...))
+locate.minilog.default <- function(x, ...){
+   # Regular search:
+   v <- locate.probe(x, probe = "minilog", remove = c("reject", "test", "invalid", "DS_Store"), ...)
+   
+   # Perform header search:
+   if (length(v) == 0){
+      year <- list(...)$year
+      header <- header.minilog(year = year)
+      header <- header[which(header$start.time != "" & header$finish.time != ""), ]
+      date <- as.character(date(unlist(lapply(strsplit(header$start.time, "[, ]"), function(x) x[1]))))
+      start.time <- unlist(lapply(strsplit(header$start.time, "[, ]"), function(x) x[2]))
+      stop.time  <- unlist(lapply(strsplit(header$finish.time, "[, ]"), function(x) x[2]))
+   
+      header$start.time <- as.POSIXct(paste(date, start.time))
+      header$finish.time <- as.POSIXct(paste(date, stop.time))
+      
+      s <- read.scsset(year)
+      s <- s[s$start.time != "", ]
+      start.time <- time(s, "start") 
+      header$tow.id <- NA
+      for (i in 1:nrow(header)) header$tow.id[i] <- s$tow.id[which.min(abs(start.time - header$start.time[i]))]
+      tow.id <- list(...)$tow.id
+      header <- header[which(header$tow.id %in% tow.id), ]
+      if (nrow(header) == 0) return(NULL)
+      header <- header[match(header$tow.id, tow.id), ]
+      if (nrow(header) == 0) return(NULL)
+      files <- locate.minilog(year)
+      ix <- rep(FALSE, length(files))
+      for (i in 1:nrow(header)) ix[grep(header$file.name[i], files)] <- TRUE
+      v <- files[ix]
+   }
+   
+   return(v)
+}
 
 #' @describeIn locate.probe Locate Minilog associated with snow crab survey tow data.
 #' @rawNamespace S3method(locate.minilog,scsset)
@@ -250,3 +300,7 @@ locate.esonar.default <- function(x, ...) return(locate.probe(x, probe = "esonar
 #' @describeIn locate.probe \code{scsset} method for locating eSonar data files.
 #' @rawNamespace S3method(locate.esonar,scsset)
 locate.esonar.scsset <- function(x, ...) return(locate.esonar(year = unique(year(x)), tow.id = unique(x$tow.id, ...)))
+
+#' @describeIn locate.probe Default method for locating trawl winch speed and warp files.
+#' @rawNamespace S3method(locate.winch,default)
+locate.winch.default <- function(x, ...) return(locate.probe(x, probe = "winch", ...))

@@ -4,7 +4,7 @@
 \alias{read.netmind}
 \title{Read Netmind Acoustic Trawl Data.}
 \usage{
-read.netmind(x, file, offset = 0, repeats = FALSE, ...)
+read.netmind(x, file, offset = 0, repeats = FALSE, verbose = FALSE, ...)
 }
 \arguments{
 \item{x}{Survey year or file name.}
@@ -28,6 +28,6 @@ Functions to read Netmind acoustic trawl measurement data.
 }
 \examples{
 # Read snow crab survey Netmind data from 1990 to 1994:
-x <- read.scanmar(1990:1994)
+x <- read.netmind(1990:1994)
 
 }

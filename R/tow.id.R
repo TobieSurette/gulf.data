@@ -25,7 +25,7 @@ tow.id.default <- function(x, ...){
    return(v)
 } 
 
-#' @describeIn tow.id \sQuote{tow.id} probe method.
+#' @describeIn tow.id \sQuote{tow.id} \sQuote{probe} method.
 #' @rawNamespace S3method(tow.id,probe)
 tow.id.probe <- function(x, method, ...){
    if (missing(method)) return(tow.id.default(x,))
@@ -58,6 +58,32 @@ tow.id.probe <- function(x, method, ...){
    }
    
    return(v)
+}
+
+#' @describeIn tow.id \sQuote{tow.id} sQuote{star.oddi} method.
+#' @rawNamespace S3method(tow.id,star.oddi)
+tow.id.star.oddi <- function(x, method, ...){
+   
+   if ("tow.id" %in% names(x)) return(x$tow.id)
+   
+   header <- header(x)
+   if (length(header) > 0){
+      if ("tow.id" %in% names(header)) return(header[[which(names(header) == "tow.id")]])
+      if ("file.name" %in% names(header)){
+         if (length(grep("GP", header["file.name"])) > 0){
+            file <- strsplit(header["file.name"], "/")[[1]]
+            file <- file[grep("GP", file)] 
+            file <- gsub(".DAT", "", file)
+            return(file)
+         }
+      }
+   }
+   
+   # Use time method:
+   s <- read.scsset(year = unique(year(time(x))))
+   return(s$tow.id[which.min(abs(mean(time(x)) - time(s)))])
+   
+   return(NULL)
 }
 
 #' @describeIn tow.id \sQuote{tow.id} \sQuote{minilog} method.

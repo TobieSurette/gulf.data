@@ -95,10 +95,13 @@ header.minilog <- function(x, verbose = FALSE, ...){
 #' @export header.star.oddi
 header.star.oddi <- function(x, verbose = FALSE, ...){
    # Define file(s) to be read:
-   if (!missing(x) & missing(file)) if (is.character(x)) file = x
-   if (missing(file)){
-      if (missing(x)) file <- locate.star.oddi(...) else file <- locate.star.oddi(x, ...)  
-   }
+   if (!missing(x)){
+      file <- NULL
+      if (is.character(x)) file <- x 
+      if (is.numeric(x))   file <- locate.star.oddi(x, ...) 
+   }else{
+      file <- locate.star.oddi(...) 
+   } 
    if (length(file) == 0) return(NULL)
    
    # Read multiple Star Oddi files and concatenate them:

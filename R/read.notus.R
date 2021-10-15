@@ -12,7 +12,7 @@
 #' @param ... Other parameters passed onto \code{locate} functions or used to subset data.
 
 #' @export read.notus
-read.notus <- function(file){
+read.notus <- function(file, ...){
   # Define file(s) to be read:
   if (!missing(x) & missing(file)) if (is.character(x)) file = x
   if (missing(file)){
