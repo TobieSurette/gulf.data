@@ -1,4 +1,4 @@
-#' Snow Crab Observer Data Class:
+#' @title Snow Crab Observer Data Class:
 #'
 #' @description Class containers for snow crab observer data.
 #'
@@ -13,7 +13,7 @@ scobs <- function(x, ...) UseMethod("scobs")
 
 #' @describeIn scobs Create an \code{scobs} object.
 #' @export
-scobs.default <- function(x = NULL, ...){
+scobs.default <- function(x, ...){
    gulf.metadata::key(x) <- c("year", "month", "day", "trip.number", "trap.number", "crab.number")
 
    # Define class:
