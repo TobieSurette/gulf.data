@@ -22,7 +22,7 @@
 #'   \item{\code{is.new.shell.scsbio}}{Returns whether a crab is newly-moulted based on snow crab survey data.}
 #'   \item{\code{is.hard.shell}}{Generic \code{is.hard.shell} method.}
 #'   \item{\code{is.hard.shell.scsbio}}{Returns whether a carapace is considered hard based on snow crab survey data.}
-#'   \item{\code{is.hard.shell.scsobs}}{Returns whether a carapace is considered hard based on snow crab observer data.}
+#'   \item{\code{is.hard.shell.scobs}}{Returns whether a carapace is considered hard based on snow crab observer data.}
 #'   \item{\code{is.soft.shell}}{Returns whether a crustacean carapace is considered soft.}
 #'   \item{\code{is.skip.moulter}}{Generic \code{is.skip.moulter} method.}
 #'   \item{\code{is.skip.moulter.scsbio}}{Returns whether a crustacean is considered to have skipped a moult, based on snow crab survey data.}
@@ -96,8 +96,8 @@ is.hard.shell.scsbio <- function(x, durometer, shell.condition, zone, ...){
 }
 
 #' @rdname moulting
-#' @rawNamespace S3method(is.hard.shell,scsobs)
-is.hard.shell.scsobs <- function(x, durometer, shell.condition, zone, ...){
+#' @rawNamespace S3method(is.hard.shell,scobs)
+is.hard.shell.scobs <- function(x, durometer, shell.condition, zone, ...){
    # Parse input arguments:
    if (is.data.frame(x)) names(x) <- tolower(names(x))
    if (missing(durometer) & ("durometer" %in% names(x))) durometer <- x$durometer
