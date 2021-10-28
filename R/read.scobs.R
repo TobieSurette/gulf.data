@@ -16,6 +16,7 @@
 #' 
 
 # READ.SCOBS - Reads an ASCII snow crab observer biological card.
+#' @export read.scobs
 read.scobs <- function(year, file, path = "W:/Crab/Offshore Crab Common/", cfvn, type = "sea", trip.number,
                           database = "gap", username = "4R_GAP", password, source = "oracle", ...){
 

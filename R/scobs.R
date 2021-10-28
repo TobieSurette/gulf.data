@@ -7,7 +7,6 @@
 #' @param ... Other parameters (not used).
 #'
 
-#' @describeIn scobs Generic \code{scsbio} method.
 #' @export
 scobs <- function(x, ...) UseMethod("scobs")
 
