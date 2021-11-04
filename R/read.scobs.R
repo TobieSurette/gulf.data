@@ -206,7 +206,11 @@ read.oracle.scobs <- function(x, year, zone, cfvn, trip.number, password, ...){
 }
 
 # Read CSV files:
-read.csv.scobs <- function(x, year, zone, ...){
+read.csv.scobs <- function(x, year, zone, type, path, ...){
+   # Parse 'year':
+   if (missing(year) & is.numeric(x)) year <- x
+   if (missing(year)) stop("'year' must be specified.")
+   
    # Locate files:
    path <- paste0(path, "Fishing Year ", year, "/Observer Data")
    files <- locate(path = path, file = "*.csv")
@@ -229,7 +233,11 @@ read.csv.scobs <- function(x, year, zone, ...){
 }
 
 # Read Rdata files:
-read.rdata.scobs <- function(x, year, zone, ...){
+read.rdata.scobs <- function(x, year, zone, type, path, ...){
+   # Parse 'year':
+   if (missing(year) & is.numeric(x)) year <- x
+   if (missing(year)) stop("'year' must be specified.")
+      
    # Locate files:
    path <- paste0(path, "Fishing Year ", year, "/Observer Data")
    files <- locate(path = path, file = "*.rdata")

@@ -5,264 +5,268 @@
 #' @export
 observer <- function(x){
    # OBSERVER - Standardize and correct observer names object.
+
+   ux <- unique(x)
+   cx <- ux
    
    # Remove leading and trailing spaces and change special characters:
-   x <- gsub("?", "E", x)
-   x <- gsub("?", "E", x)
-   x <- gsub("?", "E", x)
-   x <- gsub("?", "C", x)
-   x <- gsub("[,']", " ", x)
-   x <- as.character(x)
-   x <- gsub("(^[ ]+)|([ ]+$)", "", x)
-   x <- gsub(" - ", "-", x)
+   cx <- gsub("[,']", " ", cx)
+   cx <- as.character(cx)
+   cx <- gsub("(^[ ]+)|([ ]+$)", "", cx)
+   cx <- gsub(" - ", "-", cx)
 
    # Observer name corrections:
-   x <- gsub("AALEXANDRE KENNY", "ALEXANDRE KENNY", x)
-   x <- gsub("ANDRE LAROCQUE", "AUDRE LAROCQUE", x)
-   x <- gsub("NATASHA CAISSIE", "NATACHA CAISSIE", x)
+   cx <- gsub("AALEXANDRE KENNY", "ALEXANDRE KENNY", cx)
+   cx <- gsub("ANDRE LAROCQUE", "AUDRE LAROCQUE", cx)
+   cx <- gsub("NATASHA CAISSIE", "NATACHA CAISSIE", cx)
                    
-   x <- gsub("JOSIANNE ARESNEAU", "JOSIANNE ARSENEAU", x) 
-   x <- gsub("JOSLANE ARSENEAU", "JOSIANNE ARSENEAU", x) 
-   x <- gsub("JOSIANE ARSENEAU", "JOSIANNE ARSENEAU", x) 
+   cx <- gsub("JOSIANNE ARESNEAU", "JOSIANNE ARSENEAU", cx) 
+   cx <- gsub("JOSLANE ARSENEAU", "JOSIANNE ARSENEAU", cx) 
+   cx <- gsub("JOSIANE ARSENEAU", "JOSIANNE ARSENEAU", cx) 
          
-   x <- gsub("SABRINA AUCET", "SABRINA AUDET", x) 
+   cx <- gsub("SABRINA AUCET", "SABRINA AUDET", cx) 
 
-   x <- gsub("ABOELLAH BACHA", "ABDELLAH BACHA", x) 
-   x <- gsub("SEBASTION BEAUCHAMP", "SEBASTIEN BEAUCHAMP", x)  
+   cx <- gsub("ABOELLAH BACHA", "ABDELLAH BACHA", cx) 
+   cx <- gsub("SEBASTION BEAUCHAMP", "SEBASTIEN BEAUCHAMP", cx)  
 
-   x <- gsub("REMI P BEAUCHEMIN", "REMI P. BEAUCHEMIN", x)  
-   x <- gsub("REMI P.BEAUCHEMIN", "REMI P. BEAUCHEMIN", x)  
+   cx <- gsub("REMI P BEAUCHEMIN", "REMI P. BEAUCHEMIN", cx)  
+   cx <- gsub("REMI P.BEAUCHEMIN", "REMI P. BEAUCHEMIN", cx)  
 
-   x <- gsub("STEVE BENAIT", "STEVE BENOIT", x)
-   x <- gsub("BENOIT STEVE", "STEVE BENOIT", x)
-   x <- gsub("BENAIT, STEVE", "STEVE BENOIT", x)
+   cx <- gsub("STEVE BENAIT", "STEVE BENOIT", cx)
+   cx <- gsub("BENOIT STEVE", "STEVE BENOIT", cx)
+   cx <- gsub("BENAIT, STEVE", "STEVE BENOIT", cx)
+   
+   cx <- gsub("DANIEL LE BLANC", "DANIEL LEBLANC", cx) 
                       
-   x <- gsub("BENOIT SUSIE", "SUSIE BENOIT", x)
-   x <- gsub("BENOIT, SUSIE", "SUSIE BENOIT", x)
+   cx <- gsub("BENOIT SUSIE", "SUSIE BENOIT", cx)
+   cx <- gsub("BENOIT, SUSIE", "SUSIE BENOIT", cx)
    
-   x <- gsub("SUZIE OKIZOLE-BERNIER", "SUZIE OLAIZOLA BERNIER", x)
-   x <- gsub("SUZIE OLAIZDA BERNIER", "SUZIE OLAIZOLA BERNIER", x)
-   x <- gsub("SUZIE OLAIZOLA-BERNIER", "SUZIE OLAIZOLA BERNIER", x)
-   x <- gsub("SUZIE OLAIZOLA-REINIER", "SUZIE OLAIZOLA BERNIER", x)   
+   cx <- gsub("SUZIE OKIZOLE-BERNIER", "SUZIE OLAIZOLA BERNIER", cx)
+   cx <- gsub("SUZIE OLAIZDA BERNIER", "SUZIE OLAIZOLA BERNIER", cx)
+   cx <- gsub("SUZIE OLAIZOLA-BERNIER", "SUZIE OLAIZOLA BERNIER", cx)
+   cx <- gsub("SUZIE OLAIZOLA-REINIER", "SUZIE OLAIZOLA BERNIER", cx)   
        
-   x <- gsub("SEAN-PHILIPPE BERTIN", "JEAN-PHILIPPE BERTIN", x)
-   x <- gsub("JEAN PHILIPPE BERTIN", "JEAN-PHILIPPE BERTIN", x)
+   cx <- gsub("SEAN-PHILIPPE BERTIN", "JEAN-PHILIPPE BERTIN", cx)
+   cx <- gsub("JEAN PHILIPPE BERTIN", "JEAN-PHILIPPE BERTIN", cx)
    
-   x <- gsub("BRANCH BRIAN", "BRIAN BRANCH", x)
+   cx <- gsub("BRANCH BRIAN", "BRIAN BRANCH", cx)
 
-   x <- gsub("MARIE MICHELE BOURASSA", "MARIE-MICHELE BOURASSA", x)
+   cx <- gsub("MARIE MICHELE BOURASSA", "MARIE-MICHELE BOURASSA", cx)
    
-   x <- gsub("ANTHONY GALLIER" , "ANTHONY CALLIER", x)
-   x <- gsub("ANTHONY GALLIN", "ANTHONY CALLIER", x)
-   x <- gsub("ANTHONY GALLUM", "ANTHONY CALLIER", x)  
-   x <- gsub("ANTHONY GALLIEN", "ANTHONY CALLIER", x)
-   x <- gsub("ANTHONY CALLIN", "ANTHONY CALLIER", x)
+   cx <- gsub("ANTHONY GALLIER" , "ANTHONY CALLIER", cx)
+   cx <- gsub("ANTHONY GALLIN", "ANTHONY CALLIER", cx)
+   cx <- gsub("ANTHONY GALLUM", "ANTHONY CALLIER", cx)  
+   cx <- gsub("ANTHONY GALLIEN", "ANTHONY CALLIER", cx)
+   cx <- gsub("ANTHONY CALLIN", "ANTHONY CALLIER", cx)
    
-   x <- gsub("VANESSA CARYDRAS", "VANESSA CARYDIAS", x)
+   cx <- gsub("VANESSA CARYDRAS", "VANESSA CARYDIAS", cx)
 
-   x <- gsub("JOEL CHAINOT", "JOEL CHANUT", x)
-   x <- gsub("JOEL CHANOT", "JOEL CHANUT", x)
+   cx <- gsub("JOEL CHAINOT", "JOEL CHANUT", cx)
+   cx <- gsub("JOEL CHANOT", "JOEL CHANUT", cx)
 
-   x <- gsub("PAUL J. CHIASSON", "PAUL JR. CHIASSON", x)
-   x <- gsub("PAUL JR CHAISSON", "PAUL JR. CHIASSON", x)
-   x <- gsub("PAUL JR CHIASSON", "PAUL JR. CHIASSON", x)
-   x <- gsub("CHIASSON PAUL", "PAUL JR. CHIASSON", x)
-   x <- gsub("CHIASSON PAUL JR", "PAUL JR. CHIASSON", x)   
+   cx <- gsub("PAUL J. CHIASSON", "PAUL JR. CHIASSON", cx)
+   cx <- gsub("PAUL JR CHAISSON", "PAUL JR. CHIASSON", cx)
+   cx <- gsub("PAUL JR CHIASSON", "PAUL JR. CHIASSON", cx)
+   cx <- gsub("CHIASSON PAUL", "PAUL JR. CHIASSON", cx)
+   cx <- gsub("CHIASSON PAUL JR", "PAUL JR. CHIASSON", cx)   
 
-   x <- gsub("CHENARD J.P", "J.P. CHENARD", x)
-   x <- gsub("CHENARD J.P.", "J.P. CHENARD", x)
-   x <- gsub("CHENARD JP", "J.P. CHENARD", x)
+   cx <- gsub("CHENARD J.P", "J.P. CHENARD", cx)
+   cx <- gsub("CHENARD J.P.", "J.P. CHENARD", cx)
+   cx <- gsub("CHENARD JP", "J.P. CHENARD", cx)
    
-   x <- gsub("MICHAIL CHIASSON", "MICHAEL CHIASSON", x) 
-   x <- gsub("STEVE CHOINARD", "STEVE CHOUINARD", x)  
+   cx <- gsub("MICHAIL CHIASSON", "MICHAEL CHIASSON", cx) 
+   cx <- gsub("STEVE CHOINARD", "STEVE CHOUINARD", cx)  
   
-   x <- gsub("STEVE CHEVANE", "STEVE CHEVARIE", x)  
-   x <- gsub("STEVE CHEVAINE", "STEVE CHEVARIE", x)  
-   x <- gsub("STEVE CHEVAIRE", "STEVE CHEVARIE", x)  
-   x <- gsub("STEVE CHEVERIE", "STEVE CHEVARIE", x)                 
+   cx <- gsub("STEVE CHEVANE", "STEVE CHEVARIE", cx)  
+   cx <- gsub("STEVE CHEVAINE", "STEVE CHEVARIE", cx)  
+   cx <- gsub("STEVE CHEVAIRE", "STEVE CHEVARIE", cx)  
+   cx <- gsub("STEVE CHEVERIE", "STEVE CHEVARIE", cx)                 
   
-   x <- gsub("DANIEL CYR-GAGNON", "DANIEL CYR GAGNON", x)
+   cx <- gsub("DANIEL CYR-GAGNON", "DANIEL CYR GAGNON", cx)
 
-   x <- gsub("MORGAN DAUVEGNE", "MORGAN DAUVERGNE", x)
+   cx <- gsub("MORGAN DAUVEGNE", "MORGAN DAUVERGNE", cx)
    
-   x <- gsub("JULIEN DESLAURIES", "JULIEN DESLAURIERS", x)
+   cx <- gsub("JULIEN DESLAURIES", "JULIEN DESLAURIERS", cx)
              
-   x <- gsub("NICOLAS ALLEN DAMERS", "NICOLAS ALLEN DEMERS", x)
-   x <- gsub("NICOLA ALLEN DAMERS", "NICOLAS ALLEN DEMERS", x)
+   cx <- gsub("NICOLAS ALLEN DAMERS", "NICOLAS ALLEN DEMERS", cx)
+   cx <- gsub("NICOLA ALLEN DAMERS", "NICOLAS ALLEN DEMERS", cx)
 
-   x <- gsub("MARCO DE SANTIS", "MARCO DESANTIS", x) 
+   cx <- gsub("MARCO DE SANTIS", "MARCO DESANTIS", cx) 
  
-   x <- gsub("VERONIQUE DERESPE", "VERONIQUE DERASPE", x)  
-   x <- gsub("VERONIQUE DERRAPE", "VERONIQUE DERASPE", x) 
+   cx <- gsub("VERONIQUE DERESPE", "VERONIQUE DERASPE", cx)  
+   cx <- gsub("VERONIQUE DERRAPE", "VERONIQUE DERASPE", cx) 
    
-   x <- gsub("JESSICA DORION", "JESSICA DOIRON", x)
-   x <- gsub("JESSICA DARRA", "JESSICA DOIRON", x)   
+   cx <- gsub("JESSICA DORION", "JESSICA DOIRON", cx)
+   cx <- gsub("JESSICA DARRA", "JESSICA DOIRON", cx)   
    
-   x <- gsub("ALEX DUBOURGUOIS", "ALEX DUBOURGUAIS", x) 
+   cx <- gsub("ALEX DUBOURGUOIS", "ALEX DUBOURGUAIS", cx) 
    
-   x <- gsub("CHRISTINE DUFRESRE", "CHRISTINE DUFRESNE", x)  
-   x <- gsub("CHRISTINE DUTRESNE", "CHRISTINE DUFRESNE", x)  
-   x <- gsub("CHRISTINE DUTRESRE", "CHRISTINE DUFRESNE", x)  
+   cx <- gsub("CHRISTINE DUFRESRE", "CHRISTINE DUFRESNE", cx)  
+   cx <- gsub("CHRISTINE DUTRESNE", "CHRISTINE DUFRESNE", cx)  
+   cx <- gsub("CHRISTINE DUTRESRE", "CHRISTINE DUFRESNE", cx)  
 
-   x <- gsub("MARIO-FERRON", "MARIO FERRON", x)  
+   cx <- gsub("MARIO-FERRON", "MARIO FERRON", cx)  
 
-   x <- gsub("MIGUEL FILLION", "MIGUEL FICCION", x)
-   x <- gsub("MIGUES FICCION", "MIGUEL FICCION", x)
+   cx <- gsub("MIGUEL FILLION", "MIGUEL FICCION", cx)
+   cx <- gsub("MIGUES FICCION", "MIGUEL FICCION", cx)
    
-   x <- gsub("JEAN PHILIPPE FLEURY", "JEAN-PHILIPPE FLEURY", x)
-   x <- gsub("JEAN - PHILIPPE FLEURY", "JEAN-PHILIPPE FLEURY", x)
+   cx <- gsub("JEAN PHILIPPE FLEURY", "JEAN-PHILIPPE FLEURY", cx)
+   cx <- gsub("JEAN - PHILIPPE FLEURY", "JEAN-PHILIPPE FLEURY", cx)
 
-   x <- gsub("MARINA MARCAGGI-FOUCAR", "MARINA MARCAGGI-FOUCARD", x)
-   x <- gsub("MARINA MARCAGGI F", "MARINA MARCAGGI-FOUCARD", x)
-   x <- gsub("MARINA MARCAGGI FOUCAR", "MARINA MARCAGGI-FOUCARD", x)
-   x <- gsub("MARINA MARCAGGIE", "MARINA MARCAGGI-FOUCARD", x)
-   x <- gsub("MARINA MARCAGGIF", "MARINA MARCAGGI-FOUCARD", x)
-   x <- gsub("MARINA MARGAGGI FOUCAR", "MARINA MARCAGGI-FOUCARD", x)
+   cx <- gsub("MARINA MARCAGGI-FOUCAR", "MARINA MARCAGGI-FOUCARD", cx)
+   cx <- gsub("MARINA MARCAGGI F", "MARINA MARCAGGI-FOUCARD", cx)
+   cx <- gsub("MARINA MARCAGGI FOUCAR", "MARINA MARCAGGI-FOUCARD", cx)
+   cx <- gsub("MARINA MARCAGGIE", "MARINA MARCAGGI-FOUCARD", cx)
+   cx <- gsub("MARINA MARCAGGIF", "MARINA MARCAGGI-FOUCARD", cx)
+   cx <- gsub("MARINA MARGAGGI FOUCAR", "MARINA MARCAGGI-FOUCARD", cx)
 
-   x <- gsub("AUDRE GAGNON", "ANDRE GAGNON", x) 
+   cx <- gsub("AUDRE GAGNON", "ANDRE GAGNON", cx) 
    
-   x <- gsub("MARTIN GALLUCHION", "MARTIN GALLUCHON", x)
-   x <- gsub("MARTIN GALLUCTION", "MARTIN GALLUCHON", x)
-   x <- gsub("GALLUCHAN MARTIN", "MARTIN GALLUCHON", x)
-   x <- gsub("GALLUCHION MARTIN", "MARTIN GALLUCHON", x)
-   x <- gsub("GALLUCHON MARTIN", "MARTIN GALLUCHON", x)
+   cx <- gsub("MARTIN GALLUCHION", "MARTIN GALLUCHON", cx)
+   cx <- gsub("MARTIN GALLUCTION", "MARTIN GALLUCHON", cx)
+   cx <- gsub("GALLUCHAN MARTIN", "MARTIN GALLUCHON", cx)
+   cx <- gsub("GALLUCHION MARTIN", "MARTIN GALLUCHON", cx)
+   cx <- gsub("GALLUCHON MARTIN", "MARTIN GALLUCHON", cx)
    
-   x <- gsub("JEAN-FRANCOIS GAUTHIER", "JEAN-FRANCIS GAUTHIER", x)
+   cx <- gsub("JEAN-FRANCOIS GAUTHIER", "JEAN-FRANCIS GAUTHIER", cx)
    
-   x <- gsub("MYLENE GIONEST", "MYLENE GIONET", x)
+   cx <- gsub("MYLENE GIONEST", "MYLENE GIONET", cx)
    
-   x <- gsub("SIMON GOSSEAN", "SIMON GOSSELIN", x)
-   x <- gsub("SIMON GOSSEUX", "SIMON GOSSELIN", x)
+   cx <- gsub("SIMON GOSSEAN", "SIMON GOSSELIN", cx)
+   cx <- gsub("SIMON GOSSEUX", "SIMON GOSSELIN", cx)
 
-   x <- gsub("DAMIEN CRELON", "DAMIEN GRELON", x)
-   x <- gsub("DAMIEN GULON", "DAMIEN GRELON", x)
-   x <- gsub("DAMION CRELON", "DAMIEN GRELON", x)
+   cx <- gsub("DAMIEN CRELON", "DAMIEN GRELON", cx)
+   cx <- gsub("DAMIEN GULON", "DAMIEN GRELON", cx)
+   cx <- gsub("DAMION CRELON", "DAMIEN GRELON", cx)
    
-   x <- gsub("ABIGAEL GUENETTE", "ABIGAEL GUERETTE", x)
-   x <- gsub("ABIGAEL QUENETTE", "ABIGAEL GUERETTE", x)
-   x <- gsub("ABIGAIL GUEIETTE", "ABIGAEL GUERETTE", x)
+   cx <- gsub("ABIGAEL GUENETTE", "ABIGAEL GUERETTE", cx)
+   cx <- gsub("ABIGAEL QUENETTE", "ABIGAEL GUERETTE", cx)
+   cx <- gsub("ABIGAIL GUEIETTE", "ABIGAEL GUERETTE", cx)
 
-   x <- gsub("MICHALAS HACHE", "NICHOLAS HACHE", x)
+   cx <- gsub("MICHALAS HACHE", "NICHOLAS HACHE", cx)
 
-   x <- gsub("WADII HADUJ", "WADII HADAJ", x)
+   cx <- gsub("WADII HADUJ", "WADII HADAJ", cx)
 
-   x <- gsub("MICKE VAN DER HAYDE", "MIEKE VAN DER HEYDE", x)
-   x <- gsub("MICKE VAN DER HEYDE", "MIEKE VAN DER HEYDE", x)
-   x <- gsub("MIEKE VAN DER HAYDE", "MIEKE VAN DER HEYDE", x)
-   x <- gsub("MIEKE VANDER HEYDE", "MIEKE VAN DER HEYDE", x)
+   cx <- gsub("MICKE VAN DER HAYDE", "MIEKE VAN DER HEYDE", cx)
+   cx <- gsub("MICKE VAN DER HEYDE", "MIEKE VAN DER HEYDE", cx)
+   cx <- gsub("MIEKE VAN DER HAYDE", "MIEKE VAN DER HEYDE", cx)
+   cx <- gsub("MIEKE VANDER HEYDE", "MIEKE VAN DER HEYDE", cx)
 
-   x <- gsub("MAUDE JAMPHE", "MAUDE JOMPHE", x)
+   cx <- gsub("MAUDE JAMPHE", "MAUDE JOMPHE", cx)
     
-   x <- gsub("JARED JUCKIEWICZ", "JARED JUCHIEWICZ", x)
-   x <- gsub("JARED JUCHIGWICZ", "JARED JUCHIEWICZ", x)
+   cx <- gsub("JARED JUCKIEWICZ", "JARED JUCHIEWICZ", cx)
+   cx <- gsub("JARED JUCHIGWICZ", "JARED JUCHIEWICZ", cx)
 
-   x <- gsub("DENIS LABBERTE", "DENIS LALIBERTE", x)
+   cx <- gsub("DENIS LABBERTE", "DENIS LALIBERTE", cx)
    
-   x <- gsub("FRANCOIS LANDY", "FRANCOIS LANDRY", x)
+   cx <- gsub("FRANCOIS LANDY", "FRANCOIS LANDRY", cx)
   
-   x <- gsub("MARTIN LANGLAIS", "MARTIN LANGLOIS", x)
+   cx <- gsub("MARTIN LANGLAIS", "MARTIN LANGLOIS", cx)
    
-   x <- gsub("YVES L LAROCQUE", "YVES LAROCQUE", x) 
-   x <- gsub("YVES LLAROCQUE", "YVES LAROCQUE", x) 
-   x <- gsub("YVES L LARACQUE", "YVES LAROCQUE", x)
-   x <- gsub("YVES L. LAROCQUE", "YVES LAROCQUE", x)  
-   x <- gsub("YVES L LAROQUE", "YVES LAROCQUE", x)
-   x <- gsub("YVES L.LAROCQUE", "YVES LAROCQUE", x)
+   cx <- gsub("YVES L LAROCQUE", "YVES LAROCQUE", cx) 
+   cx <- gsub("YVES LLAROCQUE", "YVES LAROCQUE", cx) 
+   cx <- gsub("YVES L LARACQUE", "YVES LAROCQUE", cx)
+   cx <- gsub("YVES L. LAROCQUE", "YVES LAROCQUE", cx)  
+   cx <- gsub("YVES L LAROQUE", "YVES LAROCQUE", cx)
+   cx <- gsub("YVES L.LAROCQUE", "YVES LAROCQUE", cx)
 
-   x <- gsub("PATRICK LE BRETON", "PATRICK LEBRETON", x)    
+   cx <- gsub("PATRICK LE BRETON", "PATRICK LEBRETON", cx)    
 
-   x <- gsub("MYLENE LEFEBURE", "MYLENE LEFEBVRE", x)   
-   x <- gsub("MYLENE LE FEBURE", "MYLENE LEFEBVRE", x)   
-   x <- gsub("MYLENE LEFEBRE", "MYLENE LEFEBVRE", x)   
+   cx <- gsub("MYLENE LEFEBURE", "MYLENE LEFEBVRE", cx)   
+   cx <- gsub("MYLENE LE FEBURE", "MYLENE LEFEBVRE", cx)   
+   cx <- gsub("MYLENE LEFEBRE", "MYLENE LEFEBVRE", cx)   
 
-   x <- gsub("VINCENT DEMANDE", "VINCENT LEMONDE", x)
-   x <- gsub("VINCENT SEMANDE", "VINCENT LEMONDE", x)
-   x <- gsub("VINCENT SEMONDE", "VINCENT LEMONDE", x)
+   cx <- gsub("VINCENT DEMANDE", "VINCENT LEMONDE", cx)
+   cx <- gsub("VINCENT SEMANDE", "VINCENT LEMONDE", cx)
+   cx <- gsub("VINCENT SEMONDE", "VINCENT LEMONDE", cx)
 
-   x <- gsub("LEVESQUE CHRIS", "CHRISTOPHER LEVESQUE", x) 
-   x <- gsub("LE VESQUE CHRIS", "CHRISTOPHER LEVESQUE", x) 
-   x <- gsub("CHRIS LEVESQUE", "CHRISTOPHER LEVESQUE", x)   
+   cx <- gsub("LEVESQUE CHRIS", "CHRISTOPHER LEVESQUE", cx) 
+   cx <- gsub("LE VESQUE CHRIS", "CHRISTOPHER LEVESQUE", cx) 
+   cx <- gsub("CHRIS LEVESQUE", "CHRISTOPHER LEVESQUE", cx)   
 
-   x <- gsub("FRANCOIS MATHUNIN", "FRANCOIS MATHURIN", x)
+   cx <- gsub("FRANCOIS MATHUNIN", "FRANCOIS MATHURIN", cx)
  
-   x <- gsub("KESLIE MATTHEWS", "LESLIE MATTHEWS", x)
-   x <- gsub("LESLIE MATTHEW", "LESLIE MATTHEWS", x)
-   x <- gsub("LESLIE MATTHEWSS", "LESLIE MATTHEWS", x)
-   x <- gsub("LESLIE MATTHEWSSS", "LESLIE MATTHEWS", x)
+   cx <- gsub("KESLIE MATTHEWS", "LESLIE MATTHEWS", cx)
+   cx <- gsub("LESLIE MATTHEW", "LESLIE MATTHEWS", cx)
+   cx <- gsub("LESLIE MATTHEWSS", "LESLIE MATTHEWS", cx)
+   cx <- gsub("LESLIE MATTHEWSSS", "LESLIE MATTHEWS", cx)
                      
-   x <- gsub("MC WILLIAMS MURRAY", "MURRAY MCWILLIAMS", x)
-   x <- gsub("MCWILLIAMS MURRAY", "MURRAY MCWILLIAMS", x)
-   x <- gsub("MURRAY MC WILLIAMS", "MURRAY MCWILLIAMS", x)
+   cx <- gsub("MC WILLIAMS MURRAY", "MURRAY MCWILLIAMS", cx)
+   cx <- gsub("MCWILLIAMS MURRAY", "MURRAY MCWILLIAMS", cx)
+   cx <- gsub("MURRAY MC WILLIAMS", "MURRAY MCWILLIAMS", cx)
 
-   x <- gsub("TANIA MIASSE", "TANIA MIOUSSE",  x)
+   cx <- gsub("TANIA MIASSE", "TANIA MIOUSSE",  cx)
 
-   x <- gsub("LUKE NAVILLE", "LUKE NEVILLE",  x)
+   cx <- gsub("LUKE NAVILLE", "LUKE NEVILLE",  cx)
    
 
-   x <- gsub("ANDRE PARACHIS", "ANDRE PARADIS", x)
-   x <- gsub("ANDRE PARADES", "ANDRE PARADIS", x)                           
+   cx <- gsub("ANDRE PARACHIS", "ANDRE PARADIS", cx)
+   cx <- gsub("ANDRE PARADES", "ANDRE PARADIS", cx)                           
 
-   x <- gsub("VINCENT PAREBOOM", "VINCENT PEREBOOM", x)
-   x <- gsub("VINCENT PEMBOOM", "VINCENT PEREBOOM", x)
-   x <- gsub("VINCENT PERBOOM", "VINCENT PEREBOOM", x)
-   x <- gsub("VINCENT PEREBOON", "VINCENT PEREBOOM", x)
-   x <- gsub("VINCENT PERNBOOM", "VINCENT PEREBOOM", x)
+   cx <- gsub("VINCENT PAREBOOM", "VINCENT PEREBOOM", cx)
+   cx <- gsub("VINCENT PEMBOOM", "VINCENT PEREBOOM", cx)
+   cx <- gsub("VINCENT PERBOOM", "VINCENT PEREBOOM", cx)
+   cx <- gsub("VINCENT PEREBOON", "VINCENT PEREBOOM", cx)
+   cx <- gsub("VINCENT PERNBOOM", "VINCENT PEREBOOM", cx)
                    
-   x <- gsub("CARDINE PELLETIER" , "CAROLINE PELLETIER", x)
+   cx <- gsub("CARDINE PELLETIER" , "CAROLINE PELLETIER", cx)
 
-   x <- gsub("STEPHANIE-C PIEDDESAUX", "STEPHANIE C PIEDDESAUX", x)
-   x <- gsub("STEPHANIE C PIEDDERAUX", "STEPHANIE C PIEDDESAUX", x)
-   x <- gsub("STEPHANIE C PIEODESAUX", "STEPHANIE C PIEDDESAUX", x)
+   cx <- gsub("STEPHANIE-C PIEDDESAUX", "STEPHANIE C PIEDDESAUX", cx)
+   cx <- gsub("STEPHANIE C PIEDDERAUX", "STEPHANIE C PIEDDESAUX", cx)
+   cx <- gsub("STEPHANIE C PIEODESAUX", "STEPHANIE C PIEDDESAUX", cx)
    
-   x <- gsub("LUC QUENNEUILLE", "LUC QUENNEVILLE", x)
+   cx <- gsub("LUC QUENNEUILLE", "LUC QUENNEVILLE", cx)
     
-   x <- gsub("MICHEL - ALVIN ROUSSEL", "MICHEL-ALVIN ROUSSEL", x)
-   x <- gsub("MICHEL - ALVIN ROUSSEL", "MICHEL-ALVIN ROUSSEL", x)
-   x <- gsub("MATTHEWS SMITH", "MATTHEW SMITH", x)
+   cx <- gsub("MICHEL - ALVIN ROUSSEL", "MICHEL-ALVIN ROUSSEL", cx)
+   cx <- gsub("MICHEL - ALVIN ROUSSEL", "MICHEL-ALVIN ROUSSEL", cx)
+   cx <- gsub("MATTHEWS SMITH", "MATTHEW SMITH", cx)
 
-   x <- gsub("CHARLES E RAYNAULT", "CHARLES E. RAYNAULT", x)
-   x <- gsub("CHARLES-E. RAYNAULT", "CHARLES E. RAYNAULT", x)
-   x <- gsub("CHARLES-ETIEM RAYNAULT", "CHARLES E. RAYNAULT", x)
-   x <- gsub("CHARLES-ETIEN RAYNAULT", "CHARLES E. RAYNAULT", x)
+   cx <- gsub("CHARLES E RAYNAULT", "CHARLES E. RAYNAULT", cx)
+   cx <- gsub("CHARLES-E. RAYNAULT", "CHARLES E. RAYNAULT", cx)
+   cx <- gsub("CHARLES-ETIEM RAYNAULT", "CHARLES E. RAYNAULT", cx)
+   cx <- gsub("CHARLES-ETIEN RAYNAULT", "CHARLES E. RAYNAULT", cx)
 
-   x <- gsub("AMELIE ROBILLERD", "AMELIE ROBILLARD", x)
+   cx <- gsub("AMELIE ROBILLERD", "AMELIE ROBILLARD", cx)
 
-   x <- gsub("CLAUDIE ROMERO", "CLAUDIA ROMERO", x)
+   cx <- gsub("CLAUDIE ROMERO", "CLAUDIA ROMERO", cx)
 
-   x <- gsub("BRIAN ROUSSEI", "BRIAN ROUSSEL", x)
+   cx <- gsub("BRIAN ROUSSEI", "BRIAN ROUSSEL", cx)
 
-   x <- gsub("YVAN RVEST", "YVAN RUEST", x)
+   cx <- gsub("YVAN RVEST", "YVAN RUEST", cx)
 
 
-   x <- gsub("VERONIQUE SAUCIER", "VERONIQUE SOUCIER", x)
+   cx <- gsub("VERONIQUE SAUCIER", "VERONIQUE SOUCIER", cx)
    
-   x <- gsub("MATTHEWS SMITH", "MATTHEW SMITH", x) 
+   cx <- gsub("MATTHEWS SMITH", "MATTHEW SMITH", cx) 
    
-   x <- gsub("STEPHEN  SMITH", "STEPHEN SMITH", x) 
-   x <- gsub("STEPHEN L. SMITH", "STEPHEN SMITH", x) 
+   cx <- gsub("STEPHEN  SMITH", "STEPHEN SMITH", cx) 
+   cx <- gsub("STEPHEN L. SMITH", "STEPHEN SMITH", cx) 
 
    
-   x <- gsub("MAMADDU HADY SOW", "MAMADOU HADY SOW", x)
-   x <- gsub("SOW MAMADOU HADY", "MAMADOU HADY SOW", x)
+   cx <- gsub("MAMADDU HADY SOW", "MAMADOU HADY SOW", cx)
+   cx <- gsub("SOW MAMADOU HADY", "MAMADOU HADY SOW", cx)
       
-   x <- gsub("AHMED TOUJANI", "AHMED TOUGANI", x)  
+   cx <- gsub("AHMED TOUJANI", "AHMED TOUGANI", cx)  
 
-   x <- gsub("PIERRE LUC TREMBLEY", "PIERRE LUC TREMBLAY", x)  
+   cx <- gsub("PIERRE LUC TREMBLEY", "PIERRE LUC TREMBLAY", cx)  
    
-   x <- gsub("FRANCIS VALIQUELLE", "FRANCIS VALIQUETTE", x)
-   x <- gsub("FRANCIS VOLIQUETTE", "FRANCIS VALIQUETTE", x)
+   cx <- gsub("FRANCIS VALIQUELLE", "FRANCIS VALIQUETTE", cx)
+   cx <- gsub("FRANCIS VOLIQUETTE", "FRANCIS VALIQUETTE", cx)
     
-   x <- gsub("DOMINIC VINGEUX", "DOMINIC VIGNEUX", x)
+   cx <- gsub("DOMINIC VINGEUX", "DOMINIC VIGNEUX", cx)
    
-   x <- gsub("DANWIESE", "DAN WIESE", x)  
+   cx <- gsub("DANWIESE", "DAN WIESE", cx)  
     
-   x <- gsub("MARILYN LAROCQUE", "MARILYNE LAROCQUE", x) 
-   x <- gsub("MARIO ELEMENT", "MARIO CLEMENT", x)  
-   x <- gsub("RENE LEBOUTHILIER", "RENE LEBOUTHILLIER", x) 
+   cx <- gsub("MARILYN LAROCQUE", "MARILYNE LAROCQUE", cx) 
+   cx <- gsub("MARIO ELEMENT", "MARIO CLEMENT", cx)  
+   cx <- gsub("RENE LEBOUTHILIER", "RENE LEBOUTHILLIER", cx) 
    
-   x <- gsub("ROBERT WILISON", "ROBERT WILSON", x)
-   x <- gsub("ROBERT WILLSON", "ROBERT WILSON", x)
-   x <- gsub("ROBERT WINSON", "ROBERT WILSON", x)
+   cx <- gsub("ROBERT WILISON", "ROBERT WILSON", cx)
+   cx <- gsub("ROBERT WILLSON", "ROBERT WILSON", cx)
+   cx <- gsub("ROBERT WINSON", "ROBERT WILSON", cx)
+   
+   ix <- match(x, ux)
+   x <- cx[ix]
    
    return(x)
 }
