@@ -7,7 +7,7 @@
 \alias{is.new.shell.scsbio}
 \alias{is.hard.shell}
 \alias{is.hard.shell.scsbio}
-\alias{is.hard.shell.scsobs}
+\alias{is.hard.shell.scobs}
 \alias{is.soft.shell}
 \alias{is.skip.moulter}
 \alias{is.skip.moulter.scsbio}
@@ -21,7 +21,7 @@ is.hard.shell(x, ...)
 
 \method{is.hard.shell}{scsbio}(x, durometer, shell.condition, zone, ...)
 
-\method{is.hard.shell}{scsobs}(x, durometer, shell.condition, zone, ...)
+\method{is.hard.shell}{scobs}(x, durometer, shell.condition, zone, ...)
 
 is.soft.shell(x, ...)
 
@@ -45,7 +45,7 @@ Determines the carapace moult or hardness status.
   \item{\code{is.new.shell.scsbio}}{Returns whether a crab is newly-moulted based on snow crab survey data.}
   \item{\code{is.hard.shell}}{Generic \code{is.hard.shell} method.}
   \item{\code{is.hard.shell.scsbio}}{Returns whether a carapace is considered hard based on snow crab survey data.}
-  \item{\code{is.hard.shell.scsobs}}{Returns whether a carapace is considered hard based on snow crab observer data.}
+  \item{\code{is.hard.shell.scobs}}{Returns whether a carapace is considered hard based on snow crab observer data.}
   \item{\code{is.soft.shell}}{Returns whether a crustacean carapace is considered soft.}
   \item{\code{is.skip.moulter}}{Generic \code{is.skip.moulter} method.}
   \item{\code{is.skip.moulter.scsbio}}{Returns whether a crustacean is considered to have skipped a moult, based on snow crab survey data.}

@@ -1,0 +1,938 @@
+grid,date.closed,date.open,grid.portion,comment
+GY56,4/29/2021,5/10/2021,Full Grid,72 hour Gear Removal - High Impact CFA12F
+GY57,4/29/2021,5/10/2021,Full Grid,72 hour Gear Removal - High Impact CFA12F
+GZ57,4/29/2021,5/10/2021,Full Grid,72 hour Gear Removal - High Impact CFA12F
+HA57,4/29/2021,5/10/2021,Full Grid,72 hour Gear Removal - High Impact CFA12F
+HB55,5/8/2021,5/19/2021,Full Grid,72 hour Gear Removal - High Impact CFA12F & CFA12E
+HB56,5/8/2021,5/19/2021,Full Grid,72 hour Gear Removal - High Impact CFA12F
+GX55,5/9/2021,5/20/2021,Full Grid,72 hour Gear Removal - High Impact CFA12F
+HB35,5/14/2021,6/1/2021,Full Grid,48 hour Gear Removal - Medium Impact CFA12; LFA23C & LFA23D - Entangled Whale (Snow Cone #3560)
+HB36,5/14/2021,6/1/2021,>20 Fathom ,48 hour Gear Removal - Medium Impact CFA12; LFA23C & LFA23D - Entangled Whale (Snow Cone #3560)
+HB37,5/14/2021,6/1/2021,Full Grid,48 hour Gear Removal - Medium Impact CFA12; LFA23C & LFA23D - Entangled Whale (Snow Cone #3560)
+GZ51,5/15/2021,5/31/2021,>20 Fathom ,48 hour Gear Removal - High Impact CFA12E; Medium Impact: CFA12F; CFA12
+GX44,5/18/2021,6/1/2021,Full Grid,72 hour Gear Removal - Medium Impact CFA12; Low Impact LFA22
+GX45,5/18/2021,6/1/2021,Full Grid,72 hour Gear Removal - Medium Impact CFA12; Low Impact LFA22
+GY44,5/18/2021,6/1/2021,Full Grid,72 hour Gear Removal - Medium Impact CFA12; Low Impact LFA22
+GY45,5/18/2021,6/1/2021,Full Grid,72 hour Gear Removal - Medium Impact CFA12; Low Impact LFA22
+GZ44,5/18/2021,6/1/2021,Full Grid,72 hour Gear Removal - Medium Impact CFA12; Low Impact LFA22
+GZ45,5/18/2021,6/1/2021,Full Grid,72 hour Gear Removal - Medium Impact CFA12; Low Impact LFA22
+GZ46,5/18/2021,6/1/2021,Full Grid,72 hour Gear Removal - Medium Impact CFA12; Low Impact LFA22
+GV41,5/18/2021,6/1/2021,Full Grid,48 hour Gear Removal - Medium Impact CFA12; Medium Impact LFA22
+GV42,5/18/2021,6/1/2021,Full Grid,48 hour Gear Removal - Medium Impact CFA12; Medium Impact LFA22
+GV43,5/18/2021,6/1/2021,Full Grid,48 hour Gear Removal - Medium Impact CFA12; Medium Impact LFA22
+GW42,5/18/2021,6/1/2021,Full Grid,48 hour Gear Removal - Medium Impact CFA12; Medium Impact LFA22
+GW43,5/18/2021,6/1/2021,Full Grid,48 hour Gear Removal - Medium Impact CFA12; Medium Impact LFA22
+GX42,5/18/2021,6/1/2021,Full Grid,48 hour Gear Removal - Medium Impact CFA12; Medium Impact LFA22
+GX43,5/18/2021,6/1/2021,Full Grid,48 hour Gear Removal - Medium Impact CFA12; Medium Impact LFA22
+GY42,5/18/2021,6/1/2021,Full Grid,48 hour Gear Removal - Medium Impact CFA12; Medium Impact LFA22
+GZ52,5/18/2021,5/31/2021,>10 Fathom,48 hour Gear Removal - Medium Impact CFA12; Medium Impact LFA22
+GZ53,5/18/2021,5/31/2021,>10 Fathom,48 hour Gear Removal - Medium Impact CFA12; Medium Impact LFA22
+GZ54,5/18/2021,5/31/2021,>10 Fathom,48 hour Gear Removal - Medium Impact CFA12; Medium Impact LFA22
+HA52,5/18/2021,5/31/2021,>10 Fathom,48 hour Gear Removal - Medium Impact CFA12; Medium Impact LFA22
+HA53,5/18/2021,5/31/2021,>10 Fathom,48 hour Gear Removal - Medium Impact CFA12; Medium Impact LFA22
+HA54,5/18/2021,5/31/2021,>10 Fathom,48 hour Gear Removal - Medium Impact CFA12; Medium Impact LFA22
+HB52,5/18/2021,5/31/2021,>10 Fathom,48 hour Gear Removal - Medium Impact CFA12; Medium Impact LFA22
+HB53,5/18/2021,5/31/2021,>10 Fathom,48 hour Gear Removal - Medium Impact CFA12; Medium Impact LFA22
+HB54,5/18/2021,5/31/2021,>10 Fathom,48 hour Gear Removal - Medium Impact CFA12; Medium Impact LFA22
+GW51,5/29/2021,6/8/2021,Full Grid,96 hour Gear Removal
+GX46,5/18/2021,6/15/2021,Full Grid,72 hour Gear Removal - Medium Impact CFA12; Low Impact LFA22
+GY46,5/18/2021,6/15/2021,Full Grid,72 hour Gear Removal - Medium Impact CFA12; Low Impact LFA22
+GU47,6/2/2021,6/15/2021,Full Grid,48 hour Gear Removal  - CFA12 & CFA12E - Low Impact
+GU48,6/2/2021,6/15/2021,Full Grid,48 hour Gear Removal  - CFA12 & CFA12E - Low Impact
+GU49,6/2/2021,6/15/2021,Full Grid,48 hour Gear Removal  - CFA12 & CFA12E - Low Impact
+GV47,6/2/2021,6/15/2021,Full Grid,48 hour Gear Removal  - CFA12 & CFA12E - Low Impact
+GV48,6/2/2021,6/15/2021,Full Grid,48 hour Gear Removal  - CFA12 & CFA12E - Low Impact
+GV49,6/2/2021,6/15/2021,Full Grid,48 hour Gear Removal  - CFA12 & CFA12E - Low Impact
+GW46,6/2/2021,6/15/2021,Full Grid,48 hour Gear Removal  - CFA12 & CFA12E - Low Impact
+GW47,6/2/2021,6/15/2021,Full Grid,48 hour Gear Removal  - CFA12 & CFA12E - Low Impact
+GW48,6/2/2021,6/15/2021,Full Grid,48 hour Gear Removal  - CFA12 & CFA12E - Low Impact
+GW49,6/2/2021,6/15/2021,Full Grid,48 hour Gear Removal  - CFA12 & CFA12E - Low Impact
+GX47,6/2/2021,6/15/2021,Full Grid,48 hour Gear Removal  - CFA12 & CFA12E - Low Impact
+GX48,6/2/2021,6/15/2021,Full Grid,48 hour Gear Removal  - CFA12 & CFA12E - Low Impact
+GX49,6/2/2021,6/15/2021,Full Grid,48 hour Gear Removal  - CFA12 & CFA12E - Low Impact
+GY47,6/2/2021,6/15/2021,Full Grid,48 hour Gear Removal  - CFA12 & CFA12E - Low Impact
+GY48,6/2/2021,6/15/2021,Full Grid,48 hour Gear Removal  - CFA12 & CFA12E - Low Impact
+GY49,6/2/2021,6/15/2021,Full Grid,48 hour Gear Removal  - CFA12 & CFA12E - Low Impact
+HB38,6/5/2021,6/16/2021,Full Grid,72 hour Gear Removal  - CFA12 - Medium Impact; LFA23C - Low Impact; GFA 4T3B - Low Impact
+HB39,6/5/2021,6/16/2021,Full Grid,72 hour Gear Removal  - CFA12 - Medium Impact; LFA23C - Low Impact; GFA 4T3B - Low Impact
+HB40,6/5/2021,6/16/2021,Full Grid,72 hour Gear Removal  - CFA12 - Medium Impact; LFA23C - Low Impact; GFA 4T3B - Low Impact
+HB37,6/8/2021,6/17/2021,Full Grid,120 hour Gear Removal  - CFA12 Low Impact
+HC37,6/8/2021,6/17/2021,>20 Fathom ,120 hour Gear Removal  - CFA12 Low Impact
+HC38,6/8/2021,6/17/2021,Full Grid,120 hour Gear Removal  - CFA12 Low Impact
+HC39,6/8/2021,6/17/2021,Full Grid,120 hour Gear Removal  - CFA12 Low Impact
+GW43,6/8/2021,6/22/2021,Full Grid,120 hour Gear Removal  - CFA12 Low Impact
+GW44,6/8/2021,6/22/2021,Full Grid,120 hour Gear Removal  - CFA12 Low Impact
+GW45,6/8/2021,6/22/2021,Full Grid,120 hour Gear Removal  - CFA12 Low Impact
+GX43,6/8/2021,6/22/2021,Full Grid,120 hour Gear Removal  - CFA12 Low Impact
+GX44,6/8/2021,6/22/2021,Full Grid,120 hour Gear Removal  - CFA12 Low Impact
+GX45,6/8/2021,6/22/2021,Full Grid,120 hour Gear Removal  - CFA12 Low Impact
+GY43,6/8/2021,6/22/2021,Full Grid,120 hour Gear Removal  - CFA12 Low Impact
+HB41,6/8/2021,6/22/2021,Full Grid,120 hour Gear Removal  - CFA12 Low Impact
+HB42,6/8/2021,6/22/2021,Full Grid,120 hour Gear Removal  - CFA12 Low Impact
+GZ34,6/8/2021,6/22/2021,>20 Fathom ,48 hour Gear Removal - CFA12 - Low-Medium Impact
+GY42,6/15/2021,6/29/2021,Full Grid,72 hour Gear Removal  - High Winds
+HB34,6/17/2021,6/29/2021,>20 Fathom ,48 hour Gear Removal  
+HC34,6/17/2021,6/29/2021,>20 Fathom ,48 hour Gear Removal  
+HC35,6/17/2021,6/29/2021,Full Grid,48 hour Gear Removal  
+HC36,6/17/2021,6/29/2021,>20 Fathom ,48 hour Gear Removal  
+GU35,6/19/2021,6/30/2021,>20 Fathom ,48 hour Gear Removal  
+GV35,6/19/2021,6/30/2021,>20 Fathom ,48 hour Gear Removal  
+GW35,6/19/2021,6/30/2021,Full Grid,48 hour Gear Removal  
+GT38,6/25/2021,7/6/2021,Full Grid,72 hour Gear Removal  - High Winds
+GT39,6/25/2021,7/6/2021,Full Grid,72 hour Gear Removal  - High Winds
+GT40,6/25/2021,7/6/2021,Full Grid,72 hour Gear Removal  - High Winds
+GU38,6/25/2021,7/6/2021,Full Grid,72 hour Gear Removal  - High Winds
+GU39,6/25/2021,7/6/2021,Full Grid,72 hour Gear Removal  - High Winds
+GU40,6/25/2021,7/6/2021,Full Grid,72 hour Gear Removal  - High Winds
+GY44,6/8/2021,7/8/2021,Full Grid,120 hour Gear Removal  - CFA12 Low Impact
+GY45,6/8/2021,7/8/2021,Full Grid,120 hour Gear Removal  - CFA12 Low Impact
+GZ44,6/8/2021,7/8/2021,Full Grid,120 hour Gear Removal  - CFA12 Low Impact
+GZ45,6/8/2021,7/8/2021,Full Grid,120 hour Gear Removal  - CFA12 Low Impact
+GZ46,6/8/2021,7/8/2021,Full Grid,120 hour Gear Removal  - CFA12 Low Impact
+HA44,6/8/2021,7/8/2021,Full Grid,120 hour Gear Removal  - CFA12 Low Impact
+HA45,6/8/2021,7/8/2021,Full Grid,120 hour Gear Removal  - CFA12 Low Impact
+HA46,6/8/2021,7/8/2021,Full Grid,120 hour Gear Removal  - CFA12 Low Impact
+GY46,6/22/2021,7/8/2021,Full Grid,72 hour Gear Removal  - High Winds
+GM31,6/28/2021,7/8/2021,Full Grid,96 hour Gear Removal
+GM32,6/28/2021,7/8/2021,Full Grid,96 hour Gear Removal
+GM33,6/28/2021,7/8/2021,>20 Fathom ,96 hour Gear Removal
+GN31,6/28/2021,7/8/2021,Full Grid,96 hour Gear Removal
+GN32,6/28/2021,7/8/2021,Full Grid,96 hour Gear Removal
+GN33,6/28/2021,7/8/2021,>20 Fathom ,96 hour Gear Removal
+GO31,6/28/2021,7/8/2021,Full Grid,96 hour Gear Removal
+GO32,6/28/2021,7/8/2021,Full Grid,96 hour Gear Removal
+GO33,6/28/2021,7/8/2021,Full Grid,96 hour Gear Removal
+GP22,7/3/2021,7/8/2021,Full Grid,72 hour Gear Removal  - Low Impact Greenland Halibut
+GP23,7/3/2021,7/8/2021,Full Grid,72 hour Gear Removal  - Low Impact Greenland Halibut
+GP24,7/3/2021,7/8/2021,Full Grid,72 hour Gear Removal  - Low Impact Greenland Halibut
+GQ22,7/3/2021,7/8/2021,>20 Fathom ,72 hour Gear Removal  - Low Impact Greenland Halibut
+GQ23,7/3/2021,7/8/2021,>20 Fathom ,72 hour Gear Removal  - Low Impact Greenland Halibut
+GQ24,7/3/2021,7/8/2021,>20 Fathom ,72 hour Gear Removal  - Low Impact Greenland Halibut
+GR22,7/3/2021,7/8/2021,>20 Fathom ,72 hour Gear Removal  - Low Impact Greenland Halibut
+HB37,6/22/2021,7/13/2021,Full Grid,72 hour Gear Removal  - High Winds
+HB38,6/22/2021,7/13/2021,Full Grid,72 hour Gear Removal  - High Winds
+HB39,6/22/2021,7/13/2021,Full Grid,72 hour Gear Removal  - High Winds
+GT35,7/10/2021,7/22/2021,>10 Fathom,72 hour Gear Removal  - Low Impact LFA19C
+GT36,7/10/2021,7/22/2021,>10 Fathom,72 hour Gear Removal  - Low Impact LFA19C
+GU35,7/10/2021,7/27/2021,>10 Fathom,72 hour Gear Removal  - Low Impact LFA19C
+GV35,7/10/2021,7/27/2021,>10 Fathom,72 hour Gear Removal  - Low Impact LFA19C
+GU36,7/10/2021,7/27/2021,>10 Fathom,72 hour Gear Removal  - Low Impact LFA19C
+GV36,7/10/2021,7/27/2021,>10 Fathom,72 hour Gear Removal  - Low Impact LFA19C
+HE48,7/19/2021,7/30/2021,Full Grid,72 hour Gear Removal  - No Impact
+HE49,7/19/2021,7/30/2021,Full Grid,72 hour Gear Removal  - No Impact
+HE50,7/19/2021,7/30/2021,>20 Fathom ,72 hour Gear Removal  - No Impact
+HF48,7/19/2021,7/30/2021,Full Grid,72 hour Gear Removal  - No Impact
+HF49,7/19/2021,7/30/2021,Full Grid,72 hour Gear Removal  - No Impact
+HF50,7/19/2021,7/30/2021,Full Grid,72 hour Gear Removal  - No Impact
+HG48,7/19/2021,7/30/2021,>20 Fathom ,72 hour Gear Removal  - No Impact
+HG49,7/19/2021,7/30/2021,>20 Fathom ,72 hour Gear Removal  - No Impact
+HG50,7/19/2021,7/30/2021,>20 Fathom ,72 hour Gear Removal  - No Impact
+GT38,7/23/2021,8/6/2021,Full Grid,48 hour Gear Removal - Low impact turbot 4T3a
+GU38,7/23/2021,8/6/2021,Full Grid,48 hour Gear Removal - Low impact turbot 4T3a
+GT45,7/29/2021,8/10/2021,Full Grid,72 hour Gear Removal - Low Impact Greenland Halibut
+GT46,7/29/2021,8/10/2021,Full Grid,72 hour Gear Removal - Low Impact Greenland Halibut
+GT47,7/29/2021,8/10/2021,Full Grid,72 hour Gear Removal - Low Impact Greenland Halibut
+GU45,7/29/2021,8/10/2021,Full Grid,72 hour Gear Removal - Low Impact Greenland Halibut
+GU46,7/29/2021,8/10/2021,Full Grid,72 hour Gear Removal - Low Impact Greenland Halibut
+GU47,7/29/2021,8/10/2021,Full Grid,72 hour Gear Removal - Low Impact Greenland Halibut
+GV45,7/29/2021,8/10/2021,Full Grid,72 hour Gear Removal - Low Impact Greenland Halibut
+GV46,7/29/2021,8/10/2021,Full Grid,72 hour Gear Removal - Low Impact Greenland Halibut
+GV47,7/29/2021,8/10/2021,Full Grid,72 hour Gear Removal - Low Impact Greenland Halibut
+GL36,7/24/2021,8/10/2021,>20 Fathom ,48 hour Gear Removal
+GL37,7/24/2021,8/10/2021,>20 Fathom ,48 hour Gear Removal
+GL38,7/24/2021,8/10/2021,>20 Fathom ,48 hour Gear Removal
+GM36,7/24/2021,8/10/2021,>20 Fathom ,48 hour Gear Removal
+GM37,7/24/2021,8/10/2021,>20 Fathom ,48 hour Gear Removal
+GM38,7/24/2021,8/10/2021,>20 Fathom ,48 hour Gear Removal
+GV43,7/24/2021,8/11/2021,Full Grid,48 hour Gear Removal
+GT48,7/30/2021,8/11/2021,Full Grid,48 Hour Gear Removal
+GU48,7/30/2021,8/11/2021,Full Grid,48 Hour Gear Removal
+GV48,7/30/2021,8/11/2021,Full Grid,48 Hour Gear Removal
+GW44,8/2/2021,8/12/2021,Full Grid,96 Hour Gear Removal
+GW45,8/2/2021,8/12/2021,Full Grid,96 Hour Gear Removal
+GX44,8/2/2021,8/12/2021,Full Grid,96 Hour Gear Removal
+GX45,8/2/2021,8/12/2021,Full Grid,96 Hour Gear Removal
+GY44,8/2/2021,8/12/2021,Full Grid,96 Hour Gear Removal
+GY45,8/2/2021,8/12/2021,Full Grid,96 Hour Gear Removal
+HB37,7/29/2021,8/13/2021,Full Grid,72 hour Gear Removal - Low Impact Greenland Halibut
+GY43,8/2/2021,8/13/2021,Full Grid,96 Hour Gear Removal
+GX43,8/2/2021,8/13/2021,Full Grid,96 Hour Gear Removal
+GW43,8/2/2021,8/13/2021,Full Grid,96 Hour Gear Removal
+GZ34,8/2/2021,8/13/2021,>20 Fathom ,72 hour Gear Removal - Low Impact NAFO 4T
+GR42,8/6/2021,8/17/2021,Full Grid,72 hour Gear Removal - Low Impact NAFO 4T
+GR43,8/6/2021,8/17/2021,>20 Fathom ,72 hour Gear Removal - Low Impact NAFO 4T
+GR44,8/6/2021,8/17/2021,>20 Fathom ,72 hour Gear Removal - Low Impact NAFO 4T
+GS42,8/6/2021,8/17/2021,Full Grid,72 hour Gear Removal - Low Impact NAFO 4T
+GT40,8/6/2021,8/17/2021,Full Grid,72 hour Gear Removal - Low Impact NAFO 4T
+GU40,8/6/2021,8/17/2021,Full Grid,72 hour Gear Removal - Low Impact NAFO 4T
+HE43,8/9/2021,8/24/2021,Full Grid,96 hour Gear Removal - Low impact NAFO 4T; LFA 24; WHELK 5;9;10;11
+HE44,8/9/2021,8/24/2021,Full Grid,96 hour Gear Removal - Low impact NAFO 4T; LFA 24; WHELK 5;9;10;11
+HE45,8/9/2021,8/24/2021,Full Grid,96 hour Gear Removal - Low impact NAFO 4T; LFA 24; WHELK 5;9;10;11
+GW42,8/11/2021,8/24/2021,Full Grid,48 Hour Gear Removal
+HD42,8/9/2021,8/24/2021,Full Grid,96 hour Gear Removal - Low impact NAFO 4T; LFA 24; WHELK 5;9;10;11
+HD43,8/9/2021,8/24/2021,Full Grid,96 hour Gear Removal - Low impact NAFO 4T; LFA 24; WHELK 5;9;10;11
+HC42,8/9/2021,8/24/2021,Full Grid,96 hour Gear Removal - Low impact NAFO 4T; LFA 24; WHELK 5;9;10;11
+HC43,8/9/2021,8/24/2021,Full Grid,96 hour Gear Removal - Low impact NAFO 4T; LFA 24; WHELK 5;9;10;11
+HB42,8/9/2021,8/24/2021,Full Grid,96 hour Gear Removal - Low impact NAFO 4T; LFA 24; WHELK 5;9;10;11
+HB43,8/9/2021,8/24/2021,Full Grid,96 hour Gear Removal - Low impact NAFO 4T; LFA 24; WHELK 5;9;10;11
+GU42,5/17/2019,5/28/2019,> 20(fth) Outside DZ,Opened May 28; 2019 at 17:00 hrs Atlantic time
+GU43,5/17/2019,5/28/2019,> 20(fth) Outside DZ,Opened May 28; 2019 at 17:00 hrs Atlantic time
+GU44,5/17/2019,5/31/2019,> 20(fth) Outside DZ,
+GV42,5/17/2019,5/31/2019,> 20(fth) Outside DZ,
+GV43,5/17/2019,5/31/2019,> 20(fth) Outside DZ,
+GW36,5/21/2019,6/1/2019,> 20(fth) Inside DZ,
+GU36,5/21/2019,6/1/2019,> 20(fth) Inside DZ,
+GV36,5/21/2019,6/1/2019,> 20(fth) Inside DZ,
+GV43,5/17/2019,6/4/2019,> 20(fth) Inside DZ,Opened June 4; 2019 at 17:00 hrs Atlantic Daylight Time (ADT)
+GY47,5/24/2019,6/7/2019,> 20(fth) Inside DZ,Opened June 7; 2019 at 17:00 hrs Atlantic Daylight Time (ADT)
+IA30,6/9/2019,6/27/2019,> 20(fth) MAR,Revocation of all associated VO’s for Roseway Basin will come into effect at 1300hrs on June 27th.
+IA31,6/9/2019,6/27/2019,> 20(fth) MAR,Revocation of all associated VO’s for Roseway Basin will come into effect at 1300hrs on June 27th.
+IB30,6/9/2019,6/27/2019,> 20(fth) MAR,Revocation of all associated VO’s for Roseway Basin will come into effect at 1300hrs on June 27th.
+IB31,6/9/2019,6/27/2019,> 20(fth) MAR,Revocation of all associated VO’s for Roseway Basin will come into effect at 1300hrs on June 27th.
+GW36,6/13/2019,7/18/2019,> 20(fth) Inside DZ,Opening on July 18; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GW45,5/17/2019,7/18/2019,> 20(fth) Inside DZ,Opening on July 18; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GX45,5/17/2019,7/18/2019,> 20(fth) Inside DZ,Opening on July 18; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GX46,6/3/2019,7/18/2019,> 20(fth) Outside DZ,Opening on July 18; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GX46,5/24/2019,7/18/2019,> 20(fth) Inside DZ,Opening on July 18; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GZ41,6/6/2019,7/18/2019,> 20(fth) Inside DZ,Opening on July 18; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HB36,6/25/2019,7/18/2019,> 20(fth) Inside DZ,Opening on July 18; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HB37,6/25/2019,7/18/2019,> 20(fth) Inside DZ,Opening on July 18; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HB38,7/2/2019,7/18/2019,> 20(fth) Inside DZ,Opening on July 18; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HC36,6/25/2019,7/18/2019,> 20(fth) Inside DZ,Opening on July 18; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HC37,6/25/2019,7/18/2019,> 20(fth) Inside DZ,Opening on July 18; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HC38,7/2/2019,7/18/2019,> 20(fth) Inside DZ,Opening on July 18; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HA41,6/6/2019,7/22/2019,> 20(fth) Inside DZ,Opening on July 22; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GZ42,6/6/2019,7/25/2019,> 20(fth) Inside DZ,Opening on July 25; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV42,6/30/2019,7/26/2019,> 20(fth) Outside DZ,Opening on July 26; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GW43,5/17/2019,7/26/2019,> 20(fth) Inside DZ,Opening on July 26; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GX43,5/17/2019,7/26/2019,> 20(fth) Inside DZ,Opening on July 26; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GY43,5/24/2019,7/26/2019,> 20(fth) Inside DZ,Opening on July 26; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GS40,7/3/2019,7/31/2019,> 20(fth) Outside DZ,Opening on July 31; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GS41,7/3/2019,7/31/2019,> 20(fth) Outside DZ,Opening on July 31; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GS42,7/3/2019,7/31/2019,> 20(fth) Outside DZ,Opening on July 31; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GT40,7/3/2019,7/31/2019,> 20(fth) Outside DZ,Opening on July 31; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GT41,7/3/2019,7/31/2019,> 20(fth) Outside DZ,Opening on July 31; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GT42,7/3/2019,7/31/2019,> 20(fth) Outside DZ,Opening on July 31; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GU36,6/13/2019,7/31/2019,> 20(fth) Inside DZ,Opening on July 31; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GU42,6/30/2019,7/31/2019,> 20(fth) Outside DZ,Opening on July 31; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV36,6/13/2019,7/31/2019,> 20(fth) Inside DZ,Opening on July 31; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV44,5/17/2019,7/31/2019,> 20(fth) Outside DZ,Opening on July 31; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV45,5/17/2019,7/31/2019,> 20(fth) Outside DZ,Opening on July 31; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV46,6/3/2019,7/31/2019,> 20(fth) Outside DZ,Opening on July 31; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GZ40,6/25/2019,7/31/2019,> 20(fth) Inside DZ,Opening on July 31; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GZ40,7/11/2019,7/31/2019,> 20(fth) GSL DZ,Opening on July 31; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GZ43,6/6/2019,7/31/2019,> 20(fth) Inside DZ,Opening on July 31; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GZ44,6/20/2019,7/31/2019,> 20(fth) Inside DZ,Opening on July 31; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HB35,6/25/2019,7/31/2019,> 20(fth) Inside DZ,Opening on July 31; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GL36,7/16/2019,8/1/2019,> 20(fth) GSL DZ,Opening on August 1; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HC35,6/25/2019,8/1/2019,> 20(fth) Inside DZ,Opening on August 1; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GU39,6/3/2019,8/6/2019,> 20(fth) Inside DZ,Opening on August 6; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GU39,7/16/2019,8/6/2019,> 20(fth) GSL DZ,Opening on August 6; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HA37,6/25/2019,8/6/2019,> 20(fth) Inside DZ,Opening on August 6; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HA37,7/9/2019,8/6/2019,> 20(fth) GSL DZ,Opening on August 6; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HA38,6/25/2019,8/6/2019,> 20(fth) Inside DZ,Opening on August 6; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HA38,7/9/2019,8/6/2019,> 20(fth) GSL DZ,Opening on August 6; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HA39,6/25/2019,8/6/2019,> 20(fth) Inside DZ,Opening on August 6; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HA39,7/9/2019,8/6/2019,> 20(fth) GSL DZ,Opening on August 6; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GM36,7/16/2019,8/8/2019,> 20(fth) GSL DZ,Opening on August 8; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV43,6/7/2019,8/8/2019,> 20(fth) Inside DZ,Opening on August 8; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GW43,5/17/2019,8/8/2019,> 20(fth) Outside DZ,Opening on August 8; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GW44,5/17/2019,8/8/2019,> 20(fth) Outside DZ,Opening on August 8; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GW44,5/17/2019,8/8/2019,> 20(fth) Inside DZ,Opening on August 8; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GW45,5/17/2019,8/8/2019,> 20(fth) Outside DZ,Opening on August 8; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GX44,5/17/2019,8/8/2019,> 20(fth) Inside DZ,Opening on August 8; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GY42,6/6/2019,8/8/2019,> 20(fth) Inside DZ,Opening on August 8; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GY44,5/24/2019,8/8/2019,> 20(fth) Inside DZ,Opening on August 8; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GY45,5/24/2019,8/8/2019,> 20(fth) Inside DZ,Opening on August 8; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HA42,6/6/2019,8/8/2019,> 20(fth) Inside DZ,Opening on August 8; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HA43,6/6/2019,8/8/2019,> 20(fth) Inside DZ,Opening on August 8; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HA43,7/23/2019,8/8/2019,> 20(fth) GSL DZ,Opening on August 8; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HA44,7/23/2019,8/8/2019,> 20(fth) GSL DZ,Opening on August 8; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HA45,7/23/2019,8/8/2019,> 20(fth) GSL DZ,Opening on August 8; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV37,5/21/2019,8/12/2019,> 20(fth) Inside DZ,Opening on August 12; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV37,7/22/2019,8/12/2019,> 20(fth) GSL DZ,Opening on August 12; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV38,5/21/2019,8/12/2019,> 20(fth) Inside DZ,Opening on August 12; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV38,7/11/2019,8/12/2019,> 20(fth) GSL DZ,Opening on August 12; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GT37,6/15/2019,8/14/2019,> 20(fth) Inside DZ,Opening on August 14; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GU37,5/21/2019,8/14/2019,> 20(fth) Inside DZ,Opening on August 14; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GU37,7/25/2019,8/14/2019,> 20(fth) GSL DZ,Opening on August 14; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GU38,5/21/2019,8/14/2019,> 20(fth) Inside DZ,Opening on August 14; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GU38,7/16/2019,8/14/2019,> 20(fth) GSL DZ,Opening on August 14; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GU40,6/3/2019,8/14/2019,> 20(fth) Inside DZ,Opening on August 14; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GU40,6/30/2019,8/14/2019,> 20(fth) Outside DZ,Opening on August 14; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GU40 ,7/11/2019,8/14/2019,> 20(fth) GSL DZ,Opening on August 14; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GU41,6/30/2019,8/14/2019,> 20(fth) Outside DZ,Opening on August 14; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HA40,6/25/2019,8/14/2019,> 20(fth) Inside DZ,Opening on August 14; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HB43,7/23/2019,8/14/2019,> 20(fth) GSL DZ,Opening on August 14; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HB44,7/23/2019,8/14/2019,> 20(fth) GSL DZ,Opening on August 14; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HB45,7/23/2019,8/14/2019,> 20(fth) GSL DZ,Opening on August 14; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GU35,8/14/2019,8/14/2019,BTW 20(fth) & 10(fth),GV34 Sighting (Originally thought to be inside the 10 Fathom line but ended up outside the 20 Fathom line)
+GU35,8/14/2019,8/14/2019,BTW 10(fth) & Land,GV34 Sighting (Originally thought to be inside the 10 Fathom line but ended up outside the 20 Fathom line)
+GV33,8/14/2019,8/14/2019,BTW 20(fth) & 10(fth),GV34 Sighting (Originally thought to be inside the 10 Fathom line but ended up outside the 20 Fathom line)
+GV33,8/14/2019,8/14/2019,BTW 10(fth) & Land,GV34 Sighting (Originally thought to be inside the 10 Fathom line but ended up outside the 20 Fathom line)
+GV34,8/14/2019,8/14/2019,BTW 20(fth) & 10(fth),GV34 Sighting (Originally thought to be inside the 10 Fathom line but ended up outside the 20 Fathom line)
+GV34,8/14/2019,8/14/2019,BTW 10(fth) & Land,GV34 Sighting (Originally thought to be inside the 10 Fathom line but ended up outside the 20 Fathom line)
+GV35,8/14/2019,8/14/2019,BTW 20(fth) & 10(fth),GV34 Sighting (Originally thought to be inside the 10 Fathom line but ended up outside the 20 Fathom line)
+GV35,8/14/2019,8/14/2019,BTW 10(fth) & Land,GV34 Sighting (Originally thought to be inside the 10 Fathom line but ended up outside the 20 Fathom line)
+GW33,8/14/2019,8/14/2019,BTW 20(fth) & 10(fth),GV34 Sighting (Originally thought to be inside the 10 Fathom line but ended up outside the 20 Fathom line)
+GW33,8/14/2019,8/14/2019,BTW 10(fth) & Land,GV34 Sighting (Originally thought to be inside the 10 Fathom line but ended up outside the 20 Fathom line)
+HC43,7/23/2019,8/15/2019,> 20(fth) GSL DZ,Opening on August 15; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HC44,7/23/2019,8/15/2019,> 20(fth) GSL DZ,Opening on August 15; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HC45,7/23/2019,8/15/2019,> 20(fth) GSL DZ,Opening on August 15; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV42,5/17/2019,8/21/2019,> 20(fth) Inside DZ,Opening on August 21; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV42,8/8/2019,8/21/2019,> 20(fth) GSL DZ,Opening on August 21; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GY47,8/10/2019,8/21/2019,> 20(fth) GSL DZ,Opening on August 21; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GK31,8/14/2019,8/28/2019,> 20(fth) GSL DZ,Opening on August 28; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GL31,8/14/2019,8/28/2019,> 20(fth) GSL DZ,Opening on August 28; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GM31,8/14/2019,8/28/2019,> 20(fth) GSL DZ,Opening on August 28; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GW46,5/24/2019,8/28/2019,> 20(fth) Inside DZ,Opening on August 28; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GW46,6/3/2019,8/28/2019,> 20(fth) Outside DZ,Opening on August 28; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GW46,8/6/2019,8/28/2019,> 20(fth) GSL DZ,Opening on August 28; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GW47,8/10/2019,8/28/2019,> 20(fth) GSL DZ,Opening on August 28; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GW48,8/10/2019,8/28/2019,> 20(fth) GSL DZ,Opening on August 28; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GX46,8/10/2019,8/28/2019,> 20(fth) GSL DZ,Opening on August 28; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GX47,5/24/2019,8/28/2019,> 20(fth) Inside DZ,Opening on August 28; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GX47,8/10/2019,8/28/2019,> 20(fth) GSL DZ,Opening on August 28; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GX48,8/10/2019,8/28/2019,> 20(fth) GSL DZ,Opening on August 28; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GY46,5/24/2019,8/28/2019,> 20(fth) Inside DZ,Opening on August 28; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GY46,8/6/2019,8/28/2019,> 20(fth) GSL DZ,Opening on August 28; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GY48,8/10/2019,8/28/2019,> 20(fth) GSL DZ,Opening on August 28; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HA37,8/14/2019,8/28/2019,> 20(fth) GSL DZ,Opening on August 28; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HA38,8/14/2019,8/28/2019,> 20(fth) GSL DZ,Opening on August 28; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GU39,8/17/2019,9/4/2019,> 20(fth) GSL DZ,Opening on September 4; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GU40,8/17/2019,9/4/2019,> 20(fth) GSL DZ,Opening on September 4; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GU41,8/17/2019,9/4/2019,> 20(fth) GSL DZ,Opening on September 4; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV33,8/14/2019,9/4/2019,> 20(fth) GSL DZ,Opening on September 4; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV34,8/14/2019,9/4/2019,> 20(fth) GSL DZ,Opening on September 4; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV35,8/14/2019,9/4/2019,> 20(fth) GSL DZ,Opening on September 4; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV36,8/18/2019,9/4/2019,> 20(fth) GSL DZ,Opening on September 4; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV37,8/18/2019,9/4/2019,> 20(fth) GSL DZ,Opening on September 4; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GW34,8/14/2019,9/4/2019,> 20(fth) GSL DZ,Opening on September 4; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GW35,8/14/2019,9/4/2019,> 20(fth) GSL DZ,Opening on September 4; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GW36,8/18/2019,9/4/2019,> 20(fth) GSL DZ,Opening on September 4; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GX35,8/18/2019,9/4/2019,> 20(fth) GSL DZ,Opening on September 4; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GW32,8/26/2019,9/10/2019,> 20(fth) GSL DZ,Opening on September 10; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GX31,8/26/2019,9/10/2019,> 20(fth) GSL DZ,Opening on September 10; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GX32,8/26/2019,9/10/2019,> 20(fth) GSL DZ,Opening on September 10; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GY31,8/26/2019,9/10/2019,> 20(fth) GSL DZ,Opening on September 10; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GY32,8/26/2019,9/10/2019,> 20(fth) GSL DZ,Opening on September 10; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GL35,7/16/2019,9/10/2019,> 20(fth) GSL DZ,Opening on September 10; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GL36,8/25/2019,9/10/2019,> 20(fth) GSL DZ,Opening on September 10; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GM35,7/16/2019,9/10/2019,> 20(fth) GSL DZ,Opening on September 10; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GM36,8/25/2019,9/10/2019,> 20(fth) GSL DZ,Opening on September 10; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HE54,8/29/2019,9/16/2019,> 20(fth) GSL DZ,Opening on September 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HE55,8/29/2019,9/16/2019,> 20(fth) GSL DZ,Opening on September 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HE55,8/29/2019,9/16/2019,BTW 20(fth) & 10(fth),Opening on September 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HE55,8/29/2019,9/16/2019,BTW 10(fth) & Land,Opening on September 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HE56,8/29/2019,9/16/2019,> 20(fth) GSL DZ,Opening on September 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HE56,8/29/2019,9/16/2019,BTW 20(fth) & 10(fth),Opening on September 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HE56,8/29/2019,9/16/2019,BTW 10(fth) & Land,Opening on September 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HF54,8/29/2019,9/16/2019,> 20(fth) GSL DZ,Opening on September 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HF54,8/29/2019,9/16/2019,BTW 20(fth) & 10(fth),Opening on September 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HF55,8/29/2019,9/16/2019,> 20(fth) GSL DZ,Opening on September 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HF55,8/29/2019,9/16/2019,BTW 20(fth) & 10(fth),Opening on September 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HF55,8/29/2019,9/16/2019,BTW 10(fth) & Land,Opening on September 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HF56,8/29/2019,9/16/2019,> 20(fth) GSL DZ,Opening on September 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HF56,8/29/2019,9/16/2019,BTW 10(fth) & Land,Opening on September 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HG54,8/29/2019,9/16/2019,> 20(fth) GSL DZ,Opening on September 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HG54,8/29/2019,9/16/2019,BTW 20(fth) & 10(fth),Opening on September 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HG54,8/29/2019,9/16/2019,BTW 10(fth) & Land,Opening on September 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HG55,8/29/2019,9/16/2019,> 20(fth) GSL DZ,Opening on September 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HG55,8/29/2019,9/16/2019,BTW 10(fth) & Land,Opening on September 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HP22,9/1/2019,9/18/2019,> 20(fth) MAR,Opening on September 18; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HQ22,9/1/2019,9/18/2019,> 20(fth) MAR,Opening on September 18; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HQ23,9/1/2019,9/18/2019,> 20(fth) MAR,Opening on September 18; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HR22,8/29/2019,9/18/2019,> 20(fth) MAR,Opening on September 18; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HR23,8/29/2019,9/18/2019,> 20(fth) MAR,Opening on September 18; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HS21,8/29/2019,9/18/2019,> 20(fth) MAR,Opening on September 18; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HS22,8/29/2019,9/18/2019,> 20(fth) MAR,Opening on September 18; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HS23,8/29/2019,9/18/2019,> 20(fth) MAR,Opening on September 18; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HT21,8/29/2019,9/18/2019,> 20(fth) MAR,Opening on September 18; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HT22,8/29/2019,9/18/2019,> 20(fth) MAR,Opening on September 18; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HP20,9/1/2019,9/21/2019,> 20(fth) MAR,Opening on September 21; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HP21,9/1/2019,9/21/2019,> 20(fth) MAR,Opening on September 21; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HQ20,9/1/2019,9/21/2019,> 20(fth) MAR,Opening on September 21; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HQ21,9/1/2019,9/21/2019,> 20(fth) MAR,Opening on September 21; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HR20,9/1/2019,9/21/2019,> 20(fth) MAR,Opening on September 21; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HR21,8/29/2019,9/21/2019,> 20(fth) MAR,Opening on September 21; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV33,9/12/2019,9/26/2019,> 20(fth) GSL DZ,Opening on September 26; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV34,9/12/2019,9/26/2019,> 20(fth) GSL DZ,Opening on September 26; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV35,9/12/2019,9/26/2019,> 20(fth) GSL DZ,Opening on September 26; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GW33,8/14/2019,9/26/2019,> 20(fth) GSL DZ,Opening on September 26; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GW34,9/12/2019,9/26/2019,> 20(fth) GSL DZ,Opening on September 26; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GW35,9/12/2019,9/26/2019,> 20(fth) GSL DZ,Opening on September 26; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GX33,8/26/2019,9/26/2019,> 20(fth) GSL DZ,Opening on September 26; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GX34,9/12/2019,9/26/2019,> 20(fth) GSL DZ,Opening on September 26; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GX35,9/12/2019,9/26/2019,> 20(fth) GSL DZ,Opening on September 26; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GZ38,7/9/2019,9/26/2019,> 20(fth) GSL DZ,Opening on September 26; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GZ38,6/22/2019,9/26/2019,> 20(fth) Inside DZ,Opening on September 26; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HB39,8/29/2019,9/26/2019,> 20(fth) GSL DZ,Opening on September 26; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HC39,8/29/2019,9/26/2019,> 20(fth) GSL DZ,Opening on September 26; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GN25,9/6/2019,10/2/2019,> 20(fth) GSL DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GN26,9/6/2019,10/2/2019,> 20(fth) GSL DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GN27,9/6/2019,10/2/2019,> 20(fth) GSL DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GO25,9/6/2019,10/2/2019,> 20(fth) GSL DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GO26,9/6/2019,10/2/2019,> 20(fth) GSL DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GO27,9/6/2019,10/2/2019,> 20(fth) GSL DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GP25,9/6/2019,10/2/2019,> 20(fth) GSL DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GP26,9/6/2019,10/2/2019,> 20(fth) GSL DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GP27,9/6/2019,10/2/2019,> 20(fth) GSL DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV38,8/29/2019,10/2/2019,> 20(fth) GSL DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV39,6/3/2019,10/2/2019,> 20(fth) Inside DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV39,7/11/2019,10/2/2019,> 20(fth) GSL DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV40,6/3/2019,10/2/2019,> 20(fth) Inside DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV40,6/30/2019,10/2/2019,> 20(fth) Outside DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GV40,7/11/2019,10/2/2019,> 20(fth) GSL DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GW38,5/21/2019,10/2/2019,> 20(fth) Inside DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GW38,7/9/2019,10/2/2019,> 20(fth) GSL DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GX38,6/6/2019,10/2/2019,> 20(fth) Inside DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GX38,7/9/2019,10/2/2019,> 20(fth) GSL DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GY38,6/11/2019,10/2/2019,> 20(fth) Inside DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GY38,7/9/2019,10/2/2019,> 20(fth) GSL DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GZ39,6/22/2019,10/2/2019,> 20(fth) Inside DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GZ39,7/9/2019,10/2/2019,> 20(fth) GSL DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GZ40,8/4/2019,10/2/2019,> 20(fth) GSL DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HA39,8/14/2019,10/2/2019,> 20(fth) GSL DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HA40,8/29/2019,10/2/2019,> 20(fth) GSL DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HB40,8/29/2019,10/2/2019,> 20(fth) GSL DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HC40,8/29/2019,10/2/2019,> 20(fth) GSL DZ,Opening on October 2; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GK32,8/12/2019,10/9/2019,> 20(fth) GSL DZ,Opening on October 9; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GK33,7/26/2019,10/9/2019,> 20(fth) GSL DZ,Opening on October 9; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GK34,7/16/2019,10/9/2019,> 20(fth) GSL DZ,Opening on October 9; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GK35,7/16/2019,10/9/2019,> 20(fth) GSL DZ,Opening on October 9; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GL32,8/12/2019,10/9/2019,> 20(fth) GSL DZ,Opening on October 9; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GL33,7/26/2019,10/9/2019,> 20(fth) GSL DZ,Opening on October 9; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GL34,7/16/2019,10/9/2019,> 20(fth) GSL DZ,Opening on October 9; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GL35 ,9/27/2019,10/9/2019,> 20(fth) GSL DZ,Opening on October 9; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GM32,8/12/2019,10/9/2019,> 20(fth) GSL DZ,Opening on October 9; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GM33,7/26/2019,10/9/2019,> 20(fth) GSL DZ,Opening on October 9; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GM34,7/16/2019,10/9/2019,> 20(fth) GSL DZ,Opening on October 9; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GM35,9/27/2019,10/9/2019,> 20(fth) GSL DZ,Opening on October 9; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GU35,8/14/2019,10/9/2019,> 20(fth) GSL DZ,Opening on October 9; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HC57,10/4/2019,10/16/2019,> 20(fth) GSL DZ,Opening on October 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HC58,10/4/2019,10/16/2019,> 20(fth) GSL DZ,Opening on October 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HC59,10/4/2019,10/16/2019,> 20(fth) GSL DZ,Opening on October 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HD57,10/4/2019,10/16/2019,> 20(fth) GSL DZ,Opening on October 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HD57,10/4/2019,10/16/2019,BTW 20(fth) & 10(fth),Opening on October 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HD57,10/4/2019,10/16/2019,BTW 10(fth) & Land,Opening on October 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HD58,10/4/2019,10/16/2019,> 20(fth) GSL DZ,Opening on October 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HD58,10/4/2019,10/16/2019,BTW 20(fth) & 10(fth),Opening on October 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HD58,10/4/2019,10/16/2019,BTW 10(fth) & Land,Opening on October 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HD59,10/4/2019,10/16/2019,> 20(fth) GSL DZ,Opening on October 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HE57,10/4/2019,10/16/2019,BTW 10(fth) & Land,Opening on October 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HE58,10/4/2019,10/16/2019,> 20(fth) GSL DZ,Opening on October 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HE58,10/4/2019,10/16/2019,BTW 20(fth) & 10(fth),Opening on October 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HE58,10/4/2019,10/16/2019,BTW 10(fth) & Land,Opening on October 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HE59,10/4/2019,10/16/2019,> 20(fth) GSL DZ,Opening on October 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HE59,10/4/2019,10/16/2019,BTW 20(fth) & 10(fth),Opening on October 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HE59,10/4/2019,10/16/2019,BTW 10(fth) & Land,Opening on October 16; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GX39,6/6/2019,10/21/2019,> 20(fth) Inside DZ,Opening on October 21; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GX39,7/9/2019,10/21/2019,> 20(fth) GSL DZ,Opening on October 21; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GX40,6/6/2019,10/21/2019,> 20(fth) Inside DZ,Opening on October 21; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GX40,7/11/2019,10/21/2019,> 20(fth) GSL DZ,Opening on October 21; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HB45,10/4/2019,10/21/2019,> 20(fth) GSL DZ,Opening on October 21; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HB46,10/4/2019,10/21/2019,> 20(fth) GSL DZ,Opening on October 21; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HC46,10/4/2019,10/21/2019,> 20(fth) GSL DZ,Opening on October 21; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HD45,10/4/2019,10/21/2019,> 20(fth) GSL DZ,Opening on October 21; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HD46,10/4/2019,10/21/2019,> 20(fth) GSL DZ,Opening on October 21; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HD47,9/19/2019,10/21/2019,> 20(fth) GSL DZ,Opening on October 21; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HE45,9/29/2019,10/21/2019,> 20(fth) GSL DZ,Opening on October 21; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HG46,9/29/2019,10/21/2019,> 20(fth) GSL DZ,Opening on October 21; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HG47,9/29/2019,10/21/2019,> 20(fth) GSL DZ,Opening on October 21; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HB44,10/4/2019,10/22/2019,> 20(fth) GSL DZ,Opening on October 22; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GY39,6/11/2019,10/29/2019,> 20(fth) Inside DZ,Opening on October 29; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GY39,7/9/2019,10/29/2019,> 20(fth) GSL DZ,Opening on October 29; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GZ39,10/14/2019,10/29/2019,> 20(fth) GSL DZ,Opening on October 29; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HR21,10/25/2019,11/20/2019,> 20(fth) MAR,Opening on November 20; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HR22,10/25/2019,11/20/2019,> 20(fth) MAR,Opening on November 20; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HR23,10/25/2019,11/20/2019,> 20(fth) MAR,Opening on November 20; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HS21,10/25/2019,11/20/2019,> 20(fth) MAR,Opening on November 20; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HS22,10/25/2019,11/20/2019,> 20(fth) MAR,Opening on November 20; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HS23,10/25/2019,11/20/2019,> 20(fth) MAR,Opening on November 20; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HT21,10/25/2019,11/20/2019,> 20(fth) MAR,Opening on November 20; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+HT22,10/25/2019,11/20/2019,> 20(fth) MAR,Opening on November 20; 2019 at 5:00 p.m. Atlantic Daylight Time (ADT)
+GU43,5/8/2020,5/22/2020,Full Grid GSL DZ,
+GU44,5/8/2020,5/22/2020,Full Grid GSL DZ,
+GV43,5/8/2020,5/22/2020,Full Grid GSL DZ,
+GX52,5/16/2020,5/26/2020,Full Grid GSL DZ,Major - CFA12E
+GX53,5/16/2020,5/26/2020,Full Grid GSL DZ,Major - CFA12E
+GX54,5/16/2020,5/26/2020,Full Grid GSL DZ,Major - CFA12E
+GV52,5/16/2020,5/28/2020,Full Grid GSL DZ,
+GV53,5/16/2020,5/28/2020,Full Grid GSL DZ,
+GV54,5/16/2020,5/28/2020,Full Grid GSL DZ,
+GW52,5/16/2020,5/28/2020,Full Grid GSL DZ,
+GW53,5/16/2020,5/28/2020,Full Grid GSL DZ,
+GW54,5/16/2020,5/28/2020,Full Grid GSL DZ,
+GQ39,5/21/2020,6/2/2020,Full Grid GSL DZ,
+GR39,5/21/2020,6/2/2020,Full Grid GSL DZ,
+GR40,5/21/2020,6/2/2020,Full Grid GSL DZ,
+GR41,5/21/2020,6/2/2020,Full Grid GSL DZ,
+GS39,5/21/2020,6/2/2020,Full Grid GSL DZ,
+GS40,5/21/2020,6/2/2020,Full Grid GSL DZ,
+GS41,5/21/2020,6/2/2020,Full Grid GSL DZ,
+GQ40,5/21/2020,6/2/2020,> 20(fth) GSL DZ,
+GQ41,5/21/2020,6/2/2020,> 20(fth) GSL DZ,
+GV45,5/21/2020,6/9/2020,Full Grid GSL DZ,
+GV46,5/21/2020,6/9/2020,Full Grid GSL DZ,
+GU40,5/25/2020,6/9/2020,Full Grid GSL DZ,
+GU42,5/8/2020,6/11/2020,Full Grid GSL DZ,
+GU41,5/25/2020,6/11/2020,Full Grid GSL DZ,
+GW48,5/28/2020,6/12/2020,Full Grid GSL DZ,Medium Impact
+GW49,5/28/2020,6/12/2020,Full Grid GSL DZ,Medium Impact
+GW50,5/28/2020,6/12/2020,Full Grid GSL DZ,Medium Impact
+GX48,5/28/2020,6/12/2020,Full Grid GSL DZ,Medium Impact
+GX49,5/28/2020,6/12/2020,Full Grid GSL DZ,Medium Impact
+GX50,5/28/2020,6/12/2020,Full Grid GSL DZ,Medium Impact
+GY48,5/28/2020,6/12/2020,Full Grid GSL DZ,Medium Impact
+GY49,5/28/2020,6/12/2020,Full Grid GSL DZ,Medium Impact
+GY50,5/28/2020,6/12/2020,Full Grid GSL DZ,Medium Impact
+GY40,5/31/2020,6/12/2020,Full Grid GSL DZ,
+GY41,5/31/2020,6/12/2020,Full Grid GSL DZ,
+GW35,6/5/2020,6/17/2020,Full Grid GSL DZ,Medium Impact
+GV35,6/5/2020,6/17/2020,> 20(fth) GSL DZ,
+GX35,6/5/2020,6/17/2020,> 20(fth) GSL DZ,Medium Impact
+HC38,6/7/2020,6/19/2020,Full Grid GSL DZ,
+HC39,6/7/2020,6/19/2020,Full Grid GSL DZ,
+HC37,6/7/2020,6/19/2020,> 20(fth) GSL DZ,
+GX41,6/5/2020,6/23/2020,Full Grid GSL DZ,
+HA34 ,6/10/2020,6/23/2020,> 20(fth) GSL DZ,
+GZ34,6/10/2020,6/23/2020,> 20(fth) GSL DZ,
+GS36,6/22/2020,6/23/2020,Full Grid GSL DZ,Humpback sighting - Mistaken for NARW
+GS37,6/22/2020,6/23/2020,Full Grid GSL DZ,Humpback sighting - Mistaken for NARW
+GS35,6/22/2020,6/23/2020,> 20(fth) GSL DZ,Humpback sighting - Mistaken for NARW
+GT35,6/22/2020,6/23/2020,> 20(fth) GSL DZ,Humpback sighting - Mistaken for NARW
+GU35,6/22/2020,6/23/2020,> 20(fth) GSL DZ,Humpback sighting - Mistaken for NARW
+HB40,6/14/2020,6/25/2020,Full Grid GSL DZ,
+HB41,6/14/2020,6/25/2020,Full Grid GSL DZ,
+HB42,6/14/2020,6/25/2020,Full Grid GSL DZ,
+GW47,5/16/2020,9/8/2021,Full Grid GSL DZ,
+GX47,5/16/2020,9/8/2021,Full Grid GSL DZ,
+GY47,5/16/2020,9/8/2021,Full Grid GSL DZ,
+GO31,7/4/2020,7/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 72 hours will be alloted for gear removal bu harvesters
+GO32,7/4/2020,7/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 72 hours will be alloted for gear removal bu harvesters
+GO33,7/4/2020,7/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 72 hours will be alloted for gear removal bu harvesters
+GP31,7/4/2020,7/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 72 hours will be alloted for gear removal bu harvesters
+GP32,7/4/2020,7/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 72 hours will be alloted for gear removal bu harvesters
+GP33,7/4/2020,7/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 72 hours will be alloted for gear removal bu harvesters
+GQ31,7/4/2020,7/16/2020,> 20(fth) GSL DZ,Due to marine weather forecast; additional 72 hours will be alloted for gear removal bu harvesters
+GQ32,7/4/2020,7/16/2020,> 20(fth) GSL DZ,Due to marine weather forecast; additional 72 hours will be alloted for gear removal bu harvesters
+GQ33,7/4/2020,7/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 72 hours will be alloted for gear removal bu harvesters
+GX41,7/7/2020,7/19/2020,Full Grid GSL DZ,
+GY41,7/7/2020,7/19/2020,Full Grid GSL DZ,
+GT41,7/5/2020,7/21/2020,Full Grid GSL DZ,48 hour delay
+GU42,7/22/2020,8/1/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GX41,7/22/2020,8/3/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+HQ20,7/26/2020,8/5/2020,Full Grid GSL DZ,72 hour delay (tides)
+HP18,7/26/2020,8/5/2020,BTW 10(fth) & Land,72 hour delay (tides)
+HP19,7/26/2020,8/5/2020,BTW 10(fth) & Land,72 hour delay (tides)
+HP20,7/26/2020,8/5/2020,BTW 10(fth) & Land,72 hour delay (tides)
+HQ18,7/26/2020,8/5/2020,BTW 10(fth) & Land,72 hour delay (tides)
+HQ19,7/26/2020,8/5/2020,BTW 10(fth) & Land,72 hour delay (tides)
+HR19,7/26/2020,8/5/2020,BTW 10(fth) & Land,72 hour delay (tides)
+GM30,8/9/2020,8/6/2020,Full Grid GSL DZ,Whalemap created erroneous sightings on August 3rd
+HC39,7/24/2020,8/11/2020,Full Grid GSL DZ,48 Hour delay
+HC40,7/24/2020,8/11/2020,Full Grid GSL DZ,48 Hour delay
+HC41,7/24/2020,8/11/2020,Full Grid GSL DZ,48 Hour delay
+HR20,7/26/2020,8/11/2020,BTW 10(fth) & Land,72 hour delay (tides)
+HR21,7/31/2020,8/11/2020,Full Grid BOF DZ,72 hour delay (tides)
+HR22,7/31/2020,8/11/2020,Full Grid BOF DZ,72 hour delay (tides)
+HS20,7/31/2020,8/11/2020,BTW 10(fth) & Land,72 hour delay (tides)
+HS21,7/31/2020,8/11/2020,Full Grid BOF DZ,72 hour delay (tides)
+HS22,7/31/2020,8/11/2020,Full Grid BOF DZ,72 hour delay (tides)
+HT20,7/31/2020,8/11/2020,BTW 10(fth) & Land,72 hour delay (tides)
+HT21,7/31/2020,8/11/2020,BTW 10(fth) & Land,72 hour delay (tides)
+HT22,7/31/2020,8/11/2020,Full Grid BOF DZ,72 hour delay (tides)
+HB42,7/30/2020,8/11/2020,> 20(fth) GSL DZ,72 Hour delay (High winds)
+GM27,7/30/2020,8/12/2020,> 20(fth) GSL DZ,72 Hour delay (High winds)
+GM28,7/30/2020,8/12/2020,> 20(fth) GSL DZ,72 Hour delay (High winds)
+GM29,7/30/2020,8/12/2020,> 20(fth) GSL DZ,72 Hour delay (High winds)
+GS37,7/25/2020,8/18/2020,Full Grid GSL DZ,48 Hour delay
+GS38,7/25/2020,8/18/2020,Full Grid GSL DZ,48 Hour delay
+GS39,7/25/2020,8/18/2020,Full Grid GSL DZ,48 Hour delay
+GP22,8/9/2020,8/18/2020,Full Grid GSL DZ,96Hour delay (High winds)
+GP23,8/9/2020,8/18/2020,Full Grid GSL DZ,96Hour delay (High winds)
+GP24,8/9/2020,8/18/2020,Full Grid GSL DZ,96Hour delay (High winds)
+GP27,8/9/2020,8/18/2020,Full Grid GSL DZ,96Hour delay (High winds)
+GP28,8/9/2020,8/18/2020,Full Grid GSL DZ,96Hour delay (High winds)
+GP29,8/9/2020,8/18/2020,Full Grid GSL DZ,96Hour delay (High winds)
+GP30,8/9/2020,8/18/2020,Full Grid GSL DZ,96Hour delay (High winds)
+GO30,8/9/2020,8/18/2020,Full Grid GSL DZ,96Hour delay (High winds)
+GO31,8/9/2020,8/18/2020,Full Grid GSL DZ,96Hour delay (High winds)
+GQ22,8/9/2020,8/18/2020,> 20(fth) GSL DZ,96Hour delay (High winds)
+GQ23,8/9/2020,8/18/2020,> 20(fth) GSL DZ,96Hour delay (High winds)
+GQ24,8/9/2020,8/18/2020,> 20(fth) GSL DZ,96Hour delay (High winds)
+GO32,8/10/2020,8/19/2020,Full Grid GSL DZ,
+GO33,8/10/2020,8/19/2020,Full Grid GSL DZ,
+GT41,8/14/2020,8/26/2020,Full Grid GSL DZ,72 Hour delay (High winds)
+GU42,8/14/2020,8/26/2020,Full Grid GSL DZ,72 Hour delay (High winds)
+HC57,8/14/2020,8/25/2020,Full Grid GSL DZ,72 Hour delay (High winds)
+HC58,8/14/2020,8/25/2020,Full Grid GSL DZ,72 Hour delay (High winds)
+HC59,8/14/2020,8/25/2020,Full Grid GSL DZ,72 Hour delay (High winds)
+HD57,8/14/2020,8/25/2020,> 20(fth) GSL DZ,72 Hour delay (High winds)
+HD58,8/14/2020,8/25/2020,> 20(fth) GSL DZ,72 Hour delay (High winds)
+HD59,8/14/2020,8/25/2020,> 20(fth) GSL DZ,72 Hour delay (High winds)
+HE53,8/19/2020,9/2/2020,Full Grid GSL DZ,48 Hour delay 
+HE54,8/19/2020,9/2/2020,Full Grid GSL DZ,48 Hour delay
+HE55,8/19/2020,9/2/2020,BTW 20(fth) & 10(fth),48 Hour delay 
+HF53,8/19/2020,9/2/2020,BTW 20(fth) & 10(fth),48 Hour delay
+HF54,8/19/2020,9/2/2020,BTW 20(fth) & 10(fth),48 Hour delay 
+HF55,8/19/2020,9/2/2020,BTW 20(fth) & 10(fth),48 Hour delay
+HG53,8/19/2020,9/2/2020,Full Grid GSL DZ,48 Hour delay 
+HG54,8/19/2020,9/2/2020,BTW 20(fth) & 10(fth),48 Hour delay
+GS47,8/23/2020,9/3/2020,Full Grid GSL DZ,72 Hour delay (High winds)
+GT49,8/23/2020,9/3/2020,Full Grid GSL DZ,96 Hour delay (High winds)
+GU49,8/23/2020,9/5/2020,Full Grid GSL DZ,96 Hour delay (High winds)
+GV49,8/23/2020,9/5/2020,Full Grid GSL DZ,96 Hour delay (High winds)
+GY54,8/22/2020,9/9/2020,> 20(fth) GSL DZ,96 Hour delay (High winds)96 Hour delay (High winds)
+GY55,8/22/2020,9/9/2020,Full Grid GSL DZ,96 Hour delay (High winds)
+GY56,8/22/2020,9/9/2020,Full Grid GSL DZ,96 Hour delay (High winds)
+GZ54,8/22/2020,9/9/2020,> 20(fth) GSL DZ,96 Hour delay (High winds)
+GZ55,8/22/2020,9/9/2020,Full Grid GSL DZ,96 Hour delay (High winds)
+GZ56,8/22/2020,9/9/2020,Full Grid GSL DZ,96 Hour delay (High winds)
+HA54,8/22/2020,9/9/2020,> 20(fth) GSL DZ,96 Hour delay (High winds)
+HA55,8/22/2020,9/9/2020,> 20(fth) GSL DZ,96 Hour delay (High winds)
+HA56,8/22/2020,9/9/2020,Full Grid GSL DZ,96 Hour delay (High winds)
+GR42,8/29/2020,9/9/2020,Full Grid GSL DZ,120 Hour delay (High winds)
+GR43,8/29/2020,9/9/2020,> 20(fth) GSL DZ,120 Hour delay (High winds)
+GR44,8/29/2020,9/9/2020,> 20(fth) GSL DZ,120 Hour delay (High winds)
+GS42,8/29/2020,9/9/2020,Full Grid GSL DZ,120 Hour delay (High winds)
+GS43,8/29/2020,9/9/2020,Full Grid GSL DZ,120 Hour delay (High winds)
+GK30,8/29/2020,9/9/2020,> 20(fth) GSL DZ,120 Hour delay (High winds)
+GL36,8/29/2020,9/9/2020,> 20(fth) GSL DZ,120 Hour delay (High winds)
+GM36,8/29/2020,9/9/2020,> 20(fth) GSL DZ,120 Hour delay (High winds)
+GV46,8/30/2020,9/9/2020,Full Grid GSL DZ,72 Hour delay (High winds)
+GO33,8/29/2020,9/15/2020,Full Grid GSL DZ,120 Hour delay (High winds)
+GO34,8/29/2020,9/15/2020,Full Grid GSL DZ,120 Hour delay (High winds)
+GO35,8/29/2020,9/15/2020,Full Grid GSL DZ,120 Hour delay (High winds)
+GU44,9/2/2020,9/15/2020,Full Grid GSL DZ,48 Hour delay
+GM38,9/2/2020,9/15/2020,> 20(fth) GSL DZ,48 Hour delay
+GL38,9/2/2020,9/15/2020,> 20(fth) GSL DZ,48 Hour delay
+GN35,8/29/2020,9/15/2020,> 20(fth) GSL DZ,120 Hour delay (High winds)
+HS20,9/6/2020,9/16/2020,> 20(fth) GSL DZ,72 Hour delay (weather)
+HS21,9/6/2020,9/16/2020,> 20(fth) GSL DZ,72 Hour delay (weather)
+HS22,9/6/2020,9/16/2020,Full Grid GSL DZ,72 Hour delay (weather)
+HT20,9/6/2020,9/16/2020,> 20(fth) GSL DZ,72 Hour delay (weather)
+HT21,9/6/2020,9/16/2020,> 20(fth) GSL DZ,72 Hour delay (weather)
+HT22,9/6/2020,9/16/2020,Full Grid GSL DZ,72 Hour delay (weather)
+HU21,9/6/2020,9/16/2020,> 20(fth) GSL DZ,72 Hour delay (weather)
+HU22,9/6/2020,9/16/2020,> 20(fth) GSL DZ,72 Hour delay (weather)
+GX30,9/10/2020,9/22/2020,> 20(fth) GSL DZ,48 Hour delay
+GY30,9/10/2020,9/22/2020,> 20(fth) GSL DZ,48 Hour delay
+HD39,9/18/2020,9/29/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+HD40,9/18/2020,9/29/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+HD41,9/18/2020,9/29/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+HE39,9/18/2020,9/29/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+HE40,9/18/2020,9/29/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+HE41,9/18/2020,9/29/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+GL27,9/18/2020,9/29/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+GL28,9/18/2020,9/29/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+GL29,9/18/2020,9/29/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+GM27,9/18/2020,9/29/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+GM28,9/18/2020,9/29/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+GM29,9/18/2020,9/29/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+GK27,9/18/2020,9/29/2020,> 20(fth) GSL DZ,96 hour delay (strong winds)
+GK28,9/18/2020,9/29/2020,> 20(fth) GSL DZ,96 hour delay (strong winds)
+GK29,9/18/2020,9/29/2020,> 20(fth) GSL DZ,96 hour delay (strong winds)
+HC39,9/18/2020,9/29/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+HC40,9/18/2020,9/29/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+IE28,9/18/2020,9/29/2020,> 20(fth) GSL DZ,96 hour delay (strong winds)
+HA43,9/20/2020,9/30/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+HB42,9/20/2020,9/30/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+HB43,9/20/2020,9/30/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+HC42,9/20/2020,9/30/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+HC43,9/20/2020,9/30/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+IA29,9/20/2020,10/6/2020,Full Grid Outside DZ,72 hour delay (strong winds)
+IB26,9/14/2020,10/6/2020,Full Grid Outside DZ,Only within portions of the Roseway Basin
+IB27,9/14/2020,10/6/2020,Full Grid Outside DZ,Only within portions of the Roseway Basin
+IB28,9/14/2020,10/6/2020,Full Grid Outside DZ,Only within portions of the Roseway Basin
+IC26,9/14/2020,10/6/2020,Full Grid Outside DZ,Only within portions of the Roseway Basin
+IC27,9/14/2020,10/6/2020,Full Grid Outside DZ,Only within portions of the Roseway Basin
+IC28,9/14/2020,10/6/2020,Full Grid Outside DZ,Only within portions of the Roseway Basin
+ID26,9/14/2020,10/6/2020,Full Grid Outside DZ,Only within portions of the Roseway Basin
+ID27,9/14/2020,10/6/2020,Full Grid Outside DZ,Only within portions of the Roseway Basin
+ID28,9/14/2020,10/6/2020,Full Grid Outside DZ,Only within portions of the Roseway Basin
+GS36,9/26/2020,10/7/2020,Full Grid GSL DZ,120 Hour delay (High winds)
+GS37,9/26/2020,10/7/2020,Full Grid GSL DZ,120 Hour delay (High winds)
+GS38,9/26/2020,10/7/2020,Full Grid GSL DZ,120 Hour delay (High winds)
+IB29,9/18/2020,10/9/2020,> 20(fth) GSL DZ,96 hour delay (strong winds)
+IB30,9/20/2020,10/9/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+IB31,9/20/2020,10/9/2020,> 20(fth) GSL DZ,96 hour delay (strong winds)
+IC29,9/18/2020,10/9/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+IC30,9/18/2020,10/9/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+IC31,9/20/2020,10/9/2020,> 20(fth) GSL DZ,96 hour delay (strong winds)
+ID29,9/18/2020,10/9/2020,> 20(fth) GSL DZ,96 hour delay (strong winds)
+ID30,9/18/2020,10/9/2020,> 20(fth) GSL DZ,96 hour delay (strong winds)
+ID31,9/20/2020,10/9/2020,> 20(fth) GSL DZ,96 hour delay (strong winds)
+GL41,9/18/2020,10/14/2020,> 20(fth) GSL DZ,96 hour delay (strong winds)
+GL42,10/2/2020,10/14/2020,> 20(fth) GSL DZ,72 hour delay (strong winds)
+GM41,9/18/2020,10/14/2020,> 20(fth) GSL DZ,96 hour delay (strong winds)
+GM42,10/2/2020,10/14/2020,Full Grid GSL DZ,72 hour delay (strong winds)
+GN41,9/18/2020,10/14/2020,> 20(fth) GSL DZ,96 hour delay (strong winds)
+GN42,10/2/2020,10/14/2020,> 20(fth) GSL DZ,72 hour delay (strong winds)
+GQ31,10/2/2020,10/14/2020,> 20(fth) GSL DZ,72 hour delay (strong winds)
+GQ32,10/2/2020,10/14/2020,> 20(fth) GSL DZ,72 hour delay (strong winds)
+GV04,9/30/2020,10/22/2020,> 20(fth) GSL DZ,48 hour delay
+GV05,9/30/2020,10/22/2020,> 20(fth) GSL DZ,48 hour delay
+GW03,9/30/2020,10/22/2020,BTW 10(fth) & Land,48 hour delay
+GW04,9/30/2020,10/22/2020,BTW 10(fth) & Land,48 hour delay
+GW05,9/30/2020,10/22/2020,> 20(fth) GSL DZ,48 hour delay
+GX03,9/30/2020,10/22/2020,BTW 10(fth) & Land,48 hour delay
+GX04,9/30/2020,10/22/2020,BTW 10(fth) & Land,48 hour delay
+GX05,9/30/2020,10/22/2020,> 20(fth) GSL DZ,72 hour delay (strong winds)
+GX02,10/4/2020,10/22/2020,BTW 10(fth) & Land,72 hour delay (strong winds)
+GY02,10/4/2020,10/22/2020,BTW 10(fth) & Land,72 hour delay (strong winds)
+GY03,10/4/2020,10/22/2020,BTW 10(fth) & Land,72 hour delay (strong winds)
+GY04,10/4/2020,10/22/2020,BTW 10(fth) & Land,72 hour delay (strong winds)
+GR42,10/8/2020,10/22/2020,Full Grid GSL DZ,48 hour delay
+GR43,10/8/2020,10/22/2020,> 20(fth) GSL DZ,48 hour delay
+GR44,10/8/2020,10/22/2020,> 20(fth) GSL DZ,48 hour delay
+GS42,10/8/2020,10/22/2020,Full Grid GSL DZ,48 hour delay
+GZ44,10/8/2020,10/22/2020,Full Grid GSL DZ,48 hour delay
+GZ45,10/8/2020,10/22/2020,Full Grid GSL DZ,48 hour delay
+HA44,10/8/2020,10/22/2020,Full Grid GSL DZ,48 hour delay
+HB44,10/8/2020,10/22/2020,Full Grid GSL DZ,48 hour delay
+HD45,10/8/2020,10/22/2020,Full Grid GSL DZ,48 hour delay
+HD46,10/8/2020,10/22/2020,Full Grid GSL DZ,48 hour delay
+HD47,10/8/2020,10/22/2020,> 20(fth) GSL DZ,48 hour delay
+GU43,10/12/2020,10/22/2020,Full Grid GSL DZ,120 Hour delay (High winds)
+GU44,10/12/2020,10/22/2020,Full Grid GSL DZ,120 Hour delay (High winds)
+GQ34,10/12/2020,10/22/2020,Full Grid GSL DZ,96 hour delay (High winds)
+GQ35,10/12/2020,10/22/2020,Full Grid GSL DZ,96 hour delay (High winds)
+GR33,10/12/2020,10/22/2020,> 20(fth) GSL DZ,96 hour delay (High winds)
+GR34,10/12/2020,10/22/2020,> 20(fth) GSL DZ,96 hour delay (High winds)
+GR35,10/12/2020,10/22/2020,Full Grid GSL DZ,96 hour delay (High winds)
+GS35,10/12/2020,10/22/2020,> 20(fth) GSL DZ,96 hour delay (High winds)
+HC39,10/16/2020,10/28/2020,Full Grid GSL DZ,72 hour delay (High winds)
+HC40,10/16/2020,10/28/2020,Full Grid GSL DZ,72 hour delay (High winds)
+HD39,10/16/2020,10/28/2020,Full Grid GSL DZ,72 hour delay (High winds)
+HD40,10/16/2020,10/28/2020,Full Grid GSL DZ,72 hour delay (High winds)
+HD41,10/16/2020,10/28/2020,Full Grid GSL DZ,72 hour delay (High winds)
+GY47,10/16/2020,10/28/2020,Full Grid GSL DZ,48 hour delay
+GY48,10/16/2020,10/28/2020,Full Grid GSL DZ,48 hour delay
+GZ47,10/16/2020,10/28/2020,Full Grid GSL DZ,48 hour delay
+GZ48,10/16/2020,10/28/2020,Full Grid GSL DZ,48 hour delay
+HA48,10/16/2020,10/28/2020,> 20(fth) GSL DZ,48 hour delay
+HD47,10/30/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (High winds)
+HD48,10/30/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (High winds)
+HD53,10/30/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (High winds)
+HD54,10/30/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (High winds)
+HD55,10/30/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (High winds)
+HE47,10/30/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (High winds)
+HE48,10/30/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (High winds)
+HE53,10/30/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (High winds)
+HE54,10/30/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (High winds)
+HF53,10/30/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (High winds)
+HC47,10/30/2020,11/10/2020,BTW 20(fth) & 10(fth),72 hour delay (High winds)
+HC48,10/30/2020,11/10/2020,BTW 20(fth) & 10(fth),72 hour delay (High winds)
+HE55,10/30/2020,11/16/2020,> 20(fth) GSL DZ,72 hour delay (High winds)
+HF54,10/30/2020,11/16/2020,> 20(fth) GSL DZ,72 hour delay (High winds)
+HF55,10/30/2020,11/16/2020,> 20(fth) GSL DZ,72 hour delay (High winds)
+GY47,11/3/2020,11/16/2020,> 20(fth) GSL DZ,120 Hour delay (High winds)
+GZ45,11/3/2020,11/16/2020,> 20(fth) GSL DZ,120 Hour delay (High winds)
+GZ47,11/3/2020,11/16/2020,> 20(fth) GSL DZ,120 Hour delay (High winds)
+GL41,11/13/2020,11/16/2020,> 20(fth) GSL DZ,96 Hour delay (High winds)
+GL42,11/13/2020,11/16/2020,> 20(fth) GSL DZ,96 Hour delay (High winds)
+GL43,11/13/2020,11/16/2020,Full Grid GSL DZ,96 Hour delay (High winds)
+GM41,11/13/2020,11/16/2020,> 20(fth) GSL DZ,96 Hour delay (High winds)
+GM42,11/13/2020,11/16/2020,Full Grid GSL DZ,96 Hour delay (High winds)
+GM43,11/13/2020,11/16/2020,Full Grid GSL DZ,96 Hour delay (High winds)
+GN41,11/13/2020,11/16/2020,> 20(fth) GSL DZ,96 Hour delay (High winds)
+GN42,11/13/2020,11/16/2020,> 20(fth) GSL DZ,96 Hour delay (High winds)
+GN43,11/13/2020,11/16/2020,> 20(fth) GSL DZ,96 Hour delay (High winds)
+GV42,5/8/2020,11/16/2020,Full Grid GSL DZ,
+GV44,5/8/2020,11/16/2020,Full Grid GSL DZ,
+GW42,5/8/2020,11/16/2020,Full Grid GSL DZ,
+GW43,5/8/2020,11/16/2020,Full Grid GSL DZ,
+GW44,5/8/2020,11/16/2020,Full Grid GSL DZ,
+GW45,5/16/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; 144 hours will be allotted for gear removal by harvesters
+GW46,5/16/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; 144 hours will be allotted for gear removal by harvesters
+GX45,5/16/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; 144 hours will be allotted for gear removal by harvesters
+GX46,5/16/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; 144 hours will be allotted for gear removal by harvesters
+GY45,5/16/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; 144 hours will be allotted for gear removal by harvesters
+GY46,5/16/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; 144 hours will be allotted for gear removal by harvesters
+GX42,5/21/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GX43,5/21/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GX44,5/21/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GY42,5/21/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GY43,5/21/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GY44,5/21/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GV40,5/25/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 48 hours will be allotted for gear removal by harvesters
+GV41,5/25/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 48 hours will be allotted for gear removal by harvesters
+GW40,5/25/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 48 hours will be allotted for gear removal by harvesters
+GW41,5/25/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 48 hours will be allotted for gear removal by harvesters
+GZ40,5/31/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 48 hours will be allotted for gear removal by harvesters
+GZ41,5/31/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 48 hours will be allotted for gear removal by harvesters
+GZ42,5/31/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 48 hours will be allotted for gear removal by harvesters
+HA40,5/31/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 48 hours will be allotted for gear removal by harvesters
+HA41,5/31/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 48 hours will be allotted for gear removal by harvesters
+HA42,5/31/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 48 hours will be allotted for gear removal by harvesters
+GY35,6/2/2020,11/16/2020,> 20(fth) GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GY36,6/2/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GY37,6/2/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GZ35,6/2/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GZ36,6/2/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GZ37,6/2/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+HA35,6/2/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+HA36,6/2/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+HA37,6/2/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GV37,6/5/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GV38,6/5/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GW36,6/5/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GW37,6/5/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GW38,6/5/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GX36,6/5/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GX37,6/5/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GX38,6/5/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GX40,6/5/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GY38,6/5/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GV36,6/5/2020,11/16/2020,> 20(fth) GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GZ38,6/7/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+GZ39,6/7/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+HA38,6/7/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+HA39,6/7/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+HB37,6/7/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+HB38,6/7/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+HB39,6/7/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+GU37,6/10/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+GU38,6/10/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+GV39,6/10/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+GW39,6/10/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+GX39,6/10/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+GU36,6/10/2020,11/16/2020,> 20(fth) GSL DZ,48 Hour delay
+GU39,6/14/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 48 hours will be allotted for gear removal by harvesters
+GY39,6/14/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be allotted for gear removal by harvesters
+GY40,6/17/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 48 hours will be allotted for gear removal by harvesters
+GT37,6/17/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+GT38,6/17/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+GT36,6/17/2020,11/16/2020,> 20(fth) GSL DZ,48 Hour delay
+GT39,6/23/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+GT40,6/23/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+GU40,6/23/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+GX35,6/26/2020,11/16/2020,> 20(fth) GSL DZ,48 Hour delay
+GU41,7/5/2020,11/16/2020,Full Grid GSL DZ,48 hour delay
+HB35,7/16/2020,11/16/2020,Full Grid GSL DZ,Due to marine weather forecast; additional 24 hours will be alloted for gear removal bu harvesters
+HB36,7/16/2020,11/16/2020,> 20(fth) GSL DZ,Due to marine weather forecast; additional 24 hours will be alloted for gear removal bu harvesters
+HB40,7/24/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+HB41,7/24/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+GV34,7/26/2020,11/16/2020,> 20(fth) GSL DZ,48 Hour delay
+GV33,7/26/2020,11/16/2020,> 20(fth) GSL DZ,48 Hour delay
+GV35,7/26/2020,11/16/2020,> 20(fth) GSL DZ,48 Hour delay
+GW33,7/26/2020,11/16/2020,> 20(fth) GSL DZ,48 Hour delay
+GW34,7/26/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+GW35,7/26/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+GX33,7/26/2020,11/16/2020,> 20(fth) GSL DZ,48 Hour delay
+GX34,7/26/2020,11/16/2020,> 20(fth) GSL DZ,48 Hour delay
+GY41,7/30/2020,11/16/2020,> 20(fth) GSL DZ,72 Hour delay (High winds)
+GN27,7/30/2020,11/16/2020,> 20(fth) GSL DZ,72 Hour delay (High winds)
+GN28,7/30/2020,11/16/2020,> 20(fth) GSL DZ,72 Hour delay (High winds)
+GN29,7/30/2020,11/16/2020,> 20(fth) GSL DZ,72 Hour delay (High winds)
+GO27,7/30/2020,11/16/2020,> 20(fth) GSL DZ,72 Hour delay (High winds)
+GO28,7/30/2020,11/16/2020,> 20(fth) GSL DZ,72 Hour delay (High winds)
+GO29,7/30/2020,11/16/2020,> 20(fth) GSL DZ,72 Hour delay (High winds)
+GL32,8/9/2020,11/16/2020,Full Grid GSL DZ,96Hour delay (High winds)
+GL33,8/9/2020,11/16/2020,Full Grid GSL DZ,96 Hour delay (High winds)
+GL34,8/9/2020,11/16/2020,Full Grid GSL DZ,96Hour delay (High winds)
+GM32,8/9/2020,11/16/2020,Full Grid GSL DZ,96 Hour delay (High winds)
+GM33,8/9/2020,11/16/2020,> 20(fth) GSL DZ,96 Hour delay (High winds)
+GL31,8/9/2020,11/16/2020,Full Grid GSL DZ,96Hour delay (High winds)
+GM31,8/9/2020,11/16/2020,Full Grid GSL DZ,96Hour delay (High winds)
+GN30,8/9/2020,11/16/2020,Full Grid GSL DZ,96Hour delay (High winds)
+GN31,8/9/2020,11/16/2020,Full Grid GSL DZ,96 Hour delay (High winds)
+GN32,8/9/2020,11/16/2020,Full Grid GSL DZ,96Hour delay (High winds)
+GN33,8/9/2020,11/16/2020,Full Grid GSL DZ,96 Hour delay (High winds)
+GK32,8/9/2020,11/16/2020,> 20(fth) GSL DZ,96 Hour delay (High winds)
+GK33,8/9/2020,11/16/2020,> 20(fth) GSL DZ,96Hour delay (High winds)
+GK34,8/9/2020,11/16/2020,> 20(fth) GSL DZ,96 Hour delay (High winds)
+GM35,8/9/2020,11/16/2020,> 20(fth) GSL DZ,96Hour delay (High winds)
+GM34,8/9/2020,11/16/2020,> 20(fth) GSL DZ,96 Hour delay (High winds)
+GN34,8/10/2020,11/16/2020,> 20(fth) GSL DZ,96Hour delay (High winds)
+GT42,8/14/2020,11/16/2020,Full Grid GSL DZ,72 Hour delay (High winds)
+GW32,8/14/2020,11/16/2020,> 20(fth) GSL DZ,72 Hour delay (High winds)
+GX31,8/14/2020,11/16/2020,> 20(fth) GSL DZ,72 Hour delay (High winds)
+GX32,8/16/2020,11/16/2020,> 20(fth) GSL DZ,72 Hour delay (High winds)
+GK35,8/15/2020,11/16/2020,> 20(fth) GSL DZ,48 Hour delay 
+GL35,8/15/2020,11/16/2020,> 20(fth) GSL DZ,48 Hour delay 
+GM35,8/15/2020,11/16/2020,> 20(fth) GSL DZ,48 Hour delay 
+GK31,8/16/2020,11/16/2020,> 20(fth) GSL DZ,48 Hour delay 
+GL30,8/19/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+GM30,8/19/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay 
+GY31,8/19/2020,11/16/2020,> 20(fth) GSL DZ,48 Hour delay
+GY32,8/19/2020,11/16/2020,> 20(fth) GSL DZ,48 Hour delay 
+GX41,8/22/2020,11/16/2020,Full Grid GSL DZ,96 Hour delay (High winds)
+GT47,8/23/2020,11/16/2020,Full Grid GSL DZ,96 Hour delay (High winds)
+GT48,8/23/2020,11/16/2020,Full Grid GSL DZ,96 Hour delay (High winds)
+GU47,8/23/2020,11/16/2020,Full Grid GSL DZ,96 Hour delay (High winds)
+GU48,8/23/2020,11/16/2020,Full Grid GSL DZ,96 Hour delay (High winds)
+GV47,8/23/2020,11/16/2020,Full Grid GSL DZ,96 Hour delay (High winds)
+GV48,8/23/2020,11/16/2020,Full Grid GSL DZ,96 Hour delay (High winds)
+GS45,8/23/2020,11/16/2020,Full Grid GSL DZ,72 Hour delay (High winds)
+GS46,8/23/2020,11/16/2020,Full Grid GSL DZ,72 Hour delay (High winds)
+GT45,8/23/2020,11/16/2020,Full Grid GSL DZ,72 Hour delay (High winds)
+GT46,8/23/2020,11/16/2020,Full Grid GSL DZ,72 Hour delay (High winds)
+GU45,8/23/2020,11/16/2020,Full Grid GSL DZ,72 Hour delay (High winds)
+GU46,8/23/2020,11/16/2020,Full Grid GSL DZ,72 Hour delay (High winds)
+GS44,8/29/2020,11/16/2020,Full Grid GSL DZ,120 Hour delay (High winds)
+GT44,8/29/2020,11/16/2020,Full Grid GSL DZ,120 Hour delay (High winds)
+GL39,9/2/2020,11/16/2020,Full Grid GSL DZ,48 Hour delay
+GL40,9/2/2020,11/16/2020,> 20(fth) GSL DZ,48 Hour delay
+GM39,9/2/2020,11/16/2020,> 20(fth) GSL DZ,48 Hour delay
+GM40,9/2/2020,11/16/2020,> 20(fth) GSL DZ,48 Hour delay
+HC41,9/18/2020,11/16/2020,Full Grid GSL DZ,96 hour delay (strong winds)
+GO31,9/20/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (strong winds)
+GO32,9/20/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (strong winds)
+GO33,9/20/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (strong winds)
+GP36,9/20/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (strong winds)
+GP37,9/20/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (strong winds)
+GP38,9/20/2020,11/16/2020,> 20(fth) GSL DZ,72 hour delay (strong winds)
+GQ36,9/20/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (strong winds)
+GQ37,9/20/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (strong winds)
+GQ38,9/20/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (strong winds)
+GR36,9/20/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (strong winds)
+GR37,9/20/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (strong winds)
+GR38,9/20/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (strong winds)
+GP31,10/2/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (strong winds)
+GP32,10/2/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (strong winds)
+GP33,10/2/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (strong winds)
+GQ33,10/2/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (strong winds)
+GS43,10/8/2020,11/16/2020,Full Grid GSL DZ,48 hour delay
+GS44,10/8/2020,11/16/2020,Full Grid GSL DZ,48 hour delay
+GT43,10/8/2020,11/16/2020,Full Grid GSL DZ,48 hour delay
+GZ46,10/8/2020,11/16/2020,Full Grid GSL DZ,48 hour delay
+HA45,10/8/2020,11/16/2020,Full Grid GSL DZ,48 hour delay
+HA46,10/8/2020,11/16/2020,Full Grid GSL DZ,48 hour delay
+HB45,10/8/2020,11/16/2020,Full Grid GSL DZ,48 hour delay
+HB46,10/8/2020,11/16/2020,Full Grid GSL DZ,48 hour delay
+HB47,10/8/2020,11/16/2020,> 20(fth) GSL DZ,48 hour delay
+HC45,10/8/2020,11/16/2020,Full Grid GSL DZ,48 hour delay
+HC46,10/8/2020,11/16/2020,Full Grid GSL DZ,48 hour delay
+HC47,10/8/2020,11/16/2020,> 20(fth) GSL DZ,48 hour delay
+HA47,10/16/2020,11/16/2020,Full Grid GSL DZ,48 hour delay
+HC44,10/30/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (High winds)
+HD44,10/30/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (High winds)
+HD45,10/30/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (High winds)
+HD46,10/30/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (High winds)
+HE44,10/30/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (High winds)
+HE45,10/30/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (High winds)
+HE46,10/30/2020,11/16/2020,Full Grid GSL DZ,72 hour delay (High winds)
+IB30,11/8/2020,11/19/2020,> 20(fth) Outside DZ,
+IB31,11/8/2020,11/19/2020,Full Grid Outside DZ,
+IC30,11/8/2020,11/19/2020,> 20(fth) Outside DZ,
+IC31,11/8/2020,11/19/2020,Full Grid Outside DZ,
+ID30,11/8/2020,11/19/2020,Full Grid Outside DZ,
+ID31,11/8/2020,,Full Grid Outside DZ,
+IB29,11/8/2020,11/29/2020,Full Grid Outside DZ,
+IC29,11/8/2020,11/29/2020,> 20(fth) Outside DZ,
+ID29,11/8/2020,11/29/2020,Full Grid Outside DZ,
+IB26,11/19/2020,11/29/2020,> 20(fth) Outside DZ,72 Hour delay (High Winds)
+IB27,11/19/2020,11/29/2020,> 20(fth) Outside DZ,72 Hour delay (High Winds)
+IB28,11/19/2020,11/29/2020,> 20(fth) Outside DZ,72 Hour delay (High Winds)
+IC26,11/19/2020,11/29/2020,> 20(fth) Outside DZ,72 Hour delay (High Winds)
+IC27,11/19/2020,11/29/2020,Full Grid Outside DZ,72 Hour delay (High Winds)
+IC28,11/19/2020,11/29/2020,Full Grid Outside DZ,72 Hour delay (High Winds)
+ID27,11/20/2020,11/29/2020,> 20(fth) Outside DZ,72 Hour delay (High Winds)
+ID28,11/20/2020,11/29/2020,> 20(fth) Outside DZ,72 Hour delay (High Winds)
+IE27,11/20/2020,11/29/2020,> 20(fth) Outside DZ,72 Hour delay (High Winds)
+IE28,11/20/2020,11/29/2020,> 20(fth) Outside DZ,72 Hour delay (High Winds)
+IB30,11/26/2020,11/29/2020,Full Grid Outside DZ,72 Hour delay (High Winds)
+IB30,11/26/2020,11/29/2020,Full Grid Outside DZ,72 Hour delay (High Winds)
+ID30,11/26/2020,11/29/2020,> 20(fth) Outside DZ,72 Hour delay (High Winds)

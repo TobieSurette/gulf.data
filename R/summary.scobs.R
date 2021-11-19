@@ -1,3 +1,9 @@
+#' @title Summarize Snow Crab Observer Data.
+#' 
+#' @description Generates a summary of snow crab observer data.
+#' 
+
+#' @export
 summary.scobs <- function(x, by, type){
    # SUMMARY.SCOBS - Generate a snow crab observer data summary.
 

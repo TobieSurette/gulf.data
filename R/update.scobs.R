@@ -1,11 +1,19 @@
 #' @title Update Snow Crab Observer Data
 #' 
 #' @description Update snow crab observer data from Oracle database download.
+#' 
+#' @param year Year.
+#' @param zone Fishing zone identifier.
+#' @param path Data path location.
+#' @param type Sampling type ('sea' or 'port').
+#' @param Rfile Logical value specifying whether output to Rdata format.
+#' @param csv Logical value specifying whether to write to CSV data format.
+#' @param database Oracle database name.
+#' @param username Oracle user name.
+#' @param password Oracle password.
 
 #' @export update.scobs
 update.scobs <- function(year, zone, path = "W:/Crab/Offshore Crab Common/", type = "sea", Rfile = TRUE, csv = TRUE, ...){
-
-   
    # Check input argument:
    if (!is.numeric(year) | (length(year) == 0)) stop("'year' must be a numeric vector.")
    if (any((year %% 1) != 0 )) stop("'year' must be an integer.")
