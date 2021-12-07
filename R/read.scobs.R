@@ -36,7 +36,7 @@ read.scobs <- function(year, file, path = "W:/Crab/Offshore Crab Common/", cfvn,
 }
 
 # Read GAP database:
-read.oracle.scobs <- function(x, year, zone, cfvn, trip.number, password, ...){
+read.oracle.scobs <- function(x, year, zone, cfvn, type = "sea", trip.number, password, ...){
    # Open Oracle channel:
    if (missing(password)) stop("'password' must be specified.")
    channel <- RODBC::odbcConnect(dsn = "gap", uid =  "4R_GAP", pwd = password, believeNRows = FALSE)
@@ -200,7 +200,7 @@ read.oracle.scobs <- function(x, year, zone, cfvn, trip.number, password, ...){
    # Fix variables:
    z$carapace.width <- round(z$carapace.width)
    
-   odbcClose(channel)   
+   RODBC::odbcClose(channel)   
    
    return(z)
 }
