@@ -31,7 +31,7 @@ summary.scobs <- function(x, by, type){
    res$observer <- cbind(res$observer, aggregate(list(n.vessel = x$cfvn), by = x[vars], function(x) return(length(unique(x))))["n.vessel"]) 
                 
    # Summary trap table:
-   x$soft <- !is.hard.scobs(x)
+   x$soft <- !is.hard.shell(x)
    x$individual.weight <- exp(-8.230136 + 3.098 * log(x$carapace.width)) / 1000 #weight(x, units = "kg")
    vars <- c("year", "data.type", "observer", "trip.number", "trap.number", "zone", "weight")
    res$trap <- aggregate(x[c("longitude", "latitude")], by = x[vars], mean, na.rm = TRUE)  
@@ -57,6 +57,7 @@ summary.scobs <- function(x, by, type){
    #res$trap$number.caught.soft <- res$trap$number.sampled.soft * ratio
    res$trap$weight.caught.soft <- res$trap$weight.caught * res$trap$number.sampled.soft / res$trap$number.sampled
    
+   ix <- is.mature(x)  
    res$trap$number.sampled.commercial <- aggregate(list(x = is.category(x, "COMSC345")), by = x[vars], sum, na.rm = TRUE)$x  
    res$trap$weight.sampled.commercial <- aggregate(list(x = is.category(x, "COMSC345") * x$individual.weight), by = x[vars], sum, na.rm = TRUE)$x   
    res$trap$number.caught.commercial <- res$trap$number.sampled.commercial * ratio                                                                
