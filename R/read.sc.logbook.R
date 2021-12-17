@@ -64,6 +64,7 @@ read.sc.logbook <- function(x, year, file, path = "//ent.dfo-mpo.ca/dfo-mpo/GROU
    }
 
    # Fix grid names:
+   if (is.null(x$grid) & !is.null(x$grid.calc)) x$grid <- x$grid.calc
    x$grid <- gsub(" +", "", x$grid)
    x$grid[which(nchar(x$grid) <= 3)] <- ""
 
