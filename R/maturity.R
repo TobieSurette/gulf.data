@@ -52,11 +52,9 @@ is.mature.scsbio <- function(x, probability = FALSE, ...){
    mat <- as.logical(rep(NA, dim(x)[1]))
 
    # Male discriminant function:
-   index <- which(!is.na(x$sex) & !is.na(x$carapace.width) & !is.na(x$chela.height) & (x$sex == 1))
-   if (length(index) > 0){
-      temp <- (-0.7889259*log(x$carapace.width[index]) + 0.6144883*log(x$chela.height[index]) + 1.7605142) >= 0
-      mat[index] <- temp
-   }
+   ix <- which(!is.na(x$sex) & !is.na(x$carapace.width) & !is.na(x$chela.height) & (x$sex == 1))
+   if (length(ix) > 0) mat[ix] <- (-0.7889259*log(x$carapace.width[ix]) + 0.6144883*log(x$chela.height[ix]) + 1.7605142) >= 0
+   
    # Small males:
    mat[(x$sex == 1) & (x$carapace.width < 40)] <- FALSE
    # Large males:
@@ -64,9 +62,8 @@ is.mature.scsbio <- function(x, probability = FALSE, ...){
 
    # Females:
    if (length(which((x$sex == 2))) > 0){
-      index <- !is.na(x$sex) & !is.na(x$carapace.width) & !is.na(x$abdomen.width) & (x$sex == 2)
-      temp <- (16.422757 * log(x$carapace.width[index]) - 14.756163 * log(x$abdomen.width[index]) - 14.898721) < 0
-      mat[index] <- temp
+      ix <- !is.na(x$sex) & !is.na(x$carapace.width) & !is.na(x$abdomen.width) & (x$sex == 2)
+      mat[ix] <- (16.422757 * log(x$carapace.width[ix]) - 14.756163 * log(x$abdomen.width[ix]) - 14.898721) < 0
       mat[is.na(mat) & !is.na(x$sex) & (x$sex == 2) & !is.na(x$gonad.colour) & (x$gonad.colour >= 1)] <- FALSE
       mat[is.na(mat) & !is.na(x$sex) & (x$sex == 2) & (!is.na(x$egg.colour) | !is.na(x$eggs.remaining))] <- TRUE
    }
@@ -75,15 +72,15 @@ is.mature.scsbio <- function(x, probability = FALSE, ...){
    if (probability){
       years <- sort(unique(gulf.utils::year(x)))
       for (i in 1:length(years)){
-         index <- !is.na(mat) & (gulf.utils::year(x) == years[i]) & !is.na(x$carapace.width) & !is.na(x$sex)
+         ix <- !is.na(mat) & (gulf.utils::year(x) == years[i]) & !is.na(x$carapace.width) & !is.na(x$sex)
          sexf <- as.factor(x$sex)
          mat <- as.numeric(mat)
-         y <- data.frame(mat = mat[index], cw = x$carapace.width[index], sex = sexf[index])
+         y <- data.frame(mat = mat[ix], cw = x$carapace.width[ix], sex = sexf[ix])
          model <- mgcv::gam(mat ~ s(cw, by = sex), family = binomial, data = y)
-         index <- is.na(mat) & (gulf.utils::year(x) == years[i]) & !is.na(x$carapace.width) & !is.na(x$sex)
-         newdata <- data.frame(cw = x$carapace.width[index], sex = sexf[index])
-         mat[index] <- predict(model, newdata = newdata)
-         mat[index] <- exp(mat[index]) / (1 + exp(mat[index]))
+         ix <- is.na(mat) & (gulf.utils::year(x) == years[i]) & !is.na(x$carapace.width) & !is.na(x$sex)
+         newdata <- data.frame(cw = x$carapace.width[ix], sex = sexf[ix])
+         mat[ix] <- predict(model, newdata = newdata)
+         mat[ix] <- exp(mat[ix]) / (1 + exp(mat[ix]))
       }
    }
 
@@ -101,17 +98,17 @@ is.primiparous.scsbio <- function(x, ...){
    # Returns whether a crab is newly moulted.
 
    # Contruct logical vextor:
-   index <- rep(TRUE, dim(x)[1])
+   ix <- rep(TRUE, dim(x)[1])
    names(x) <- tolower(names(x))
-   index <- index * is.mature(x, ...) * (x$sex == 2) * is.new.shell(x)
-   index[x$sex == 1] <- 0
-   index[is.na(index) & (x$sex == 2) & !is.na(x$gonad.colour)] <- 0
-   index[is.na(index) & (x$sex == 2) & !is.na(x$egg.colour) & !is.na(x$eggs.remaining) & is.new.shell(x)] <- 1
+   ix <- ix * is.mature(x, ...) * (x$sex == 2) * is.new.shell(x)
+   ix[x$sex == 1] <- 0
+   ix[is.na(ix) & (x$sex == 2) & !is.na(x$gonad.colour)] <- 0
+   ix[is.na(ix) & (x$sex == 2) & !is.na(x$egg.colour) & !is.na(x$eggs.remaining) & is.new.shell(x)] <- 1
 
    # Convert to logical if there are no fractions:
-   if (all((index[!is.na(index)] %% 1) == 0)) index <- (index == 1)
+   if (all((ix[!is.na(ix)] %% 1) == 0)) ix <- (ix == 1)
    
-   return(index)
+   return(ix)
 }
 
 #' @rdname maturity
@@ -125,16 +122,16 @@ is.multiparous.scsbio <- function(x, ...){
    # Returns whether a crab is newly moulted.
 
    # Contruct logical vextor:
-   index <- rep(TRUE, dim(x)[1])
+   ix <- rep(TRUE, dim(x)[1])
    names(x) <- tolower(names(x))
-   index <- index * is.mature(x, ...) * (x$sex == 2) * !is.new.shell(x)
-   index[x$sex == 1] <- 0
-   index[is.na(index) & (x$sex == 2) & !is.na(x$egg.colour) & (x$eggs.remaining > 1) & !is.new.shell(x)] <- 1
+   ix <- ix * is.mature(x, ...) * (x$sex == 2) * !is.new.shell(x)
+   ix[x$sex == 1] <- 0
+   ix[is.na(ix) & (x$sex == 2) & !is.na(x$egg.colour) & (x$eggs.remaining > 1) & !is.new.shell(x)] <- 1
       
    # Convert to logical if there are no fractions:
-   if (all((index[!is.na(index)] %% 1) == 0)) index <- (index == 1)
+   if (all((ix[!is.na(ix)] %% 1) == 0)) ix <- (ix == 1)
  
-   return(index)
+   return(ix)
 }
 
 #' @rdname maturity
@@ -146,7 +143,7 @@ is.senile <- function(x, ...) UseMethod("is.senile")
 #' @export
 is.senile.scsbio <- function(x, ...){
    # Contruct logical vextor:
-   index <- rep(TRUE, dim(x)[1])
+   ix <- rep(TRUE, dim(x)[1])
    names(x) <- tolower(names(x))
    
    # Determine maturity:
@@ -154,14 +151,14 @@ is.senile.scsbio <- function(x, ...){
    
    # Set variable:
    temp <- (gulf.utils::year(x) <= 1991)
-   index[temp] <- maturity[temp] * (x$sex[temp] == 2) * (x$shell.condition[temp] %in% 3) * (x$eggs.remaining[temp] %in% 0:1)
-   index[!temp] <- maturity[!temp] * (x$sex[!temp] == 2) * (x$shell.condition[!temp] %in% 4:5) * (x$eggs.remaining[!temp] %in% 0:1)
-   index[x$sex == 1] <- 0
+   ix[temp] <- maturity[temp] * (x$sex[temp] == 2) * (x$shell.condition[temp] %in% 3) * (x$eggs.remaining[temp] %in% 0:1)
+   ix[!temp] <- maturity[!temp] * (x$sex[!temp] == 2) * (x$shell.condition[!temp] %in% 4:5) * (x$eggs.remaining[!temp] %in% 0:1)
+   ix[x$sex == 1] <- 0
    
    # Convert to logical if there are no fractions:
-   if (all((index[!is.na(index)] %% 1) == 0)) index <- (index == 1)
+   if (all((ix[!is.na(ix)] %% 1) == 0)) ix <- (ix == 1)
    
-   return(index)
+   return(ix)
 }
 
 #' @rdname maturity
@@ -171,10 +168,10 @@ maturity <- function(x, ...) UseMethod("maturity")
 #' @rdname maturity
 #' @export
 maturity.default <- function(x, ...){
-   index <- is.mature(x)
-   v <- rep("", length(index))
-   v[index] <- "mature"
-   v[!index] <- "immature"
+   ix <- is.mature(x)
+   v <- rep("", length(ix))
+   v[ix] <- "mature"
+   v[!ix] <- "immature"
    return(v)
 }
 

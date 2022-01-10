@@ -13,7 +13,8 @@
 #' @param password Oracle password.
 
 #' @export update.scobs
-update.scobs <- function(year, zone, path = "W:/Crab/Offshore Crab Common/", type = "sea", Rfile = TRUE, csv = TRUE, ...){
+update.scobs <- function(year, zone, path = "//ent.dfo-mpo.ca/dfo-mpo/GROUP/GLF/Regional_Shares/AquaRes_Common/Crab/Offshore Crab Common/", 
+                         type = "sea", Rfile = TRUE, csv = TRUE, ...){
    # Check input argument:
    if (!is.numeric(year) | (length(year) == 0)) stop("'year' must be a numeric vector.")
    if (any((year %% 1) != 0 )) stop("'year' must be an integer.")

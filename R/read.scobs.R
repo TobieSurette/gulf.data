@@ -17,17 +17,17 @@
 
 # READ.SCOBS - Reads an ASCII snow crab observer biological card.
 #' @export read.scobs
-read.scobs <- function(year, file, path = "W:/Crab/Offshore Crab Common/", cfvn, type = "sea", trip.number,
+read.scobs <- function(year, file, path = "//ent.dfo-mpo.ca/dfo-mpo/GROUP/GLF/Regional_Shares/AquaRes_Common/Crab/Offshore Crab Common/", cfvn, type = "sea", trip.number,
                           database = "gap", username = "4R_GAP", password, source = "oracle", ...){
 
    # Parse 'source' argument:
    source <- match.arg(tolower(source), c("r", "ascii", "csv", "oracle"))
 
    # Read R or csv file:
-   if (source == "r")      x <- read.rdata.scobs(year, path = path, type = type, ...)
-   if (source == "csv")    x <- read.csv.scobs(year, path = path, type = type, ...) 
-   if (source == "ascii")  x <- read.ascii.scobs(year, path = path, type = type, ...)
-   if (source == "oracle") x <- read.oracle.scobs(year, path = path, type = type, password = password, ...)
+   if (source == "r")      x <- read.rdata.scobs(year = year, path = path, type = type, ...)
+   if (source == "csv")    x <- read.csv.scobs(year = year, path = path, type = type, ...) 
+   if (source == "ascii")  x <- read.ascii.scobs(year = year, path = path, type = type, ...)
+   if (source == "oracle") x <- read.oracle.scobs(year = year, path = path, type = type, password = password, ...)
 
    # Convert to 'scbio' object:
    x <- scobs(x)
@@ -36,7 +36,7 @@ read.scobs <- function(year, file, path = "W:/Crab/Offshore Crab Common/", cfvn,
 }
 
 # Read GAP database:
-read.oracle.scobs <- function(x, year, zone, cfvn, trip.number, password, ...){
+read.oracle.scobs <- function(x, year, zone, cfvn, type = "sea", trip.number, password, ...){
    # Open Oracle channel:
    if (missing(password)) stop("'password' must be specified.")
    channel <- RODBC::odbcConnect(dsn = "gap", uid =  "4R_GAP", pwd = password, believeNRows = FALSE)
@@ -200,7 +200,7 @@ read.oracle.scobs <- function(x, year, zone, cfvn, trip.number, password, ...){
    # Fix variables:
    z$carapace.width <- round(z$carapace.width)
    
-   odbcClose(channel)   
+   RODBC::odbcClose(channel)   
    
    return(z)
 }
@@ -225,7 +225,11 @@ read.csv.scobs <- function(x, year, zone, type, path, ...){
       for (i in 1:length(files)){
          cat(paste0("Reading : '", files[i], "'\n"))
          x <- read.table(files[i], header = TRUE, sep = ",", colClasses = "character", stringsAsFactors = FALSE)
-         x <- scobs(x)
+         if (!is.null(res)){
+            vars <- intersect(names(res), names(x))
+            res <- res[vars]
+            x <- x[vars]
+         }
          res <- rbind(res, x)
       }
       return(res)
@@ -235,7 +239,7 @@ read.csv.scobs <- function(x, year, zone, type, path, ...){
 # Read Rdata files:
 read.rdata.scobs <- function(x, year, zone, type, path, ...){
    # Parse 'year':
-   if (missing(year) & is.numeric(x)) year <- x
+   if (!missing(x)) if (missing(year) & is.numeric(x)) year <- x
    if (missing(year)) stop("'year' must be specified.")
       
    # Locate files:
@@ -252,6 +256,11 @@ read.rdata.scobs <- function(x, year, zone, type, path, ...){
       for (i in 1:length(files)){
          cat(paste0("Reading : '", files[i], "'\n"))
          load(files[i])
+         if (!is.null(res)){
+            vars <- intersect(names(res), names(x))
+            res <- res[vars]
+            x <- x[vars]
+         }
          res <- rbind(res, x)
       }
       return(res)
@@ -259,7 +268,7 @@ read.rdata.scobs <- function(x, year, zone, type, path, ...){
 }
 
 # Read ASCII files:
-read.ascii.scobs <- function(x, year, zone, ...){
+read.ascii.scobs <- function(x, year, zone, path, ...){
    # Define file format:
    #           variable name                   format  fill.char  description
    fmt.str = c("blank1",                        "A1",     " ",    "Blank.",
@@ -343,16 +352,20 @@ read.ascii.scobs <- function(x, year, zone, ...){
    f <- data.frame(name = fmt.str[seq(1,n,k)], format = fmt.str[seq(2,n,k)],
                    fill.char = fmt.str[seq(3,n,k)], description = fmt.str[seq(4,n,k)])
    
-   # Locate files:
-   path <- paste0(path, "Fishing Year ", year, "/Observer Data")
-   files <- locate(path = path, file = "*.txt")
-   remove <- "intermediaire"
-   files <- files[-grep(remove, files)]
-   
-   # Target file subset:
-   if (!missing(type)) files <- files[grep(paste0(type, " sample"), tolower(files))]
-   if (!missing(zone)) files <- files[grep(paste0("zone ", tolower(zone)), tolower(files))]
-   if (length(files) == 0) return(NULL)
+   if (is.character(x)){
+      files <- x
+   }else{
+      # Locate files:
+      path <- paste0(path, "Fishing Year ", year, "/Observer Data")
+      files <- locate(path = path, file = "*.txt")
+      remove <- "intermediaire"
+      files <- files[-grep(remove, files)]
+      
+      # Target file subset:
+      if (!missing(type)) files <- files[grep(paste0(type, " sample"), tolower(files))]
+      if (!missing(zone)) files <- files[grep(paste0("zone ", tolower(zone)), tolower(files))]
+      if (length(files) == 0) return(NULL)
+   } 
    
    # Read files: 
    x <- NULL
