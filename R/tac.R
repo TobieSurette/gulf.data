@@ -20,16 +20,20 @@ reference.points <- function(species){
    # Snow crab:
    if (species == 2526){
       v <- c(Flim = 0.346,         # Limit reference point for exploitation rate.
-             Blim = 9970,          # Limit reference point for residual commercial snow crab biomass.
-             Bmax = 103427.5)      # Maximum observed commercial biomass.
-      v["Busr"] <- 0.4 * v["Bmax"] # Upper stock reference point for commercial biomass of residual commercial snow crab.
+             Blim = 10000,          # Limit reference point for residual commercial snow crab biomass.
+             Busr = 41400,
+             Bmax = 103400)      # Maximum observed commercial biomass.
+      #v <- c(Flim = 0.346,         # Limit reference point for exploitation rate.
+      #       Blim = 9970,          # Limit reference point for residual commercial snow crab biomass.
+      #       Bmax = 103427.5)      # Maximum observed commercial biomass.
+      #v["Busr"] <- 0.4 * v["Bmax"] # Upper stock reference point for commercial biomass of residual commercial snow crab.
    }
 
    return(v)
 }
 
-#' @export total.allowable.catch
-total.allowable.catch <- function(x, limit.reference.point, upper.stock.reference, species){
+#' @export harvest.control.rule
+harvest.control.rule <- function(x, limit.reference.point, upper.stock.reference, species){
    # Parse 'species' arguments:
    if (missing(species)) stop("'species' must be specified.")
    if (is.character(species)) species <- species(species)
@@ -63,6 +67,12 @@ total.allowable.catch <- function(x, limit.reference.point, upper.stock.referenc
    }
 
    return(NULL)
+}
+
+#' @export total.allowable.catch
+total.allowable.catch <- function(x, ...){
+   hcr <- harvest.control.rule(...)   
+   if (!missing(x)) return(x * hcr(x)) else return(function(x) x * hcr(x))
 }
 
 #' @export TAC
