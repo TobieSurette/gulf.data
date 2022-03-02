@@ -21,6 +21,7 @@ read.sc.logbook <- function(x, year, file, path = "//ent.dfo-mpo.ca/dfo-mpo/GROU
 
    # Field name fixes:
    names(x) <- gsub("[.]+", ".", tolower(names(x)))
+   names(x) <- gsub("[_]+", ".", tolower(names(x)))
    names(x) <- gsub("lon.dec", "longitude", names(x))
    names(x) <- gsub("lat.dec", "latitude", names(x))
    names(x) <- gsub("lat.pas.modifier", "lat.str", names(x))
@@ -31,6 +32,9 @@ read.sc.logbook <- function(x, year, file, path = "//ent.dfo-mpo.ca/dfo-mpo/GROU
    names(x) <- gsub("^x[.]", "", names(x))
    names(x)[names(x) == "prov"] <- "province"
    names(x) <- gsub("^pue", "cpue", names(x)) 
+   if (sum(names(x) == "grid") > 1) names(x)[grep("grid", names(x))[2]] <- "grid.calc"
+   names(x)[names(x) == "slip"] <- "slip.number"
+   names(x)[names(x) == "no.de.formulaire"] <- "slip.number"
    
    # Convert numeric variables:
    vars <- c("longitude", "latitude")
@@ -42,7 +46,7 @@ read.sc.logbook <- function(x, year, file, path = "//ent.dfo-mpo.ca/dfo-mpo/GROU
    x$latitude[which(x$latitude < 45 | x$latitude > 49.5)] <- NA
 
    # Depth-coordinate filter:
-   x$depth <- depth(x$longitude, x$latitude)  # Determine depth from coordinates.
+   x$depth <- gulf.spatial::depth(x$longitude, x$latitude)  # Determine depth from coordinates.
    ix <- (x$depth < 40) | (x$depth > 200)
    x$longitude[ix] <- NA
    x$latitude[ix] <- NA
@@ -57,13 +61,13 @@ read.sc.logbook <- function(x, year, file, path = "//ent.dfo-mpo.ca/dfo-mpo/GROU
       ix <- which(is.na(x$longitude) & !is.na(x$lon.str) &  (floor(log10(x$lon.str)) == 10))
       x$longitude[ix] <- -abs(x$lon.str[ix] / 10^9)
       ix <- which(is.na(x$longitude) & !is.na(x$lon.str) & (floor(log10(x$lon.str)) == 5))
-      x$longitude[ix] <- -dmm2deg(x$lon.str[ix] / 10^2)   
+      x$longitude[ix] <- -gulf.spatial::dmm2deg(x$lon.str[ix] / 10^2)   
    }
    if ("lat.str" %in% names(x)){
       ix <- which(is.na(x$latitude) & !is.na(x$lat.str) & (floor(log10(x$lat.str)) == 10))
       x$latitude[ix] <- abs(x$lat.str[ix] / 10^9)
       ix <- which(is.na(x$latitude) & !is.na(x$lat.str) & (floor(log10(x$lat.str)) == 5))
-      x$latitude[ix] <- dmm2deg(x$lat.str[ix] / 10^2)
+      x$latitude[ix] <- gulf.spatial::dmm2deg(x$lat.str[ix] / 10^2)
    }
    
    # Loran C conversions:
@@ -71,24 +75,24 @@ read.sc.logbook <- function(x, year, file, path = "//ent.dfo-mpo.ca/dfo-mpo/GROU
       ix <- which((is.na(x$longitude) | is.na(x$latitude)) & (!is.na(x$lon.str) & !is.na(x$lat.str)))
       ix <- ix[x$lon.str[ix] < 35000]
       if (length(ix) > 0){
-         tmp <- loran2deg(x$lat.str[ix], x$lon.str[ix])
+         tmp <- gulf.spatial::loran2deg(x$lat.str[ix], x$lon.str[ix])
          x$longitude[ix] <- tmp$long
          x$latitude[ix] <- tmp$lat
       }
    }
 
    # Fix grid names:
+   x$grid.calc[grep("VALUE", x$grid.calc)] <- ""
+   if (is.null(x$grid) & !is.null(x$grid.calc)) x$grid <- x$grid.calc
    x$grid <- gsub(" ", "", x$grid)
    x$grid[grep("VALUE", x$grid)] <- ""
-   x$grid.calc[grep("VALUE", x$grid.calc)] <- ""
    x$grid[x$grid == "0"] <- ""
-   if (is.null(x$grid) & !is.null(x$grid.calc)) x$grid <- x$grid.calc
    x$grid <- gsub(" +", "", x$grid)
    x$grid[which(nchar(x$grid) <= 3)] <- ""
    x$grid[!(substr(x$grid, 1, 1) %in% c("G", "H"))] <- ""
    
    # Re-apply depth-coordinate and range filter:
-   x$depth <- depth(x$longitude, x$latitude)  # Determine depth from coordinates.
+   x$depth <- gulf.spatial::depth(x$longitude, x$latitude)  # Determine depth from coordinates.
    ix <- (x$depth < 40) | (x$depth > 200)
    x$longitude[ix] <- NA
    x$latitude[ix] <- NA
@@ -96,10 +100,16 @@ read.sc.logbook <- function(x, year, file, path = "//ent.dfo-mpo.ca/dfo-mpo/GROU
    x$latitude[which(x$latitude < 45 | x$latitude > 49.5)] <- NA
 
    # Fix slip:
-   x$slip <- gsub(" ", "", x$slip)
+   x$slip.number <- gsub(" ", "", x$slip.number)
    
    # Define date formatting function:
    format.date <- function(x){
+      t <- table(nchar(x))
+      if (max(as.numeric(names(t))) == 8){
+         x <- paste0(substr(x,1,4), "-", substr(x,5,6), "-", substr(x,7,8))
+         x[nchar(x) != 10] <- ""
+      } 
+      
       y <- x
       x <- unique(x[which(!is.na(x) & (x != ""))])
       ix <- match(y, x)
