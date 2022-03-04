@@ -68,7 +68,8 @@ scsset.default <- function(x, ...){
 scscat.default <- function(x, ...){
    # Define attributes:
    gulf.metadata::project(x) <- "scs"
-  #  gulf.metadata::key(x) <- key.scscat()
+   x$tow.id <- tow.id.scscat(x)
+   gulf.metadata::key(x) <- key.scscat()
    
    # Define class:
    class(x) <- unique(c("scscat", class(x))) 
@@ -81,6 +82,8 @@ scscat.default <- function(x, ...){
 scsbio.default <- function(x, ...){
    # Define attributes:
    gulf.metadata::project(x) <- "scs"
+   x$tow.id <- tow.id.scsbio(x)
+   gulf.metadata::key(x) <- key.scsbio()
    if ("carapace.width" %in% names(x)) gulf.metadata::units(x, "carapace.width") <- "millimeters"
    if ("chela.height" %in% names(x)) gulf.metadata::units(x,  "chela.height") <- "millimeters"
    if ("abdomen.width" %in% names(x)) gulf.metadata::units(x, "abdomen.width") <- "millimeters"
@@ -100,6 +103,7 @@ scsbio.default <- function(x, ...){
 scslen.default <- function(x, ...){
    # Define attributes:
    gulf.metadata::project(x) <- "scs"
+   x$tow.id <- tow.id.scslen(x)
    gulf.metadata::key(x) <- key.scslen()
    
    # Define class:
