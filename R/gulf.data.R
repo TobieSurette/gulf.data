@@ -1,4 +1,4 @@
-#' Gulf Data Package
+#' @title Gulf Data Package
 #' 
 #' @name gulf.data
 #' 
@@ -17,10 +17,12 @@
    path <- list()
    
    # Main drive paths:
-   path$hd2 <- "//mon02uni01a/Science/Hd2/"
-   path$hd3 <- "//mon02uni01a/Science/Hd3/"
-   path$snow.crab <- "//mon02uni01a/AquaRes_Common$/Crab/"
+   path$hd2 <- "//ENT.dfo-mpo.ca/dfo-mpo/GROUP/GLF/Regional_Shares/Science/Hd2/"
+   path$hd3 <- "//ENT.dfo-mpo.ca/dfo-mpo/GROUP/GLF/Regional_Shares/Science/Hd3/"
+ 
 
+   "//ENT.dfo-mpo.ca/dfo-mpo/GROUP/GLF/Regional_Shares/AquaRes_Common/Crab"
+   
    # Groundfish data directories:
    path$com  <- paste0(path$hd2, "commercial/")              # Commercial data directory.
    path$obs  <- paste0(path$hd2, "observer/")                # Observer data directory.
@@ -49,11 +51,10 @@
    
    # Oracle databases:
    oracle <- list()
-   oracle$generic.user <- "GLF_4R"
-   oracle$generic.pass <- "GLF_4R"
-   oracle$dev.bd       <- "dtran"
-   oracle$prod.bd      <- "ptran"
-   oracle$gap.bd       <- "gap"
+   oracle$rvs$dsn <- "ptran"
+   oracle$rvs$uid <- "GLF_4R"
+   oracle$gap$dsn <- "gap"
+   oracle$gap$uid <- "4R_GAP"
    
    # Attach to options:
    options(gulf.path = path, gulf.oracle = oracle)

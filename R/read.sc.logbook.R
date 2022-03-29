@@ -144,6 +144,28 @@ read.sc.logbook <- function(x, year, file, path = "//ent.dfo-mpo.ca/dfo-mpo/GROU
       return(y)
    }
    
+   # Province correction:
+   x$province[grep("que", tolower(x$province))] <- "QC"
+   
+   # Soak time:
+   if ("ti" %in% names(x)) x$t1 <- x$ti
+   
+   1,680
+   3,600
+   
+   if (year == 2020){
+      x$t1[x$t1 == "4,080"] <- 48
+      x$t1 <- round(as.numeric(x$t1))
+   }
+   if (!("soak.time" %in% names(x)) & ("t1" %in% names(x))) x$soak.time <- x$t1
+   if (year == 2021){
+      ix <- which((x$province == "QC") & (x$soak.time > 60))
+      x$soak.time[ix] <- x$soak.time[ix] / 10
+   }
+   if ("soak.time" %in% names(x)){
+      x$soak.time[x$soak.time == 0] <- NA
+   } 
+   
    # Fix date fields:
    x$date.landed <- format.date(x$date.landed)
    x$date.caught <- format.date(x$date.caught)

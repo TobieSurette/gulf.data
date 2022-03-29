@@ -36,11 +36,11 @@ read.scobs <- function(year, file, path = "//ent.dfo-mpo.ca/dfo-mpo/GROUP/GLF/Re
 }
 
 # Read GAP database:
-read.oracle.scobs <- function(x, year, zone, cfvn, type = "sea", trip.number, password, ...){
-   # Open Oracle channel:
-   if (missing(password)) stop("'password' must be specified.")
-   channel <- RODBC::odbcConnect(dsn = "gap", uid =  "4R_GAP", pwd = password, believeNRows = FALSE)
-   
+read.oracle.scobs <- function(x, year, zone, cfvn, type = "sea", trip.number, 
+                              dsn = options()$gulf.oracle$gap$dsn, 
+                              uid = options()$gulf.oracle$gap$uid,
+                              password, ...){
+
    # Parse 'year' argument:
    if (missing(year)) year <- substr(as.character(Sys.Date()), 1, 4)
    year.str <- paste0("'", paste0(year, collapse = "', '"), "'")
@@ -139,8 +139,8 @@ read.oracle.scobs <- function(x, year, zone, cfvn, type = "sea", trip.number, pa
       query <- gsub(";", paste0(" and a.NO_VOY_OBSR || a.NO_AFFEC || a.NO_SORTIE in ", trip.str, ";"), query, fixed = TRUE)
    }
    
-   # Execute query:
-   z <- RODBC::sqlQuery(channel, query, stringsAsFactors = FALSE, as.is = TRUE)
+   # Open Oracle channel:
+   z <- read.oracle(query, dsn = dsn, uid = uid, ...)
    
    # Rename columns:
    names(z) <- tolower(names(z))
@@ -199,8 +199,6 @@ read.oracle.scobs <- function(x, year, zone, cfvn, type = "sea", trip.number, pa
    
    # Fix variables:
    z$carapace.width <- round(z$carapace.width)
-   
-   RODBC::odbcClose(channel)   
    
    return(z)
 }
