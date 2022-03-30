@@ -7,12 +7,12 @@
 read.scobs(
   year,
   file,
-  path = "W:/Crab/Offshore Crab Common/",
+  path = options("gulf.path")[[1]]$snow.crab$survey,
   cfvn,
   type = "sea",
   trip.number,
-  database = "gap",
-  username = "4R_GAP",
+  database = options("gulf.oracle")[[1]]$gap$dsn,
+  username = options("gulf.oracle")[[1]]$gap$uid,
   password,
   source = "oracle",
   ...

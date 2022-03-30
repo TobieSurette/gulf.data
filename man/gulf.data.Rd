@@ -8,7 +8,7 @@
 .onLoad(libname, pkgname)
 }
 \description{
-\strong{gulf.data} is an \code{R} package for accessing and manipulating southern Gulf of Saint Lawrence fisheries science data.
+\strong{gulf.data} is an \code{R} package for accessing and manipulating southern Gulf of Saint Lawrence fisheries data.
 }
 \examples{
 # Snow crab survey data:

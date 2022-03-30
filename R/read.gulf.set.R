@@ -20,7 +20,7 @@ read.gulf.set <- function(year, survey = "rv", source = "oracle",
    survey <- keywords[project(survey)]
    
    # Build SQL query:
-   query <- paste("select * from V_GSCARD_TYPE_S_", survey, sep = "")
+   query <- paste("select * from GLF_GROUNDFISH.V_GSCARD_TYPE_S_", survey, sep = "")
    query <- paste(query, "where extract(year from SDATE) in", paste("(", paste(year, collapse = ","), ")", sep = ""))
    
    # Read data:

@@ -6,7 +6,9 @@
 \alias{tow.id.probe}
 \alias{tow.id.star.oddi}
 \alias{tow.id.minilog}
+\alias{tow.id.scscat}
 \alias{tow.id.scsbio}
+\alias{tow.id.scslen}
 \title{Extract Tow Identifier}
 \usage{
 tow.id(x, ...)
@@ -19,7 +21,11 @@ tow.id(x, ...)
 
 \method{tow.id}{minilog}(x, method = "observed")
 
+\method{tow.id}{scscat}(x, ...)
+
 \method{tow.id}{scsbio}(x, ...)
+
+\method{tow.id}{scslen}(x, ...)
 }
 \arguments{
 \item{x}{Data object.}
@@ -48,6 +54,10 @@ Functions to extract or determine trawl tow identifiers.
 
 \item \code{minilog}: \sQuote{tow.id} \sQuote{minilog} method.
 
+\item \code{scscat}: \sQuote{tow.id} \sQuote{scscat} method.
+
 \item \code{scsbio}: \sQuote{tow.id} \sQuote{scsbio} method.
+
+\item \code{scslen}: \sQuote{tow.id} \sQuote{scslen} method.
 }}
 

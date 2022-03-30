@@ -7,7 +7,8 @@
 \method{update}{scobs}(
   year,
   zone,
-  path = "W:/Crab/Offshore Crab Common/",
+ 
+    path = "//ent.dfo-mpo.ca/dfo-mpo/GROUP/GLF/Regional_Shares/AquaRes_Common/Crab/Offshore Crab Common/",
   type = "sea",
   Rfile = TRUE,
   csv = TRUE,

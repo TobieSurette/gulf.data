@@ -1,4 +1,4 @@
-#' @title Load Fishery Logbook Data:
+#' @title Load Fishery Logbook Data
 #'
 #' @description Function to load logbook and slip landings data from the southern Gulf of Saint Lawrence fisheries.
 #'
