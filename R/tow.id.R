@@ -160,6 +160,20 @@ tow.id.minilog <- function(x, method = "observed"){
    return(v)
 }
 
+#' @describeIn tow.id \sQuote{tow.id} \sQuote{scscat} method.
+#' @rawNamespace S3method(tow.id,scscat)
+tow.id.scscat <- function(x, ...){
+   if (is.null(x$tow.id)) x$tow.id <- ""
+   x$tow.id[is.na(x$tow.id)] <- ""
+   ix <- x$tow.id == ""
+   if (any(ix)){
+      s <- read.scsset(year = as.numeric(unique(substr(unique(x$date[ix]), 1, 4))))
+      x$tow.id[ix] <- s$tow.id[gulf.utils::match(x[ix, c("date", "tow.number")], s[c("date", "tow.number")])]
+   }
+   
+   return(x$tow.id)
+}
+
 #' @describeIn tow.id \sQuote{tow.id} \sQuote{scsbio} method.
 #' @rawNamespace S3method(tow.id,scsbio)
 tow.id.scsbio <- function(x, ...){
@@ -174,3 +188,16 @@ tow.id.scsbio <- function(x, ...){
    return(x$tow.id)
 }
 
+#' @describeIn tow.id \sQuote{tow.id} \sQuote{scslen} method.
+#' @rawNamespace S3method(tow.id,scslen)
+tow.id.scslen <- function(x, ...){
+   if (is.null(x$tow.id)) x$tow.id <- ""
+   x$tow.id[is.na(x$tow.id)] <- ""
+   ix <- x$tow.id == ""
+   if (any(ix)){
+      s <- read.scsset(year = as.numeric(unique(substr(unique(x$date[ix]), 1, 4))))
+      x$tow.id[ix] <- s$tow.id[gulf.utils::match(x[ix, c("date", "tow.number")], s[c("date", "tow.number")])]
+   }
+   
+   return(x$tow.id)
+}
