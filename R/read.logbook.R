@@ -1,6 +1,6 @@
-#' @title Load Snow Crab Fishery Data:
+#' @title Load Fishery Logbook Data:
 #'
-#' @description Function to load logbook and slip landings data from the southern Gulf of Saint Lawrence snow crab fishery.
+#' @description Function to load logbook and slip landings data from the southern Gulf of Saint Lawrence fisheries.
 #'
 #' @param x Fishery year or file name.
 #' @param year Fishery year.
@@ -8,8 +8,23 @@
 #' @param path File path containing comma-separated fishery logbook files (i.e. .csv).
 #'
 
+#' @export read.logbook
+read.logbook <- function(x, species = "snow crab", ...){
+   # Parse 'species' argument:
+   species <- species(species)[1]
+   
+   z <- NULL
+   
+   # Read data:
+   if (species == 2526) z <- read.sc.logbook(x, ...)
+      
+   class(z) <- c("logbook", class(z))
+   
+   return(z)
+} 
+
 #' @export read.sc.logbook
-read.sc.logbook <- function(x, year, file, path = "//ent.dfo-mpo.ca/dfo-mpo/GROUP/GLF/Regional_Shares/AquaRes_Common/Crab/Databases/Fishery Logbooks/csv/"){
+read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow.crab$logbook, ...){
    if (!missing(x)){
       if (is.numeric(x) & missing(file))   year <- x
       if (is.character(x) & missing(file)) file <- x
@@ -35,6 +50,10 @@ read.sc.logbook <- function(x, year, file, path = "//ent.dfo-mpo.ca/dfo-mpo/GROU
    if (sum(names(x) == "grid") > 1) names(x)[grep("grid", names(x))[2]] <- "grid.calc"
    names(x)[names(x) == "slip"] <- "slip.number"
    names(x)[names(x) == "no.de.formulaire"] <- "slip.number"
+   names(x) <- gsub("^cfv$", "cfvn", names(x)) 
+   if (!("zone" %in% names(x)) & ("zone.corrected" %in% names(x))) names(x) <- gsub("zone.corrected", "zone", names(x))
+   names(x) <- gsub("list[.]sub[.]fleet", "fleet", names(x))
+   names(x) <- gsub("list[.]quota", "allocation.code", names(x)) 
    
    # Convert numeric variables:
    vars <- c("longitude", "latitude")
@@ -90,7 +109,11 @@ read.sc.logbook <- function(x, year, file, path = "//ent.dfo-mpo.ca/dfo-mpo/GROU
    x$grid <- gsub(" +", "", x$grid)
    x$grid[which(nchar(x$grid) <= 3)] <- ""
    x$grid[!(substr(x$grid, 1, 1) %in% c("G", "H"))] <- ""
-   
+   if ("grid.fish" %in% names(x)){
+      x$grid.fish <- deblank(x$grid.fish)
+      x$grid.fish[x$grid.fish == "0"] <- ""      
+   }
+
    # Re-apply depth-coordinate and range filter:
    x$depth <- gulf.spatial::depth(x$longitude, x$latitude)  # Determine depth from coordinates.
    ix <- (x$depth < 40) | (x$depth > 200)
@@ -150,9 +173,6 @@ read.sc.logbook <- function(x, year, file, path = "//ent.dfo-mpo.ca/dfo-mpo/GROU
    # Soak time:
    if ("ti" %in% names(x)) x$t1 <- x$ti
    
-   1,680
-   3,600
-   
    if (year == 2020){
       x$t1[x$t1 == "4,080"] <- 48
       x$t1 <- round(as.numeric(x$t1))
@@ -170,6 +190,26 @@ read.sc.logbook <- function(x, year, file, path = "//ent.dfo-mpo.ca/dfo-mpo/GROU
    x$date.landed <- format.date(x$date.landed)
    x$date.caught <- format.date(x$date.caught)
    x$date.sailed <- format.date(x$date.sailed)
+   
+   x$licence.holder <- gsub("[.]", " ", x$licence.holder)
+   x$licence.holder <- gsub(" +", " ", x$licence.holder)
+   x$licence.holder <- deblank(x$licence.holder)
+   x$licence.holder <- gsub("P\\?CH", "PECH", x$licence.holder)
+   
+   x$vessel.name <- gsub(" +", " ", x$vessel.name)
+   x$vessel.name <- deblank(x$vessel.name)
+   
+   # Re-order variables:
+   vars <- c("cfvn", "vessel.name", "zone", "province", "fleet", "licence.holder", "licence.id", "allocation.code", "slip.number", "trip.id",
+             "date.caught", "date.landed", "date.sailed", "longitude", "latitude", "grid", "grid.calc", "amt.landed.kg", 
+             "trap.day", "trap.trip", "soak.time")
+   vars <- intersect(vars, names(x))
+   x <- x[, c(vars, setdiff(names(x), vars))]
+   
+   # Delete obsolete variables:   
+   delete <- c('sequence.jf')
+   x <- x[, setdiff(names(x), delete)]
+   x <- gulf.utils::compress(x)
    
    return(x)
 }

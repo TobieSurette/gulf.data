@@ -9,7 +9,8 @@
 
 #' @export read.gulf.set
 read.gulf.set <- function(year, survey = "rv", source = "oracle", 
-                          dsn = , uid = ...){
+                          dsn = options("gulf.oracle")[[1]]$rvs$dsn, 
+                          uid = options("gulf.oracle")[[1]]$rvs$uid, ...){
    
    # Define keywords for Oracle query:
    keywords <- c("ECOSYSTEM", "NORTHUMBERLAND", "SENTINEL", "INSHORE", "JANUARY", "JUVENILE", "SEASONAL", "HISTORICAL", "SCALLOP")
@@ -23,7 +24,7 @@ read.gulf.set <- function(year, survey = "rv", source = "oracle",
    query <- paste(query, "where extract(year from SDATE) in", paste("(", paste(year, collapse = ","), ")", sep = ""))
    
    # Read data:
-   x <- read.oracle(dsn = , uid = , ...)
+   x <- read.oracle(dsn = dsn, uid = uid, ...)
    
    # Format table names:
    names(x) <- gsub("_", ".", tolower(names(x)))

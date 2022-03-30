@@ -10,7 +10,7 @@
 #'
 
 #' @export read.vms
-read.vms <- function(year, month = 1:12, dsn = "VMS", uid = "GULF_SCIENCE", password){
+read.vms <- function(year, month = 1:12, dsn = options("gulf.oracle")[[1]]$vms$dsn, uid = options("gulf.oracle")[[1]]$vms$uid, password){
    # Open channel:
    channel <- RODBC::odbcConnect(dsn, uid, password)
 

@@ -204,7 +204,7 @@ summary.scobs <- function(x, by, type){
    # Check date ranges within trips:
    vars <- c("year", "month", "day", "trip.number", "data.type")
    tmp <- unique(x[vars])
-   tmp$date <- date(tmp)
+   tmp$date <- gulf.utils::date(tmp)
    a <- aggregate(list(start.date = tmp$date), by = tmp[c("trip.number", "data.type")], min)
    a$end.date <- aggregate(list(end.date = tmp$date), by = tmp[c("trip.number", "data.type")], max)$end.date
    d <- (a$end.date - a$start.date) / (24*60*60)

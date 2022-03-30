@@ -2,7 +2,7 @@
 #' 
 #' @name gulf.data
 #' 
-#' @description \strong{gulf.data} is an \code{R} package for accessing and manipulating southern Gulf of Saint Lawrence fisheries science data.
+#' @description \strong{gulf.data} is an \code{R} package for accessing and manipulating southern Gulf of Saint Lawrence fisheries data.
 #' 
 #' @examples 
 #' # Snow crab survey data:
@@ -16,38 +16,25 @@
    # Define default paths to be used and store them within 'options':
    path <- list()
    
-   # Main drive paths:
-   path$hd2 <- "//ENT.dfo-mpo.ca/dfo-mpo/GROUP/GLF/Regional_Shares/Science/Hd2/"
-   path$hd3 <- "//ENT.dfo-mpo.ca/dfo-mpo/GROUP/GLF/Regional_Shares/Science/Hd3/"
- 
-
-   "//ENT.dfo-mpo.ca/dfo-mpo/GROUP/GLF/Regional_Shares/AquaRes_Common/Crab"
-   
-   # Groundfish data directories:
-   path$com  <- paste0(path$hd2, "commercial/")              # Commercial data directory.
-   path$obs  <- paste0(path$hd2, "observer/")                # Observer data directory.
-   path$rvs  <- paste0(path$hd2, "research/groundfish/")     # Research vessel survey data directory.
-   path$sens <- paste0(path$hd2, "research/sentinel/")       # Sentinel survey data directory.
-   path$nss  <- paste0(path$hd2, "research/northumberland/") # Northumberland Strait survey data directory..
-   path$ins  <- paste0(path$hd2, "research/inshore/")        # Inshore survey data directory.
-   path$jans <- paste0(path$hd2, "research/january/")        # January survey data directory.
-   path$juvs <- paste0(path$hd2, "research/juvenile/")       # Juvenile survey data directory.
-   path$seas <- paste0(path$hd2, "research/seasonal/")       # Seasonal survey data directory.
-   path$scas <- paste0(path$hd2, "research/scallop/")        # Scallop survey data directory.
-   path$ziff <- paste0(path$hd3, "landings/zif/raw/")        # ZIFF data directory.
-   path$nafo <- paste0(path$hd3, "landings/nafo/")           # NAFO landings data directory.
-   
-   # Survey probe data:
-   path$rv.minilog   <- paste0(path$rv, "minilog/") # Research vessel survey minilog data directory.
-   path$ns.minilog   <- paste0(path$ns, "minilog/") # Northumberland Strait survey minilog data directory.
-   path$rv.scanmar   <- paste0(path$rv, "scanmar/") # Research vessel survey scanmar data directory.
-   path$ns.scanmar   <- paste0(path$ns, "scanmar/") # Northumberland Strait survey scanmar data directory.
-   
    # Snow crab data paths:
-   path$scs  <- paste0(path$snow.crab, "Offshore Crab Common/")
+   path$snow.crab$root    <- "//ent.dfo-mpo.ca/dfo-mpo/GROUP/GLF/Regional_Shares/AquaRes_Common/Crab"
+   path$snow.crab$logbook <- paste0(path$snow.crab$root, "/Databases/Fishery Logbooks/csv/")
+   path$snow.crab$survey  <- paste0(path$snow.crab$root, "/Offshore Crab Common/")
    
-   # Herring data paths:
-   path$herring.phone <- paste0(path$root, "herring/phone/")
+   # Groundfish data paths:
+   path$groundfish$root  <- "//ENT.dfo-mpo.ca/dfo-mpo/GROUP/GLF/Regional_Shares/Science"
+   path$groundfish$com  <- paste0(path$groundfish$root, "/Hd2/commercial/")              # Commercial data directory.
+   path$groundfish$obs  <- paste0(path$groundfish$root, "/Hd2/observer/")                # Observer data directory.
+   path$groundfish$rvs  <- paste0(path$groundfish$root, "/Hd2/research/groundfish/")     # Research vessel survey data directory.
+   path$groundfish$sens <- paste0(path$groundfish$root, "/Hd2/research/sentinel/")       # Sentinel survey data directory.
+   path$groundfish$nss  <- paste0(path$groundfish$root, "/Hd2/research/northumberland/") # Northumberland Strait survey data directory..
+   path$groundfish$ins  <- paste0(path$groundfish$root, "/Hd2/research/inshore/")        # Inshore survey data directory.
+   path$groundfish$jans <- paste0(path$groundfish$root, "/Hd2/research/january/")        # January survey data directory.
+   path$groundfish$juvs <- paste0(path$groundfish$root, "/Hd2/research/juvenile/")       # Juvenile survey data directory.
+   path$groundfish$seas <- paste0(path$groundfish$root, "/Hd2/research/seasonal/")       # Seasonal survey data directory.
+   path$groundfish$scas <- paste0(path$groundfish$root, "/Hd2/research/scallop/")        # Scallop survey data directory.
+   path$groundfish$ziff <- paste0(path$groundfish$root, "/Hd3/landings/zif/raw/")        # ZIFF data directory.
+   path$groundfish$nafo <- paste0(path$groundfish$root, "/Hd3/landings/nafo/")           # NAFO landings data directory.
    
    # Oracle databases:
    oracle <- list()
@@ -55,7 +42,9 @@
    oracle$rvs$uid <- "GLF_4R"
    oracle$gap$dsn <- "gap"
    oracle$gap$uid <- "4R_GAP"
-   
+   oracle$vms$dsn <- "VMS"
+   oracle$vms$uid <- "GULF_SCIENCE"
+
    # Attach to options:
    options(gulf.path = path, gulf.oracle = oracle)
 
