@@ -20,6 +20,7 @@
    path$snow.crab$root    <- "//ent.dfo-mpo.ca/dfo-mpo/GROUP/GLF/Regional_Shares/AquaRes_Common/Crab"
    path$snow.crab$logbook <- paste0(path$snow.crab$root, "/Databases/Fishery Logbooks/csv/")
    path$snow.crab$survey  <- paste0(path$snow.crab$root, "/Offshore Crab Common/")
+   path$snow.crab$vms     <- paste0(path$snow.crab$root, "/Databases/vms/")
    
    # Groundfish data paths:
    path$groundfish$root  <- "//ENT.dfo-mpo.ca/dfo-mpo/GROUP/GLF/Regional_Shares/Science"
