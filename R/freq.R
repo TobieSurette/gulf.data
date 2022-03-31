@@ -266,4 +266,32 @@ freq.nsslen <- function(x, variable = "length", by, units = "cm", ...){
    return(f)
 }
 
+#' @rawNamespace S3method(freq,gulf.len)
+freq.gulf.len <- function(x, by, scale = TRUE, ...){
+   fvars <- names(x)[grep("^freq[0-9]+$", names(x))]
+   
+   # Construct matrix of corresponding length values:
+   len <- gulf.utils::repvec(x$start.length, ncol = length(fvars)) + 
+          gulf.utils::repvec(0:(length(fvars)-1), nrow = nrow(x)) * 
+          gulf.utils::repvec(x$length.interval, ncol = length(fvars))
+   
+   # Adjust sample frequencies by sampling ratio:
+   if (scale) x[fvars] <- x[fvars] / gulf.utils::repvec(x$ratio, ncol = dim(v)[2])
+
+   # Linearize length data table:
+   vars <- setdiff(names(x), fvars)
+   for (i in 1:length(vars)){
+      tmp <- data.frame(rep(x[, vars[i]], each = length(fvars)))
+      names(tmp) <- vars[i]
+      if (i == 1) v <- tmp else v <- cbind(v, tmp)
+   }
+   v$length <- as.vector(t(len))
+   v$number <- as.vector(t(x[fvars]))
+   v <- v[v$number > 0, ]
+   
+   # Calculate length-frequencies:
+   r <- freq.default(v$length, v$number, by = v[by])
+   
+   return(r)
+}
 

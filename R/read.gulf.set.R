@@ -1,14 +1,16 @@
-#' @title Read Survey Data
+#' @title Read Survey Set Data
 #' 
-#' @description Read trawl set data from various groundfish and lobster surveys.
+#' @description Read trawl set data from various groundfish, crustacean and pelagic surveys.
 #' 
 #' @param year Survey year.
 #' @param survey Survey name.
-#' @param source Data source name.
+#' @param dsn Data source name.
+#' @param uid User identification.
+#' @param password Oracle database password.
 #' 
 
 #' @export read.gulf.set
-read.gulf.set <- function(year, survey = "rv", source = "oracle", 
+read.gulf.set <- function(year, survey = "rv", 
                           dsn = options("gulf.oracle")[[1]]$rvs$dsn, 
                           uid = options("gulf.oracle")[[1]]$rvs$uid, ...){
    
@@ -17,14 +19,14 @@ read.gulf.set <- function(year, survey = "rv", source = "oracle",
    names(keywords) <- c("rvs", "nss", "sens", "ins", "jans", "juvs", "seas", "his", "scas")
    
    # Parse 'survey' arguments:
-   survey <- keywords[project(survey)]
+   survey <- keywords[gulf.metadata::project(survey)]
    
    # Build SQL query:
    query <- paste("select * from GLF_GROUNDFISH.V_GSCARD_TYPE_S_", survey, sep = "")
    query <- paste(query, "where extract(year from SDATE) in", paste("(", paste(year, collapse = ","), ")", sep = ""))
    
    # Read data:
-   x <- read.oracle(dsn = dsn, uid = uid, ...)
+   x <- read.oracle(query = query, dsn = dsn, uid = uid, ...)
    
    # Format table names:
    names(x) <- gsub("_", ".", tolower(names(x)))
@@ -57,12 +59,34 @@ read.gulf.set <- function(year, survey = "rv", source = "oracle",
    names(x) <- gsub("strat[.]2", "block.number", names(x))  
    names(x) <- gsub("remarks", "comment", names(x))
    
+   # Format data and time:
+   x$date <- substr(x$date, 1, 10)
+   x$start.time <- gsub(" ", "0", formatC(x$start.time, width = 4))
+   x$start.time <- paste0(substr(x$start.time,1,2), ":", substr(x$start.time,3,4), ":00")
+   
+   # Convert data to numeric:
+   for (i in 1:ncol(x)) if (all((gsub("[0-9.]", "", x[,i]) == "") | is.na(x[,i]))) x[,i] <- as.numeric(x[,i])
+
+   # Format coordinates:
+   x$longitude.start <- -abs(gulf.spatial::dmm2deg(x$longitude.start))
+   x$longitude.end   <- -abs(gulf.spatial::dmm2deg(x$longitude.end))
+   x$latitude.start  <- gulf.spatial::dmm2deg(x$latitude.start)
+   x$latitude.end    <- gulf.spatial::dmm2deg(x$latitude.end)
+
    # Set zero coordinate values to zero:
    x$longitude.start[x$longitude.start == 0] <- NA
    x$longitude.end[x$longitude.end == 0] <- NA  
    x$latitude.start[x$latitude.start == 0] <- NA
    x$latitude.end[x$latitude.end == 0] <- NA
- 
+   
+   # Delete irrelevant or empty variables:   
+   delete <- c("card.type", "inf.id", "card.image", "species.fish.number", "species.invertebrate.number", "catch.total.weight")
+   x <- x[, setdiff(names(x), delete)]
+   x <- gulf.utils::compress(x)
+   
+   class(x) <- c("gulf.set", class(x))
+   gulf.metadata::key(x) <- c("date", "vessel.code", "cruise.number", "set.number")  
+   
    return(x) 
 }
 
