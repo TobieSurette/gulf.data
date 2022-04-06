@@ -29,15 +29,17 @@ read.vms <- function(year, cfvn, month = 1:12, source = "file",
       
       # Read files:
       r <- NULL
-      for (i in 1:length(files)){
-         load(files[i])
-         r <- rbind(r, x)
+      if (length(files) > 0){
+         for (i in 1:length(files)){
+            load(files[i])
+            r <- rbind(r, x)
+         }
+         
+         # Format date fields:
+         r$time <- substr(r$date, 12, 19)
+         r$date <- substr(r$date, 1, 10)         
       }
-      
-      # Format date fields:
-      r$time <- substr(r$date, 12, 19)
-      r$date <- substr(r$date, 1, 10)
-      
+
       return(r)
    }
    
@@ -77,12 +79,19 @@ read.vms <- function(year, cfvn, month = 1:12, source = "file",
 }
 
 #' @export update.vms
-update.vms <- function(..., path = "A:/VMS project/VMS daily points/"){
+update.vms <- function(..., path = options("gulf.path")[[1]]$snow.crab$vms){
    # Read data:
-   x <- read.vms(...)
+   y <- read.vms(...)
    
    # Write to file: 
-   file <- paste0(path, "VMS points ", year, ".csv")
-   write.table(x, file = file, row.names = FALSE, sep = ",")
-   save(x, file = gsub(".csv", ".rdata", file))
+   years <- sort(unique(year(unique(y$date))))
+   for (i in 1:length(years)){
+      path.year <- paste0(options("gulf.path")[[1]]$snow.crab$vms, years[i])
+      if (!file.exists(path.year)) dir.create(path.year)
+      cfvs <- sort(unique(y$cfvn))
+      for (j in 1:length(cfvs)){
+         x <- y[which(y$cfvn == cfvs[j]), ]
+         save(x, file = paste0(path.year, "/", cfvs[j], ".Rdata"))
+      }
+   }
 }
