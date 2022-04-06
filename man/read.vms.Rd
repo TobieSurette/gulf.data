@@ -6,10 +6,13 @@
 \usage{
 read.vms(
   year,
+  cfvn,
   month = 1:12,
+  source = "file",
   dsn = options("gulf.oracle")[[1]]$vms$dsn,
   uid = options("gulf.oracle")[[1]]$vms$uid,
-  password
+  password,
+  path = options("gulf.path")[[1]]$snow.crab$vms
 )
 }
 \arguments{

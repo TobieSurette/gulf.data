@@ -25,6 +25,8 @@ read.vms <- function(year, cfvn, month = 1:12, source = "file",
          files <- files[ix]
       }
       
+      if (length(files) == 0) return(NULL)
+      
       # Read files:
       r <- NULL
       for (i in 1:length(files)){
