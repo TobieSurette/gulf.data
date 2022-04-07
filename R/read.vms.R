@@ -54,23 +54,27 @@ read.vms <- function(year, cfvn, month = 1:12, source = "file",
       # Read data:
       x <- NULL
       for (i in 1:length(month)){
+         cat(paste0("Reading VMS data : '", month.name[as.numeric(month[i])], "'\n"))
+         
          # Build query:
-         query <- paste0("SELECT VR_NUMBER, LATITUDE, LONGITUDE, POSITION_UTC_DATE FROM VMS.VMS_GULF_POSITIONS_4RST WHERE to_char(POSITION_UTC_DATE, 'YYYY') = ", 
-                         year, " AND to_char(POSITION_UTC_DATE, 'MM') = ", months[i])
+         query <- paste0("SELECT REGION, VR_NUMBER, LATITUDE, LONGITUDE, POSITION_UTC_DATE, SPEED_KNOTS FROM VMS.VMS_GULF_POSITIONS_4RST WHERE to_char(POSITION_UTC_DATE, 'YYYY') = ", year, " AND to_char(POSITION_UTC_DATE, 'MM') = ", month[i])
+         #query <- paste0("SELECT * FROM VMS.VMS_GULF_POSITIONS_4RST WHERE to_char(POSITION_UTC_DATE, 'YYYY') = ", year, " AND to_char(POSITION_UTC_DATE, 'MM') = ", month[i])
          
          # Fetch and concatenate data:
-         x <- rbind(x, sqlQuery(channel, query, believeNRows = FALSE))
+         x <- rbind(x, RODBC::sqlQuery(channel, query, believeNRows = FALSE))
       }
       
       # Close channel:
       RODBC::odbcClose(channel)
       
       # Format names:
+      names(x) <- gsub("REGION", "region", names(x))
       names(x) <- gsub("VR_NUMBER", "cfvn", names(x))
       names(x) <- gsub("LATITUDE", "latitude", names(x))
       names(x) <- gsub("LONGITUDE", "longitude", names(x))
       names(x) <- gsub("POSITION_UTC_DATE", "date", names(x))
-      x <- x[c("cfvn", "date", "longitude", "latitude")]
+      x <- x[c("region", "cfvn", "date", "longitude", "latitude")]
+      x$date <- as.character(x$date)
       
       return(x)
    }
@@ -84,7 +88,7 @@ update.vms <- function(..., path = options("gulf.path")[[1]]$snow.crab$vms){
    y <- read.vms(...)
    
    # Write to file: 
-   years <- sort(unique(year(unique(y$date))))
+   years <- as.numeric(unique(substr(unique(y$date), 1, 4)))
    for (i in 1:length(years)){
       path.year <- paste0(options("gulf.path")[[1]]$snow.crab$vms, years[i])
       if (!file.exists(path.year)) dir.create(path.year)
