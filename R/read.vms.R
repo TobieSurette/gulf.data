@@ -7,16 +7,19 @@
 #' @param dsn Registered data source.
 #' @param uid User identification.
 #' @param password User password.
-#'
+#' @param echo Logical value specifying whether to report information while reading data.
 
 #' @export read.vms
 read.vms <- function(year, cfvn, month = 1:12, source = "file", 
                      dsn = options("gulf.oracle")[[1]]$vms$dsn, 
                      uid = options("gulf.oracle")[[1]]$vms$uid, password,
-                     path = options("gulf.path")[[1]]$snow.crab$vms){
+                     path = options("gulf.path")[[1]]$snow.crab$vms, 
+                     echo = TRUE){
    if (source == "file"){
       # Find files:
       files <- gulf.utils::locate(keywords = as.character(year), path = path)
+      ix <- unlist(lapply(strsplit(files, "/"), function(x) return(length(grep(year, x[1:(length(x)-1)])) > 0)  ))
+      files <- files[ix]
       
       # Find specified 'cfvn':
       if (!missing(cfvn)){
@@ -28,18 +31,32 @@ read.vms <- function(year, cfvn, month = 1:12, source = "file",
       if (length(files) == 0) return(NULL)
       
       # Read files:
-      r <- NULL
+      r <- list()
       if (length(files) > 0){
          for (i in 1:length(files)){
+            str <- paste0("Reading file ", i, " of ", length(files), " : '", files[i], "'\n")
+            if (echo) cat(str)
             load(files[i])
-            r <- rbind(r, x)
+            x$date <- as.character(x$date)
+            r[[i]] <- x
          }
+      }   
          
-         # Format date fields:
-         r$time <- substr(r$date, 12, 19)
-         r$date <- substr(r$date, 1, 10)         
+      # Collapse files to single data frame:
+      while (length(r) > 1){
+         #print(length(r))
+         for (i in seq(2, length(r), by = 2)){
+            r[[i]] <- rbind(r[[i]], r[[i-1]])
+            r[i-1] <- list(NULL)
+         }
+         r <- r[!unlist(lapply(r, is.null))] 
       }
-
+      if (length(r) == 1) r <- r[[1]]
+      
+      # Format date fields:
+      r$time <- substr(r$date, 12, 19)
+      r$date <- substr(r$date, 1, 10)         
+      
       return(r)
    }
    
@@ -85,7 +102,7 @@ read.vms <- function(year, cfvn, month = 1:12, source = "file",
 #' @export update.vms
 update.vms <- function(..., path = options("gulf.path")[[1]]$snow.crab$vms){
    # Read data:
-   y <- read.vms(...)
+   y <- read.vms(source = "oracle", ...)
    
    # Write to file: 
    years <- as.numeric(unique(substr(unique(y$date), 1, 4)))
