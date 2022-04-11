@@ -1,4 +1,4 @@
-#' Read Notus Acoustic Trawl Data.
+#' @title Read Notus Acoustic Trawl Data.
 #'
 #' @description Functions to read Notus acoustic trawl data, such as depth/temperature or acoustic trawl monitoring data.
 #'
@@ -12,7 +12,7 @@
 #' @param ... Other parameters passed onto \code{locate} functions or used to subset data.
 
 #' @export read.notus
-read.notus <- function(file, ...){
+read.notus <- function(x, file, echo = FALSE, ...){
   # Define file(s) to be read:
   if (!missing(x) & missing(file)) if (is.character(x)) file = x
   if (missing(file)){
@@ -26,7 +26,7 @@ read.notus <- function(file, ...){
     x <- vector(mode = "list", length = length(file))
     k <- 0
     for (i in 1:length(file)){
-      if (verbose) cat(paste(i, ") Reading: '", file[i], "'\n", sep = ""))
+      if (echo) cat(paste(i, ") Reading: '", file[i], "'\n", sep = ""))
       x[i] <- list(expand(read.notus(file[i])))
       k <- k + nrow(x[[i]])
     }
@@ -76,7 +76,6 @@ read.notus <- function(file, ...){
                     location    = gsub(" ", ".", tolower(unlist(lapply(strsplit(x[ix+1], ": "), function(x) x[2])))),
                     stringsAsFactors = FALSE)
   
-  
   # Remove non-data lines:
   x <- x[grep("^[A-Z][0-9][0-9][A-Z]", x)]
 
@@ -98,13 +97,18 @@ read.notus <- function(file, ...){
   # Convert numeric fields:
   for (i in 2:ncol(data)) data[, i] <- gsub("-", "", data[, i])
   for (i in 2:ncol(data)) if (!all(is.na(data[, i]))) if (all(gsub("[.0-9/-]", "", data[, i]) == ""))  data[, i] <- as.numeric(data[, i])
-
   names(data) <- tolower(names(data))
   
   # Format comments:
   data$comment[is.na(data$comment)] <- ""
   
-  v <- unique(data[c("date", "time")])
+  # Format coordinates:
+  if ("latitude" %in% names(data))  data$latitude  <- gulf.spatial::dmm2deg(as.numeric(gsub("['° SNEW]", "", data$latitude)))
+  if ("longitude" %in% names(data)) data$longitude <- -gulf.spatial::dmm2deg(as.numeric(gsub("['° SNEW]", "", data$longitude)))
+  
+  # Sort by time stamp:
+  data <- data[order(gulf.utils::time(data)), ]
+  rownames(data) <- NULL
   
   return(data)
 }
