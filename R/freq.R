@@ -241,7 +241,7 @@ freq.scslen <- function(x, variable = "length", by, units = "cm", ...){
 
 #' @describeIn freq \code{nsslen} \code{freq} method.
 #' @export
-freq.nsslen <- function(x, variable = "length", by, units = "cm", ...){
+freq.nsslen <- function(x, variable = "length", by = c("date", "vessel.code", "cruise.number", "set.number"), units = "cm", ...){
    # Remove NA values from data set:
    x <- x[!is.na(x[, variable]), ]
    
@@ -267,7 +267,7 @@ freq.nsslen <- function(x, variable = "length", by, units = "cm", ...){
 }
 
 #' @rawNamespace S3method(freq,gulf.len)
-freq.gulf.len <- function(x, by, scale = TRUE, ...){
+freq.gulf.len <- function(x, by = c("date", "vessel.code", "cruise.number", "set.number"), scale = TRUE, ...){
    fvars <- names(x)[grep("^freq[0-9]+$", names(x))]
    
    # Construct matrix of corresponding length values:
@@ -276,7 +276,7 @@ freq.gulf.len <- function(x, by, scale = TRUE, ...){
           gulf.utils::repvec(x$length.interval, ncol = length(fvars))
    
    # Adjust sample frequencies by sampling ratio:
-   if (scale) x[fvars] <- x[fvars] / gulf.utils::repvec(x$ratio, ncol = dim(v)[2])
+   if (scale) x[fvars] <- x[fvars] / gulf.utils::repvec(x$ratio, ncol = length(fvars))
 
    # Linearize length data table:
    vars <- setdiff(names(x), fvars)

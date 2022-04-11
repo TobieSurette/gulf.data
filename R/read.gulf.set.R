@@ -80,9 +80,13 @@ read.gulf.set <- function(year, survey = "rv",
    x$latitude.end[x$latitude.end == 0] <- NA
    
    # Delete irrelevant or empty variables:   
-   delete <- c("card.type", "inf.id", "card.image", "species.fish.number", "species.invertebrate.number", "catch.total.weight")
+   delete <- c("card.type", "inf.id", "card.image", "species.fish.number", "species.invertebrate.number", 
+               "catch.total.weight", "repeat.number", "location.repeat.cnt", "gsseriesid")
    x <- x[, setdiff(names(x), delete)]
-   x <- gulf.utils::compress(x)
+   x <- gulf.utils::compress(x, unique = FALSE)
+   
+   # Format comments:
+   x$comment[is.na(x$comment)] <- ""
    
    class(x) <- c("gulf.set", class(x))
    gulf.metadata::key(x) <- c("date", "vessel.code", "cruise.number", "set.number")  
