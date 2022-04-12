@@ -38,14 +38,13 @@
    path$groundfish$nafo <- paste0(path$groundfish$root, "/Hd3/landings/nafo/")           # NAFO landings data directory.
    
    # Oracle databases:
-   p <- gulf.metadata::project()
    oracle <- list()
-   oracle$rvs$dsn <- p[p$name == "rvs", "oracle.dsn"]
-   oracle$rvs$uid <- p[p$name == "rvs", "oracle.uid"] 
-   oracle$gap$dsn <- p[p$name == "sco", "oracle.dsn"] 
-   oracle$gap$uid <- p[p$name == "sco", "oracle.uid"] 
-   oracle$vms$dsn <- p[p$name == "vms", "oracle.dsn"] 
-   oracle$vms$uid <- p[p$name == "vms", "oracle.uid"] 
+   oracle$rvs$dsn <- "ptran"
+   oracle$rvs$uid <- "GLF_4R"
+   oracle$gap$dsn <- "gap"
+   oracle$gap$uid <- "4R_GAP"
+   oracle$vms$dsn <- "VMS"
+   oracle$vms$uid <- "GULF_SCIENCE"
 
    # Attach to options:
    options(gulf.path = path, gulf.oracle = oracle)
