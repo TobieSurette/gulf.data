@@ -2,6 +2,9 @@
 #' 
 #' @description Functions to extract or estimate crab chela height measurements.
 #' 
+#' @param x Data frame containing chela height measurements.
+#' @param adjust Logical value specifying whether to adjust for any bias contained in chela height measurements.
+#' @param recalculate Logical value specifying whether to recalculate chela height versus carapace width parameters using snow crab survey data.
 #' 
 
 #' @export chela.height
@@ -18,9 +21,8 @@ chela.height.scobs <- function(x, by = "observer", adjust = FALSE, recalculate =
    
    # Fit regression mixture to chela height versus carapace width from the snow crab survey:
    if (recalculate){
-      b <- read.scbio(year = unique(x$year))
-      index <- b$sex == 1 & !is.na(b$carapace.width) & !is.na(b$chela.height) & (b$carapace.width > 0) & (b$carapace.width < 160) & (b$chela.height > 0)
-      b <- b[index, ]
+      b <- read.scsbio(year = unique(x$year))
+      b <- b[which(b$sex == 1 & !is.na(b$carapace.width) & !is.na(b$chela.height) & (b$carapace.width > 0) & (b$carapace.width < 160) & (b$chela.height > 0)), ]
    
       # Mixture regression log-likelihood function:
       ll <- function(theta, x, y){
@@ -89,33 +91,25 @@ chela.height.scobs <- function(x, by = "observer", adjust = FALSE, recalculate =
    tmp <- by(x, x[by], function(x) return(x))
    
    v <- rep(NA, nrow(x))
-   # clg()
    for (i in 1:length(tmp)){
-      index <- which(tmp[[i]]$sex == 1 & !is.na(tmp[[i]]$carapace.width) & !is.na(tmp[[i]]$chela.height.right) & 
+      ix <- which(tmp[[i]]$sex == 1 & !is.na(tmp[[i]]$carapace.width) & !is.na(tmp[[i]]$chela.height.right) & 
                      (tmp[[i]]$carapace.width > 0) & (tmp[[i]]$carapace.width < 160) & (tmp[[i]]$chela.height.right > 0))
    
       # Remove odd values:
-      m <- lm(chela.height.right ~ carapace.width, data = tmp[[i]][index, ])
+      m <- lm(chela.height.right ~ carapace.width, data = tmp[[i]][ix, ])
       r <- residuals(m, type = "pearson")
-      index <- index[(r >= -6) & (r <= 6)]
+      ix <- ix[(r >= -6) & (r <= 6)]
 
       # Find initial value:
-      init <- mean(tmp[[i]]$chela.height.right[index] - exp(1.356 * log(tmp[[i]]$carapace.width[index]) -3.051))
-      res <- optim(init, obj, x = tmp[[i]]$carapace.width[index], y = tmp[[i]]$chela.height.right[index], theta = theta, control = list(trace = 0, maxit = 5000))
+      init <- mean(tmp[[i]]$chela.height.right[ix] - exp(1.356 * log(tmp[[i]]$carapace.width[ix]) -3.051))
+      res <- optim(init, obj, x = tmp[[i]]$carapace.width[ix], y = tmp[[i]]$chela.height.right[ix], theta = theta, control = list(trace = 0, maxit = 5000))
       delta <- res$par
       
-      ref <- obj(0, x = tmp[[i]]$carapace.width[index], y = tmp[[i]]$chela.height.right[index], theta = theta)
+      ref <- obj(0, x = tmp[[i]]$carapace.width[ix], y = tmp[[i]]$chela.height.right[ix], theta = theta)
    
-      index <- match(tmp[[i]][key(x)], x[key(x)])
-      if ((ref - res$value) > 10) v[index] <- delta[1] + tmp[[i]]$chela.height.right else v[index] <- tmp[[i]]$chela.height.right
-      
-      #windows()
-      #plot(b$carapace.width, b$chela.height)
-      #points(tmp[[i]]$carapace.width, tmp[[i]]$chela.height.left, bg = "red", pch = 21)
-      #points(tmp[[i]]$carapace.width, tmp[[i]]$chela.height.right, bg = "green", pch = 21)
+      ix <- match(tmp[[i]][key(x)], x[key(x)])
+      if ((ref - res$value) > 10) v[ix] <- delta[1] + tmp[[i]]$chela.height.right else v[ix] <- tmp[[i]]$chela.height.right
    }
    
    return(v)
 }
-
-

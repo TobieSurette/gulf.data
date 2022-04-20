@@ -12,7 +12,8 @@ read.vms(
   dsn = options("gulf.oracle")[[1]]$vms$dsn,
   uid = options("gulf.oracle")[[1]]$vms$uid,
   password,
-  path = options("gulf.path")[[1]]$snow.crab$vms
+  path = options("gulf.path")[[1]]$snow.crab$vms,
+  echo = TRUE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ read.vms(
 \item{uid}{User identification.}
 
 \item{password}{User password.}
+
+\item{echo}{Logical value specifying whether to report information while reading data.}
 }
 \description{
 Functions to access and update vessel monitoring system data.

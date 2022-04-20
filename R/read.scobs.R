@@ -15,20 +15,21 @@
 #' @param source Data source ('r', 'ascii', 'csv', or 'oracle').
 #' 
 
-# READ.SCOBS - Reads an ASCII snow crab observer biological card.
+# READ.SCOBS - Read snow crab observer data.
 #' @export read.scobs
-read.scobs <- function(year, file, path = options("gulf.path")[[1]]$snow.crab$survey, cfvn, type = "sea", trip.number,
-                       database = options("gulf.oracle")[[1]]$gap$dsn, username = options("gulf.oracle")[[1]]$gap$uid, 
-                       password, source = "oracle", ...){
+read.scobs <- function(x, year, type = "sea", source = "R", ...){
+   # Parse 'year':
+   if (missing(year) & !missing(x)) if (is.numeric(x)) year <- x
+   if (missing(year)) stop("'year' must be specified.")
    
    # Parse 'source' argument:
    source <- match.arg(tolower(source), c("r", "ascii", "csv", "oracle"))
 
    # Read R or csv file:
-   if (source == "r")      x <- read.rdata.scobs(year = year, path = path, type = type, ...)
-   if (source == "csv")    x <- read.csv.scobs(year = year, path = path, type = type, ...) 
-   if (source == "ascii")  x <- read.ascii.scobs(year = year, path = path, type = type, ...)
-   if (source == "oracle") x <- read.oracle.scobs(year = year, path = path, type = type, password = password, ...)
+   if (source == "r")      x <- read.rdata.scobs(year = year, type = type, ...)
+   if (source == "csv")    x <- read.csv.scobs(year = year, type = type, ...) 
+   if (source == "ascii")  x <- read.ascii.scobs(year = year, type = type, ...)
+   if (source == "oracle") x <- read.oracle.scobs(year = year, type = type, ...)
 
    # Convert to 'scbio' object:
    x <- scobs(x)
@@ -39,8 +40,7 @@ read.scobs <- function(year, file, path = options("gulf.path")[[1]]$snow.crab$su
 # Read GAP database:
 read.oracle.scobs <- function(x, year, zone, cfvn, type = "sea", trip.number, 
                               dsn = options()$gulf.oracle$gap$dsn, 
-                              uid = options()$gulf.oracle$gap$uid,
-                              password, ...){
+                              uid = options()$gulf.oracle$gap$uid, ...){
 
    # Parse 'year' argument:
    if (missing(year)) year <- substr(as.character(Sys.Date()), 1, 4)
@@ -132,7 +132,7 @@ read.oracle.scobs <- function(x, year, zone, cfvn, type = "sea", trip.number,
    if (!missing(cfvn)) query <- gsub(";", paste0(" and F.NO_BPC_PROB in ", cfvn.str, ";"), query)
    
    # Use trap number to target sea or port sampling:
-   if (type == "sea") query <- gsub(";", " and a.NO_SEQ_CASIER <= 50;", query, fixed = TRUE)
+   if (type == "sea")  query <- gsub(";", " and a.NO_SEQ_CASIER <= 50;", query, fixed = TRUE)
    if (type == "port") query <- gsub(";", " and a.NO_SEQ_CASIER > 50;", query, fixed = TRUE)
    
    if (!missing(trip.number)){
@@ -205,13 +205,13 @@ read.oracle.scobs <- function(x, year, zone, cfvn, type = "sea", trip.number,
 }
 
 # Read CSV files:
-read.csv.scobs <- function(x, year, zone, type, path, ...){
+read.csv.scobs <- function(x, year, zone, type, path = options("gulf.path")[[1]]$snow.crab$observer, echo = TRUE, ...){
    # Parse 'year':
    if (missing(year) & is.numeric(x)) year <- x
    if (missing(year)) stop("'year' must be specified.")
    
    # Locate files:
-   path <- paste0(path, "Fishing Year ", year, "/Observer Data")
+   path <- paste0(path, year, "/csv")
    files <- locate(path = path, file = "*.csv")
    
    # Target file subset:
@@ -222,7 +222,7 @@ read.csv.scobs <- function(x, year, zone, type, path, ...){
    if (length(files) > 0){
       res <- NULL
       for (i in 1:length(files)){
-         cat(paste0("Reading : '", files[i], "'\n"))
+         if (echo) cat(paste0("Reading : '", files[i], "'\n"))
          x <- read.table(files[i], header = TRUE, sep = ",", colClasses = "character", stringsAsFactors = FALSE)
          if (!is.null(res)){
             vars <- intersect(names(res), names(x))
@@ -236,13 +236,13 @@ read.csv.scobs <- function(x, year, zone, type, path, ...){
 }
 
 # Read Rdata files:
-read.rdata.scobs <- function(x, year, zone, type, path, ...){
+read.rdata.scobs <- function(x, year, zone, type, path = options("gulf.path")[[1]]$snow.crab$observer, echo = TRUE, ...){
    # Parse 'year':
    if (!missing(x)) if (missing(year) & is.numeric(x)) year <- x
    if (missing(year)) stop("'year' must be specified.")
       
    # Locate files:
-   path <- paste0(path, "Fishing Year ", year, "/Observer Data")
+   path <- paste0(path, year, "/R")
    files <- locate(path = path, file = "*.rdata")
    
    # Target file subset:
@@ -253,7 +253,7 @@ read.rdata.scobs <- function(x, year, zone, type, path, ...){
    if (length(files) > 0){
       res <- NULL
       for (i in 1:length(files)){
-         cat(paste0("Reading : '", files[i], "'\n"))
+         if (echo) cat(paste0("Reading : '", files[i], "'\n"))
          load(files[i])
          if (!is.null(res)){
             vars <- intersect(names(res), names(x))

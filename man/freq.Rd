@@ -16,7 +16,13 @@ freq(x, ...)
 
 \method{freq}{scslen}(x, variable = "length", by, units = "cm", ...)
 
-\method{freq}{nsslen}(x, variable = "length", by, units = "cm", ...)
+\method{freq}{nsslen}(
+  x,
+  variable = "length",
+  by = c("date", "vessel.code", "cruise.number", "set.number"),
+  units = "cm",
+  ...
+)
 }
 \arguments{
 \item{x}{Vector of numeric values.}

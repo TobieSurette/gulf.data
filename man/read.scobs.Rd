@@ -4,30 +4,20 @@
 \alias{read.scobs}
 \title{Read Observer Data}
 \usage{
-read.scobs(
-  year,
-  file,
-  path = options("gulf.path")[[1]]$snow.crab$survey,
-  cfvn,
-  type = "sea",
-  trip.number,
-  database = options("gulf.oracle")[[1]]$gap$dsn,
-  username = options("gulf.oracle")[[1]]$gap$uid,
-  password,
-  source = "oracle",
-  ...
-)
+read.scobs(x, year, type = "sea", source = "R", ...)
 }
 \arguments{
 \item{year}{Year.}
+
+\item{type}{Sampling type ('sea' or 'port').}
+
+\item{source}{Data source ('r', 'ascii', 'csv', or 'oracle').}
 
 \item{file}{File name(s).}
 
 \item{path}{Data file path.}
 
 \item{cfvn}{Canadian Fishing Vessel Number(s).}
-
-\item{type}{Sampling type ('sea' or 'port').}
 
 \item{trip.number}{Trip number identifier.}
 
@@ -36,8 +26,6 @@ read.scobs(
 \item{username}{Oracle user name.}
 
 \item{password}{Oracle password.}
-
-\item{source}{Data source ('r', 'ascii', 'csv', or 'oracle').}
 }
 \description{
 Function to access and read at-sea and port observer data.

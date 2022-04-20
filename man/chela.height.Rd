@@ -6,6 +6,13 @@
 \usage{
 chela.height(x, ...)
 }
+\arguments{
+\item{x}{Data frame containing chela height measurements.}
+
+\item{adjust}{Logical value specifying whether to adjust for any bias contained in chela height measurements.}
+
+\item{recalculate}{Logical value specifying whether to recalculate chela height versus carapace width parameters using snow crab survey data.}
+}
 \description{
 Functions to extract or estimate crab chela height measurements.
 }

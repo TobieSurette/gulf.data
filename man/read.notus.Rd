@@ -4,14 +4,14 @@
 \alias{read.notus}
 \title{Read Notus Acoustic Trawl Data.}
 \usage{
-read.notus(file, ...)
+read.notus(x, file, echo = FALSE, ...)
 }
 \arguments{
+\item{x}{Survey year or file name.}
+
 \item{file}{File name(s).}
 
 \item{...}{Other parameters passed onto \code{locate} functions or used to subset data.}
-
-\item{x}{Survey year or file name.}
 
 \item{year}{Survey year(s).}
 

@@ -17,15 +17,13 @@ read.vms <- function(year, cfvn, month = 1:12, source = "file",
                      echo = TRUE){
    if (source == "file"){
       # Find files:
-      files <- gulf.utils::locate(keywords = as.character(year), path = path)
-      ix <- unlist(lapply(strsplit(files, "/"), function(x) return(length(grep(year, x[1:(length(x)-1)])) > 0)  ))
-      files <- files[ix]
-      
-      # Find specified 'cfvn':
+      files <- NULL
       if (!missing(cfvn)){
-         ix <- NULL
-         for (i in 1:length(cfvn)) ix <- c(ix, grep(cfvn[i], files))
-         files <- files[ix]
+         #for (i in 1:length(cfvn)) files <- c(files, list.files(path = paste0(path, year), pattern = paste0("^", cfvn[i], ".Rdata"), full.names = TRUE))
+         files <- paste0(path, year, "/", cfvn, ".Rdata")
+         files <- files[file.exists(files)]
+      }else{
+         for (i in 1:length(year)) files <- c(files, gulf.utils::locate(path = paste0(path, year[i])))
       }
       
       if (length(files) == 0) return(NULL)

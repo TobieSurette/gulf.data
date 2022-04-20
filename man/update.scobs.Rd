@@ -7,9 +7,8 @@
 \method{update}{scobs}(
   year,
   zone,
- 
-    path = "//ent.dfo-mpo.ca/dfo-mpo/GROUP/GLF/Regional_Shares/AquaRes_Common/Crab/Offshore Crab Common/",
-  type = "sea",
+  path = options("gulf.path")[[1]]$snow.crab$observer,
+  type = c("sea", "port"),
   Rfile = TRUE,
   csv = TRUE,
   ...
@@ -27,10 +26,6 @@
 \item{Rfile}{Logical value specifying whether output to Rdata format.}
 
 \item{csv}{Logical value specifying whether to write to CSV data format.}
-
-\item{database}{Oracle database name.}
-
-\item{username}{Oracle user name.}
 
 \item{password}{Oracle password.}
 }
