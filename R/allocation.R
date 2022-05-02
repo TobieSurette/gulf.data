@@ -24,6 +24,18 @@ allocation.default <- function(x, ...){
    return(v)
 }
 
+#' @describeIn allocation Return allocation code description.
+#' @export
+allocation.numeric <- function(x, language = "english", ...){
+   # Parse language:
+   language <- language(language)   
+   
+   # Load vessel table:
+   tab <- allocation() 
+   
+   return(tab[match(x, tab$code), language])
+}
+
 #' @describeIn allocation return allocation code table.
 #' @export 
 allocation.character <- function(x, language = "english", ...){
