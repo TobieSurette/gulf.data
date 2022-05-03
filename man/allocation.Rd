@@ -3,12 +3,15 @@
 \name{allocation}
 \alias{allocation}
 \alias{allocation.default}
+\alias{allocation.numeric}
 \alias{allocation.character}
 \title{Allocation Codes}
 \usage{
 allocation(x, ...)
 
 \method{allocation}{default}(x, ...)
+
+\method{allocation}{numeric}(x, language = "english", ...)
 
 \method{allocation}{character}(x, language = "english", ...)
 }
@@ -25,6 +28,8 @@ Snow crab license allocation codes, used to partition landings by fisher groups.
 \section{Methods (by class)}{
 \itemize{
 \item \code{default}: return allocation code table.
+
+\item \code{numeric}: Return allocation code description.
 
 \item \code{character}: return allocation code table.
 }}
