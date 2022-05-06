@@ -16,10 +16,14 @@ Function           | Description
 `read.scscat`      | Read snow crab survey by-catch data.
 `read.scsbio`      | Read snow crab survey crab biological measurement data.
 `read.scslen`      | Read snow crab survey fish length data.
-`read.nssset`      | Read Northumberland Strait survey set/tow data.
-`read.nsscat`      | Read Northumberland Strait survey catch data.
-`read.nssbio`      | Read Northumberland Strait survey crab biological measurement data.
-`read.nsslen`      | Read Northumberland Strait survey animal length data.
+`read.gulf.set`    | Read set/tow data from groundfish surveys.
+`read.gulf.cat`    | Read catch summary data from groundfish surveys.
+`read.gulf.bio`    | Read biological sampling data from groundfish surveys.
+`read.gulf.len`    | Read length-frequency data from groundfish surveys.
+`read.oracle`      | Read data from Oracle database.
+`read.scobs`       | Read snow crab observer data.
+`read.logbook`     | Read fishery logbook data.
+`read.vms`         | Read fishery Vessel Monitoring System data.
 `read.minilog`     | Read Minilog probe data.
 `read.star.oddi`   | Read Star Oddi probe data.
 `read.scanmar`     | Read Scanmar acoustic trawl monitoring data.

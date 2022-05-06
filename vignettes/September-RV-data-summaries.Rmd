@@ -1,0 +1,35 @@
+---
+title: "Using the gulf.data package to access the September RV data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{September-RV-data-summaries}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(gulf.data)
+```
+
+## Set cards
+
+
+```{r}
+x <- read.gulf.set(year = 2020, password="R_GulfPKG_19")
+## how many sets by stratum and experiment?
+table(x$stratum, x$experiment)
+```
+
+## Catch cards
+
+## Length cards
+
+## Bio cards
+

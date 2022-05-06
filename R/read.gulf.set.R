@@ -8,7 +8,11 @@
 #' @param uid User identification.
 #' @param password Oracle database password.
 #' 
-
+#' @examples
+#'
+#'    # Read the 2020 set cards:
+#'    x <- read.gulf.set(year = 2020)
+#' 
 #' @export read.gulf.set
 read.gulf.set <- function(year, survey = "rv", 
                           dsn = options("gulf.oracle")[[1]]$rvs$dsn, 
