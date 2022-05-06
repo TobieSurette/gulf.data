@@ -3,7 +3,10 @@ Type: Package
 Title: Southern Gulf of St Lawrence Data Access
 Version: 1.0.0
 Depends: gulf.metadata
-Authors@R: as.person(c("Tobie Surette <Tobie.Surette@dfo-mpo.gc.ca> [aut, cre]"))
+Authors@R: as.person(c(
+   "Tobie Surette <Tobie.Surette@dfo-mpo.gc.ca> [aut, cre]",
+   "Daniel Ricard <Daniel.Ricard@dfo-mpo.gc.ca> [aut]"
+   ))
 Description: Data access and manipulation of Southern Gulf of Saint Lawrence fisheries, scientific survey and research project data.
 License: GPL
 Encoding: UTF-8
