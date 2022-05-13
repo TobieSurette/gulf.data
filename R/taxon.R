@@ -5,6 +5,8 @@
 #' @param x Species code.
 #' @param aphia.id Aphia taxonomic identification codes.
 #' @param rank Taxonomic rank (e.g. "kingdom", "phylum", "genus", etc ...). 
+#' @param drop Logical value specifying whether to remove empty columns from the taxonomic reference table.
+#' @param ... Other taxonomic groups (see examples).
 #' 
 #' @examples 
 #' taxon(10:100)             # Latin genus + species names.
@@ -28,42 +30,32 @@ taxon.default <- function(x, rank, aphia.id, drop = TRUE, ...){
    tab <- species()
    if (!missing(aphia.id)) tab$code <- tab$aphia.id
    
-   # Taxonomic rank is specified:
-   rank <- list(...)
-   if (is.list(rank)){
-      rank <- rank[tolower(names(rank)) %in% names(tab)]
-      if (length(rank) == 0) return(NULL)
-      
+   # Look up specific taxa:
+   lookup <- list(...)
+   if (length(lookup) > 0){
       ix <- 1:nrow(tab)
-      for (i in 1:length(rank)) ix <- intersect(ix, which(tolower(tab[, names(rank)[i]]) %in% tolower(rank[[i]])))    
-      
-      if (missing(x)) return(tab[ix, ])
+      for (i in 1:length(lookup)) ix <- intersect(ix, which(tolower(tab[, names(lookup)[i]]) %in% tolower(lookup[[i]])))    
+      if (missing(x)) return(tab[ix, ]) 
    }
    
-   # Default 'rank': 
+   # Taxonomic rank is specified:
    remove <- c("code", "english", "latin", "french", "aphia.id")
-   if (missing(rank)) rank <- setdiff(names(tab), remove) else drop <- FALSE
-   
-   # Initialize variables:   
-   ix <- NULL
-   v <- NULL
-   
-   # Match using appropriate coding:
+   if (!missing(rank)) tab <- tab[, unique(c(remove, rank[tolower(rank) %in% names(tab)]))] 
 
-   tab <- tab[!is.na(tab$code), ]
-   if (!missing(x)) if (is.numeric(x)) ix <- match(x, tab$code)  
-
-   # Extract taxonomic information:
-   if (length(ix) > 0){
-      rank <- rank[rank %in% names(tab)]
-      v <- tab[ix, rank]
-      if (drop) v <- v[which(unlist(lapply(v, function(x) any(x != ""))))]
+   # Match using species coding:
+   if (!missing(x)){
+      tab <- tab[!is.na(tab$code), ]
+      if (is.numeric(x)) if (length(ix) > 0) tab <- tab[match(x, tab$code), ] else return(NULL)
+      
+      # Remove irrelevant fields:
+      tab <- tab[, setdiff(names(tab), remove), drop = FALSE]
    }
    
-   # Expand empty result:
-   if (length(v) == 0) v <- rep("", length(x))
+   # Extract taxonomic information:
+   if (drop) tab <- tab[which(unlist(lapply(tab, function(x) any(x != ""))))]
+   if (ncol(tab) == 1) tab <- tab[,1]
    
-   return(v)
+   return(tab)
 }
 
 #' @export

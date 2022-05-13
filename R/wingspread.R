@@ -1,8 +1,9 @@
-#' Trawl Wing Spread
+#' @title Trawl Wing Spread
 #' 
 #' @description Functions to extract trawl wing spread measurements.
 #' 
 #' @param x Data object containing trawl wing spread measurements.
+#' @param ... Not used.
 #' 
 #' @examples 
 #' x <- read.esonar(2020)

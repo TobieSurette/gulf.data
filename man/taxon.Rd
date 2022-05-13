@@ -15,9 +15,13 @@ taxon(x, ...)
 \arguments{
 \item{x}{Species code.}
 
+\item{...}{Other taxonomic groups (see examples).}
+
 \item{rank}{Taxonomic rank (e.g. "kingdom", "phylum", "genus", etc ...).}
 
 \item{aphia.id}{Aphia taxonomic identification codes.}
+
+\item{drop}{Logical value specifying whether to remove empty columns from the taxonomic reference table.}
 }
 \description{
 Retrieve taxonomic information associated with identification codes.

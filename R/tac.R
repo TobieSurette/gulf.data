@@ -1,9 +1,13 @@
-#' @title Harvest Control Rules
-#'
+#' @title Reference Points and Harvest Control Rules
+#' @name TAC
+#' 
 #' @description Calculate harvest control rates.
 #'
 #' @param species Species name or code.
-#'
+#' @param x Stock index value.
+#' @param limit.reference.point Limit reference point value.
+#' @param upper.stock.reference Upper stock reference point value.
+#' 
 #' @examples
 #' x <- seq(0, 125000, len = 1000)
 #' y <- TAC(x, species = "snow crab")
@@ -12,6 +16,7 @@
 #' lines(x / 1000, y, lwd = 2)
 #' box()
 
+#' @rdname TAC
 #' @export reference.points
 reference.points <- function(species){
    if (missing(species)) stop("'species' must be specified.")
@@ -32,6 +37,7 @@ reference.points <- function(species){
    return(v)
 }
 
+#' @rdname TAC
 #' @export harvest.control.rule
 harvest.control.rule <- function(x, limit.reference.point, upper.stock.reference, species){
    # Parse 'species' arguments:
@@ -69,11 +75,13 @@ harvest.control.rule <- function(x, limit.reference.point, upper.stock.reference
    return(NULL)
 }
 
+#' @rdname TAC
 #' @export total.allowable.catch
 total.allowable.catch <- function(x, ...){
    hcr <- harvest.control.rule(...)   
    if (!missing(x)) return(x * hcr(x)) else return(function(x) x * hcr(x))
 }
 
+#' @rdname TAC
 #' @export TAC
 TAC <- total.allowable.catch
