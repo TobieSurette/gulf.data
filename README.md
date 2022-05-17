@@ -101,11 +101,6 @@ x <- read.scsset(2020, valid = 1, survey = "regular") # Read valid regular surve
 x <- read.scsbio(2020, category = "COM")              # Read commercial snow crab biological data for 2020.
 x <- read.scscat(2020, species = c("cod", "plaice"))  # Read Atlantic cod and American plaice data for 2020.
 x <- read.scslen(2020, species = c("cod", "plaice"))  # Read Atlantic cod and American plaice data for 2020.
-  
-# Read Northumberland Strait survey data:  
-x <- read.nssset(2019, experiment = 1)                # Read valid regular survey tows for 2019.
-x <- read.nssbio(2019, species = "american lobster")  # Read biological data for American lobster in 2019.
-x <- read.nsscat(2019, species = c("cod", "plaice"))  # Read Atlantic cod and American plaice data for 2020.
 ```
   
 
