@@ -1,4 +1,4 @@
-#' Sex Codes and Descriptions.
+#' @title Sex Codes and Descriptions.
 #'
 #' @description Functions to provide sex code options and descriptions.
 #'

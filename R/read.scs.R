@@ -1,4 +1,4 @@
-#' Read Snow Crab Survey Data
+#' @title Read Snow Crab Survey Data
 #' 
 #' @aliases read.scs
 #' 
@@ -31,7 +31,6 @@
 #' 
 #' @seealso \code{\link[gulf.data]{scs}}
 #' @seealso \code{\link[gulf.data]{locate.scs}}
-#' @seealso \code{\link[gulf.data]{read.nss}}
 
 #' @describeIn read.scs Read southern Gulf of Saint Lawrence snow crab survey set data.
 #' @export read.scsset

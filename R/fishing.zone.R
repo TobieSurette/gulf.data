@@ -4,7 +4,7 @@
 #'
 #' @param longitude Numerical vector of longitudes in decimal degree format.
 #' @param latitude Numerical vector of latitudes in decimal degree format.
-#' @param region Character value specifying the geographic region. This argument is passed onto the \code{\link[gulf]{fishing.zone.info}} function.
+#' @param region Character value specifying the geographic region.
 #' @param species Numerical scalar containing a species code.
 #' @param method Character value specifying the method to be used to determine the fishing zone.
 #'

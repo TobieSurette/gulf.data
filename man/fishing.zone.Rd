@@ -11,7 +11,7 @@ fishing.zone(x, ...)
 
 \item{latitude}{Numerical vector of latitudes in decimal degree format.}
 
-\item{region}{Character value specifying the geographic region. This argument is passed onto the \code{\link[gulf]{fishing.zone.info}} function.}
+\item{region}{Character value specifying the geographic region.}
 
 \item{species}{Numerical scalar containing a species code.}
 
