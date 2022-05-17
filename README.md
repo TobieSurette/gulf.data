@@ -87,7 +87,8 @@ Function           | Description
 ------------------ | --------------------------------------------------
 `glossary`         | Science and data terms glossary data table.
 `probe`            | Data probe list and descriptions table.
-`project`          | Data project definitions and descriptions data table.
+`project`          | Data project definitions and descriptions table.
+`region`           | Administrative regions definitions and descriptions table.
 `species`          | Species codes data table.
 `species.foreign`  | Foreign species codes data table.
 `survey`           | Science surveys data table.
