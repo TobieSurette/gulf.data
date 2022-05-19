@@ -12,7 +12,7 @@ read.scsset(x, file, survey, ...)
 
 read.scscat(x, file, survey, species, ...)
 
-read.scsbio(x, file, survey, category, drop = TRUE, verbose = FALSE, ...)
+read.scsbio(x, file, survey, category, drop = TRUE, echo = FALSE, ...)
 
 read.scslen(x, file, survey, species, ...)
 }
@@ -28,6 +28,8 @@ read.scslen(x, file, survey, species, ...)
 \item{species}{Species code or name.}
 
 \item{drop}{Logical value specifying whether to remove empty data rows.}
+
+\item{echo}{Logical value specifying whether to report information as data is being read.}
 
 \item{year}{Survey year(s).}
 
@@ -50,7 +52,6 @@ Functions to read snow crab survey data.
 \examples{
  
 # Read snow crab survey set data files:
-x <- read.scsset()                 # Read all available data.
 x <- read.scsset(year = 2019)      # Read single year.
 x <- read.scsset(year = 2010:2015) # Read range of years.
 

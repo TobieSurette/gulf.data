@@ -1,28 +1,53 @@
 #' @title Load Fishery Logbook Data
-#'
+#' @rdname read.logbook
+#' 
 #' @description Function to load logbook and slip landings data from the southern Gulf of Saint Lawrence fisheries.
 #'
 #' @param x Fishery year or file name.
 #' @param year Fishery year.
 #' @param file File name to be loaded. File format is assumed to be comma-separated (i.e. .csv).
 #' @param path File path containing comma-separated fishery logbook files (i.e. .csv).
-#'
+#' @param echo Logical value specifying whether to report files to the R console as they're being read.  
+#' @param ...
 
 #' @export read.logbook
 read.logbook <- function(x, species = "snow crab", ...){
-   # Parse 'species' argument:
-   species <- species(species)[1]
-   
-   z <- NULL
+   if (!missing(species)){
+      if (is.numeric(species)) species <- tolower(species(species)[1])
+      species <- match.arg(tolower(species), "snow crab")
+   }
    
    # Read data:
-   if (species == 2526) z <- read.sc.logbook(x, ...)
+   z <- NULL
+   if (species == "snow crab"){
+      z <- read.sc.logbook(x, ...)
+   }else{
+      z <- read.ziff(x, ...)
+   }
       
    class(z) <- c("logbook", class(z))
    
    return(z)
 } 
 
+#' @rdname read.logbook
+#' @export read.ziff
+read.ziff <- function(x, echo = TRUE, ...){
+   files <- locate.ziff(x, ...)
+   if (length(files) == 0) return(NULL)
+   
+   
+   r <- NULL
+   for (i in 1:length(files)){
+      if (echo & (length(files) > 1)) cat(paste0("Reading : '", files[i], "'\n"))
+      load(files[i])     
+      r <- rbind(r, x)
+   }
+
+   return(r)
+}
+
+#' @rdname read.logbook
 #' @export read.sc.logbook
 read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow.crab$logbook, ...){
    if (!missing(x)){

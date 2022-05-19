@@ -11,6 +11,8 @@ wingspread(x, ...)
 }
 \arguments{
 \item{x}{Data object containing trawl wing spread measurements.}
+
+\item{...}{Not used.}
 }
 \description{
 Functions to extract trawl wing spread measurements.

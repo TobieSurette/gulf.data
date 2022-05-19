@@ -30,4 +30,6 @@ Functions to retrieve survey vessel information.
 \examples{
 vessel()               # Survey vessel table.
 vessel("prince")       # Search for vessel name.
+vessel("marco")        # Search for vessel name.
+vessel("opilio")       # Search for vessel name.
 }

@@ -2,12 +2,26 @@
 % Please edit documentation in R/read.logbook.R
 \name{read.logbook}
 \alias{read.logbook}
+\alias{read.ziff}
+\alias{read.sc.logbook}
 \title{Load Fishery Logbook Data}
 \usage{
 read.logbook(x, species = "snow crab", ...)
+
+read.ziff(x, echo = TRUE, ...)
+
+read.sc.logbook(
+  x,
+  year,
+  file,
+  path = options("gulf.path")[[1]]$snow.crab$logbook,
+  ...
+)
 }
 \arguments{
 \item{x}{Fishery year or file name.}
+
+\item{echo}{Logical value specifying whether to report files to the R console as they're being read.}
 
 \item{year}{Fishery year.}
 
