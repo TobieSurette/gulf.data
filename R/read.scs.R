@@ -11,11 +11,11 @@
 #' @param survey Survey type, as determined by the \link{survey.scsset} function.
 #' @param tow.id Numeric value or character string specifying the ID corresponding to a particular tow sampling station.
 #' @param drop Logical value specifying whether to remove empty data rows.
+#' @param echo Logical value specifying whether to report information as data is being read.
 #' @param ... Other parameters passed onto \code{locate} functions or used to subset data.
 #' 
 #' @examples  
 #' # Read snow crab survey set data files:
-#' x <- read.scsset()                 # Read all available data.
 #' x <- read.scsset(year = 2019)      # Read single year.
 #' x <- read.scsset(year = 2010:2015) # Read range of years.
 #' 
@@ -190,7 +190,7 @@ read.scscat <- function(x, file, survey, species, ...){
 
 #' @describeIn read.scs Read southern Gulf of Saint Lawrence snow crab survey biological data.
 #' @export read.scsbio
-read.scsbio <- function(x, file, survey, category, drop = TRUE, verbose = FALSE, ...){
+read.scsbio <- function(x, file, survey, category, drop = TRUE, echo = FALSE, ...){
    # Define file(s) to be read:
    if (!missing(x) & missing(file)) if (is.character(x)) file = x 
    if (missing(file)) file <- locate.scsbio(x, ...)
@@ -200,7 +200,7 @@ read.scsbio <- function(x, file, survey, category, drop = TRUE, verbose = FALSE,
    if (length(file) > 1){
       v <- NULL
       for (i in 1:length(file)){
-         if (verbose) cat(paste0("Reading: '", file[i], "'\n"))
+         if (echo) cat(paste0("Reading: '", file[i], "'\n"))
             
          # Append data:
          tmp <- read.scsbio(file = file[i], drop = drop, ...)
@@ -277,9 +277,9 @@ read.scsbio <- function(x, file, survey, category, drop = TRUE, verbose = FALSE,
    args <- list(...)
    args <- args[names(args) %in% names(v)]
    if (length(args) > 0){
-      index <- rep(TRUE, nrow(v))
-      for (i in 1:length(args)) index <- index & (v[,names(args)[i]] %in% args[[i]])
-      v <- v[index, ]
+      ix <- rep(TRUE, nrow(v))
+      for (i in 1:length(args)) ix <- ix & (v[,names(args)[i]] %in% args[[i]])
+      v <- v[ix, ]
    }
 
    # Subset if 'scsset' object was given:
@@ -288,7 +288,7 @@ read.scsbio <- function(x, file, survey, category, drop = TRUE, verbose = FALSE,
    # Subset by biological category:
    if (!missing(category)) v <- v[which(is.category(scsbio(v), category)), ]
    
-   # Convert to 'scsset' object:
+   # Convert to 'scsbio' object:
    v <- scsbio(v)
    
    # Subset by survey type:
