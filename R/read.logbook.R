@@ -8,10 +8,10 @@
 #' @param file File name to be loaded. File format is assumed to be comma-separated (i.e. .csv).
 #' @param path File path containing comma-separated fishery logbook files (i.e. .csv).
 #' @param echo Logical value specifying whether to report files to the R console as they're being read.  
-#' @param ...
+#' @param ... Not used.
 
 #' @export read.logbook
-read.logbook <- function(x, species = "snow crab", ...){
+read.logbook <- function(x, species = "snow crab", source = "r", ...){
    if (!missing(species)){
       if (is.numeric(species)) species <- tolower(species(species)[1])
       species <- match.arg(tolower(species), "snow crab")
@@ -22,7 +22,7 @@ read.logbook <- function(x, species = "snow crab", ...){
    if (species == "snow crab"){
       z <- read.sc.logbook(x, ...)
    }else{
-      z <- read.ziff(x, ...)
+      z <- read.ziff(x, source = source, ...)
    }
       
    class(z) <- c("logbook", class(z))
@@ -30,17 +30,27 @@ read.logbook <- function(x, species = "snow crab", ...){
    return(z)
 } 
 
-#' @rdname read.logbook
+#' @rdname read.logbook 
 #' @export read.ziff
-read.ziff <- function(x, echo = TRUE, ...){
-   files <- locate.ziff(x, ...)
+read.ziff <- function(x, file, echo = TRUE, ...){
+   # Find data files:
+   files <- NULL
+   if (missing(x) & missing(file)) files <- locate.ziff(x, ...)
+   if (!missing(x)) if (is.character(x)) files <- x
+   if (!missing(file)) files <- file
    if (length(files) == 0) return(NULL)
    
-   
+   # Read files:
    r <- NULL
    for (i in 1:length(files)){
-      if (echo & (length(files) > 1)) cat(paste0("Reading : '", files[i], "'\n"))
-      load(files[i])     
+      if (echo) cat(paste0("Reading : '", files[i], "'\n"))
+      type <- tolower(unlist(lapply(strsplit(files[i], "[.]"), function(x) x[length(x)])))
+      if (type == "new"){
+         read.ziff.ascii(files[i], ...)
+      }
+      if (type %in% c("rda", "rdata")){
+         load(files[i])  
+      }
       r <- rbind(r, x)
    }
 
@@ -238,3 +248,93 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
    
    return(x)
 }
+
+#' @rdname read.logbook
+#' @export read.ziff.ascii
+read.ziff.ascii <- function(x, convert = TRUE, as.character = FALSE, ...){
+   # Define variable names, formats, fill characters and descriptions:
+   fmt = c("cfvn",                   "A6",       
+           "vessel.tonnage",         "I5",      
+           "vessel.tonnage.class",   "I1",     
+           "vessel.length",          "I3",     
+           "vessel.length.class",    "I1",    
+           "horsepower",             "I5",     
+           "horsepower.class",       "I1",    
+           "homeport",               "I5",     
+           "district",               "I3",       
+           "gulf.based",             "I1",      
+           "company",                "I4",      
+           "report",                 "A7",      
+           "trip",                   "I2",      
+           "date.landed",            "A8",       
+           "nafo.area",              "A3",       
+           "nafo.division",          "A3",       
+           "gear.code",              "I2",       
+           "gear.category",          "I1",       
+           "port.landed",            "I5",      
+           "port.district",          "I3",       
+           "company.code",           "I4",      
+           "community.code",         "I5",       
+           "species.group",          "I1",     
+           "species.code",           "I3",   
+           "species.size",           "I1",       
+           "species.form",           "I2",      
+           "species.grade",          "A1",       
+           "measurement.unit",       "A1",      
+           "landed.quantity",        "I9",       
+           "landed.value",           "F9.2",    
+           "round.weight",           "I9",       
+           "effort.flag",            "A1",       
+           "main.species.caught",    "A3",       
+           "main.species.sought",    "A3",      
+           "mile200",                "I1",       
+           "trip.fraction",          "F3.1",    
+           "days.at.sea",            "F3.1",     
+           "days.on.ground",         "F3.1",    
+           "days.fished",            "F4.2",    
+           "hours.fished",           "F4.1",    
+           "gear.amount",            "I4",      
+           "date.caught",            "A8",      
+           "depth.code",             "A1",      
+           "region.id",              "A1",      
+           "latitude",               "F8.4",    
+           "longitude",              "F8.4",    
+           "comment",                "A44")
+   
+   # Read file: 
+   y <- utils::read.fortran(file = x, format = fmt[seq(2,length(fmt),2)], comment.char = "") 
+   names(y) <- fmt[seq(1,length(fmt),2)]
+   
+   # Remove dots from empty integer data fields:
+   if (!as.character){
+      ix <- which(substr(fmt[seq(2,length(fmt),2)],1,1) == "I")
+      for (i in 1:length(ix)){
+         y[, ix[i]] <- gsub(".", " ", y[, ix[i]], fixed = TRUE)
+      }
+   }
+   
+   # Convert to user-friendly format:
+   if (convert & !as.character){
+      names(y) <- gsub("nafo.area", "nafo.subdivision", names(y))
+      
+      y$longitude[y$longitude == 0] <- NA
+      y$latitude[y$latitude == 0]   <- NA
+      y$nafo.division               <- gsub(" ", "", y$nafo.division, fixed = TRUE)
+      y$nafo.subdivision            <- gsub(" ", "", y$nafo.subdivision, fixed = TRUE)
+      y$nafo.division               <- toupper(y$nafo.division)
+      y$nafo.subdivision            <- paste0(toupper(substr(y$nafo.subdivision, 1, nchar(y$nafo.subdivision)-1)),
+                                              tolower(substr(y$nafo.subdivision, nchar(y$nafo.subdivision), nchar(y$nafo.subdivision))))
+      y$nafo.division[y$nafo.division == ""]       <- NA
+      y$nafo.subdivision[y$nafo.subdivision == ""] <- NA
+      #y$gear.class   <- gear.str(y$gear.code, input = "stacac", output = "alpha")
+      y$gear.class   <- ""
+      y$year         <- as.numeric(substr(y$date.landed, 1, 4))
+      y$year.landed  <- y$year
+      y$month.landed <- as.numeric(substr(y$date.landed, 5, 6))
+      y$day.landed   <- as.numeric(substr(y$date.landed, 7, 8))
+   }
+   
+   return(y)
+}
+
+

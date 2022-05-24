@@ -7,7 +7,14 @@
 \usage{
 \method{locate}{logbook}(x, year, species, ...)
 
-\method{locate}{ziff}(x, year, path = options("gulf.path")[[1]]$groundfish$ziff, region, ...)
+\method{locate}{ziff}(
+  x,
+  year,
+  path = options("gulf.path")[[1]]$groundfish$ziff,
+  region,
+  source = "R",
+  ...
+)
 }
 \arguments{
 \item{x}{Data object.}
@@ -19,6 +26,10 @@
 \item{...}{Not used.}
 
 \item{path}{Character string specifying the location of ZIFF data.}
+
+\item{region}{DFO region (\sQuote{g}, \sQuote{m}, \sQuote{q}, \sQuote{n}).}
+
+\item{source}{Data source (\sQuote{R}, \sQuote{ascii}).}
 }
 \description{
 Functions to locate fishery logbook data, such as snow crab fishery data and 
@@ -34,4 +45,5 @@ locate.logbook()                                             # Find all availabl
 locate.ziff()                                                # Find all available ziff files.
 locate.ziff(year = 2000:2008, region = "g")                  # Find Gulf region ziff files from 2000-2008.     
 locate.ziff(year = 2002:2003, region = c("Gulf", "Quebec"))  # Find Gulf and Quebec regions ziff files from 2002-2003. 
+locate.logbook(2000, source =  "ascii")                      # Find ASCII versions of 2000 ziff files.
 }

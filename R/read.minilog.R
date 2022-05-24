@@ -1,7 +1,7 @@
 #' @title Read VEMCO Minilog Data
 #'
-#' @description VEMCO Minilog probes are used to measure water temperature and depth. These functions reads 
-#'              the ASCII formatted Minilog data or header information.
+#' @description VEMCO Minilog probes are used to measure water temperature and depth. 
+#'              These functions reads the ASCII formatted Minilog data or header information.
 #'              
 #' @param x Survey year or file name.
 #' @param file File name(s).
@@ -9,7 +9,7 @@
 #' @param survey Survey type, as determined by the \link{survey.scsset} function.
 #' @param tow.id Numeric value or character string specifying the ID corresponding to a particular tow sampling station.
 #' @param offset Numeric value specifying the offset time (in minutes) to include as a corrective in the data time stamps.
-#' @param repeats Logical value specifying whether to keep or average out data records with identical time stamps.
+#' @param echo Logical value specifying whether to report files being read to the R console.
 #' @param ... Other parameters passed onto \code{locate} functions or used to subset data.
 #' 
 #' @examples 
@@ -26,7 +26,7 @@ read.minilog <- function(x, ...) UseMethod("read.minilog")
 
 #' @describeIn read.minilog Read a Minilog data file.
 #' @rawNamespace S3method(read.minilog,default)
-read.minilog.default <- function(x, file, offset = 0, verbose = FALSE, ...){
+read.minilog.default <- function(x, file, offset = 0, echo = FALSE, ...){
    # Define file(s) to be read:
    if (!missing(x) & missing(file)) if (is.character(x)) file = x
    if (missing(file)){
@@ -40,7 +40,7 @@ read.minilog.default <- function(x, file, offset = 0, verbose = FALSE, ...){
       x <- vector(mode = "list", length = length(file))
       k <- 0
       for (i in 1:length(file)){
-         if (verbose) cat(paste(i, ") Reading: '", file[i], "'\n", sep = ""))
+         if (echo) cat(paste(i, ") Reading: '", file[i], "'\n", sep = ""))
          x[i] <- list(expand(read.minilog(file[i])))
          k <- k + nrow(x[[i]])
       }

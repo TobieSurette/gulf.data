@@ -23,6 +23,7 @@ Function           | Description
 `read.oracle`      | Read data from Oracle database.
 `read.scobs`       | Read snow crab observer data.
 `read.logbook`     | Read fishery logbook data.
+`read.ziff`        | Read groundfish and pelagic fishery logbook data (Zonal Interchange File Format data files).
 `read.vms`         | Read fishery Vessel Monitoring System data.
 `read.minilog`     | Read Minilog probe data.
 `read.star.oddi`   | Read Star Oddi probe data.

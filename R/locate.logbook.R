@@ -6,6 +6,8 @@
 #' 
 #' @param x Data object.
 #' @param year Survey year.
+#' @param region DFO region (\sQuote{g}, \sQuote{m}, \sQuote{q}, \sQuote{n}).
+#' @param source Data source (\sQuote{R}, \sQuote{ascii}).
 #' @param species Species to be targeted (e.g. "snow crab").
 #' @param path Character string specifying the location of ZIFF data.
 #' @param ... Not used.
@@ -20,6 +22,7 @@
 #' locate.ziff()                                                # Find all available ziff files.
 #' locate.ziff(year = 2000:2008, region = "g")                  # Find Gulf region ziff files from 2000-2008.     
 #' locate.ziff(year = 2002:2003, region = c("Gulf", "Quebec"))  # Find Gulf and Quebec regions ziff files from 2002-2003. 
+#' locate.logbook(2000, source =  "ascii")                      # Find ASCII versions of 2000 ziff files.
 
 #' @export locate.logbook
 locate.logbook <- function(x, year, species, ...){ 
@@ -48,13 +51,13 @@ locate.logbook <- function(x, year, species, ...){
 
 #' @rdname locate.logbook
 #' @export locate.ziff
-locate.ziff <- function(x, year, path = options("gulf.path")[[1]]$groundfish$ziff, region, ...){ 
+locate.ziff <- function(x, year, path = options("gulf.path")[[1]]$groundfish$ziff, region, source = "R", ...){ 
    # Parse 'year' argument:
    if (!missing(x)) if (is.numeric(x)) year <- x
    if (missing(year)) year <- NULL
    
-   # Parse 'path' argument:
-   path <- paste0(path, "R versions")
+   # Parse 'source' argument:   
+   source <- match.arg(tolower(source), c("r", "ascii"))
    
    # Parse 'region' argument:
    if (!missing(region)){
@@ -65,9 +68,17 @@ locate.ziff <- function(x, year, path = options("gulf.path")[[1]]$groundfish$zif
    }
    
    # Locate files:
-   files <- locate(path = path)
-   files <- files[grep("[gnqs]_raw_[12][0-9][0-9][0-9].Rdata", files)]
-
+   if (source == "r"){
+      path <- paste0(path, "R versions")  
+      files <- locate(path = path)
+      files <- files[grep("[gnqs]_raw_[12][0-9][0-9][0-9].Rdata", files)]
+   } 
+   
+   if (source == "ascii"){
+      files <- locate(path = path)
+      files <- files[grep("[gnqs]_raw_[12][0-9][0-9][0-9].new", files)]
+   }
+   
    # Subset by region:
    if (length(region) > 0){
       ix <- NULL

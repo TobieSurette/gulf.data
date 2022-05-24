@@ -27,6 +27,8 @@
 
 \item{csv}{Logical value specifying whether to write to CSV data format.}
 
+\item{...}{Not used.}
+
 \item{password}{Oracle password.}
 }
 \description{

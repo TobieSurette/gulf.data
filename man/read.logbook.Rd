@@ -4,11 +4,12 @@
 \alias{read.logbook}
 \alias{read.ziff}
 \alias{read.sc.logbook}
+\alias{read.ziff.ascii}
 \title{Load Fishery Logbook Data}
 \usage{
-read.logbook(x, species = "snow crab", ...)
+read.logbook(x, species = "snow crab", source = "r", ...)
 
-read.ziff(x, echo = TRUE, ...)
+read.ziff(x, file, echo = TRUE, ...)
 
 read.sc.logbook(
   x,
@@ -17,15 +18,19 @@ read.sc.logbook(
   path = options("gulf.path")[[1]]$snow.crab$logbook,
   ...
 )
+
+read.ziff.ascii(x, convert = TRUE, as.character = FALSE, ...)
 }
 \arguments{
 \item{x}{Fishery year or file name.}
 
+\item{...}{Not used.}
+
+\item{file}{File name to be loaded. File format is assumed to be comma-separated (i.e. .csv).}
+
 \item{echo}{Logical value specifying whether to report files to the R console as they're being read.}
 
 \item{year}{Fishery year.}
-
-\item{file}{File name to be loaded. File format is assumed to be comma-separated (i.e. .csv).}
 
 \item{path}{File path containing comma-separated fishery logbook files (i.e. .csv).}
 }

@@ -9,12 +9,11 @@
 #' @param Rfile Logical value specifying whether output to Rdata format.
 #' @param csv Logical value specifying whether to write to CSV data format.
 #' @param password Oracle password.
-#' 
+#' @param ... Not used.
 #' 
 
 #' @export update.scobs
-update.scobs <- function(year, zone, path = options("gulf.path")[[1]]$snow.crab$observer, 
-                         type = c("sea", "port"), Rfile = TRUE, csv = TRUE, ...){
+update.scobs <- function(year, zone, path = options("gulf.path")[[1]]$snow.crab$observer, type = c("sea", "port"), Rfile = TRUE, csv = TRUE, ...){
    # Check input argument:
    if (!is.numeric(year) | (length(year) == 0)) stop("'year' must be a numeric vector.")
    if (any((year %% 1) != 0 )) stop("'year' must be an integer.")

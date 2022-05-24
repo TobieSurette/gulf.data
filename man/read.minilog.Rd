@@ -8,7 +8,7 @@
 \usage{
 read.minilog(x, ...)
 
-\method{read.minilog}{default}(x, file, offset = 0, verbose = FALSE, ...)
+\method{read.minilog}{default}(x, file, offset = 0, echo = FALSE, ...)
 
 \method{read.star.oddi}{default}(x, file, offset = 0, repeats = FALSE, verbose = FALSE, ...)
 }
@@ -21,7 +21,7 @@ read.minilog(x, ...)
 
 \item{offset}{Numeric value specifying the offset time (in minutes) to include as a corrective in the data time stamps.}
 
-\item{repeats}{Logical value specifying whether to keep or average out data records with identical time stamps.}
+\item{echo}{Logical value specifying whether to report files being read to the R console.}
 
 \item{year}{Survey year(s).}
 
@@ -30,8 +30,8 @@ read.minilog(x, ...)
 \item{tow.id}{Numeric value or character string specifying the ID corresponding to a particular tow sampling station.}
 }
 \description{
-VEMCO Minilog probes are used to measure water temperature and depth. These functions reads 
-             the ASCII formatted Minilog data or header information.
+VEMCO Minilog probes are used to measure water temperature and depth. 
+             These functions reads the ASCII formatted Minilog data or header information.
 }
 \section{Methods (by class)}{
 \itemize{
