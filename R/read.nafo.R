@@ -5,15 +5,17 @@
 #' @param x Survey year or file name.
 #' @param file File name(s). 
 #' @param year Survey year(s).
+#' @param ... Arguments passed onto \sQuote{locate.nafo}.
+#' 
 #' @return A data frame is returned.
+#' 
 #' @examples
-#'
-#'    # Read the 1960-1965 NAFO landings data files:
-#'    x <- read.nafo(year = 1960)
+#' # Read the 1960-1965 NAFO landings data files:
+#' x <- read.nafo(year = 1960)
 #'    
-#'    # Read the 1960-1965 NAFO landings data files:
-#'    x <- read.nafo(year = 1960:1965)
-#'
+#' # Read the 1960-1965 NAFO landings data files:
+#' x <- read.nafo(year = 1960:1965)
+
 #' @export read.nafo
 read.nafo <- function(x, file, ...){
    # Determine files to load:
@@ -52,34 +54,32 @@ read.nafo <- function(x, file, ...){
       names(v) <- c("year", "country","gear","blank1","nafo.division.code",
                     "species","blank2","blank3",
                     "jan","feb","mar","apr","may","jun",
-                    "jul","aug","sep","oct","nov","dec"
-                    )
+                    "jul","aug","sep","oct","nov","dec")
       
-   v$year <- as.numeric(paste0("19", v$year))
-   v$gear.code <- v$gear
-   
-   # Define months:
-   months <- c("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec")
-   # Linearize data frame:
-   vars <- setdiff(names(v), months)
-   
-   for (i in 1:length(vars)){
-      if (i == 1){
-         temp <- base::data.frame(rep(v[, vars[i]], length(months)))
-      }else{
-         temp <- cbind(temp, base::data.frame(rep(v[, vars[i]], length(months))))
+      v$year <- as.numeric(paste0("19", v$year))
+      v$gear.code <- v$gear
+      
+      # Define months:
+      months <- tolower(month.abb)
+      
+      # Linearize data frame:
+      vars <- setdiff(names(v), months)
+      for (i in 1:length(vars)){
+         if (i == 1){
+            temp <- base::data.frame(rep(v[, vars[i]], length(months)))
+         }else{
+            temp <- cbind(temp, base::data.frame(rep(v[, vars[i]], length(months))))
+         }
       }
-   }
-   names(temp) <- vars
-   temp <- cbind(temp, base::data.frame(month = rep(1:length(months), each = nrow(v))))
-   temp$round.weight <- as.vector(as.matrix(v[, months]))
-   
-   # Remove entries with no landings:
-   temp <- temp[!is.na(temp$round.weight) & (temp$round.weight > 0), ]
-   temp$round.weight <- temp$round.weight * 1000
-   
-   v <- temp
-   
+      names(temp) <- vars
+      temp <- cbind(temp, base::data.frame(month = rep(1:length(months), each = nrow(v))))
+      temp$round.weight <- as.vector(as.matrix(v[, months]))
+      
+      # Remove entries with no landings:
+      temp <- temp[!is.na(temp$round.weight) & (temp$round.weight > 0), ]
+      temp$round.weight <- temp$round.weight * 1000
+      
+      v <- temp
    }
    
    return(v)

@@ -38,6 +38,10 @@
    path$groundfish$ziff <- paste0(path$groundfish$root, "/Hd3/landings/zif/raw/")        # ZIFF data directory.
    path$groundfish$nafo <- paste0(path$groundfish$root, "/Hd3/landings/nafo/")           # NAFO landings data directory.
    
+   # Lobster data paths:
+   path$lobster$scuba <- "http://dmapps/en/scuba/"
+   path$lobster$nss   <- path$groundfish$nss
+   
    # Oracle databases:
    oracle <- list()
    oracle$rvs$dsn <- "ptran"

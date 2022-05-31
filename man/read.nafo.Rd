@@ -11,6 +11,8 @@ read.nafo(x, file, ...)
 
 \item{file}{File name(s).}
 
+\item{...}{Arguments passed onto \sQuote{locate.nafo}.}
+
 \item{year}{Survey year(s).}
 }
 \value{
@@ -20,11 +22,9 @@ A data frame is returned.
 Read a fixed-width formatted NAFO landings data file.
 }
 \examples{
-
-   # Read the 1960-1965 NAFO landings data files:
-   x <- read.nafo(year = 1960)
+# Read the 1960-1965 NAFO landings data files:
+x <- read.nafo(year = 1960)
    
-   # Read the 1960-1965 NAFO landings data files:
-   x <- read.nafo(year = 1960:1965)
-
+# Read the 1960-1965 NAFO landings data files:
+x <- read.nafo(year = 1960:1965)
 }
