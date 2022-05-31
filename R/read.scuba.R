@@ -19,7 +19,7 @@
 
 read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
    # Define Scuba data path:
-   path <- "http://dmapps/en/scuba/reports/"
+   path <- paste0(options()$gulf.path$lobster$scuba, "reports/")
    
    # Process 'table' argument:
    if (!missing(table)){
@@ -87,9 +87,40 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
                   "updated.by.id", "diver.id", "transect.id", "outing", "start.descent", "bottom.time")
       dives <- dives[, setdiff(names(dives), remove)]     
    }
-
+   
+   # Read section table:
+   if (!missing(year)){
+      sections <- NULL
+      for (i in 1:length(year)) sections <- rbind(sections, read.csv(paste0(path, "section/?year=", year[i])))
+   }else{
+      sections <- read.csv(path, "section/?year")
+   }
+   # Remove empty columns:
+   if (compress) sections <- gulf.utils::compress(sections)
+   if (nrow(sections) > 0){
+      # Format variable names:
+      names(sections) <- gsub("sample", "outing", names(sections))
+      names(sections) <- gsub("_", ".", names(sections))
+      names(sections) <- gsub("^id$", "section.id", names(sections))
+      
+      # Format 'comment field:
+      sections$comment[is.na(sections$comment)] <- ""
+      
+      # Re-order variables:
+      start <- c("region", "outing.id", "dive.id", "section.id", "transect", "diver", "date", "side.display")
+      end <- c("comment")
+      sections <- sections[, c(start, setdiff(names(sections), c(start, end)), end)]
+      
+      # Remove empty rows:
+      remove <- c("created.by", "dive", "created.at", "updated.by", "updated.at", "sample", "created.by.id", 
+                  "interval.display", "outing", "updated.by.id", "diver.id", "transect.id", "outing", "start.descent", "bottom.time")
+      sections <- sections[, setdiff(names(sections), remove)]     
+   }
+   
    # Collate data tables:   
-   res <- list(outings = outings, dives = dives)
+   res <- list(outings = outings, 
+               dives = dives, 
+               sections = sections)
    
    return(res)
 }
