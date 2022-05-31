@@ -26,3 +26,9 @@ read.gulf.set(
 \description{
 Read trawl set data from various groundfish, crustacean and pelagic surveys.
 }
+\examples{
+
+   # Read the 2020 set cards:
+   x <- read.gulf.set(year = 2020)
+
+}
