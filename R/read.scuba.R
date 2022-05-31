@@ -1,13 +1,9 @@
-# "http://dmapps/en/scuba/reports/dive.log.xlsx", to = "dive log.xlsx")
-# "http://dmapps/en/scuba/reports/section/?year=2021") # Read in transect section table:
-# "http://dmapps/en/scuba/reports/dive/?year=2021") # Read dives table:
-# "http://dmapps/en/scuba/reports/outing/?year=2021") # Read outings table:
-# "http://dmapps/en/scuba/reports/observations/?year=2018") # Read biological data:
-# "http://dmapps/en/scuba/reports/scuba_transect/?year=2021") # Scuba transect table:
-
+#' @title Read Scuba Survey Data
+#' 
+#' @description Functions to access data from the SCUBA transect survey in the southern Gulf of Saint Lawrence.
+#' 
 #' @param year Study year(s).
-#' @param table Character string specifying which data table to read. Options are \sQuote{outings}, \sQuote{dives},
-#'              \sQuote{sections}, \sQuote{biological} or \sQuote{observations}.
+#' @param table Character string specifying which data table to read. Options are \sQuote{outings}, \sQuote{dives}, \sQuote{sections}, \sQuote{biological} or \sQuote{observations}.
 #' @param compress Logical value specifying whether to automatically remove empty data columns or rows.
 #' @param source Data source.
 #'                           
@@ -15,8 +11,17 @@
 #' x <- read.scuba(2012:2014)  # Read all SCUBA data tables for the 2012 to 2014 seasons.
 #' x <- read.scuba(2021)       # Read all SCUBA data tables for the 2021 season.
 #' 
-#' x <- read.scuba(2021, table = "section") 
+#' x <- read.scuba(2021, table = "section") # Read transect sectio data from the 2021 season.
 
+
+# "http://dmapps/en/scuba/reports/dive.log.xlsx", to = "dive log.xlsx")
+# "http://dmapps/en/scuba/reports/section/?year=2021" # Read in transect section table:
+# "http://dmapps/en/scuba/reports/dive/?year=2021" # Read dives table:
+# "http://dmapps/en/scuba/reports/outing/?year=2021" # Read outings table:
+# "http://dmapps/en/scuba/reports/observations/?year=2018" # Read biological data:
+# "http://dmapps/en/scuba/reports/scuba_transect/?year=2021" # Scuba transect table:
+
+#' @export read.scuba
 read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
    # Define Scuba data path:
    path <- paste0(options()$gulf.path$lobster$scuba, "reports/")
@@ -27,6 +32,13 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
       if (table == "biological") table <- "observations"
    } 
    
+   # Build transect index table:
+   transects <- read.csv("http://dmapps/en/scuba/reports/dive/?year")
+   names(transects) <- gsub("_", ".", names(transects))
+   transects <- unique(transects[c("transect", "transect.id")])
+   transects <- transects[!is.na(transects$transect.id), ]
+   transects$region <- unlist(lapply(strsplit(gsub(")", "", transects$transect), "[(]"), function(x) x[length(x)]))
+
    # Read outings table:
    if (!missing(year)){
       outings <- NULL
@@ -46,9 +58,11 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
       outings$time <- substr(outings$datetime, 12, 19)
       names(outings) <- gsub("^id$", "outing.id", names(outings))
       names(outings) <- gsub("_", ".", names(outings))
+      outings$region <- transects$region[match(outings$transect, transects$transect)]
+      outings$region[is.na(outings$region)] <- ""
       
       # Re-order variables:
-      start <- c("outing.id", "transect", "date", "time")
+      start <- c("region", "outing.id", "transect", "date", "time")
       end <- c("weather.notes", "comment")
       outings <- outings[, c(start, setdiff(names(outings), c(start, end)), end)]
       
@@ -76,16 +90,18 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
       dives$date <- substr(dives$start.descent, 1, 10)
       dives$start.time <- substr(dives$start.descent, 12, 19)
       dives$bottom.time.mins <- dives$bottom.time
-      
-      # Re-order variables:
-      start <- c("dive.id", "outing.id", "transect", "diver", "date", "start.time", "bottom.time.mins")
-      end <- c("comment")
-      dives <- dives[, c(start, setdiff(names(dives), c(start, end)), end)]
+      dives$region <- transects$region[match(dives$transect, transects$transect)]
+      dives$region[is.na(dives$region)] <- ""
       
       # Remove empty rows:
       remove <- c("created.by", "created.at", "updated.by", "updated.at", "sample", "created.by.id", 
                   "updated.by.id", "diver.id", "transect.id", "outing", "start.descent", "bottom.time")
-      dives <- dives[, setdiff(names(dives), remove)]     
+      dives <- dives[, setdiff(names(dives), remove)]   
+      
+      # Re-order variables:
+      start <- c("region", "dive.id", "outing.id", "transect", "diver", "date", "start.time", "bottom.time.mins")
+      end <- c("comment")
+      dives <- dives[, c(start, setdiff(names(dives), c(start, end)), end)]
    }
    
    # Read section table:
@@ -102,19 +118,23 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
       names(sections) <- gsub("sample", "outing", names(sections))
       names(sections) <- gsub("_", ".", names(sections))
       names(sections) <- gsub("^id$", "section.id", names(sections))
+      names(sections) <- gsub("^transect$", "transect.id", names(sections))
+  
+      sections$region <- transects$region[match(sections$transect.id, transects$transect.id)]
+      sections$region[is.na(sections$region)] <- ""
       
       # Format 'comment field:
       sections$comment[is.na(sections$comment)] <- ""
       
-      # Re-order variables:
-      start <- c("region", "outing.id", "dive.id", "section.id", "transect", "diver", "date", "side.display")
-      end <- c("comment")
-      sections <- sections[, c(start, setdiff(names(sections), c(start, end)), end)]
-      
       # Remove empty rows:
       remove <- c("created.by", "dive", "created.at", "updated.by", "updated.at", "sample", "created.by.id", 
-                  "interval.display", "outing", "updated.by.id", "diver.id", "transect.id", "outing", "start.descent", "bottom.time")
-      sections <- sections[, setdiff(names(sections), remove)]     
+                  "interval.display", "outing", "updated.by.id", "diver.id", "outing", "start.descent", "bottom.time")
+      sections <- sections[, setdiff(names(sections), remove)]  
+      
+      # Re-order variables:
+      start <- c("region", "outing.id", "dive.id", "section.id", "transect.id", "diver", "date", "side.display")
+      end <- c("comment")
+      sections <- sections[, c(start, setdiff(names(sections), c(start, end)), end)]
    }
    
    # Collate data tables:   
