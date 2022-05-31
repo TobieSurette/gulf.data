@@ -51,8 +51,8 @@ read.gulf.bio <- function(year, species, survey = "rv", source = "oracle",
    # Format data and time:
    x$date <- substr(x$date, 1, 10)
    
-   # Format comment field:
-   x$comment[is.na(x$comment)] <- ""
+   # Format comments:
+   if ("comment" %in% names(x)) x$comment[is.na(x$comment)] <- "" else x$comment <- ""
    
    # Convert data to numeric:
    for (i in 1:ncol(x)) if (all((gsub("[0-9.]", "", x[,i]) == "") | is.na(x[,i]))) x[,i] <- as.numeric(x[,i])

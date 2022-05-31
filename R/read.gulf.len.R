@@ -58,8 +58,8 @@ read.gulf.len <- function(year, species, survey = "rv", source = "oracle",
    # Format length interval:
    x$length.interval <- 1 / x$length.interval
    
-   # Format comment field:
-   x$comment[is.na(x$comment)] <- ""
+   # Format comments:
+   if ("comment" %in% names(x)) x$comment[is.na(x$comment)] <- "" else x$comment <- ""
    
    # Delete irrelevant or empty variables:  
    delete <- c("card.type", "gsseriesid", "inf.id", "stratum", "repeat.number", "uarea", "experiment", 
