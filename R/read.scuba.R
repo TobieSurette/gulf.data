@@ -32,18 +32,16 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
       if (table == "biological") table <- "observations"
    } 
    
-   
-   outings <- read.csv("http://dmapps/en/scuba/reports/outing/?year")
-   dives <- read.csv("http://dmapps/en/scuba/reports/dive/?year")
-   
    # Build transect index table:
-   transects <- read.csv("http://dmapps/en/scuba/reports/dive/?year")
-   names(transects) <- gsub("_", ".", names(transects))
-   transects$date <- substr(transects$start.descent, 1, 10)
-   transects <- unique(transects[c("transect", "transect.id")])
-   transects <- transects[!is.na(transects$transect.id), ]
+   transects <- sort(unique(read.csv("http://dmapps/en/scuba/reports/outing/?year")$transect))
+   transects <- data.frame(transect = transects)
+   transects <- transects[transects$transect != "", , drop = FALSE]
    transects$region <- unlist(lapply(strsplit(gsub(")", "", transects$transect), "[(]"), function(x) x[length(x)]))
-
+   transects$name <- transects$transect
+   transects$number <- as.numeric(unlist(lapply(strsplit(gsub("T-", "", transects$transect), " "), function(x) x[1])))
+   transects <- transects[, setdiff(names(transects), "transect")]
+   transects <- transects[, c("region", "number", "name")]
+   
    # Read outings table:
    if (!missing(year)){
       outings <- NULL
@@ -63,11 +61,12 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
       outings$time <- substr(outings$datetime, 12, 19)
       names(outings) <- gsub("^id$", "outing.id", names(outings))
       names(outings) <- gsub("_", ".", names(outings))
-      outings$region <- transects$region[match(outings$transect, transects$transect)]
+      names(outings) <- gsub("^transect$", "transect.name", names(outings))
+      outings$region <- transects$region[match(outings$transect.name, transects$name)]
       outings$region[is.na(outings$region)] <- ""
       
       # Re-order variables:
-      start <- c("region", "outing.id", "transect", "date", "time")
+      start <- c("region", "outing.id", "transect.name", "date", "time")
       end <- c("weather.notes", "comment")
       outings <- outings[, c(start, setdiff(names(outings), c(start, end)), end)]
       
@@ -95,7 +94,8 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
       dives$date <- substr(dives$start.descent, 1, 10)
       dives$start.time <- substr(dives$start.descent, 12, 19)
       dives$bottom.time.mins <- dives$bottom.time
-      dives$region <- transects$region[match(dives$transect, transects$transect)]
+      names(dives) <- gsub("^transect$", "transect.name", names(dives))
+      dives$region <- transects$region[match(dives$transect.name, transects$name)]
       dives$region[is.na(dives$region)] <- ""
       
       # Remove empty rows:
@@ -104,7 +104,7 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
       dives <- dives[, setdiff(names(dives), remove)]   
       
       # Re-order variables:
-      start <- c("region", "dive.id", "outing.id", "transect", "diver", "date", "start.time", "bottom.time.mins")
+      start <- c("region", "dive.id", "outing.id", "transect.name", "diver", "date", "start.time", "bottom.time.mins")
       end <- c("comment")
       dives <- dives[, c(start, setdiff(names(dives), c(start, end)), end)]
    }
@@ -123,10 +123,13 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
       names(sections) <- gsub("sample", "outing", names(sections))
       names(sections) <- gsub("_", ".", names(sections))
       names(sections) <- gsub("^id$", "section.id", names(sections))
-      names(sections) <- gsub("^transect$", "transect.id", names(sections))
-  
-      sections$region <- transects$region[match(sections$transect.id, transects$transect.id)]
-      sections$region[is.na(sections$region)] <- ""
+      names(sections) <- gsub("^transect$", "transect.number", names(sections))
+      
+      tmp <- sections[c("region", "transect.number")]
+      names(tmp) <- c("region", "number")
+      ix <- match(tmp, transects[c("region", "number")])
+      sections$transect.name <- transects$name[ix]
+      sections$transect.name[is.na(sections$transect.name)] <- ""
       
       # Format 'comment field:
       sections$comment[is.na(sections$comment)] <- ""
@@ -138,7 +141,7 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
       sections <- sections[, setdiff(names(sections), remove)]  
       
       # Re-order variables:
-      start <- c("region", "outing.id", "dive.id", "section.id", "transect.id", "diver", "date", "side.display")
+      start <- c("region", "outing.id", "dive.id", "section.id", "transect.name", "diver", "date", "side.display")
       end <- c("comment")
       sections <- sections[, c(start, setdiff(names(sections), c(start, end)), end)]
       
