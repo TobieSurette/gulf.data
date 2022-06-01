@@ -8,6 +8,8 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+options(rmarkdown.html_vignette.check_title = FALSE)
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -24,7 +26,9 @@ library(gulf.data)
 ```{r}
 x <- read.gulf.set(year = 2020, password="R_GulfPKG_19")
 ## how many sets by stratum and experiment?
-table(x$stratum, x$experiment)
+my.table <- table(x$stratum, x$experiment)
+knitr::kable(my.table)
+
 ```
 
 ## Catch cards
