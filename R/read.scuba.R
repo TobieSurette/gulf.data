@@ -32,9 +32,14 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
       if (table == "biological") table <- "observations"
    } 
    
+   
+   outings <- read.csv("http://dmapps/en/scuba/reports/outing/?year")
+   dives <- read.csv("http://dmapps/en/scuba/reports/dive/?year")
+   
    # Build transect index table:
    transects <- read.csv("http://dmapps/en/scuba/reports/dive/?year")
    names(transects) <- gsub("_", ".", names(transects))
+   transects$date <- substr(transects$start.descent, 1, 10)
    transects <- unique(transects[c("transect", "transect.id")])
    transects <- transects[!is.na(transects$transect.id), ]
    transects$region <- unlist(lapply(strsplit(gsub(")", "", transects$transect), "[(]"), function(x) x[length(x)]))
@@ -125,6 +130,7 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
       
       # Format 'comment field:
       sections$comment[is.na(sections$comment)] <- ""
+      sections$comment <- tolower(sections$comment)
       
       # Remove empty rows:
       remove <- c("created.by", "dive", "created.at", "updated.by", "updated.at", "sample", "created.by.id", 
@@ -135,6 +141,55 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
       start <- c("region", "outing.id", "dive.id", "section.id", "transect.id", "diver", "date", "side.display")
       end <- c("comment")
       sections <- sections[, c(start, setdiff(names(sections), c(start, end)), end)]
+      
+      # Identify complex or uncompleted sections:
+      ix <- sort(unique(c(grep("complex", sections$comment), 
+                          grep("compl[ea]te", sections$comment), 
+                          grep("skip", sections$comment), 
+                          grep("scrap", sections$comment),
+                          grep("no habitat", sections$comment),
+                          grep("no observations", sections$comment))))
+      sections$completed <- TRUE
+      sections$completed[ix] <- FALSE
+      
+      # Define visibility:
+      sections$visibility <- "Good"
+      ix <- sort(unique(c(grep("alg", sections$comment), 
+                          grep("kelp", sections$comment))))
+      sections$comment[ix] <- "Poor"
+      ix <- grep("visib", sections$comment)
+      sections$visibility[ix] <- "Poor"
+   }
+   
+   # Read biological data:
+   if (!missing(year)){
+      observations <- NULL
+      for (i in 1:length(year)) observations <- rbind(observations, read.csv(paste0(path, "observations/?year=", year[i])))
+   }else{
+      observations <- read.csv(path, "observations/?year")
+   }
+   # Remove empty columns:
+   if (compress) observations <- gulf.utils::compress(observations)
+   if (nrow(observations) > 0){
+      # Format variable names:
+      names(observations) <- gsub("sample", "outing", names(observations))
+      names(observations) <- gsub("_", ".", names(observations))
+      names(observations) <- gsub("^id$", "observation.id", names(observations))
+      names(observations) <- gsub("^transect$", "transect.id", names(observations))
+ 
+      # Format 'comment field:
+      observations$comment[is.na(observations$comment)] <- ""
+      observations$comment <- tolower(observations$comment)     
+      
+      # Remove empty rows:
+      remove <- c("created.by", "dive", "created.at", "updated.by", "updated.at", "sample", "created.by.id", 
+                  "interval.display", "outing", "updated.by.id", "diver.id", "outing", "start.descent", "bottom.time")
+      observations <- observations[, setdiff(names(observations), remove)]  
+      
+      # Format empty string values:
+      observations$sex[is.na(observations$sex)] <- ""
+      observations$egg.status[is.na(observations$egg.status)] <- ""
+      observations$side.display[is.na(observations$side.display)] <- ""
    }
    
    # Collate data tables:   
