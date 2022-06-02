@@ -49,13 +49,6 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
    }else{
       outings <- read.csv(path, "outing/?year")
    }
-   if (compress){
-      # Remove empty columns:
-      outings <- gulf.utils::compress(outings)
-      
-      # Remove empty rows:
-      outings <- outings[which(outings$transect != ""), ]
-   } 
    if (nrow(outings) > 0){
       outings$date <- substr(outings$datetime, 1, 10)
       outings$time <- substr(outings$datetime, 12, 19)
@@ -66,13 +59,21 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
       outings$region[is.na(outings$region)] <- ""
       
       # Re-order variables:
-      start <- c("region", "outing.id", "transect.name", "date", "time")
+      start <- c("region", "date", "time", "outing.id", "transect.name")
       end <- c("weather.notes", "comment")
       outings <- outings[, c(start, setdiff(names(outings), c(start, end)), end)]
       
       # Remove empty rows:
       remove <- c("datetime", "transect.id")
       outings <- outings[, setdiff(names(outings), remove)]   
+      
+      if (compress){
+         # Remove empty columns:
+         outings <- gulf.utils::compress(outings)
+         
+         # Remove empty rows:
+         outings <- outings[which(outings$transect != ""), ]
+      } 
    }
 
    # Read dive table:
@@ -82,8 +83,6 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
    }else{
       dives <- read.csv(path, "dive/?year")
    }
-   # Remove empty columns:
-   if (compress) dives <- gulf.utils::compress(dives)
    if (nrow(dives) > 0){
       # Format variable names:
       names(dives) <- gsub("sample", "outing", names(dives))
@@ -104,9 +103,12 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
       dives <- dives[, setdiff(names(dives), remove)]   
       
       # Re-order variables:
-      start <- c("region", "dive.id", "outing.id", "transect.name", "diver", "date", "start.time", "bottom.time.mins")
+      start <- c("region", "date", "start.time", "dive.id", "outing.id", "transect.name", "diver", "bottom.time.mins")
       end <- c("comment")
       dives <- dives[, c(start, setdiff(names(dives), c(start, end)), end)]
+      
+      # Remove empty columns:
+      if (compress) dives <- gulf.utils::compress(dives)
    }
    
    # Read section table:
@@ -116,8 +118,6 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
    }else{
       sections <- read.csv(path, "section/?year")
    }
-   # Remove empty columns:
-   if (compress) sections <- gulf.utils::compress(sections)
    if (nrow(sections) > 0){
       # Format variable names:
       names(sections) <- gsub("sample", "outing", names(sections))
@@ -141,7 +141,7 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
       sections <- sections[, setdiff(names(sections), remove)]  
       
       # Re-order variables:
-      start <- c("region", "outing.id", "dive.id", "section.id", "transect.name", "diver", "date", "side.display")
+      start <- c("region", "date", "outing.id", "transect.name", "diver", "dive.id", "section.id", "side.display")
       end <- c("comment")
       sections <- sections[, c(start, setdiff(names(sections), c(start, end)), end)]
       
@@ -150,18 +150,29 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
                           grep("compl[ea]te", sections$comment), 
                           grep("skip", sections$comment), 
                           grep("scrap", sections$comment),
-                          grep("no habitat", sections$comment),
-                          grep("no observations", sections$comment))))
+                          grep("scrap", sections$comment),
+                          grep("bigs* *roc", sections$comment),
+                          grep("gros*e* *roc", sections$comment),
+                          grep("not +done", sections$comment))))
       sections$completed <- TRUE
       sections$completed[ix] <- FALSE
       
+      #grep("no +habitat", sections$comment)
+      #grep("no +observations", sections$comment)
+      
       # Define visibility:
       sections$visibility <- "Good"
-      ix <- sort(unique(c(grep("alg", sections$comment), 
-                          grep("kelp", sections$comment))))
-      sections$comment[ix] <- "Poor"
-      ix <- grep("visib", sections$comment)
+      #ix <- sort(unique(c(grep("alg", sections$comment), 
+      #                    grep("seaweed", sections$comment), 
+      #                    grep("kelp", sections$comment))))
+      #sections$visibility[ix] <- "Poor"
+      ix <- sort(unique(c(grep("visi[bl]", sections$comment),
+                          grep("bad +viz", sections$comment),
+                          grep("no +viz", sections$comment))))
       sections$visibility[ix] <- "Poor"
+      
+      # Remove empty columns:
+      if (compress) sections <- gulf.utils::compress(sections)
    }
    
    # Read biological data:
@@ -171,8 +182,6 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
    }else{
       observations <- read.csv(path, "observations/?year")
    }
-   # Remove empty columns:
-   if (compress) observations <- gulf.utils::compress(observations)
    if (nrow(observations) > 0){
       # Format variable names:
       names(observations) <- gsub("sample", "outing", names(observations))
@@ -186,26 +195,34 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
       
       # Remove empty rows:
       remove <- c("created.by", "dive", "created.at", "updated.by", "updated.at", "sample", "created.by.id", 
-                  "interval.display", "outing", "updated.by.id", "diver.id", "outing", "start.descent", "bottom.time")
+                  "interval.display", "transect.id", "outing", "updated.by.id", "diver.id", "species.id", "outing", "start.descent", "bottom.time")
       observations <- observations[, setdiff(names(observations), remove)]  
       
       # Format empty string values:
       observations$sex[is.na(observations$sex)] <- ""
       observations$egg.status[is.na(observations$egg.status)] <- ""
       observations$side.display[is.na(observations$side.display)] <- ""
+      
+      # Import index variables from sections table: 
+      ix <- match(observations$section.id, sections$section.id)
+      observations$dive.id       <- sections$dive.id[ix]
+      observations$transect.name <- sections$transect.name[ix]
+      observations$diver         <- sections$diver[ix]
+      
+      # Re-order variables:
+      start <- c("region", "date", "observation.id", "outing.id", "transect.name", "dive.id", "diver", "section.id", "section", "side.display", "species")
+      end <- c("comment")
+      observations <- observations[, c(start, setdiff(names(observations), c(start, end)), end)]
+      
+      # Remove empty columns:
+      if (compress) observations <- gulf.utils::compress(observations)
    }
    
    # Collate data tables:   
    res <- list(outings = outings, 
                dives = dives, 
-               sections = sections)
+               sections = sections, 
+               observations = observations)
    
    return(res)
 }
-
-
-
-
-
-   
-
