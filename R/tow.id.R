@@ -8,8 +8,9 @@
 #'               \sQuote{observed}, \sQuote{file name}, \sQuote{header}, and \sQuote{time}. 
 #' @param max.distance Numeric valiue specifying the maximum distance tolerance (in kilometers) when determining the tow 
 #'                     identification number for a \code{probe} object from lat-lon coordinates.         
+#' @param ... Not used.
 #' 
-#' #' @examples 
+#' @examples 
 #' files <- locate.minilog(2018)
 #' tow.id(read.minilog(files[200]))          
 #' 

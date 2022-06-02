@@ -1,4 +1,4 @@
-#' Extract Tow Number 
+#' @title Extract Tow Number 
 #' 
 #' @description Functions to extract or determine trawl tow numbers.
 #' 
@@ -7,7 +7,8 @@
 #'               \code{probe} object. Available methods are \sQuote{time} and \sQuote{latlong}.
 #' @param max.distance Numeric valiue specifying the maximum distance tolerance (in kilometers) when determining the tow 
 #'                     identification number for a \code{probe} object from lat-lon coordinates.         
-#'
+#' @param ... Not used.
+#' 
 #' @section Methods:
 #' \describe{
 #'    \item{\code{tow.number}}{Generic \code{tow.number} method.}

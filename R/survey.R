@@ -1,10 +1,10 @@
-#' Survey Identifiers
+#' @title Survey Identifiers
 #'
 #' @description Returns research survey codes and identifiers.
 #'
 #' @param x Object.
 #' @param year Survey year(s).
-#'
+#' @param project Data project.
 #' @param survey Character string specifying the research survey. The input is passed onto the
 #'               \code{\link{project}} function. To see the complete list of survey IDs available,
 #'               run \code{survey()}.
@@ -15,7 +15,7 @@
 #' # Complete lists survey codes:
 #' survey()                      # Complete survey table.
 #' survey(project = "sept")      # September multispecies survey table.
-#  survey("rv")                  # September multispecies survey table.
+#' survey("rv")                  # September multispecies survey table.
 #' survey(project = "ns")        # Northumberland Strait survey ID.
 #' survey(project = "northumb")  # Northumberland Strait survey ID.
 #'

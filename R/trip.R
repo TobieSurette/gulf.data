@@ -1,4 +1,4 @@
-#' Trip Identifiers
+#' @title Trip Identifiers
 #' 
 #' @description Return unique identifiers for each fishing trip in a data set.
 #' 
