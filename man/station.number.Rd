@@ -3,7 +3,7 @@
 \name{station.number}
 \alias{station.number}
 \alias{station.number.default}
-\title{Return a Station Number}
+\title{Sampling Station Numbering}
 \usage{
 station.number(x, ...)
 
@@ -16,28 +16,20 @@ station.number(x, ...)
 )
 }
 \arguments{
-\item{longitude}{A numeric vector. A coordinate vector in decimal degrees.}
+\item{longitude, latitude}{Numeric vector in decimal degrees.}
 
-\item{latitude}{A numeric vector. A coordinate vector in decimal degrees.}
+\item{time}{Numeric vector or time (\sQuote{POSIX}) objects.}
 
-\item{time}{A numeric vector or a vector of a vector of \code{R} time
-(\sQuote{POSIX}) objects.}
+\item{distance.tolerance}{Distance (in kilometers) below which a pair of points is considered to belong to the same sampling station.}
 
-\item{distance.tolerance}{A numeric value specifying the distance (in
-kilometers) below which a pair of points is considered to belong to the same
-group or station.}
-
-\item{time.tolerance}{A numeric value specifying the time-difference below
-which a pair of points is considered to belong to the same group or station.
-The units are in minutes if the \code{time} argument belongs to a
-\sQuote{POSIX} class.}
+\item{time.tolerance}{Numeric value specifying the time-difference below which a pair of points is considered 
+to have occured at the same time.}
 }
 \description{
-Functions to extract or determine trawl tow numbers.
-}
-\details{
-Partition a set of points into groups based on 
-spatial and/or temporal proximity.
+Functions to extract or determine trawl sampling station identification numbers. 
+             A sampling station is to be interpreted as a particular location, e.g. if two tows share
+             a station number they can be considered as having been sampled in the same location. 
+             Station numbers can be assigned or determined based on spatial proximity.
 }
 \section{Methods (by class)}{
 \itemize{
