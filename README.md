@@ -40,6 +40,7 @@ Function           | Description
 Function           | Description
 ------------------ | --------------------------------------------------
 `category`         | Determine or extract animal category data.
+`chela.height`     | Determine or extract crab chela height data.
 `egg.condition`    | Extract egg condition data.
 `gear`             | Extract sampling gear data. 
 `grow`             | Predict growth.
