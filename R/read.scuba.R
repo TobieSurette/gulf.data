@@ -6,6 +6,7 @@
 #' @param table Character string specifying which data table to read. Options are \sQuote{outings}, \sQuote{dives}, \sQuote{sections}, \sQuote{biological} or \sQuote{observations}.
 #' @param compress Logical value specifying whether to automatically remove empty data columns or rows.
 #' @param source Data source.
+#' @param echo Logical value specifying whether to report progress as data tables are being read. 
 #'                           
 #' @examples 
 #' x <- read.scuba(2012:2014)  # Read all SCUBA data tables for the 2012 to 2014 seasons.
@@ -22,7 +23,7 @@
 # "http://dmapps/en/scuba/reports/scuba_transect/?year=2021" # Scuba transect table:
 
 #' @export read.scuba
-read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
+read.scuba <- function(year, table, compress = TRUE, source = "dmapps", echo = TRUE){
    # Define Scuba data path:
    path <- paste0(options()$gulf.path$lobster$scuba, "reports/")
    
@@ -33,6 +34,7 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
    } 
    
    # Build transect index table:
+   if (echo) cat("Building transect table.\n")
    transects <- sort(unique(read.csv("http://dmapps/en/scuba/reports/outing/?year")$transect))
    transects <- data.frame(transect = transects)
    transects <- transects[transects$transect != "", , drop = FALSE]
@@ -45,7 +47,10 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
    # Read outings table:
    if (!missing(year)){
       outings <- NULL
-      for (i in 1:length(year)) outings <- rbind(outings, read.csv(paste0(path, "outing/?year=", year[i])))
+      for (i in 1:length(year)){
+         if (echo) cat(paste0("Reading outing table for ", year[i], ".\n"))
+         outings <- rbind(outings, read.csv(paste0(path, "outing/?year=", year[i])))
+      } 
    }else{
       outings <- read.csv(path, "outing/?year")
    }
@@ -79,7 +84,10 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
    # Read dive table:
    if (!missing(year)){
       dives <- NULL
-      for (i in 1:length(year)) dives <- rbind(dives, read.csv(paste0(path, "dive/?year=", year[i])))
+      for (i in 1:length(year)){
+         if (echo) cat(paste0("Reading dive table for ", year[i], ".\n"))
+         dives <- rbind(dives, read.csv(paste0(path, "dive/?year=", year[i])))
+      } 
    }else{
       dives <- read.csv(path, "dive/?year")
    }
@@ -114,7 +122,10 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
    # Read section table:
    if (!missing(year)){
       sections <- NULL
-      for (i in 1:length(year)) sections <- rbind(sections, read.csv(paste0(path, "section/?year=", year[i])))
+      for (i in 1:length(year)){
+         if (echo) cat(paste0("Reading section table for ", year[i], ".\n"))
+         sections <- rbind(sections, read.csv(paste0(path, "section/?year=", year[i])))
+      } 
    }else{
       sections <- read.csv(path, "section/?year")
    }
@@ -178,7 +189,10 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
    # Read biological data:
    if (!missing(year)){
       observations <- NULL
-      for (i in 1:length(year)) observations <- rbind(observations, read.csv(paste0(path, "observations/?year=", year[i])))
+      for (i in 1:length(year)){
+         if (echo) cat(paste0("Reading observation table for ", year[i], ".\n"))
+         observations <- rbind(observations, read.csv(paste0(path, "observations/?year=", year[i])))
+      } 
    }else{
       observations <- read.csv(path, "observations/?year")
    }
@@ -221,6 +235,7 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps"){
    # Collate data tables:   
    res <- list(outings = outings, 
                dives = dives, 
+               transects = transects,
                sections = sections, 
                observations = observations)
    

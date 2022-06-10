@@ -1,4 +1,4 @@
-#' Extract Tow Number 
+#' @title Extract Tow Number 
 #' 
 #' @description Functions to extract or determine trawl tow numbers.
 #' 

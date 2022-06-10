@@ -4,7 +4,7 @@
 \alias{read.scuba}
 \title{Read Scuba Survey Data}
 \usage{
-read.scuba(year, table, compress = TRUE, source = "dmapps")
+read.scuba(year, table, compress = TRUE, source = "dmapps", echo = TRUE)
 }
 \arguments{
 \item{year}{Study year(s).}
@@ -14,6 +14,8 @@ read.scuba(year, table, compress = TRUE, source = "dmapps")
 \item{compress}{Logical value specifying whether to automatically remove empty data columns or rows.}
 
 \item{source}{Data source.}
+
+\item{echo}{Logical value specifying whether to report progress as data tables are being read.}
 }
 \description{
 Functions to access data from the SCUBA transect survey in the southern Gulf of Saint Lawrence.
