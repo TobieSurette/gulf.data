@@ -46,18 +46,18 @@ Functions to extract or determine trawl tow identifiers.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{default}: Default \sQuote{tow.id} method.
+\item \code{tow.id(default)}: Default \sQuote{tow.id} method.
 
-\item \code{probe}: \sQuote{tow.id} \sQuote{probe} method.
+\item \code{tow.id(probe)}: \sQuote{tow.id} \sQuote{probe} method.
 
-\item \code{star.oddi}: \sQuote{tow.id} sQuote{star.oddi} method.
+\item \code{tow.id(star.oddi)}: \sQuote{tow.id} sQuote{star.oddi} method.
 
-\item \code{minilog}: \sQuote{tow.id} \sQuote{minilog} method.
+\item \code{tow.id(minilog)}: \sQuote{tow.id} \sQuote{minilog} method.
 
-\item \code{scscat}: \sQuote{tow.id} \sQuote{scscat} method.
+\item \code{tow.id(scscat)}: \sQuote{tow.id} \sQuote{scscat} method.
 
-\item \code{scsbio}: \sQuote{tow.id} \sQuote{scsbio} method.
+\item \code{tow.id(scsbio)}: \sQuote{tow.id} \sQuote{scsbio} method.
 
-\item \code{scslen}: \sQuote{tow.id} \sQuote{scslen} method.
+\item \code{tow.id(scslen)}: \sQuote{tow.id} \sQuote{scslen} method.
+
 }}
-

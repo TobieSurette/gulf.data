@@ -37,23 +37,23 @@ Class containers for snow crab survey data.
 }
 \section{Functions}{
 \itemize{
-\item \code{scsset}: Generic \code{scsset} method.
+\item \code{scsset()}: Generic \code{scsset} method.
 
-\item \code{scscat}: Generic \code{scscat} method.
+\item \code{scscat()}: Generic \code{scscat} method.
 
-\item \code{scsbio}: Generic \code{scsbio} method.
+\item \code{scsbio()}: Generic \code{scsbio} method.
 
-\item \code{scslen}: Generic \code{scslen} method.
+\item \code{scslen()}: Generic \code{scslen} method.
 
-\item \code{scsset.default}: Create an \code{scsset} object.
+\item \code{scsset(default)}: Create an \code{scsset} object.
 
-\item \code{scscat.default}: Create an \code{scscat} object.
+\item \code{scscat(default)}: Create an \code{scscat} object.
 
-\item \code{scsbio.default}: Create an \code{scsbio} object.
+\item \code{scsbio(default)}: Create an \code{scsbio} object.
 
-\item \code{scslen.default}: Create an \code{scslen} object.
+\item \code{scslen(default)}: Create an \code{scslen} object.
+
 }}
-
 \examples{
 # Create 'scscat' object from a data frame:
 x <- scscat(data.frame(date = "2020-07-19", tow.id = "GP001F", tow.number = 1, species = 10, number.caught = 144))

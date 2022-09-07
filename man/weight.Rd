@@ -62,13 +62,13 @@ Returns an estimate of the weight of individual organisms for a specified length
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{default}: Default weight function.
+\item \code{weight(default)}: Default weight function.
 
-\item \code{scsbio}: Weight function for \code{scsbio} objects.
+\item \code{weight(scsbio)}: Weight function for \code{scsbio} objects.
 
-\item \code{scobs}: Weight function for \code{scobs} objects.
+\item \code{weight(scobs)}: Weight function for \code{scobs} objects.
+
 }}
-
 \examples{
 # Weights for Atlantic cod:
 weight(0:100, species = 10)

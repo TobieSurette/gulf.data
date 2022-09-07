@@ -31,9 +31,9 @@ Functions to read, manipulate and analyze \strong{star.oddi} trawl acoustic moni
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{default}: Default \code{star.oddi} method. Create an \code{star.oddi} object.
-}}
+\item \code{star.oddi(default)}: Default \code{star.oddi} method. Create an \code{star.oddi} object.
 
+}}
 \examples{
 # Star Oddi files for the 2020 snow crab survey:
 locate.star.oddi(year = 2020)

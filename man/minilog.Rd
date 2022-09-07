@@ -31,9 +31,9 @@ Functions to read, manipulate and analyze \strong{minilog} trawl acoustic monito
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{default}: Default \code{minilog} method. Create an \code{minilog} object.
-}}
+\item \code{minilog(default)}: Default \code{minilog} method. Create an \code{minilog} object.
 
+}}
 \examples{
 # minilog files for the 2020 snow crab survey:
 locate.minilog(year = 2020)

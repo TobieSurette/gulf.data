@@ -26,11 +26,11 @@ Functions to extract or determine trawl tow numbers.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{default}: Default 'tow.number' method.
+\item \code{tow.number(default)}: Default 'tow.number' method.
 
-\item \code{data.frame}: Default 'tow.number' method.
+\item \code{tow.number(data.frame)}: Default 'tow.number' method.
+
 }}
-
 \section{Methods}{
 
 \describe{
