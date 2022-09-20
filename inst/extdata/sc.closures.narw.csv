@@ -1284,3 +1284,323 @@ HG53,2021/11/11,2021/11/23,Full Grid,72 hour gear removal
 HG54,2021/11/11,2021/11/23,>20 Fathom ,72 hour gear removal
 HD50,2021/11/15,2021/11/23,>20 Fathom ,72 hour gear removal
 HD51,2021/11/15,2021/11/23,>20 Fathom ,72 hour gear removal
+HA40,2022/5/11,,Full Grid,48 hour Gear Removal - Medium Impact CFA12
+HB40,2022/5/11,,Full Grid,48 hour Gear Removal - Medium Impact CFA12
+HC40,2022/5/11,,Full Grid,48 hour Gear Removal - Medium Impact CFA12
+HC41,2022/5/11,,Full Grid,48 hour Gear Removal - Medium Impact CFA12
+HA38,2022/5/12,,Full Grid,48 hour Gear Removal - Medium Impact CFA12/CFA 26 - Low Impact LFA24
+HA39,2022/5/12,,Full Grid,48 hour Gear Removal - Medium Impact CFA12/CFA 26 - Low Impact LFA24
+HB38,2022/5/12,,Full Grid,48 hour Gear Removal - Medium Impact CFA12/CFA 26 - Low Impact LFA24
+HB39,2022/5/12,,Full Grid,48 hour Gear Removal - Medium Impact CFA12/CFA 26 - Low Impact LFA24
+HC38,2022/5/12,,Full Grid,48 hour Gear Removal - Medium Impact CFA12/CFA 26 - Low Impact LFA24
+HC39,2022/5/12,,Full Grid,48 hour Gear Removal - Medium Impact CFA12/CFA 26 - Low Impact LFA24
+HD39,2022/5/12,,Full Grid,48 hour Gear Removal - Medium Impact CFA12/CFA 26 - Low Impact LFA24
+HD40,2022/5/12,,Full Grid,48 hour Gear Removal - Medium Impact CFA12/CFA 26 - Low Impact LFA24
+HD41,2022/5/12,,Full Grid,48 hour Gear Removal - Medium Impact CFA12/CFA 26 - Low Impact LFA24
+HD42,2022/5/12,,Full Grid,48 hour Gear Removal - Medium Impact CFA12/CFA 26 - Low Impact LFA24
+HD43,2022/5/12,,Full Grid,48 hour Gear Removal - Medium Impact CFA12/CFA 26 - Low Impact LFA24
+GZ40,2022/5/15,,Full Grid,72 hour Gear Removal - Medium Impact CFA12
+HE41,2022/5/16,,Full Grid,"72 hour Gear Removal - Medium Impact CFA12, CFA26 & LFA24"
+HE42,2022/5/16,,Full Grid,"72 hour Gear Removal - Medium Impact CFA12, CFA26 & LFA24"
+HE43,2022/5/16,,Full Grid,"72 hour Gear Removal - Medium Impact CFA12, CFA26 & LFA24"
+HF41,2022/5/16,,Full Grid,"72 hour Gear Removal - Medium Impact CFA12, CFA26 & LFA24"
+HF42,2022/5/16,,Full Grid,"72 hour Gear Removal - Medium Impact CFA12, CFA26 & LFA24"
+HF43,2022/5/16,,Full Grid,"72 hour Gear Removal - Medium Impact CFA12, CFA26 & LFA24"
+HE39,2022/5/19,,Full Grid,"96 hour Gear Removal - Medium Impact CFA26, LFA24"
+HE40,2022/5/19,,Full Grid,"96 hour Gear Removal - Medium Impact CFA26, LFA24"
+HF39,2022/5/19,,>20 Fathom ,"96 hour Gear Removal - Medium Impact CFA26, LFA24"
+HF40,2022/5/19,,>20 Fathom ,"96 hour Gear Removal - Medium Impact CFA26, LFA24"
+HD44,2022/5/22,,Full Grid,"72 hour Gear Removal - Medium Impact CFA26, CFA12 LFA24"
+HD45,2022/5/22,,Full Grid,"72 hour Gear Removal - Medium Impact CFA26, CFA12 LFA24"
+HE44,2022/5/22,,Full Grid,"72 hour Gear Removal - Medium Impact CFA26, CFA12 LFA24"
+HE45,2022/5/22,,Full Grid,"72 hour Gear Removal - Medium Impact CFA26, CFA12 LFA24"
+HF44,2022/5/22,,Full Grid,"72 hour Gear Removal - Medium Impact CFA26, CFA12 LFA24"
+HF45,2022/5/22,,Full Grid,"72 hour Gear Removal - Medium Impact CFA26, CFA12 LFA24"
+GZ37,2022/5/24,,Full Grid,"96 hour Gear Removal - Medium Impact CFA12, CFA26, LFA24, GFA 4T3a, GFA4s4 (low)"
+GZ38,2022/5/24,,Full Grid,"96 hour Gear Removal - Medium Impact CFA12, CFA26, LFA24, GFA 4T3a, GFA4s4 (low)"
+GZ39,2022/5/24,,Full Grid,"96 hour Gear Removal - Medium Impact CFA12, CFA26, LFA24, GFA 4T3a, GFA4s4 (low)"
+HA37,2022/5/24,,Full Grid,"96 hour Gear Removal - Medium Impact CFA12, CFA26, LFA24, GFA 4T3a, GFA4s4 (low)"
+HB37,2022/5/24,,Full Grid,"96 hour Gear Removal - Medium Impact CFA12, CFA26, LFA24, GFA 4T3a, GFA4s4 (low)"
+HC37,2022/5/25,,>20 Fathom ,"72 hour Gear Removal - Medium Impact CFA26, CFA12 GFA4T"
+GV39,2022/5/27,,Full Grid,"48 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+GV40,2022/5/27,,Full Grid,"48 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+GV41,2022/5/27,,Full Grid,"48 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+GW39,2022/5/27,,Full Grid,"48 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+GW40,2022/5/27,,Full Grid,"48 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+GW41,2022/5/27,,Full Grid,"48 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+GX39,2022/5/27,,Full Grid,"48 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+GX40,2022/5/27,,Full Grid,"48 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+GX41,2022/5/27,,Full Grid,"48 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+GZ36,2022/5/27,,Full Grid,"48 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+HA36,2022/5/27,,Full Grid,"48 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+HB36,2022/5/27,,>20 Fathom ,"48 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+HC42,2022/5/27,,Full Grid,"48 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+GX37,2022/5/30,,Full Grid,"48 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+GX38,2022/5/30,,Full Grid,"72 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+GY37,2022/5/30,,Full Grid,"72 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+GY38,2022/5/30,,Full Grid,"72 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+GY39,2022/5/30,,Full Grid,"72 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+GY40,2022/5/30,,Full Grid,"72 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+HD46,2022/5/30,,Full Grid,"72 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+HE46,2022/5/30,,Full Grid,"72 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+HF46,2022/5/30,,Full Grid,"72 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+HA44,2022/5/30,,Full Grid,48 Hour Gear Removal - Medium Impact CFA12; LFA22
+HA45,2022/5/30,,Full Grid,48 Hour Gear Removal - Medium Impact CFA12; LFA22
+HA46,2022/5/30,,Full Grid,48 Hour Gear Removal - Medium Impact CFA12; LFA22
+HB44,2022/5/30,,Full Grid,48 Hour Gear Removal - Medium Impact CFA12; LFA22
+HB45,2022/5/30,,Full Grid,48 Hour Gear Removal - Medium Impact CFA12; LFA22
+HB46,2022/5/30,,Full Grid,48 Hour Gear Removal - Medium Impact CFA12; LFA22
+HC44,2022/5/30,,Full Grid,48 Hour Gear Removal - Medium Impact CFA12; LFA22
+HC45,2022/5/30,,Full Grid,48 Hour Gear Removal - Medium Impact CFA12; LFA22
+HC46,2022/5/30,,Full Grid,48 Hour Gear Removal - Medium Impact CFA12; LFA22
+GY35,2022/6/3,,>20 Fathom ,"96 Hour Gear Removal - Medium Impact LFA22, CFA12"
+GY36,2022/6/3,,Full Grid,"96 Hour Gear Removal - Medium Impact LFA22, CFA12"
+GZ35,2022/6/3,,Full Grid,"96 Hour Gear Removal - Medium Impact LFA22, CFA12"
+HA35,2022/6/3,,Full Grid,"96 Hour Gear Removal - Medium Impact LFA22, CFA12"
+HE47,2022/6/3,,Full Grid,"72 Hour Gear Removal - Medium Impact CFA12, CFA26, LFA23C LFA23D, LFA22"
+HF47,2022/6/3,,Full Grid,"72 Hour Gear Removal - Medium Impact CFA12, CFA26, LFA23C LFA23D, LFA22"
+GW36,2022/6/3,,Full Grid,"72 Hour Gear Removal - Medium Impact CFA12,  LFA23C LFA23D, LFA22"
+GW37,2022/6/3,,Full Grid,"72 Hour Gear Removal - Medium Impact CFA12,  LFA23C LFA23D, LFA22"
+GW38,2022/6/3,,Full Grid,"72 Hour Gear Removal - Medium Impact CFA12,  LFA23C LFA23D, LFA22"
+GX36,2022/6/3,,Full Grid,"72 Hour Gear Removal - Medium Impact CFA12,  LFA23C LFA23D, LFA22"
+GY41,2022/6/9,,Full Grid,48 Hour Gear Removal 
+GT36,2022/6/14,,>20 Fathom ,72 Hour Gear Removal - Medium Impact CFA12
+GT37,2022/6/14,,Full Grid,72 Hour Gear Removal - Medium Impact CFA12
+GT38,2022/6/14,,Full Grid,72 Hour Gear Removal - Medium Impact CFA12
+GU36,2022/6/14,,>20 Fathom ,72 Hour Gear Removal - Medium Impact CFA12
+GU37,2022/6/14,,Full Grid,72 Hour Gear Removal - Medium Impact CFA12
+GU38,2022/6/14,,Full Grid,72 Hour Gear Removal - Medium Impact CFA12
+HA41,2022/6/14,,Full Grid,72 Hour Gear Removal - Medium Impact CFA12
+GY42,2022/6/19,,Full Grid,72 Hour Gear Removal - Medium Impact CFA12
+GV36,2022/6/25,,>20 Fathom ,48 Hour Gear Removal - Medium Impact CFA12
+GV37,2022/6/25,,Full Grid,48 Hour Gear Removal - Medium Impact CFA12
+GV38,2022/6/25,,Full Grid,48 Hour Gear Removal - Medium Impact CFA12
+GZ41,2022/6/25,,Full Grid,48 Hour Gear Removal - Medium Impact CFA12
+GZ42,2022/6/25,,Full Grid,48 Hour Gear Removal - Medium Impact CFA12
+HA42,2022/6/25,,Full Grid,48 Hour Gear Removal - Medium Impact CFA12
+HB41,2022/6/25,,Full Grid,48 Hour Gear Removal - Medium Impact CFA12
+HB42,2022/6/25,,Full Grid,48 Hour Gear Removal - Medium Impact CFA12
+HB35,2022/7/27,,Full Grid,48 Hour Gear Removal - Medium impact - CFA 12 25 26
+HA34,2022/8/5,,>20 Fathom ,72 hour gear removal - low impact  4ST
+HB34,2022/8/5,,>20 Fathom ,72 hour gear removal - low impact  4ST
+GZ34,2022/8/6,,>20 Fathom ,48 hour gear removal - low impact- LFA 12
+GW43,2022/8/17,,Full Grid,48 Hour Gear Removal 
+GW44,2022/8/17,,Full Grid,48 Hour Gear Removal 
+GW45,2022/8/17,,Full Grid,48 Hour Gear Removal 
+GX43,2022/8/17,,Full Grid,48 Hour Gear Removal 
+GX44,2022/8/17,,Full Grid,48 Hour Gear Removal 
+GX45,2022/8/17,,Full Grid,48 Hour Gear Removal 
+GY43,2022/8/17,,Full Grid,48 Hour Gear Removal 
+GY44,2022/8/17,,Full Grid,48 Hour Gear Removal 
+GY45,2022/8/17,,Full Grid,48 Hour Gear Removal 
+GY46,2022/8/18,,Full Grid,48 Hour Gear Removal 
+GZ44,2022/8/18,,Full Grid,48 Hour Gear Removal 
+GZ45,2022/8/18,,Full Grid,48 Hour Gear Removal 
+GZ46,2022/8/18,,Full Grid,48 Hour Gear Removal 
+HE48,2022/9/8,,Full Grid,48 hour gear removal - LFA 24 -  Medium Impact
+HE49,2022/9/8,,Full Grid,48 hour gear removal - LFA 24 -  Medium Impact
+HE50,2022/9/8,,>20 Fathom ,48 hour gear removal - LFA 24 -  Medium Impact
+HF48,2022/9/8,,Full Grid,48 hour gear removal - LFA 24 -  Medium Impact
+HF49,2022/9/8,,Full Grid,48 hour gear removal - LFA 24 -  Medium Impact
+HF50,2022/9/8,,Full Grid,48 hour gear removal - LFA 24 -  Medium Impact
+HG48,2022/9/8,,>20 Fathom ,48 hour gear removal - LFA 24 -  Medium Impact
+HG49,2022/9/8,,>20 Fathom ,48 hour gear removal - LFA 24 -  Medium Impact
+HG50,2022/9/8,,>20 Fathom ,48 hour gear removal - LFA 24 -  Medium Impact
+GW46,2022/9/10,,Full Grid,48 Hour Gear Removal 
+GX46,2022/9/10,,Full Grid,48 Hour Gear Removal 
+GX47,2022/9/10,,Full Grid,48 Hour Gear Removal 
+GY47,2022/9/10,,Full Grid,48 Hour Gear Removal 
+GZ47,2022/9/10,,Full Grid,48 Hour Gear Removal 
+GW51,2022/5/8,2022/5/18,Full Grid,72 hour Gear Removal - Medium Impact CFA12/12E
+GW52,2022/5/8,2022/5/18,Full Grid,72 hour Gear Removal - Medium Impact CFA12/12E
+GW53,2022/5/8,2022/5/18,Full Grid,72 hour Gear Removal - Medium Impact CFA12/12E
+GX51,2022/5/8,2022/5/18,Full Grid,72 hour Gear Removal - Medium Impact CFA12/12E
+GX52,2022/5/8,2022/5/18,Full Grid,72 hour Gear Removal - Medium Impact CFA12/12E
+GX53,2022/5/8,2022/5/18,Full Grid,72 hour Gear Removal - Medium Impact CFA12/12E
+GY51,2022/5/8,2022/5/18,>20 Fathom ,72 hour Gear Removal - Medium Impact CFA12/12E
+GY52,2022/5/8,2022/5/18,>20 Fathom ,72 hour Gear Removal - Medium Impact CFA12/12E
+GY53,2022/5/8,2022/5/18,>20 Fathom ,72 hour Gear Removal - Medium Impact CFA12/12E
+HA41,2022/5/11,2022/5/24,Full Grid,48 hour Gear Removal - Medium Impact CFA12
+HA42,2022/5/11,2022/5/24,Full Grid,48 hour Gear Removal - Medium Impact CFA12
+HA43,2022/5/11,2022/5/24,Full Grid,48 hour Gear Removal - Medium Impact CFA12
+HB41,2022/5/11,2022/5/24,Full Grid,48 hour Gear Removal - Medium Impact CFA12
+HB42,2022/5/11,2022/5/24,Full Grid,48 hour Gear Removal - Medium Impact CFA12
+HB43,2022/5/11,2022/5/24,Full Grid,48 hour Gear Removal - Medium Impact CFA12
+HC42,2022/5/11,2022/5/24,Full Grid,48 hour Gear Removal - Medium Impact CFA12
+HC43,2022/5/11,2022/5/25,Full Grid,48 hour Gear Removal - Medium Impact CFA12
+GZ41,2022/5/15,2022/5/26,Full Grid,72 hour Gear Removal - Medium Impact CFA12
+GZ42,2022/5/15,2022/5/26,Full Grid,72 hour Gear Removal - Medium Impact CFA12
+GS38,2022/5/24,2022/6/6,Full Grid,"96 hour Gear Removal - Medium Impact CFA12, CFA26, LFA24, GFA 4T3a, GFA4s4 (low)"
+GS39,2022/5/24,2022/6/6,Full Grid,"96 hour Gear Removal - Medium Impact CFA12, CFA26, LFA24, GFA 4T3a, GFA4s4 (low)"
+GS40,2022/5/24,2022/6/6,Full Grid,"96 hour Gear Removal - Medium Impact CFA12, CFA26, LFA24, GFA 4T3a, GFA4s4 (low)"
+GS41,2022/5/24,2022/6/6,Full Grid,"96 hour Gear Removal - Medium Impact CFA12, CFA26, LFA24, GFA 4T3a, GFA4s4 (low)"
+GT38,2022/5/24,2022/6/6,Full Grid,"96 hour Gear Removal - Medium Impact CFA12, CFA26, LFA24, GFA 4T3a, GFA4s4 (low)"
+GT39,2022/5/24,2022/6/6,Full Grid,"96 hour Gear Removal - Medium Impact CFA12, CFA26, LFA24, GFA 4T3a, GFA4s4 (low)"
+GT40,2022/5/24,2022/6/6,Full Grid,"96 hour Gear Removal - Medium Impact CFA12, CFA26, LFA24, GFA 4T3a, GFA4s4 (low)"
+GT41,2022/5/24,2022/6/6,Full Grid,"96 hour Gear Removal - Medium Impact CFA12, CFA26, LFA24, GFA 4T3a, GFA4s4 (low)"
+GU38,2022/5/24,2022/6/6,Full Grid,"96 hour Gear Removal - Medium Impact CFA12, CFA26, LFA24, GFA 4T3a, GFA4s4 (low)"
+GU39,2022/5/24,2022/6/6,Full Grid,"96 hour Gear Removal - Medium Impact CFA12, CFA26, LFA24, GFA 4T3a, GFA4s4 (low)"
+GU40,2022/5/24,2022/6/6,Full Grid,"96 hour Gear Removal - Medium Impact CFA12, CFA26, LFA24, GFA 4T3a, GFA4s4 (low)"
+GU41,2022/5/24,2022/6/6,Full Grid,"96 hour Gear Removal - Medium Impact CFA12, CFA26, LFA24, GFA 4T3a, GFA4s4 (low)"
+HD38,2022/5/24,2022/6/3,>20 Fathom ,"96 hour Gear Removal - Medium Impact CFA12, CFA26, LFA24, GFA 4T3a, GFA4s4 (low)"
+GT36,2022/5/27,2022/6/7,>20 Fathom ,"48 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+GT37,2022/5/27,2022/6/7,Full Grid,"48 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+GU36,2022/5/27,2022/6/7,>20 Fathom ,"48 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+GU37,2022/5/27,2022/6/7,Full Grid,"48 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+GV36,2022/5/27,2022/6/7,>20 Fathom ,"48 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+GV37,2022/5/27,2022/6/7,Full Grid,"48 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+GV38,2022/5/27,2022/6/7,Full Grid,"48 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+HC36,2022/5/30,2022/6/10,>20 Fathom ,"72 Hour Gear Removal - Medium Impact CFA12, GFA4T"
+HG45,2022/6/3,2022/6/13,>20 Fathom ,"72 Hour Gear Removal - Medium Impact CFA12, CFA26, LFA23C LFA23D, LFA22"
+HG46,2022/6/3,2022/6/13,>20 Fathom ,"72 Hour Gear Removal - Medium Impact CFA12, CFA26, LFA23C LFA23D, LFA22"
+HG47,2022/6/3,2022/6/13,>20 Fathom ,"72 Hour Gear Removal - Medium Impact CFA12, CFA26, LFA23C LFA23D, LFA22"
+IG22,2022/6/5,2022/6/16,Full Grid,72 Hour Gear Removal - 
+IG23,2022/6/5,2022/6/16,Full Grid,72 Hour Gear Removal - 
+IG24,2022/6/5,2022/6/16,Full Grid,72 Hour Gear Removal - 
+IG25,2022/6/5,2022/6/16,Full Grid,72 Hour Gear Removal - 
+IG26,2022/6/5,2022/6/16,Full Grid,72 Hour Gear Removal - 
+IH22,2022/6/5,2022/6/16,Full Grid,72 Hour Gear Removal - 
+IH23,2022/6/5,2022/6/16,Full Grid,72 Hour Gear Removal - 
+IH24,2022/6/5,2022/6/16,Full Grid,72 Hour Gear Removal - 
+IH25,2022/6/5,2022/6/16,Full Grid,72 Hour Gear Removal - 
+IH26,2022/6/5,2022/6/16,Full Grid,72 Hour Gear Removal - 
+II22,2022/6/5,2022/6/16,Full Grid,72 Hour Gear Removal - 
+II23,2022/6/5,2022/6/16,Full Grid,72 Hour Gear Removal - 
+II24,2022/6/5,2022/6/16,Full Grid,72 Hour Gear Removal - 
+II25,2022/6/5,2022/6/16,Full Grid,72 Hour Gear Removal - 
+II26,2022/6/5,2022/6/16,Full Grid,72 Hour Gear Removal - 
+HB41,2022/6/5,2022/6/17,Full Grid,
+HB42,2022/6/5,2022/6/17,Full Grid,
+HC43,2022/6/7,2022/6/20,Full Grid,72 Hour Gear Removal - Medium Impact CFA12
+GZ41,2022/6/9,2022/6/21,Full Grid,48 Hour Gear Removal 
+GZ44,2022/6/9,2022/6/21,Full Grid,48 Hour Gear Removal 
+GZ45,2022/6/9,2022/6/21,Full Grid,48 Hour Gear Removal 
+GZ46,2022/6/9,2022/6/21,Full Grid,48 Hour Gear Removal 
+HD47,2022/6/9,2022/6/22,>20 Fathom ,48 Hour Gear Removal 
+GV36,2022/6/12,2022/6/22,>20 Fathom ,96 Hour Gear Removal 
+GV37,2022/6/12,2022/6/22,Full Grid,96 Hour Gear Removal 
+GV38,2022/6/12,2022/6/22,Full Grid,96 Hour Gear Removal 
+GT35,2022/6/14,2022/6/27,>20 Fathom ,72 Hour Gear Removal - Medium Impact CFA12
+GU35,2022/6/14,2022/6/27,>20 Fathom ,72 Hour Gear Removal - Medium Impact CFA12
+GX35,2022/6/15,2022/6/27,>20 Fathom ,48 Hour Gear Removal 
+HE48,2022/6/15,2022/6/27,Full Grid,48 Hour Gear Removal 
+HE49,2022/6/15,2022/6/27,Full Grid,48 Hour Gear Removal 
+HE50,2022/6/15,2022/6/27,>20 Fathom ,48 Hour Gear Removal 
+HF48,2022/6/15,2022/6/27,Full Grid,48 Hour Gear Removal 
+HF49,2022/6/15,2022/6/27,Full Grid,48 Hour Gear Removal 
+HF50,2022/6/15,2022/6/27,Full Grid,48 Hour Gear Removal 
+HG48,2022/6/15,2022/6/27,>20 Fathom ,48 Hour Gear Removal 
+HG49,2022/6/15,2022/6/27,>20 Fathom ,48 Hour Gear Removal 
+HG50,2022/6/15,2022/6/27,>20 Fathom ,48 Hour Gear Removal 
+GW42,2022/6/19,2022/6/30,Full Grid,72 Hour Gear Removal - Medium Impact CFA12
+GX42,2022/6/19,2022/6/30,Full Grid,72 Hour Gear Removal - Medium Impact CFA12
+HA43,2022/6/25,2022/7/7,Full Grid,48 Hour Gear Removal - Medium Impact CFA12
+HB43,2022/6/25,2022/7/7,Full Grid,48 Hour Gear Removal - Medium Impact CFA12
+HC43,2022/6/25,2022/7/7,Full Grid,48 Hour Gear Removal - Medium Impact CFA12
+GS35,2022/6/14,2022/7/11,>20 Fathom ,72 Hour Gear Removal - Medium Impact CFA12
+GS36,2022/6/14,2022/7/11,Full Grid,72 Hour Gear Removal - Medium Impact CFA12
+GS43,2022/6/30,2022/7/11,Full Grid,72 Hour Gear Removal - Low Impact NAFO 4T & NAFO 4S
+GS44,2022/6/30,2022/7/11,Full Grid,72 Hour Gear Removal - Low Impact NAFO 4T & NAFO 4S
+GS45,2022/6/30,2022/7/11,Full Grid,72 Hour Gear Removal - Low Impact NAFO 4T & NAFO 4S
+GT43,2022/6/30,2022/7/11,Full Grid,72 Hour Gear Removal - Low Impact NAFO 4T & NAFO 4S
+GT44,2022/6/30,2022/7/11,Full Grid,72 Hour Gear Removal - Low Impact NAFO 4T & NAFO 4S
+GT45,2022/6/30,2022/7/11,Full Grid,72 Hour Gear Removal - Low Impact NAFO 4T & NAFO 4S
+GM31,2022/7/6,2022/7/15,Full Grid,48 Hour Gear Removal - Low Impact CFA16 Halibut 4S1
+GM32,2022/7/6,2022/7/15,Full Grid,48 Hour Gear Removal - Low Impact CFA16 Halibut 4S1
+GM33,2022/7/6,2022/7/15,>20 Fathom ,48 Hour Gear Removal - Low Impact CFA16 Halibut 4S1
+GN31,2022/7/6,2022/7/15,Full Grid,48 Hour Gear Removal - Low Impact CFA16 Halibut 4S1
+GN32,2022/7/6,2022/7/15,Full Grid,48 Hour Gear Removal - Low Impact CFA16 Halibut 4S1
+GN33,2022/7/6,2022/7/15,>20 Fathom ,48 Hour Gear Removal - Low Impact CFA16 Halibut 4S1
+GO31,2022/7/6,2022/7/15,Full Grid,48 Hour Gear Removal - Low Impact CFA16 Halibut 4S1
+GO32,2022/7/6,2022/7/15,Full Grid,48 Hour Gear Removal - Low Impact CFA16 Halibut 4S1
+GO33,2022/7/6,2022/7/15,Full Grid,48 Hour Gear Removal - Low Impact CFA16 Halibut 4S1
+GU43,2022/6/30,2022/7/15,Full Grid,72 Hour Gear Removal - Low Impact NAFO 4T & NAFO 4S
+GU44,2022/6/30,2022/7/15,Full Grid,72 Hour Gear Removal - Low Impact NAFO 4T & NAFO 4S
+GU45,2022/6/30,2022/7/15,Full Grid,72 Hour Gear Removal - Low Impact NAFO 4T & NAFO 4S
+GS37,2022/6/14,2022/7/15,Full Grid,72 Hour Gear Removal - Medium Impact CFA12
+GM31,2022/7/24,2022/7/26,Full Grid,48 Hour Gear Removal - Low Impact NAFO 4T/4S / Erroneous accoustic detection ( Banc- Parent)
+GM32,2022/7/24,2022/7/26,Full Grid,48 Hour Gear Removal - Low Impact NAFO 4T/4S / Erroneous accoustic detection ( Banc- Parent)
+GM33,2022/7/24,2022/7/26,>20 Fathom ,48 Hour Gear Removal - Low Impact NAFO 4T/4S / Erroneous accoustic detection ( Banc- Parent)
+GN31,2022/7/24,2022/7/26,Full Grid,48 Hour Gear Removal - Low Impact NAFO 4T/4S / Erroneous accoustic detection ( Banc- Parent)
+GN32,2022/7/24,2022/7/26,Full Grid,48 Hour Gear Removal - Low Impact NAFO 4T/4S / Erroneous accoustic detection ( Banc- Parent)
+GN33,2022/7/24,2022/7/26,>20 Fathom ,48 Hour Gear Removal - Low Impact NAFO 4T/4S / Erroneous accoustic detection ( Banc- Parent)
+GO31,2022/7/24,2022/7/26,Full Grid,48 Hour Gear Removal - Low Impact NAFO 4T/4S / Erroneous accoustic detection ( Banc- Parent)
+GO32,2022/7/24,2022/7/26,Full Grid,48 Hour Gear Removal - Low Impact NAFO 4T/4S / Erroneous accoustic detection ( Banc- Parent)
+GO33,2022/7/24,2022/7/26,Full Grid,48 Hour Gear Removal - Low Impact NAFO 4T/4S / Erroneous accoustic detection ( Banc- Parent)
+GZ43,2022/7/17,2022/7/29,Full Grid,48 Hour Gear Removal - Low Impact NAFO 4T
+HA43,2022/7/17,2022/7/29,Full Grid,48 Hour Gear Removal - Low Impact NAFO 4T
+HB43,2022/7/17,2022/7/29,Full Grid,48 Hour Gear Removal - Low Impact NAFO 4T
+GS44,2022/7/24,2022/8/5,Full Grid,48 Hour Gear Removal - Low Impact NAFO 4T/4S
+GS45,2022/7/24,2022/8/5,Full Grid,48 Hour Gear Removal - Low Impact NAFO 4T/4S
+GS46,2022/7/24,2022/8/5,Full Grid,48 Hour Gear Removal - Low Impact NAFO 4T/4S
+GT44,2022/7/24,2022/8/5,Full Grid,48 Hour Gear Removal - Low Impact NAFO 4T/4S
+GT45,2022/7/24,2022/8/5,Full Grid,48 Hour Gear Removal - Low Impact NAFO 4T/4S
+GT46,2022/7/24,2022/8/5,Full Grid,48 Hour Gear Removal - Low Impact NAFO 4T/4S
+GU44,2022/7/24,2022/8/5,Full Grid,48 Hour Gear Removal - Low Impact NAFO 4T/4S
+GU45,2022/7/24,2022/8/5,Full Grid,48 Hour Gear Removal - Low Impact NAFO 4T/4S
+GU46,2022/7/24,2022/8/5,Full Grid,48 Hour Gear Removal - Low Impact NAFO 4T/4S
+HD48,2022/7/29,2022/8/10,>20 Fathom ,48 Hour Gear Removal - Medium impact - CFA 12 25 26
+HD49,2022/7/29,2022/8/10,>20 Fathom ,48 Hour Gear Removal - Medium impact - CFA 12 25 26
+HD50,2022/7/29,2022/8/10,>20 Fathom ,48 Hour Gear Removal - Medium impact - CFA 12 25 26
+HE48,2022/7/29,2022/8/10,Full Grid,48 Hour Gear Removal - Medium impact - CFA 12 25 26
+HE49,2022/7/29,2022/8/10,Full Grid,48 Hour Gear Removal - Medium impact - CFA 12 25 26
+HE50,2022/7/29,2022/8/10,>20 Fathom ,48 Hour Gear Removal - Medium impact - CFA 12 25 26
+HF48,2022/7/29,2022/8/10,Full Grid,48 Hour Gear Removal - Medium impact - CFA 12 25 26
+HF49,2022/7/29,2022/8/10,Full Grid,48 Hour Gear Removal - Medium impact - CFA 12 25 26
+HG47,2022/7/29,2022/8/10,>20 Fathom ,48 Hour Gear Removal - Medium impact - CFA 12 25 26
+HG48,2022/7/29,2022/8/10,>20 Fathom ,48 Hour Gear Removal - Medium impact - CFA 12 25 26
+HG49,2022/7/29,2022/8/10,>20 Fathom ,48 Hour Gear Removal - Medium impact - CFA 12 25 26
+GZ44,2022/7/30,2022/8/11,Full Grid,"48 Hour Gear Removal - Medium impact - CFA 12, NAFO 4ST"
+GZ45,2022/7/30,2022/8/11,Full Grid,"48 Hour Gear Removal - Medium impact - CFA 12, NAFO 4ST"
+GZ46,2022/7/30,2022/8/11,Full Grid,"48 Hour Gear Removal - Medium impact - CFA 12, NAFO 4ST"
+HC34,2022/8/5,2022/8/16,>20 Fathom ,72 hour gear removal - low impact  4ST
+HC35,2022/8/5,2022/8/16,Full Grid,72 hour gear removal - low impact  4ST
+HC36,2022/8/5,2022/8/16,>20 Fathom ,72 hour gear removal - low impact  4ST
+HD34,2022/8/10,2022/8/22,>20 Fathom ,48 hour gear removal - low impact- - LFA 25 ; 23 
+HD35,2022/8/10,2022/8/22,>20 Fathom ,48 hour gear removal - low impact- - LFA 25 ; 23 
+HD38,2022/8/10,2022/8/22,>20 Fathom ,48 hour gear removal - low impact- - LFA 25 ; 23 
+HE48,2022/8/17,2022/8/29,Full Grid,48 Hour Gear Removal - Medium Impact LFA 24
+HE49,2022/8/17,2022/8/29,Full Grid,48 Hour Gear Removal - Medium Impact LFA 24
+HE50,2022/8/17,2022/8/29,>20 Fathom ,48 Hour Gear Removal - Medium Impact LFA 24
+HF48,2022/8/17,2022/8/29,Full Grid,48 Hour Gear Removal - Medium Impact LFA 24
+HF49,2022/8/17,2022/8/29,Full Grid,48 Hour Gear Removal - Medium Impact LFA 24
+HF50,2022/8/17,2022/8/29,Full Grid,48 Hour Gear Removal - Medium Impact LFA 24
+HG48,2022/8/17,2022/8/29,>20 Fathom ,48 Hour Gear Removal - Medium Impact LFA 24
+HG49,2022/8/17,2022/8/29,>20 Fathom ,48 Hour Gear Removal - Medium Impact LFA 24
+HG50,2022/8/17,2022/8/29,>20 Fathom ,48 Hour Gear Removal - Medium Impact LFA 24
+HS22,2022/8/18,2022/8/29,Full Grid,"72 hour gear removal - Low impact CFA 24, 4X, HFA 20"
+HS23,2022/8/18,2022/8/29,Full Grid,"72 hour gear removal - Low impact CFA 24, 4X, HFA 20"
+HS24,2022/8/18,2022/8/29,Shoreline,"72 hour gear removal - Low impact CFA 24, 4X, HFA 20"
+HT22,2022/8/18,2022/8/29,Full Grid,"72 hour gear removal - Low impact CFA 24, 4X, HFA 20"
+HT23,2022/8/18,2022/8/29,Shoreline,"72 hour gear removal - Low impact CFA 24, 4X, HFA 20"
+HT24,2022/8/18,2022/8/29,Shoreline,"72 hour gear removal - Low impact CFA 24, 4X, HFA 20"
+HU22,2022/8/18,2022/8/29,Shoreline,"72 hour gear removal - Low impact CFA 24, 4X, HFA 20"
+HU23,2022/8/18,2022/8/29,Shoreline,"72 hour gear removal - Low impact CFA 24, 4X, HFA 20"
+HU24,2022/8/18,2022/8/29,Shoreline,"72 hour gear removal - Low impact CFA 24, 4X, HFA 20"
+HS20,2022/8/19,2022/8/29,>20 Fathom ,"72 hour gear removal - Low impact CFA 24, 4X, HFA 20"
+HS21,2022/8/19,2022/8/29,>20 Fathom ,"72 hour gear removal - Low impact CFA 24, 4X, HFA 20"
+HT20,2022/8/19,2022/8/29,Within Dynamic Area,"72 hour gear removal - Low impact CFA 24, 4X, HFA 20"
+HT21,2022/8/19,2022/8/29,Within Dynamic Area,"72 hour gear removal - Low impact CFA 24, 4X, HFA 20"
+HU21,2022/8/19,2022/8/29,Within Dynamic Area,"72 hour gear removal - Low impact CFA 24, 4X, HFA 20"
+HC57,2022/8/20,2022/8/31,Full Grid,72 hour gear removal - Medium impact CFA 19 - Low Impact CFA 20 - Low Impact NAFO 4Vn - Low Impact HFA 17
+HC58,2022/8/20,2022/8/31,Full Grid,72 hour gear removal - Medium impact CFA 19 - Low Impact CFA 20 - Low Impact NAFO 4Vn - Low Impact HFA 17
+HC59,2022/8/20,2022/8/31,Within Dynamic Area,72 hour gear removal - Medium impact CFA 19 - Low Impact CFA 20 - Low Impact NAFO 4Vn - Low Impact HFA 17
+HD57,2022/8/20,2022/8/31,Shoreline,72 hour gear removal - Medium impact CFA 19 - Low Impact CFA 20 - Low Impact NAFO 4Vn - Low Impact HFA 17
+HD58,2022/8/20,2022/8/31,Shoreline,72 hour gear removal - Medium impact CFA 19 - Low Impact CFA 20 - Low Impact NAFO 4Vn - Low Impact HFA 17
+HD59,2022/8/20,2022/8/31,Within Dynamic Area,72 hour gear removal - Medium impact CFA 19 - Low Impact CFA 20 - Low Impact NAFO 4Vn - Low Impact HFA 17
+HE57,2022/8/20,2022/8/31,Shoreline,72 hour gear removal - Medium impact CFA 19 - Low Impact CFA 20 - Low Impact NAFO 4Vn - Low Impact HFA 17
+GW46,2022/8/25,2022/9/7,Full Grid,72 hour gear removal 
+GX46,2022/8/25,2022/9/7,Full Grid,72 hour gear removal 
+GZ43,2022/8/25,2022/9/7,Full Grid,72 hour gear removal 
+HC34,2022/8/25,2022/9/7,>20 Fathom ,72 hour gear removal 
+HC35,2022/8/25,2022/9/7,Full Grid,72 hour gear removal 
+HC36,2022/8/25,2022/9/7,>20 Fathom ,72 hour gear removal 
+GX35,2022/8/29,2022/9/7,>20 Fathom ,72 hour gear removal 
+HD54,2022/8/29,2022/9/9,Full Grid,72 hour gear removal 
+HD55,2022/8/29,2022/9/9,Full Grid,72 hour gear removal 
+HD56,2022/8/29,2022/9/9,>20 Fathom ,72 hour gear removal 
+HE54,2022/8/29,2022/9/9,Full Grid,72 hour gear removal 
+HE55,2022/8/29,2022/9/9,>20 Fathom ,72 hour gear removal 
+HE56,2022/8/29,2022/9/9,>20 Fathom ,72 hour gear removal 
+HF54,2022/8/29,2022/9/9,>20 Fathom ,72 hour gear removal 
+HF55,2022/8/29,2022/9/9,>20 Fathom ,72 hour gear removal 
