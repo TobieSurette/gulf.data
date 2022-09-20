@@ -17,6 +17,6 @@ Unknown codes and NA values are returned as NA values.
 \examples{
 # Get the table of all defined egg condition codes:
 egg.condition()
-egg.condition.str(1)
-egg.condition.str(0:2)
+egg.condition(1)
+egg.condition(0:2)
 }
