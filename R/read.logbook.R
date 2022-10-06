@@ -67,28 +67,33 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
    if (!missing(year) & missing(file)) file <- paste0(path, "logbook ", year, ".csv")
 
    # Load file and format variable names:
-   x <- read.csv(file)
+   x <- read.csv(file, skip = 1, header = FALSE)
 
    # Field name fixes:
-   names(x) <- gsub("[.]+", ".", tolower(names(x)))
-   names(x) <- gsub("[_]+", ".", tolower(names(x)))
-   names(x) <- gsub("lon.dec", "longitude", names(x))
-   names(x) <- gsub("lat.dec", "latitude", names(x))
-   names(x) <- gsub("lat.pas.modifier", "lat.str", names(x))
-   names(x) <- gsub("long.pas.modifier", "lon.str", names(x))
-   names(x) <- gsub("traps", "trap", names(x))
-   names(x) <- gsub("grid[.]good", "grid", names(x))
-   names(x) <- gsub("[.]$", "", names(x))
-   names(x) <- gsub("^x[.]", "", names(x))
-   names(x)[names(x) == "prov"] <- "province"
-   names(x) <- gsub("^pue", "cpue", names(x)) 
-   if (sum(names(x) == "grid") > 1) names(x)[grep("grid", names(x))[2]] <- "grid.calc"
-   names(x)[names(x) == "slip"] <- "slip.number"
-   names(x)[names(x) == "no.de.formulaire"] <- "slip.number"
-   names(x) <- gsub("^cfv$", "cfvn", names(x)) 
-   if (!("zone" %in% names(x)) & ("zone.corrected" %in% names(x))) names(x) <- gsub("zone.corrected", "zone", names(x))
-   names(x) <- gsub("list[.]sub[.]fleet", "fleet", names(x))
-   names(x) <- gsub("list[.]quota", "allocation.code", names(x)) 
+   fields <- readLines(file, n = 1)
+   fields <- tolower(strsplit(fields, ",")[[1]])
+   fields <- gsub("^[ #]+", "", fields)
+   fields <- gsub(" ", ".", fields)
+   fields <- gsub("[.]+", ".", fields)
+   fields <- gsub("[_]+", ".", fields)
+   fields <- gsub("lon.dec", "longitude", fields)
+   fields <- gsub("lat.dec", "latitude", fields)
+   fields <- gsub("lat.pas.modifier", "lat.str", fields)
+   fields <- gsub("long.pas.modifier", "lon.str", fields)
+   fields <- gsub("traps", "trap", fields)
+   fields <- gsub("grid[.]good", "grid", fields)
+   fields <- gsub("[.]$", "", fields)
+   fields <- gsub("^x[.]", "", fields)
+   fields[fields == "prov"] <- "province"
+   fields <- gsub("^pue", "cpue", fields) 
+   if (sum(fields == "grid") > 1) fields[grep("grid", fields)[2]] <- "grid.calc"
+   fields[fields == "slip"] <- "slip.number"
+   fields[fields == "no.de.formulaire"] <- "slip.number"
+   fields <- gsub("^cfv$", "cfvn", fields) 
+   if (!("zone" %in% fields) & ("zone.corrected" %in% fields)) fields <- gsub("zone.corrected", "zone", fields)
+   fields <- gsub("list[.]sub[.]fleet", "fleet", fields)
+   fields <- gsub("list[.]quota", "allocation.code", fields) 
+   names(x) <- fields
    
    # Convert numeric variables:
    vars <- c("longitude", "latitude")
@@ -106,7 +111,7 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
    x$latitude[ix] <- NA
 
    # Effort corrections:
-   x[, "trap.day"] <- as.numeric(gsub(",", "", x[, "trap.day"]))
+   x$trap.day <- as.numeric(gsub(",", "", x$trap.day))
    x$slip.prop.day[grep("VALUE", x$slip.prop.day)] <- ""
    x$slip.prop.day <- as.numeric(x$slip.prop.day)
 
@@ -130,7 +135,7 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
       ix <- ix[x$lon.str[ix] < 35000]
       if (length(ix) > 0){
          tmp <- gulf.spatial::loran2deg(x$lat.str[ix], x$lon.str[ix])
-         x$longitude[ix] <- tmp$long
+         x$longitude[ix] <- -abs(tmp$long)
          x$latitude[ix] <- tmp$lat
       }
    }
@@ -147,8 +152,28 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
    if ("grid.fish" %in% names(x)){
       x$grid.fish <- deblank(x$grid.fish)
       x$grid.fish[x$grid.fish == "0"] <- ""      
+      ix <- which((x$grid == "") & (x$grid.fish != "") & (nchar(x$grid.fish) == 4))
+      x$grid[ix] <- x$grid.fish[ix]
    }
-
+   if ("grid.calc" %in% names(x)){
+      x$grid.calc[x$grid.calc == "0"] <- ""
+      x$grid.calc <- gsub(" +", "", x$grid.calc)
+      x$grid.calc[which((nchar(x$grid.calc) <= 3) | (nchar(x$grid.calc) > 4))] <- ""
+      x$grid.calc[!(substr(x$grid.calc, 1, 1) %in% c("G", "H"))] <- ""
+      ix <- which((x$grid == "") & (x$grid.calc != ""))
+      x$grid[ix] <- x$grid.calc[ix]
+   }
+   # Fill-in missing grids using other recorded grids by the same vessel:
+   cfvs <- sort(unique(x$cfvn[x$grid == ""]))
+   for (i in 1:length(cfvs)){
+      ix <- which(x$cfvn == cfvs[i])
+      if (!all(x$grid[ix] == "")){
+         tab <- table(x$grid[ix])
+         tab <- tab[names(tab) != ""]
+         x$grid[ix[x$grid[ix] == ""]] <- names(which.max(tab))
+      }
+   }
+   
    # Re-apply depth-coordinate and range filter:
    x$depth <- gulf.spatial::depth(x$longitude, x$latitude)  # Determine depth from coordinates.
    ix <- (x$depth < 40) | (x$depth > 200)
@@ -208,7 +233,7 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
    # Soak time:
    if ("ti" %in% names(x)) x$t1 <- x$ti
    
-   if (year == 2020){
+   if (is.character(x$t1)){
       x$t1[x$t1 == "4,080"] <- 48
       x$t1 <- round(as.numeric(x$t1))
    }

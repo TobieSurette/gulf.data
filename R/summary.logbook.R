@@ -3,7 +3,7 @@
 #' @description Generates a summary of fishery logbook data.
 #' 
 
-#' @export
+#' @export summary.logbook
 summary.logbook <- function(x, by = c("cfvn"), resolution){
    # Round off coordinates:
    if (!missing(resolution)){
