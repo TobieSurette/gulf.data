@@ -263,6 +263,7 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
    vars <- c("cfvn", "vessel.name", "zone", "province", "fleet", "licence.holder", "licence.id", "allocation.code", "slip.number", "trip.id",
              "date.caught", "date.landed", "date.sailed", "longitude", "latitude", "grid", "grid.calc", "amt.landed.kg", 
              "trap.day", "trap.trip", "soak.time")
+   x <- gulf.utils::compress(x)
    vars <- intersect(vars, names(x))
    x <- x[, c(vars, setdiff(names(x), vars))]
    
