@@ -4,6 +4,8 @@
 \alias{vessel}
 \alias{vessel.default}
 \alias{vessel.character}
+\alias{vessel.scsset}
+\alias{vessel.gulf.set}
 \title{Project Identifiers}
 \usage{
 vessel(x, ...)
@@ -11,6 +13,10 @@ vessel(x, ...)
 \method{vessel}{default}(x, ...)
 
 \method{vessel}{character}(x, verbose = FALSE, ...)
+
+\method{vessel}{scsset}(x, ...)
+
+\method{vessel}{gulf.set}(x, ...)
 }
 \arguments{
 \item{x}{Character search string.}
@@ -22,14 +28,22 @@ Functions to retrieve survey vessel information.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{default}: Default \code{vessel} method. Returns the complete vessel data table.
+\item \code{vessel(default)}: Default \code{vessel} method. Returns the complete vessel data table.
 
-\item \code{character}: Search for vessel name and return vessel specifications.
+\item \code{vessel(character)}: Search for vessel name and return vessel specifications.
+
+\item \code{vessel(scsset)}: Vessel names for snow crab survey.
+
+\item \code{vessel(gulf.set)}: Vessel names for various science surveys.
+
 }}
-
 \examples{
 vessel()               # Survey vessel table.
 vessel("prince")       # Search for vessel name.
 vessel("marco")        # Search for vessel name.
 vessel("opilio")       # Search for vessel name.
+
+# Read snow crab set data:
+x <- read.scsset(2000:2021)
+vessel(x)  # Determine vessel for each data record.
 }

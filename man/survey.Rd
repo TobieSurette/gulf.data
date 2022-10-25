@@ -4,21 +4,25 @@
 \alias{survey}
 \alias{survey.default}
 \alias{survey.scsset}
-\alias{survey.nssset}
+\alias{survey.gulf.set}
 \title{Survey Identifiers}
 \usage{
 survey(x, ...)
 
-\method{survey}{default}(x, year, project, ...)
+\method{survey}{default}(x, year, project, output, ...)
 
 \method{survey}{scsset}(x, ...)
 
-\method{survey}{nssset}(x, ...)
+\method{survey}{gulf.set}(x, output, ...)
 }
 \arguments{
 \item{x}{Object.}
 
+\item{...}{}
+
 \item{year}{Survey year(s).}
+
+\item{output}{Character string specifying the column(s) of the survey table to be returned.}
 
 \item{survey}{Character string specifying the research survey. The input is passed onto the
 \code{\link{project}} function. To see the complete list of survey IDs available,
@@ -31,13 +35,13 @@ Returns research survey codes and identifiers.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{default}: Fetch survey identifiers.
+\item \code{survey(default)}: Fetch survey identifiers.
 
-\item \code{scsset}: Determine type of survey sampling for snow crab survey tows.
+\item \code{survey(scsset)}: Determine type of survey sampling for snow crab survey tows.
 
-\item \code{nssset}: Determine type of survey sampling for Northumberland Strait survey tows.
+\item \code{survey(gulf.set)}: Fetch survey identifiers for 'gulf.set' objects.
+
 }}
-
 \examples{
 # Complete lists survey codes:
 survey()                      # Complete survey table.
@@ -47,7 +51,7 @@ survey(project = "northumb")  # Northumberland Strait survey ID.
 
 survey("^P")                  # Surveys whose IDs start with "P".
 
-# Return the September research vessel survey code for 2005:
+# Return the September research vessel survey code for 2005-2007:
 survey(year = 2005:2007, project = "rv")
 
 # Return the September research vessel survey codes for a vector of years:

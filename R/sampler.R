@@ -1,4 +1,4 @@
-#' Field Samplers
+#' @title Field Samplers
 #' 
 #' @name sampler
 #' 

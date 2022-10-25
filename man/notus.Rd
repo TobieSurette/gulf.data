@@ -19,9 +19,9 @@ Create \strong{Notus} trawl acoustic monitoring probe data objects.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{default}: Create an \code{notus} object.
-}}
+\item \code{notus(default)}: Create an \code{notus} object.
 
+}}
 \examples{
 # Notus files for the 2020 snow crab survey:
 locate.notus(year = 2020, project == "nss")

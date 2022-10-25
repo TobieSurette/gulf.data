@@ -53,7 +53,7 @@ time.scsset <- function(x, event = "start", location, position, probe, ...){
    # Regular naming:
    var <- paste0(event, ".time")
    if (var %in% names(x)){
-      ix <- which((deblank(x[,var]) != "")  &  !is.na(x[,var]))
+      ix <- which((gulf.utils::deblank(x[,var]) != "")  &  !is.na(x[,var]))
       v[ix] <- x[ix,var]
    }
    

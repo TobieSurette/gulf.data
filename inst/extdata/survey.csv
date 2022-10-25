@@ -54,38 +54,43 @@ rvs,2016,T661,CCGS Teleost,,,,,,Western IIA,,,
 rvs,2017,T777,CCGS Teleost,,,,,,Western IIA,,,
 rvs,2018,T896,CCGS Teleost,,,,,,Western IIA,,,
 rvs,2019,T901,CCGS Teleost,,,,,,Western IIA,,,
-nss,1999,O901,CCGS Opilio,,,,,,,,,
-nss,2000,O024,CCGS Opilio,,,,,,,,,
-nss,2001,O139,CCGS Opilio,,,,,,,,,
-nss,2001,O160,CCGS Opilio,,,,,,,,,
-nss,2002,O241,CCGS Opilio,,,,,,,,,
-nss,2002,O218,CCGS Opilio,,,,,,,,,
-nss,2002,O263,CCGS Opilio,,,,,,,,,
-nss,2003,O341,CCGS Opilio,,,,,,,,,
-nss,2003,O320,CCGS Opilio,,,,,,,,,
-nss,2003,O365,CCGS Opilio,,,,,,,,,
-nss,2004,O434,CCGS Opilio,,,,,,,,,
-nss,2004,O456,CCGS Opilio,,,,,,,,,
-nss,2005,O536,CCGS Opilio,,,,,,,,,
-nss,2006,O637,CCGS Opilio,,,,,,,,,
-nss,2007,O030,CCGS Opilio,,,,,,,,,
-nss,2008,O022,CCGS Opilio,,,,,,,,,
-nss,2009,O029,CCGS Opilio,,,,,,,,,
-nss,2010,O103,CCGS Opilio,,,,,,,,,
-nss,2010,O104,CCGS Opilio,,,,,,,,,
-nss,2011,O129,CCGS Opilio,,,,,,,,,
-nss,2012,O026,CCGS Opilio,,,,,,,,,
+rvs,2020,T011,CCGS Teleost,,,,,,Western IIA,,,
+rvs,2021,T221,CCGS Teleost,,,,,,Western IIA,,,
+rvs,2021,C222,CCGS Capt. Jacques Cartier,,,,,,Western IIA,,,
+nss,1999,O901,CCGS Opilio,regular,,,,,,,,
+nss,2000,O024,CCGS Opilio,regular,,,,,,,,
+nss,2001,O139,CCGS Opilio,regular,,,,,,,,
+nss,2001,O160,CCGS Opilio,fall,,,,,,,,
+nss,2002,O241,CCGS Opilio,regular,,,,,,,,
+nss,2002,O218,CCGS Opilio,spring,,,,,,,,
+nss,2002,O263,CCGS Opilio,fall,,,,,,,,
+nss,2003,O341,CCGS Opilio,regular,,,,,,,,
+nss,2003,O320,CCGS Opilio,spring,,,,,,,,
+nss,2003,O365,CCGS Opilio,fall,,,,,,,,
+nss,2004,O434,CCGS Opilio,regular,,,,,,,,
+nss,2004,O456,CCGS Opilio,fall,,,,,,,,
+nss,2005,O536,CCGS Opilio,regular,,,,,,,,
+nss,2006,O637,CCGS Opilio,regular,,,,,,,,
+nss,2007,O030,CCGS Opilio,regular,,,,,,,,
+nss,2008,O022,CCGS Opilio,regular,,,,,,,,
+nss,2009,O029,CCGS Opilio,regular,,,,,,,,
+nss,2010,O103,CCGS Opilio,regular,,,,,,,,
+nss,2010,O104,CCGS Opilio,trawl test,,,,,,,,
+nss,2011,O129,CCGS Opilio,regular,,,,,,,,
+nss,2012,O026,CCGS Opilio,regular,,,,,,,,
 nss,2012,O048,CCGS Opilio,,,,,,,,,
-nss,2013,P126,CCGS Moses Perley,,,,,,,,,
-nss,2014,P021,CCGS Moses Perley,,,,,,,,,
-nss,2015,P521,CCGS Moses Perley,,,,,,,,,
-nss,2016,P018,CCGS Moses Perley,,,,,,,,,
-nss,2017,P024,CCGS Moses Perley,,,,,,,,,
-nss,2017,P329,CCGS Moses Perley,,,,,,,,,
-nss,2018,P041,CCGS Moses Perley,,,,,,,,,
-nss,2018,P829,CCGS Moses Perley,,,,,,,,,
-nss,2019,P140,CCGS Moses Perley,,,,,,,,,
-nss,2019,P953,CCGS Moses Perley,,,,,,,,,
+nss,2013,P126,CCGS Moses Perley,regular,7,17,8,13,,,,
+nss,2014,P021,CCGS Moses Perley,regular,7,16,8,9,,,,
+nss,2015,P521,CCGS Moses Perley,regular,7,15,8,8,,,,
+nss,2016,P018,CCGS Moses Perley,regular,7,12,8,6,,,,
+nss,2017,P024,CCGS Moses Perley,regular,7,12,8,2,,,,
+nss,2017,P329,CCGS Moses Perley,fall,9,3,9,11,,,,
+nss,2018,P041,CCGS Moses Perley,regular,7,10,7,30,,,,
+nss,2018,P829,CCGS Moses Perley,fall,9,1,9,7,,,,
+nss,2019,P140,CCGS Moses Perley,regular,7,9,8,7,,,,
+nss,2019,P953,CCGS Moses Perley,tagging,9,4,9,13,,,,
+nss,2020,P150,CCGS Moses Perley,regular,7,7,8,6,,Notus,,
+nss,2021,P151,CCGS Moses Perley,regular,7,3,8,2,,Notus,,
 sens,2003,S001,,,,,,,,,,
 sens,2004,S002,,,,,,,,,,
 sens,2005,S003,,,,,,,,,,
@@ -153,53 +158,59 @@ seas,1990,V036,,,,,,,,,,
 seas,1991,N151,,,,,,,,,,
 seas,1991,V137,,,,,,,,,,
 seas,1992,NV35,,,,,,,,,,
-scas,2012,O021,CCGS Opilio,,,,,,,,,
-scas,2013,P019,CCGS Moses Pearly,,,,,,,,,
-scas,2014,P047,CCGS Moses Pearly,,,,,,,,,
-scas,2015,P026,CCGS Moses Pearly,,,,,,,,,
-scas,2016,P621,CCGS Moses Pearly,,,,,,,,,
-scas,2018,P841,CCGS Moses Pearly,,,,,,,,,
-scas,2019,P201,CCGS Moses Pearly,,,,,,,,,
-scas,2019,P242,CCGS Moses Pearly,,,,,,,,,
-scs,1988,,Emy Serge D.,fall,8,5,11,13,Nephrops,,no,no
-scs,1989,,Emy Serge D.,fall,8,15,10,29,Nephrops,,no,no
-scs,1990,,Emy Serge D.,fall,6,18,10,8,Nephrops,Scanmar,yes,no
-scs,1991,,Emy Serge D.,fall,7,10,11,7,Nephrops,Scanmar,yes,no
-scs,1992,,Emy Serge D.,fall,7,13,10,21,Nephrops,Scanmar,yes,no
-scs,1993,,Emy Serge D.,fall,7,12,10,15,Nephrops,Scanmar,yes,no
-scs,1994,,Emy Serge D.,fall,7,12,10,9,Nephrops,Scanmar,yes,no
-scs,1995,,Emy Serge D.,fall,7,19,10,18,Nephrops,Scanmar,yes,no
-scs,1996,,Emy Serge D.,fall,8,21,10,11,Nephrops,Scanmar,yes,no
-scs,1997,,Emy Serge D.,fall,7,9,9,11,Nephrops,Scanmar,yes,no
-scs,1998,,Emy Serge D.,fall,7,7,9,14,Nephrops,Scanmar,yes,no
-scs,1999,,Den C. Martin,fall,7,9,9,10,Nephrops,Netmind,yes,no
-scs,2000,,Den C. Martin,fall,8,1,9,21,Nephrops,Netmind,yes,no
-scs,2001,,Den C. Martin,fall,8,9,10,2,Nephrops,Netmind,yes,no
-scs,2002,,Den C. Martin,summer,6,26,6,29,Nephrops,Netmind,yes,no
-scs,2002,,Den C. Martin,fall,7,8,9,19,Nephrops,Netmind,yes,no
-scs,2003,,Marco-Michel,fall,7,15,10,7,Nephrops,Netmind,yes,no
-scs,2004,,Marco-Michel,summer,6,22,6,26,Nephrops,Netmind,yes,no
-scs,2004,,Marco-Michel,fall,7,14,10,1,Nephrops,Netmind,yes,no
-scs,2005,,Marco-Michel,spring,4,26,5,4,Nephrops,Netmind,yes,no
-scs,2005,,Marco-Michel,summer,6,9,6,13,Nephrops,Netmind,yes,no
-scs,2005,,Marco-Michel,fall,7,13,9,20,Nephrops,Netmind,yes,no
-scs,2006,,Marco-Michel,summer,5,30,6,5,Nephrops,Netmind,yes,no
-scs,2006,,Marco-Michel,fall,8,2,10,18,Nephrops,Netmind,yes,no
-scs,2007,,Marco-Michel,summer,6,12,6,17,Nephrops,Netmind,yes,no
-scs,2007,,Marco-Michel,fall,7,10,9,22,Nephrops,Netmind,yes,no
-scs,2008,,Marco-Michel,summer,6,19,6,24,Nephrops,Netmind,yes,no
-scs,2008,,Marco-Michel,fall,7,16,9,25,Nephrops,Netmind,yes,no
-scs,2009,,Marco-Michel,summer,6,13,6,18,Nephrops,Netmind,yes,no
-scs,2009,,Marco-Michel,fall,7,16,9,27,Nephrops,Netmind,yes,no
-scs,2010,,Marco-Michel,fall,7,8,9,14,Nephrops,Netmind,yes,no
-scs,2011,,Marco-Michel,fall,7,13,10,4,Nephrops,Netmind,yes,no
-scs,2012,,Marco-Michel,fall,7,10,9,23,Nephrops,Netmind,yes,no
-scs,2013,,Jean-Mathieu,fall,7,9,10,14,Nephrops,eSonar,yes,no
-scs,2014,,Jean-Mathieu,fall,7,9,10,12,Nephrops,eSonar,yes,yes
-scs,2015,,Jean-Mathieu,fall,7,9,10,15,Nephrops,eSonar,yes,yes
-scs,2016,,Jean-Mathieu,fall,7,10,10,4,Nephrops,eSonar,yes,yes
-scs,2017,,Jean-Mathieu,fall,7,10,10,31,Nephrops,eSonar,yes,yes
-scs,2018,,Jean-Mathieu,fall,7,19,9,16,Nephrops,eSonar,yes,yes
-scs,2019,,Avalon Voyager II,fall,7,11,9,25,Nephrops,eSonar,no,yes
-scs,2019,,Jean-Mathieu,comparative,9,19,9,25,Nephrops,eSonar,no,yes
-scs,2020,,Avalon Voyager II,fall,7,13,9,10,Nephrops,eSonar,no,yes
+scas,2012,O021,CCGS Opilio,,,,,,Scallop drag,,,
+scas,2013,P019,CCGS Moses Perley,,,,,,Scallop drag,,,
+scas,2014,P047,CCGS Moses Perley,,,,,,Scallop drag,,,
+scas,2015,P026,CCGS Moses Perley,,,,,,Scallop drag,,,
+scas,2016,P621,CCGS Moses Perley,,,,,,Scallop drag,,,
+scas,2018,P841,CCGS Moses Perley,,,,,,Scallop drag,,,
+scas,2019,P201,CCGS Moses Perley,,,,,,Scallop drag,,,
+scas,2019,P242,CCGS Moses Perley,,,,,,Scallop drag,,,
+scas,2020,P161,CCGS Moses Perley,,,,,,Scallop drag,,,
+scas,2020,P162,CCGS Moses Perley,,,,,,Scallop drag,,,
+scas,2021,D261,Done Rollin',,,,,,Scallop drag,,,
+scas,2021,D262,Done Rollin',,,,,,Scallop drag,,,
+scs,1988,E001,Emy Serge D.,fall,8,5,11,13,Nephrops,,no,no
+scs,1989,E002,Emy Serge D.,fall,8,15,10,29,Nephrops,,no,no
+scs,1990,E003,Emy Serge D.,fall,6,18,10,8,Nephrops,Scanmar,yes,no
+scs,1991,E004,Emy Serge D.,fall,7,10,11,7,Nephrops,Scanmar,yes,no
+scs,1992,E005,Emy Serge D.,fall,7,13,10,21,Nephrops,Scanmar,yes,no
+scs,1993,E006,Emy Serge D.,fall,7,12,10,15,Nephrops,Scanmar,yes,no
+scs,1994,E007,Emy Serge D.,fall,7,12,10,9,Nephrops,Scanmar,yes,no
+scs,1995,E008,Emy Serge D.,fall,7,19,10,18,Nephrops,Scanmar,yes,no
+scs,1996,E009,Emy Serge D.,fall,8,21,10,11,Nephrops,Scanmar,yes,no
+scs,1997,E010,Emy Serge D.,fall,7,9,9,11,Nephrops,Scanmar,yes,no
+scs,1998,E011,Emy Serge D.,fall,7,7,9,14,Nephrops,Scanmar,yes,no
+scs,1999,D001,Den C. Martin,fall,7,9,9,10,Nephrops,Netmind,yes,no
+scs,2000,D002,Den C. Martin,fall,8,1,9,21,Nephrops,Netmind,yes,no
+scs,2001,D003,Den C. Martin,fall,8,9,10,2,Nephrops,Netmind,yes,no
+scs,2002,D004,Den C. Martin,summer,6,26,6,29,Nephrops,Netmind,yes,no
+scs,2002,D005,Den C. Martin,fall,7,8,9,19,Nephrops,Netmind,yes,no
+scs,2003,M001,Marco-Michel,fall,7,15,10,7,Nephrops,Netmind,yes,no
+scs,2004,M002,Marco-Michel,summer,6,22,6,26,Nephrops,Netmind,yes,no
+scs,2004,M003,Marco-Michel,fall,7,14,10,1,Nephrops,Netmind,yes,no
+scs,2005,M004,Marco-Michel,spring,4,26,5,4,Nephrops,Netmind,yes,no
+scs,2005,M005,Marco-Michel,summer,6,9,6,13,Nephrops,Netmind,yes,no
+scs,2005,M006,Marco-Michel,fall,7,13,9,20,Nephrops,Netmind,yes,no
+scs,2006,M007,Marco-Michel,summer,5,30,6,5,Nephrops,Netmind,yes,no
+scs,2006,M008,Marco-Michel,fall,8,2,10,18,Nephrops,Netmind,yes,no
+scs,2007,M009,Marco-Michel,summer,6,12,6,17,Nephrops,Netmind,yes,no
+scs,2007,M010,Marco-Michel,fall,7,10,9,22,Nephrops,Netmind,yes,no
+scs,2008,M011,Marco-Michel,summer,6,19,6,24,Nephrops,Netmind,yes,no
+scs,2008,M012,Marco-Michel,fall,7,16,9,25,Nephrops,Netmind,yes,no
+scs,2009,M013,Marco-Michel,summer,6,13,6,18,Nephrops,Netmind,yes,no
+scs,2009,M014,Marco-Michel,fall,7,16,9,27,Nephrops,Netmind,yes,no
+scs,2010,M015,Marco-Michel,fall,7,8,9,14,Nephrops,Netmind,yes,no
+scs,2011,M016,Marco-Michel,fall,7,13,10,4,Nephrops,Netmind,yes,no
+scs,2012,M017,Marco-Michel,fall,7,10,9,23,Nephrops,Netmind,yes,no
+scs,2013,J001,Jean-Mathieu,fall,7,9,10,14,Nephrops,eSonar,yes,no
+scs,2014,J002,Jean-Mathieu,fall,7,9,10,12,Nephrops,eSonar,yes,yes
+scs,2015,J003,Jean-Mathieu,fall,7,9,10,15,Nephrops,eSonar,yes,yes
+scs,2016,J004,Jean-Mathieu,fall,7,10,10,4,Nephrops,eSonar,yes,yes
+scs,2017,J005,Jean-Mathieu,fall,7,10,10,31,Nephrops,eSonar,yes,yes
+scs,2018,J006,Jean-Mathieu,fall,7,19,9,16,Nephrops,eSonar,yes,yes
+scs,2019,A001,Avalon Voyager II,fall,7,11,9,25,Nephrops,eSonar,no,yes
+scs,2019,J007,Jean-Mathieu,comparative,9,19,9,25,Nephrops,eSonar,no,yes
+scs,2020,A002,Avalon Voyager II,fall,7,13,9,10,Nephrops,eSonar,no,yes
+scs,2020,A003,Avalon Voyager II,experiment,7,12,7,13,Nephrops,eSonar,no,yes
+scs,2021,A004,Avalon Voyager II,fall,7,17,9,22,Nephrops,eSonar,no,yes

@@ -41,27 +41,27 @@ Define or extract index keys for various \code{gulf.data} objects.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{scsset}: Fetch \code{scsset} index key.
+\item \code{key(scsset)}: Fetch \code{scsset} index key.
 
-\item \code{nssset}: Index key for Northumberland Strait catch set (\code{nsscat}).
+\item \code{key(nssset)}: Index key for Northumberland Strait catch set (\code{nsscat}).
 
-\item \code{nsscat}: Index key for Northumberland Strait catch data (\code{nsscat}).
+\item \code{key(nsscat)}: Index key for Northumberland Strait catch data (\code{nsscat}).
 
-\item \code{nssbio}: Index key for Northumberland Strait biological data (\code{nssbio}).
+\item \code{key(nssbio)}: Index key for Northumberland Strait biological data (\code{nssbio}).
 
-\item \code{nsslen}: Index key for Northumberland Strait length data (\code{nsslen}).
+\item \code{key(nsslen)}: Index key for Northumberland Strait length data (\code{nsslen}).
 
-\item \code{scscat}: Index key for snow crab survey by-catch data (\code{scscat}).
+\item \code{key(scscat)}: Index key for snow crab survey by-catch data (\code{scscat}).
 
-\item \code{scsbio}: Fetch \code{scsbio} index key.
+\item \code{key(scsbio)}: Fetch \code{scsbio} index key.
 
-\item \code{scslen}: Fetch \code{scslen} index key.
+\item \code{key(scslen)}: Fetch \code{scslen} index key.
 
-\item \code{star.oddi}: Fetch \code{star.oddi} index key.
+\item \code{key(star.oddi)}: Fetch \code{star.oddi} index key.
 
-\item \code{esonar}: Fetch \code{esonar} index key.
+\item \code{key(esonar)}: Fetch \code{esonar} index key.
+
 }}
-
 \examples{
 x <- read.scsset(2020)
 key(x)

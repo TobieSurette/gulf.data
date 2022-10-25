@@ -1,19 +1,19 @@
 code,english,french
-70501,Traditional,Traditionnelle
-70510,Zone 12 (old zone 25-26) ,pêcheur zone 12 ( ancienne zone 25-26)
-70518,Zone 12 (old zone 18) ,pêcheur zone 12 ( ancienne zone 18)
-70519,Area 19,pêcheur zone 19
-70532,Zone 12 Indigenous (Quebec ),autochtones Québec zone 12
-70538,Zone 12 new access,pêcheur zone 12 nouvelle accès
-70540,Zone 12F (Quebec),pêcheur zone 12F (Québec)
-70542,Zone 12F (NS),pêcheur zone 12F (NS)
-70545,Zone 12F (Quebec; sharing),pêcheur zone 12F (Québec; partage)
-70547,Zone 12E,pêcheur zone 12E
-70552,Zone 12 new access (PEIFA),pêcheur zone 12 nouvel accès (PEI fisherman's association)
-70553,Zone 12 new access (PEI),pêcheur zone 12 nouvel accès (PEI)
-70555,Zone 12 new access (Lobster fishermen; Quebec),pêcheur zone 12 nouvel accès (Homardier; Québec)
-70556,Zone 12F (Quebec; sharing),pêcheur zone 12F (Québec; partage)
-70557,Zone 12 new access (Quebec),pêcheur zone 12 nouvel accès (Québec)
+70501,Traditional,Traditionnel
+70510,Zone 12 (old zone 25-26),pecheur zone 12 (ancienne zone 25-26)
+70518,Zone 12 (old zone 18),pecheur zone 12 (ancienne zone 18)
+70519,Area 19 Fishers,pecheur zone 19
+70532,Zone 12 Indigenous (Quebec),autochtones Quebec zone 12
+70538,Zone 12 new access,pecheur zone 12 nouvelle acces
+70540,Zone 12F (Quebec),pecheur zone 12F (Quebec)
+70542,Zone 12F (NS),pecheur zone 12F (NS)
+70545,Zone 12F (Quebec; sharing),pecheur zone 12F (Quebec; partage)
+70547,Zone 12E Fishers,pecheur zone 12E
+70552,Zone 12 new access (PEIFA),pecheur zone 12 nouvel acces (PEI fisherman's association)
+70553,Zone 12 new access (PEI),pecheur zone 12 nouvel acces (PEI)
+70555,Zone 12 new access (Lobster fishermen; Quebec),pecheur zone 12 nouvel acces (Homardier; Quebec)
+70556,Zone 12F (Quebec; sharing),pecheur zone 12F (Quebec; partage)
+70557,Zone 12 new access (Quebec),pecheur zone 12 nouvel acces (Quebec)
 70560,Zone 12 Indigenous (Elsipogtog),autochtones zone 12 (Elsipogtog)
 70561,Zone 12 Indigenous (Esgenoopetitj),autochtones zone 12 (Esgenoopetitj)
 70562,Zone 12 Indigenous (Eel River Bar),autochtones zone 12 (Eel River Bar)
@@ -23,9 +23,10 @@ code,english,french
 70566,Zone 12 Indigenous (Lennox Island),autochtones zone 12 (Lennox Island)
 70567,Zone 12 Indigenous (Metepenagiag),autochtones zone 12 (Metepenagiag)
 70568,Zone 12 Indigenous (Bouctouche band),autochtones zone 12 (Bouctouche band)
-70570,Zone 12 new access (UPM),pêcheur zone 12 nouvelle accès (UPM)
-70571,Zone 12 new access (NS),pêcheur zone 12 nouvelle accès (NS)
-70572,Zone 12 new access (Cape Breton),pêcheur zone 12 nouvelle accès (Cap-Breton)
-70582,Zone 12 new access (Québec),pêcheur zone 12 nouvelle accès (Québec)
-70586,Zone 12 new access (Québec),pêcheur zone 12 nouvelle accès (Québec)
-70587,Zone 12 new access (Québec),pêcheur zone 12 nouvelle accès (Québec)
+70570,Zone 12 new access (UPM),pecheur zone 12 nouvelle acces (UPM)
+70571,Zone 12 new access (NS),pecheur zone 12 nouvelle acces (NS)
+70572,Zone 12 new access (Cape Breton),pecheur zone 12 nouvelle acces (Cap-Breton)
+70582,Zone 12 new access (Quebec),pecheur zone 12 nouvelle acces (Quebec)
+70586,Zone 12 new access (Quebec),pecheur zone 12 nouvelle acces (Quebec)
+70587,Zone 12 new access (Quebec),pecheur zone 12 nouvelle acces (Quebec)
+70588,Zone 12 new access (Quebec),pecheur zone 12 nouvelle acces (Quebec)

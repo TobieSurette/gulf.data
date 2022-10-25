@@ -40,6 +40,7 @@ Function           | Description
 Function           | Description
 ------------------ | --------------------------------------------------
 `category`         | Determine or extract animal category data.
+`chela.height`     | Determine or extract crab chela height data.
 `egg.condition`    | Extract egg condition data.
 `gear`             | Extract sampling gear data. 
 `grow`             | Predict growth.
@@ -70,6 +71,7 @@ Function           | Description
 ------------------ | ------------------------------------------------------------------------------------
 `species`          | Extract or convert species identification data. 
 `taxon`            | Extract taxonomic identification data. 
+`is.category`      | Detemine if snow crab belongs to a specified biological category.
 `is.mature`        | Determine if animal is sexually mature.
 `is.primiparous`   | Determine if female is primiparous, i.e. is carrying first clutch of eggs.
 `is.multiparous`   | Determine if female is multiparous, i.e. is carrying second or more clutch of eggs.
