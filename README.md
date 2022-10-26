@@ -6,6 +6,19 @@ The `gulf.data` package contains functions for accessing and manipulating southe
   - **ALSI** Lobster and rock crab collector (Atlantic Lobster Settlement Index) data.
   - Lobster SCUBA transect survey data.
 
+## Installation:
+
+The `gulf.data` package can be installed directly from GitHub by running the following code from R:
+```
+library(devtools)
+install.packages("sp", dependencies = TRUE)
+install.packages("rgdal", dependencies = TRUE)
+install.packages("akima", dependencies = TRUE)
+install_github("TobieSurette/gulf.utils")
+install_github("TobieSurette/gulf.metadata")
+install_github("TobieSurette/gulf.data")
+```
+
 # Data Access:
 
 ## Reading Functions:
@@ -56,6 +69,13 @@ Function           | Description
 `vessel`           | Extract sampling or fishing vessel data.
 `weight`           | Extract or calculate catch or sample weight data. 
 `wingspread`       | Extract trawl wing spread data.
+
+## Environmental Data Functions:
+
+Function           | Description
+------------------ | --------------------------------------------------
+`depth`            | Extract elevation and bathymetry data. 
+`temperature`      | Extract water temperature data.
 
 ## Data Summary Functions:
 
