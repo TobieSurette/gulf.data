@@ -4,6 +4,7 @@
 #' 
 #' @param x Year.
 #' @param year Year.
+#' @param month Month of the year. Default is \sQuote{september}. 
 #' @param longitude,latitude Coordinates at which water temperatures are to be estimated. Units in decimal degrees.
 #' @param depth Water depth at which temperatures are to be retrieved. Units are in meters. Alternatively, 
 #'              setting \code{depth = 'surface'} will return surface temperatures and setting \code{depth = 'bottom'}
@@ -11,7 +12,7 @@
 #' @param radius.search Search radius in meters used to average out temperatures within a range of the specied depth.
 #' 
 #' @examples 
-#' # Load all temperature data as a 3-D matrix:
+#' # Load all september temperature data as a 3-D matrix:
 #' z <- temperature(2019)
 #' 
 #' z <- temperature(2019, depth = "surface")
@@ -19,7 +20,10 @@
 #' # Load snow crab survey data:
 #' s <- read.scsset(2019, valid = 1, survey = "regular")
 #' 
-#' # Get bottom temperatures using snow crab survey coordinates:
+#' # Get june bottom temperatures using snow crab survey coordinates:
+#' z <- temperature(2019, month = "June", depth = "bottom", longitude = lon(s), latitude = lat(s))
+#' 
+#' # Get september bottom temperatures using snow crab survey coordinates:
 #' z <- temperature(2019, depth = "bottom", longitude = lon(s), latitude = lat(s))
 #' 
 #' # Read temperatures for the top 50 meters at the snow crab survey's coordinates:
@@ -38,15 +42,23 @@ temperature.data.frame <- function(x, ...){
 }
 
 #' @export
-temperature.default <- function(x, year, longitude, latitude, depth, radius.search = 0, polygon, polygon.longitude, polygon.latitude, ...){
+temperature.default <- function(x, year, month = "september", longitude, latitude, depth, radius.search = 0, polygon, polygon.longitude, polygon.latitude, ...){
    
    # Parse input arguments:
    if (!missing(x) & missing(year)) if (is.numeric(x)) year <-x
    if (missing(year)) stop("'year' must be specified.")
    if (length(year) != 1) stop("'year' must be a single value.")
+   if (is.numeric(month)){
+       month <- month[round(month) %in% 1:12]
+       month <- month[!is.na(month)]
+       if (length(month) > 0) month <- month.name[month]
+   } 
+   if (length(month) > 1) stop("'month' must be a single value.")
+   month <- match.arg(tolower(month), c("june", "september"))
+   
    
    # Locate data file:
-   file <- locate(keywords = c("water", "temperature", "september", year), package = "gulf.data")
+   file <- locate(keywords = c("water", "temperature", month, year), package = "gulf.data")
    if (length(file) == 1){
       load(file)
    }else{
