@@ -1,15 +1,5 @@
 # `gulf.data` Package
 
-## Installation:
-
-Packages from the `gulf` series of packages can be installed directly from GitHub by running the following code from R:
-
-```
-library(devtools)
-install_github("TobieSurette/gulf.utils")
-gulf.utils::install.gulf()
-```
-
 The `gulf.data` package contains functions for accessing and manipulating southern Gulf of Saint Lawrence data sets, which include data from:
   - Snow Crab Annual Science Survey
   - Northumberland Strait Annual Science Survey
