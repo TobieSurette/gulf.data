@@ -11,6 +11,8 @@ temperature(x, ...)
 
 \item{year}{Year.}
 
+\item{month}{Month of the year. Default is \sQuote{september}.}
+
 \item{longitude, latitude}{Coordinates at which water temperatures are to be estimated. Units in decimal degrees.}
 
 \item{depth}{Water depth at which temperatures are to be retrieved. Units are in meters. Alternatively, 
@@ -23,7 +25,7 @@ will return bottom temperatures.}
 Functions to extract of estimate water temperatures.
 }
 \examples{
-# Load all temperature data as a 3-D matrix:
+# Load all september temperature data as a 3-D matrix:
 z <- temperature(2019)
 
 z <- temperature(2019, depth = "surface")
@@ -31,7 +33,10 @@ z <- temperature(2019, depth = "surface")
 # Load snow crab survey data:
 s <- read.scsset(2019, valid = 1, survey = "regular")
 
-# Get bottom temperatures using snow crab survey coordinates:
+# Get june bottom temperatures using snow crab survey coordinates:
+z <- temperature(2019, month = "June", depth = "bottom", longitude = lon(s), latitude = lat(s))
+
+# Get september bottom temperatures using snow crab survey coordinates:
 z <- temperature(2019, depth = "bottom", longitude = lon(s), latitude = lat(s))
 
 # Read temperatures for the top 50 meters at the snow crab survey's coordinates:

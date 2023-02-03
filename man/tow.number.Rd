@@ -15,6 +15,8 @@ tow.number(x, ...)
 \arguments{
 \item{x}{Data object.}
 
+\item{...}{Not used.}
+
 \item{method}{Character string specifying the method to be used when determining the tow identification number for a 
 \code{probe} object. Available methods are \sQuote{time} and \sQuote{latlong}.}
 

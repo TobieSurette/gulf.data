@@ -22,6 +22,8 @@ survey(x, ...)
 
 \item{year}{Survey year(s).}
 
+\item{project}{Data project.}
+
 \item{output}{Character string specifying the column(s) of the survey table to be returned.}
 
 \item{survey}{Character string specifying the research survey. The input is passed onto the
@@ -46,6 +48,7 @@ Returns research survey codes and identifiers.
 # Complete lists survey codes:
 survey()                      # Complete survey table.
 survey(project = "sept")      # September multispecies survey table.
+survey("rv")                  # September multispecies survey table.
 survey(project = "ns")        # Northumberland Strait survey ID.
 survey(project = "northumb")  # Northumberland Strait survey ID.
 

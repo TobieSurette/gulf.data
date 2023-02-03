@@ -93,6 +93,15 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
    if (!("zone" %in% fields) & ("zone.corrected" %in% fields)) fields <- gsub("zone.corrected", "zone", fields)
    fields <- gsub("list[.]sub[.]fleet", "fleet", fields)
    fields <- gsub("list[.]quota", "allocation.code", fields) 
+   fields <- gsub("#", "number", fields)
+   fields <- gsub("[(]kg[)]", "kg", fields)
+   fields <- gsub("[.]-[.]", ".", fields)
+   fields <- gsub("zone.de.gestion", "zone", fields)
+   fields <- gsub("numero.groupe.contingent", "allocation", fields)
+   fields <- gsub("numero.formulaire", "slip.number", fields)
+   fields <- gsub("date.debarquement", "date.landed", fields)
+   fields <- gsub("date.capture", "date.caught", fields)
+   fields <- gsub("nom.intervenant", "licence.holder", fields) 
    names(x) <- fields
    
    # Convert numeric variables:
@@ -247,14 +256,16 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
    } 
    
    # Fix date fields:
-   x$date.landed <- format.date(x$date.landed)
-   x$date.caught <- format.date(x$date.caught)
-   x$date.sailed <- format.date(x$date.sailed)
+   if (!is.null(x$date.landed)) x$date.landed <- format.date(x$date.landed)
+   if (!is.null(x$date.caught)) x$date.caught <- format.date(x$date.caught)
+   if (!is.null(x$date.sailed)) x$date.sailed <- format.date(x$date.sailed)
    
    x$licence.holder <- gsub("[.]", " ", x$licence.holder)
    x$licence.holder <- gsub(" +", " ", x$licence.holder)
    x$licence.holder <- deblank(x$licence.holder)
    x$licence.holder <- gsub("P\\?CH", "PECH", x$licence.holder)
+   x$licence.holder <- gsub("QU\\?BEC", "QUEBEC", x$licence.holder)
+   x$licence.holder <- gsub("GASP\\?SIE", "GASPESIE", x$licence.holder)
    
    x$vessel.name <- gsub(" +", " ", x$vessel.name)
    x$vessel.name <- deblank(x$vessel.name)

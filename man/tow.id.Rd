@@ -30,16 +30,14 @@ tow.id(x, ...)
 \arguments{
 \item{x}{Data object.}
 
+\item{...}{Not used.}
+
 \item{method}{Character string specifying the method to be used when determining the tow identification number for a 
 \code{probe} object. Available methods are \sQuote{time} and \sQuote{latlong}. Available options are 
 \sQuote{observed}, \sQuote{file name}, \sQuote{header}, and \sQuote{time}.}
 
 \item{max.distance}{Numeric valiue specifying the maximum distance tolerance (in kilometers) when determining the tow 
-                    identification number for a \code{probe} object from lat-lon coordinates.         
-
-#' @examples 
-files <- locate.minilog(2018)
-tow.id(read.minilog(files[200]))}
+identification number for a \code{probe} object from lat-lon coordinates.}
 }
 \description{
 Functions to extract or determine trawl tow identifiers.
@@ -61,3 +59,8 @@ Functions to extract or determine trawl tow identifiers.
 \item \code{tow.id(scslen)}: \sQuote{tow.id} \sQuote{scslen} method.
 
 }}
+\examples{
+files <- locate.minilog(2018)
+tow.id(read.minilog(files[200]))          
+
+}
