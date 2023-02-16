@@ -65,7 +65,7 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps", echo = T
 
    # Load and format transect table:
    if (echo) cat(paste0("Reading transect table.\n"))
-   transects <- read.csv("http://dmapps/en/scuba/reports/transects/?year=2021")      
+   transects <- read.csv("http://dmapps/en/scuba/reports/transects/")      
    transects$region            <- gsub(" [(]PE[)]", "", transects$region)
    transects$longitude.start   <- transects$start_longitude
    transects$latitude.start    <- transects$start_latitude
@@ -78,7 +78,7 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps", echo = T
    remove <- c("description_en", "description_fr", "start_latitude_d", "start_latitude_mm",
                "start_longitude_d", "start_longitude_mm", "end_latitude_d", "end_latitude_mm",
                "end_longitude_d",    "end_longitude_mm", "start_longitude", "end_latitude",
-               "end_longitude", "old_name", "start_latitude", "region_id", "id", "name")
+               "end_longitude", "old_name", "start_latitude", "id", "name")
    transects <- transects[, setdiff(names(transects), remove)]
    names(transects) <- gsub("_", ".", names(transects))
    ix <- match(transects$transect.id, outings$transect.id)
@@ -87,6 +87,11 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps", echo = T
    end <- c("description")
    transects <- transects[, c(start, setdiff(names(transects), c(start, end)), end)]
 
+   # Build region table:
+   regions <- unique(transects[c("region", "region.id")])
+   regions <- sort(regions, by = "region.id")
+   transects <- transects[, -which(names(transects) == "region.id")]   
+   
    # Subset by year:
    if (!missing(year)) outings <- outings[year(outings$date) %in% year, ]
    
@@ -223,8 +228,15 @@ read.scuba <- function(year, table, compress = TRUE, source = "dmapps", echo = T
    if (!missing(year)){
       observations <- NULL
       for (i in 1:length(year)){
+         r <- regions$region.id[regions$region %in% unique(sections$region)]
+         r <- r[!is.na(r)]
          if (echo) cat(paste0("Reading observation table for ", year[i], ".\n"))
-         observations <- rbind(observations, read.csv(paste0(path, "observations/?year=", year[i])))
+         if (length(r) > 0){
+            for (j in 1:length(r)){
+               if (echo) cat(paste0("   ", regions$region[regions$region.id == r[j]], "\n"))
+               observations <- rbind(observations, read.csv(paste0(path, "observations/?year=", year[i], "&region=", r[j])))
+            }
+         }
       } 
    }else{
       observations <- read.csv(paste0(path, "observations/?year"))
