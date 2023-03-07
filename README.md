@@ -122,8 +122,18 @@ Function           | Description
 # Read snow crab survey data:
 x <- read.scsset(2020, valid = 1, survey = "regular") # Read valid regular survey tows for 2020.
 x <- read.scsbio(2020, category = "COM")              # Read commercial snow crab biological data for 2020.
-x <- read.scscat(2020, species = c("cod", "plaice"))  # Read Atlantic cod and American plaice data for 2020.
-x <- read.scslen(2020, species = c("cod", "plaice"))  # Read Atlantic cod and American plaice data for 2020.
+x <- read.scscat(2020, species = c("cod", "plaice"))  # Read Atlantic cod and American plaice catch data for 2020.
+x <- read.scslen(2020, species = c("cod", "plaice"))  # Read Atlantic cod and American plaice size data for 2020.
+
+# Import commercial data:
+b <- read.scsbio(2020)
+s <- read.scsset(year = 2020, valid = 1, survey = "regular")
+import(s, fill = 0) <- catch(b, category = "COM")
+
+# Import male size-frequency data:
+b <- read.scsbio(2020, category = "M")
+s <- read.scsset(year = 2020, valid = 1, survey = "regular")
+import(s, fill = 0) <- freq(b, by = c("date", "tow.id"))
 ```
   
 
