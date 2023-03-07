@@ -120,20 +120,20 @@ Function           | Description
 
 ```
 # Read snow crab survey data:
-x <- read.scsset(2020, valid = 1, survey = "regular") # Read valid regular survey tows for 2020.
-x <- read.scsbio(2020, category = "COM")              # Read commercial snow crab biological data for 2020.
-x <- read.scscat(2020, species = c("cod", "plaice"))  # Read Atlantic cod and American plaice catch data for 2020.
-x <- read.scslen(2020, species = c("cod", "plaice"))  # Read Atlantic cod and American plaice size data for 2020.
+x <- read.scsset(year = 2020, valid = 1, survey = "regular") # Read valid regular survey tows for 2020.
+x <- read.scsbio(year = 2020, category = "COM")              # Read commercial snow crab biological data for 2020.
+x <- read.scscat(year = 2020, species = c("cod", "plaice"))  # Read Atlantic cod and American plaice catch data for 2020.
+x <- read.scslen(year = 2020, species = c("cod", "plaice"))  # Read Atlantic cod and American plaice size data for 2020.
 
-# Import commercial data:
-b <- read.scsbio(2020)
-s <- read.scsset(year = 2020, valid = 1, survey = "regular")
-import(s, fill = 0) <- catch(b, category = "COM")
+# Prepare commercial snow crab data:
+b <- read.scsbio(year = 2020)                                # Read commercial snow crab biological data for 2020.
+s <- read.scsset(year = 2020, valid = 1, survey = "regular") # Read valid regular survey tows for 2020.
+import(s, fill = 0) <- catch(b, category = "COM")            # Merge commercial crab catch data to tow data table.
 
-# Import male size-frequency data:
-b <- read.scsbio(2020, category = "M")
-s <- read.scsset(year = 2020, valid = 1, survey = "regular")
-import(s, fill = 0) <- freq(b, by = c("date", "tow.id"))
+# Import male size-frequency data: 
+b <- read.scsbio(2020, category = "M")                       # Read commercial snow crab biological data for 2020.
+s <- read.scsset(year = 2020, valid = 1, survey = "regular") # Read valid regular survey tows for 2020.
+import(s, fill = 0) <- freq(b, by = c("date", "tow.id"))     # Merge male crab size-frequency data to tow data table.
 ```
   
 
