@@ -30,11 +30,11 @@ Extract or generate catch data summaries.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{catch(scsbio)}: Snow crab biological data catch summaries.
+\item \code{scsbio}: Snow crab biological data catch summaries.
 
-\item \code{catch(scslen)}: Snow crab by-catch length data catch summaries.
-
+\item \code{scslen}: Snow crab by-catch length data catch summaries.
 }}
+
 \examples{
 s <- read.scsset(2020)  # Tow data.
 b <- read.scsbio(2020)  # Biological data.

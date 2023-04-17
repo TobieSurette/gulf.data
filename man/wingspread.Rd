@@ -19,9 +19,9 @@ Functions to extract trawl wing spread measurements.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{wingspread(esonar)}: Fetch trawl wing spread measures from an \code{esonar} object.
-
+\item \code{esonar}: Fetch trawl wing spread measures from an \code{esonar} object.
 }}
+
 \examples{
 x <- read.esonar(2020)
 wingspread(x)

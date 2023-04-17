@@ -19,9 +19,9 @@ Create \strong{Scanmar} trawl acoustic monitoring probe data objects.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{scanmar(default)}: Create an \code{scanmar} object.
-
+\item \code{default}: Create an \code{scanmar} object.
 }}
+
 \examples{
 # Scanmar files for the 2020 snow crab survey:
 locate.scanmar(year = 1990)

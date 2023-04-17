@@ -17,6 +17,6 @@ Read trawl winch speed and warp length data.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{read.winch(default)}: Read a trawl winch data file.
-
+\item \code{default}: Read a trawl winch data file.
 }}
+

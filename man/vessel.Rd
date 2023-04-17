@@ -28,15 +28,15 @@ Functions to retrieve survey vessel information.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{vessel(default)}: Default \code{vessel} method. Returns the complete vessel data table.
+\item \code{default}: Default \code{vessel} method. Returns the complete vessel data table.
 
-\item \code{vessel(character)}: Search for vessel name and return vessel specifications.
+\item \code{character}: Search for vessel name and return vessel specifications.
 
-\item \code{vessel(scsset)}: Vessel names for snow crab survey.
+\item \code{scsset}: Vessel names for snow crab survey.
 
-\item \code{vessel(gulf.set)}: Vessel names for various science surveys.
-
+\item \code{gulf.set}: Vessel names for various science surveys.
 }}
+
 \examples{
 vessel()               # Survey vessel table.
 vessel("prince")       # Search for vessel name.

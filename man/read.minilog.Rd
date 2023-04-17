@@ -35,14 +35,11 @@ VEMCO Minilog probes are used to measure water temperature and depth.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{read.minilog(default)}: Read a Minilog data file.
+\item \code{default}: Read a Minilog data file.
 
+\item \code{default}: Read a Star Oddi data file.
 }}
-\section{Functions}{
-\itemize{
-\item \code{read.star.oddi(default)}: Read a Star Oddi data file.
 
-}}
 \examples{
 # Read snow crab survey Minilog data from 1997:
 x <- read.minilog(1997)

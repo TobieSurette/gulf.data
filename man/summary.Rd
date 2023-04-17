@@ -24,13 +24,13 @@ Functions that generate data summaries for various types of data objects.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{summary(scsset)}: Generate summaries for snow crab survey set data.
+\item \code{scsset}: Generate summaries for snow crab survey set data.
 
-\item \code{summary(scsbio)}: Generate summaries for snow crab survey biological data.
+\item \code{scsbio}: Generate summaries for snow crab survey biological data.
 
-\item \code{summary(esonar)}: Generate data summary for \strong{eSonar} data.
-
+\item \code{esonar}: Generate data summary for \strong{eSonar} data.
 }}
+
 \examples{
 b <- read.scsbio(2020)
 summary(b) # General summary.

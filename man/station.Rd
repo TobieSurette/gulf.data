@@ -34,6 +34,6 @@ Functions to extract or determine trawl sampling station identification numbers.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{station(gulf.set)}: Return survey sampling station identifier.
-
+\item \code{gulf.set}: Return survey sampling station identifier.
 }}
+

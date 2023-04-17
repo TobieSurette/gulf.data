@@ -31,6 +31,6 @@ Functions to read probe data, such as depth/temperature or acoustic trawl monito
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{read.esonar(default)}: Read \strong{eSonar} trawl acoustic monitoring data.
-
+\item \code{default}: Read \strong{eSonar} trawl acoustic monitoring data.
 }}
+

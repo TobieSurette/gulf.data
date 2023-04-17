@@ -40,15 +40,15 @@ Functions to read snow crab survey data.
 }
 \section{Functions}{
 \itemize{
-\item \code{read.scsset()}: Read southern Gulf of Saint Lawrence snow crab survey set data.
+\item \code{read.scsset}: Read southern Gulf of Saint Lawrence snow crab survey set data.
 
-\item \code{read.scscat()}: Read southern Gulf of Saint Lawrence snow crab survey by-catch data.
+\item \code{read.scscat}: Read southern Gulf of Saint Lawrence snow crab survey by-catch data.
 
-\item \code{read.scsbio()}: Read southern Gulf of Saint Lawrence snow crab survey biological data.
+\item \code{read.scsbio}: Read southern Gulf of Saint Lawrence snow crab survey biological data.
 
-\item \code{read.scslen()}: Read southern Gulf of Saint Lawrence snow crab survey by-catch length data.
-
+\item \code{read.scslen}: Read southern Gulf of Saint Lawrence snow crab survey by-catch length data.
 }}
+
 \examples{
  
 # Read snow crab survey set data files:

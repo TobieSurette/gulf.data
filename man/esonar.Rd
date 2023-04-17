@@ -19,9 +19,9 @@ Create \strong{eSonar} trawl acoustic monitoring probe data objects.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{esonar(default)}: Create an \code{esonar} object.
-
+\item \code{default}: Create an \code{esonar} object.
 }}
+
 \examples{
 # eSonar files for the 2020 snow crab survey:
 locate.esonar(year = 2020)

@@ -38,9 +38,9 @@ Animal growth can be expressed in various ways. Fish species growth is generally
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{growth(default)}: Default growth function.
-
+\item \code{default}: Default growth function.
 }}
+
 \note{
 Note that growth increments are returned rather than the new size.
 }

@@ -62,25 +62,25 @@ Locate data files for various types of probes.
 }
 \section{Functions}{
 \itemize{
-\item \code{locate(minilog.default)}: Default method for locating Minilog probe data files.
+\item \code{locate.minilog.default}: Default method for locating Minilog probe data files.
 
-\item \code{locate(minilog.scsset)}: Locate Minilog associated with snow crab survey tow data.
+\item \code{locate.minilog.scsset}: Locate Minilog associated with snow crab survey tow data.
 
-\item \code{locate(star.oddi.default)}: Default method for locating Star Oddi probe data files.
+\item \code{locate.star.oddi.default}: Default method for locating Star Oddi probe data files.
 
-\item \code{locate(star.oddi.scsset)}: \code{scsset} method for locating Star Oddi data files.
+\item \code{locate.star.oddi.scsset}: \code{scsset} method for locating Star Oddi data files.
 
-\item \code{locate(scanmar.default)}: Default method for locating Scanmar acoustic data files.
+\item \code{locate.scanmar.default}: Default method for locating Scanmar acoustic data files.
 
-\item \code{locate(netmind.default)}: Default method for locating Netmind acoustic data files.
+\item \code{locate.netmind.default}: Default method for locating Netmind acoustic data files.
 
-\item \code{locate(esonar.default)}: Default method for locating eSonar data files.
+\item \code{locate.esonar.default}: Default method for locating eSonar data files.
 
-\item \code{locate(esonar.scsset)}: \code{scsset} method for locating eSonar data files.
+\item \code{locate.esonar.scsset}: \code{scsset} method for locating eSonar data files.
 
-\item \code{locate(winch.default)}: Default method for locating trawl winch speed and warp files.
-
+\item \code{locate.winch.default}: Default method for locating trawl winch speed and warp files.
 }}
+
 \examples{
 locate.probe(2020, "esonar", project = "scs")                             # 2020 Snow crab survey eSonar data files.
 locate.probe(2018, "minilog", project = "scs")                            # 2018 snow crab survey Minilog data files.

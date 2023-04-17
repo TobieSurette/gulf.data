@@ -33,15 +33,15 @@ Functions to locate various data file(s) from the Snow Crab Survey.
 }
 \section{Functions}{
 \itemize{
-\item \code{locate(scsset)}: Locate snow crab survey set data files.
+\item \code{locate.scsset}: Locate snow crab survey set data files.
 
-\item \code{locate(scscat)}: Locate snow crab survey biological data files.
+\item \code{locate.scscat}: Locate snow crab survey biological data files.
 
-\item \code{locate(scsbio)}: Locate snow crab survey biological data files.
+\item \code{locate.scsbio}: Locate snow crab survey biological data files.
 
-\item \code{locate(scslen)}: Locate snow crab survey by-catch length data files.
-
+\item \code{locate.scslen}: Locate snow crab survey by-catch length data files.
 }}
+
 \examples{
 locate.scsset()          # Find all snow crab survey set data files.
 locate.scsset(2020)      # Find specific year.

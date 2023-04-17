@@ -19,6 +19,6 @@ Class containers for snow crab observer data.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{scobs(default)}: Create an \code{scobs} object.
-
+\item \code{default}: Create an \code{scobs} object.
 }}
+

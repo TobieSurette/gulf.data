@@ -33,17 +33,17 @@ Extract file header information from probe data files.
 }
 \section{Functions}{
 \itemize{
-\item \code{header(minilog)}: Extract Minilog file header information.
+\item \code{header.minilog}: Extract Minilog file header information.
 
-\item \code{header(star.oddi)}: Extract Star Oddi file header information.
+\item \code{header.star.oddi}: Extract Star Oddi file header information.
 
-\item \code{header(netmind)}: Extract Netmind file header information.
+\item \code{header.netmind}: Extract Netmind file header information.
 
-\item \code{header(esonar)}: Extract eSonar file header information.
+\item \code{header.esonar}: Extract eSonar file header information.
 
-\item \code{header(notus)}: Extract Notus file header information.
-
+\item \code{header.notus}: Extract Notus file header information.
 }}
+
 \examples{
 header.minilog()
 header.minilog(1998)

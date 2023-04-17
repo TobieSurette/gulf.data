@@ -26,8 +26,8 @@ Removes time series data which lie beyond a specified time interval.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{trim(data.frame)}: Removes time series data which lie beyond a specified time interval for a \code{data.frame} object.
+\item \code{data.frame}: Removes time series data which lie beyond a specified time interval for a \code{data.frame} object.
 
-\item \code{trim(probe)}: Removes time series data which lie beyond start and end times for a \code{probe} object.
-
+\item \code{probe}: Removes time series data which lie beyond start and end times for a \code{probe} object.
 }}
+

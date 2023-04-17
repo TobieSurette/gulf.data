@@ -20,10 +20,10 @@ Convert \strong{gulf} data objects to data frames.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{as.data.frame(scsset)}: Convert \code{scsset} snow crab survey biological set data object to a data frame.
+\item \code{scsset}: Convert \code{scsset} snow crab survey biological set data object to a data frame.
 
-\item \code{as.data.frame(scsbio)}: Convert \code{scsbio} snow crab survey biological data object to a data frame.
+\item \code{scsbio}: Convert \code{scsbio} snow crab survey biological data object to a data frame.
 
-\item \code{as.data.frame(probe)}: Convert \code{probe} data object to a data frame.
-
+\item \code{probe}: Convert \code{probe} data object to a data frame.
 }}
+

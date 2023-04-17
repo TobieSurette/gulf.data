@@ -19,9 +19,9 @@ Functions to retrieve fishing season date information.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{fishing.season(default)}: Default \code{fishing.season} method. Returns the complete fishing.season data table.
-
+\item \code{default}: Default \code{fishing.season} method. Returns the complete fishing.season data table.
 }}
+
 \examples{
 fishing.season()                       # Complete fishing season table.
 fishing.season(year = 2019, zone = 12) # Search for zone 12 season limits in 2019.

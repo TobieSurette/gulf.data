@@ -27,13 +27,13 @@ Snow crab license allocation codes, used to partition landings by fisher groups.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{allocation(default)}: return allocation code table.
+\item \code{default}: return allocation code table.
 
-\item \code{allocation(numeric)}: Return allocation code description.
+\item \code{numeric}: Return allocation code description.
 
-\item \code{allocation(character)}: return allocation code table.
-
+\item \code{character}: return allocation code table.
 }}
+
 \examples{
 allocation()                             # Complete allocation code table.
 

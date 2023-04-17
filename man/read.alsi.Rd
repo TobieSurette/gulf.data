@@ -22,6 +22,6 @@ Functions to read probe data, such as depth/temperature or acoustic trawl monito
 }
 \section{Functions}{
 \itemize{
-\item \code{read.alsi()}: Read data from the Altantic Lobster Stock-recruitment Index. Larvae collectors are used to mainly provide recruitment indices for lobster and rock crab.
-
+\item \code{read.alsi}: Read data from the Altantic Lobster Stock-recruitment Index. Larvae collectors are used to mainly provide recruitment indices for lobster and rock crab.
 }}
+
