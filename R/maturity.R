@@ -88,12 +88,59 @@ is.mature.scsbio <- function(x, probability = FALSE, ...){
 }
 
 #' @rdname maturity
+#' @export is.pubescent
+is.pubescent <- function(x, ...) UseMethod("is.pubescent")
+
+#' @rdname maturity
+#' @export is.pubescent.scsbio
+is.pubescent.scsbio <- function(x, ...){
+   v <- rep(NA, nrow(x))
+   x$year <- year(x)
+   years <- unique(x$year)
+   if (length(years) > 0){
+      for (i in 1:length(years)){
+         # Immture female index:
+         ix <- which((x$sex == 2) & !is.mature(x) & (x$year == years[i]) & !is.na(x$carapace.width) & x$carapace.width <= 102)
+         
+         if (length(ix) > 0){
+            # Immture female with white or orange gonads:
+            iy <- which(x$gonad.colour[ix] %in% c(1,3))
+            
+            if (length(iy) > 0){
+               # Hard classification into pubescents or immatures:
+               z <- rep(NA, length(iy))
+               z[(x$gonad.colour[ix][iy] == 3) & (x$carapace.width[ix][iy] >= 30)] <- 1
+               z[(x$gonad.colour[ix][iy] == 3) & (x$carapace.width[ix][iy] < 30)]  <- 0
+               z[x$gonad.colour[ix][iy] == 1] <- 0
+               v[ix[iy]] <- z # Add classification.
+               
+               # Identify crab with beige gonads:
+               iz <- which(x$gonad.colour[ix] == 2)
+               
+               if (length(iz) > 0){
+                  # Logistic regression of pubescents:
+                  cw <- x$carapace.width[ix][iy]
+                  model <- glm(z ~ cw, family = binomial())
+                  
+                  # Classify females with beige gonads according to logistic regression:
+                  newdata <- data.frame(cw = x$carapace.width[ix][iz])
+                  p <- predict(model, newdata = list(cw = x$carapace.width[ix][iz]))
+                  v[ix[iz]] <- (p >= 0) + 1 - 1 
+               }
+            }
+         }
+      }
+   }
+   
+   return(v == 1)
+}
+
+#' @rdname maturity
 #' @export is.primiparous
 is.primiparous <- function(x, ...) UseMethod("is.primiparous")
 
 #' @rdname maturity
 #' @export is.primiparous.scsbio
-#' @export
 is.primiparous.scsbio <- function(x, ...){
    # Returns whether a crab is newly moulted.
 
@@ -117,11 +164,10 @@ is.multiparous <- function(x, ...) UseMethod("is.multiparous")
 
 #' @rdname maturity
 #' @export is.multiparous.scsbio
-#' @export
 is.multiparous.scsbio <- function(x, ...){
    # Returns whether a crab is newly moulted.
 
-   # Contruct logical vextor:
+   # Construct logical vector:
    ix <- rep(TRUE, dim(x)[1])
    names(x) <- tolower(names(x))
    ix <- ix * is.mature(x, ...) * (x$sex == 2) * !is.new.shell(x)
@@ -140,9 +186,8 @@ is.senile <- function(x, ...) UseMethod("is.senile")
 
 #' @rdname maturity
 #' @export is.senile.scsbio
-#' @export
 is.senile.scsbio <- function(x, ...){
-   # Contruct logical vextor:
+   # Construct logical vector:
    ix <- rep(TRUE, dim(x)[1])
    names(x) <- tolower(names(x))
    
