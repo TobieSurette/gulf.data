@@ -19,11 +19,11 @@ read.colorimeter(...)
 \description{
 Functions to find and access colour meter data from the snow crab survey.
 }
-\section{Methods (by generic)}{
+\section{Functions}{
 \itemize{
-\item \code{locate}: Locate snow crab colorimetry files.
-}}
+\item \code{locate(colorimeter)}: Locate snow crab colorimetry files.
 
+}}
 \examples{
 # Locate data files:
 locate.colorimeter()          # Find all snow crab colorimeter data files.

@@ -27,13 +27,13 @@ Functions to retrieve survey probe information or create a probe data object.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{default}: Load data probe description table.
+\item \code{probe(default)}: Load data probe description table.
 
-\item \code{character}: Find a data probe by name.
+\item \code{probe(character)}: Find a data probe by name.
 
-\item \code{data.frame}: Create a \code{probe} class object.
+\item \code{probe(data.frame)}: Create a \code{probe} class object.
+
 }}
-
 \examples{
 probe()            # Load complete data probe table.
 probe("min")       # Search for probe name.

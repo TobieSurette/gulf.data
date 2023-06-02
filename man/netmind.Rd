@@ -19,9 +19,9 @@ Create \strong{Netmind} trawl acoustic monitoring probe data objects.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{default}: Create an \code{netmind} object.
-}}
+\item \code{netmind(default)}: Create an \code{netmind} object.
 
+}}
 \examples{
 # Netmind files for the 2020 snow crab survey:
 locate.netmind(year = 1999)

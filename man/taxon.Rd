@@ -28,11 +28,14 @@ Retrieve taxonomic information associated with identification codes.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{default}: Default taxon function.
+\item \code{taxon(default)}: Default taxon function.
 
-\item \code{default}: Check taxonomic membership.
 }}
+\section{Functions}{
+\itemize{
+\item \code{is.taxon(default)}: Check taxonomic membership.
 
+}}
 \examples{
 taxon(10:100)             # Latin genus + species names.
 taxon(10:100, "phylum")   # Phylum names.
