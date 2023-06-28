@@ -47,6 +47,7 @@ Function           | Description
 `read.gps`         | Read GPS track data.
 `read.colorimeter` | Read colorimeter measurement data.
 `read.alsi`        | Read Atlantic Lobster Settlement Index data.
+`read.azmp`        | Read oceanographic data from the Atlantic Zonal Monitoring Program.
 
 ## Data Field Functions:
 
