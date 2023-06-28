@@ -13,13 +13,29 @@
 #' @export egg.colour
 egg.colour <- function(x, ...){  
    # Define table of values:
-   v <- c("Light orange",
-          "Dark orange",
-          "Black",
-          "Coccon")
-   names(v) <- 1:4
+   v <- c("light orange",
+          "dark orange",
+          "black",
+          "coccoon",
+          "orange")
+   names(v) <- 1:5
    
-   if (missing(x)) return(v) else v <- as.vector(v[as.character(x)])
+   if (missing(x)){
+      return(v)
+   }else{
+      if (is.character(x)){
+         x <- tolower(x)
+         x[x %in% c("oc", "lo", "orange clair", "light orange")] <- "1"
+         x[x %in% c("of", "do", "orange fonce", "dark orange")] <- "2"
+         x[x %in% c("b", "bl", "n", "noir", "black")] <- "3"
+         x[x %in% c("c", "co", "coccon", "coccoon")] <- "4"
+         x[x %in% c("o", "orange")] <- "5"
+         v <- as.vector(v[x])
+      } 
+
+      if (is.numeric(x)) v <- as.vector(v[as.character(x)])
+   } 
+   
    return(v)
 }
 

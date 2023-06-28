@@ -14,10 +14,26 @@ gonad.colour <- function(x, ...){
    # Define table of values:
    v <- c("white",
           "beige",
-          "orange")
-   names(v) <- 1:3
+          "orange",
+          "light orange")
+   names(v) <- 1:4
    
-   if (missing(x)) return(v) else v <- as.vector(v[as.character(x)])
+   if (missing(x)){
+      return(v)
+   }else{
+      if (is.character(x)){
+         x <- tolower(x)
+         x[x %in% c("w", "white")] <- "1"
+         x[x %in% c("b", "be", "bei", "beige")] <- "2"
+         x[x %in% c("o", "orange")] <- "3"
+         x[x %in% c("oc", "lo", "light orange", "orange clair")] <- "4"
+
+         v <- as.vector(v[x])
+      } 
+      
+      if (is.numeric(x)) v <- as.vector(v[as.character(x)])
+   } 
+   
    return(v)
 }
 
