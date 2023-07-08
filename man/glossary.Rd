@@ -17,9 +17,9 @@ Returns glossary terms and definitions used in Southern Gulf of Saint-Lawrence d
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{default}: Extract glossary terms.
-}}
+\item \code{glossary(default)}: Extract glossary terms.
 
+}}
 \examples{
 glossary()         # Complete table of glossary terms.
 glossary("moult")  # Look up 'moult' in glossary terms.

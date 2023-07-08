@@ -164,12 +164,9 @@ sampler.scs <- function(x){
    v <- gsub("M-A.MCCAIE", "MARC-ANDRE MCCAIE", v, fixed = TRUE)
    v <- gsub("C.VITOUX", "CHRISTOPHE VITOUX", v, fixed = TRUE)
    v <- gsub("S.CHIASSON", "STEPHANE CHIASSON", v, fixed = TRUE)
-   
    v <- gsub("T.TURBIDE", "TOMMY TURBIDE", v, fixed = TRUE)
    v <- gsub("D.LAPIERRE", "DANNY LAPIERRE", v, fixed = TRUE)
    v <- gsub("J.BOURGEOIS", "JULES BOURGEOIS", v, fixed = TRUE)
-   
-   
    v <- gsub("G.ROBICHAUD", "GUY ROBICHAUD", v, fixed = TRUE)  
    v <- gsub("A.DUGUAY", "ALBAN DUGUAY", v, fixed = TRUE)  
    v <- gsub("AD$", "ALBAN DUGUAY", v)  
@@ -195,13 +192,23 @@ sampler.scs <- function(x){
    v <- gsub("STEPHANE ALBERTLBERT", "STEPHANE ALBERT", v, fixed = TRUE) 
    v <- gsub("JF LANDRY", "JEAN-FRANCOIS LANDRY", v, fixed = TRUE)
    
+   v <- gsub("MURRAY MEWILLIAMS", "MURRAY MCWILLIAMS", v, fixed = TRUE)                                        
+   v <- gsub("YVES LAROEQUE", "YVES LAROQUE", v, fixed = TRUE)   
+   v <- gsub("PIERRE DEGRAEE", "PIERRE DEGRACE", v, fixed = TRUE) 
+   v <- gsub("MAREEL HEBERT", "MARCEL HEBERT", v, fixed = TRUE)
+   v <- gsub("STE+P", "STEP", v)
+
    # Re-order samplers:
    v <- unlist(lapply(lapply(strsplit(v, ", "), function(x) return(sort(unique(x)))), paste, collapse = ", "))
 
    v <- gsub("[,]$", "", v)
    v <- gsub(" ,", ",", v)
+   v <- gsub(",+", ",", v)
    
    v <- gsub("DAVID, MARCEL", "DAVID GIARD, MARCEL HEBERT", v, fixed = TRUE) 
+   v[v == "B HEBERT, S HEBERT"] <- "ALAIN HEBERT, MARCEL HEBERT"
+   v <- gsub("STEPHANE A ", "STEPHANE ALBERT", v, fixed = TRUE)
+   v <- gsub(", RICHARD", ", RICHARD RUEST", v, fixed = TRUE)
    
    # Expand to original vector:
    v <- v[ix]

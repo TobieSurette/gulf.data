@@ -37,13 +37,13 @@ Returns research survey codes and identifiers.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{default}: Fetch survey identifiers.
+\item \code{survey(default)}: Fetch survey identifiers.
 
-\item \code{scsset}: Determine type of survey sampling for snow crab survey tows.
+\item \code{survey(scsset)}: Determine type of survey sampling for snow crab survey tows.
 
-\item \code{gulf.set}: Fetch survey identifiers for 'gulf.set' objects.
+\item \code{survey(gulf.set)}: Fetch survey identifiers for 'gulf.set' objects.
+
 }}
-
 \examples{
 # Complete lists survey codes:
 survey()                      # Complete survey table.

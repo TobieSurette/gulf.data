@@ -49,15 +49,15 @@ Functions to generate size-frequency distributions.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{default}: Default \code{freq} method.
+\item \code{freq(default)}: Default \code{freq} method.
 
-\item \code{scsbio}: \code{scsbio} \code{freq} method.
+\item \code{freq(scsbio)}: \code{scsbio} \code{freq} method.
 
-\item \code{scslen}: \code{scslen} \code{freq} method.
+\item \code{freq(scslen)}: \code{scslen} \code{freq} method.
 
-\item \code{nsslen}: \code{nsslen} \code{freq} method.
+\item \code{freq(nsslen)}: \code{nsslen} \code{freq} method.
+
 }}
-
 \examples{
 # Simple example:
 x <- data.frame(values = c(11, 11, 12, 13, 15),
