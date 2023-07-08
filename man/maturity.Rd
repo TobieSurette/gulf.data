@@ -4,6 +4,8 @@
 \alias{maturity}
 \alias{is.mature}
 \alias{is.mature.scsbio}
+\alias{is.pubescent}
+\alias{is.pubescent.scsbio}
 \alias{is.primiparous}
 \alias{is.primiparous.scsbio}
 \alias{is.multiparous}
@@ -17,6 +19,10 @@
 is.mature(x, ...)
 
 \method{is.mature}{scsbio}(x, probability = FALSE, ...)
+
+is.pubescent(x, ...)
+
+\method{is.pubescent}{scsbio}(x, ...)
 
 is.primiparous(x, ...)
 
