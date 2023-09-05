@@ -1,0 +1,10 @@
+﻿variable,units,description
+probe.id,,unique temperature probe identifier
+probe.company,,temperature probe company name
+region,,geographic regions where probe was located
+vessel,,name of sea vessel used to deploy probe
+year.immersion,,year that the temperature probe was deployed
+latitude,decimal degrees,latitude temperature probe was deployed
+longitude,decimal degrees,longitude temperature probe was deployed
+depth,meters,depth temperature probe was deployed
+comment,,comment
