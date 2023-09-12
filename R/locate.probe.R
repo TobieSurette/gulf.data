@@ -72,6 +72,17 @@ locate.probe <- function(x, probe, project = "scs", location = "headline", remov
          files <- files[union(grep("asc", tolower(files)), grep(".csv$", tolower(files)))]    
       }
    }
+
+   # Seabird:
+   if (probe == "seabird"){
+      remove  = c("test", "lost", "NA")
+      
+      # Locate candidate files:
+      files <- NULL
+      for (i in 1:length(location)){
+         files <- c(files, locate(package = "gulf.data", keywords = c("seabird"), ...))
+      }
+   }
    
    # Star Oddi:
    if (probe == "star.oddi"){
@@ -223,12 +234,14 @@ locate.probe <- function(x, probe, project = "scs", location = "headline", remov
 }
 
 #' @export locate.minilog
+#' @export locate.seabird
 #' @export locate.star.oddi
 #' @export locate.scanmar
 #' @export locate.netmind
 #' @export locate.esonar
 #' @export locate.winch
 locate.minilog   <- function(x, ...) UseMethod("locate.minilog")
+locate.seabird   <- function(x, ...) UseMethod("locate.seabird")
 locate.star.oddi <- function(x, ...) UseMethod("locate.star.oddi")
 locate.scanmar   <- function(x, ...) UseMethod("locate.scanmar")
 locate.netmind   <- function(x, ...) UseMethod("locate.netmind")
@@ -276,6 +289,10 @@ locate.minilog.default <- function(x, ...){
 #' @describeIn locate.probe Locate Minilog associated with snow crab survey tow data.
 #' @rawNamespace S3method(locate.minilog,scsset)
 locate.minilog.scsset <- function(x, ...) return(locate.minilog(year = gulf.utils::year(x), tow.id = gulf.data::tow.id(x), ...))
+
+#' @describeIn locate.probe Default method for locating Seabird probe data files.
+#' @rawNamespace S3method(locate.seabird,default)
+locate.seabird.default <- function(x, ...) return(locate.probe(x, probe = "seabird", ...))
 
 #' @describeIn locate.probe Default method for locating Star Oddi probe data files.
 #' @rawNamespace S3method(locate.star.oddi,default)

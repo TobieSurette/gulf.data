@@ -4,6 +4,7 @@
 \alias{locate.probe}
 \alias{locate.minilog.default}
 \alias{locate.minilog.scsset}
+\alias{locate.seabird.default}
 \alias{locate.star.oddi.default}
 \alias{locate.star.oddi.scsset}
 \alias{locate.scanmar.default}
@@ -27,6 +28,8 @@
 \method{locate}{minilog.default}(x, ...)
 
 \method{locate}{minilog.scsset}(x, ...)
+
+\method{locate}{seabird.default}(x, ...)
 
 \method{locate}{star.oddi.default}(x, ...)
 
@@ -65,6 +68,8 @@ Locate data files for various types of probes.
 \item \code{locate(minilog.default)}: Default method for locating Minilog probe data files.
 
 \item \code{locate(minilog.scsset)}: Locate Minilog associated with snow crab survey tow data.
+
+\item \code{locate(seabird.default)}: Default method for locating Seabird probe data files.
 
 \item \code{locate(star.oddi.default)}: Default method for locating Star Oddi probe data files.
 

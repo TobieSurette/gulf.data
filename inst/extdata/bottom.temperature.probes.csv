@@ -1,24 +1,24 @@
 probe.id,probe.company,region,vessel,year.immersion,latitude,longitude,depth,comment
 C10885,Star Oddi,East of Miscou,CCGS Perley,2022,48.04613333,63.93791667,80,anchor- 50 fathoms lead rope with 2 floats- trap with probe-50 fathoms-popup-25 fathoms-big anchor
-SBE5608360,Seabird,East of Miscou,CCGS Perley,2022,48.04613333,63.93791667,80,anchor- 50 fathoms lead rope with 2 floats- trap with probe-50 fathoms-popup-25 fathoms-big anchor
-SBE5608357,Seabird,Bradelle Bank,Avalon Voyager II,2022,47.42268333,63.05753333,60,Less lead rope (20-30 fathoms) between chains; popup and cage)
-SBE5608362,Seabird,Bradelle Bank,Avalon Voyager II,2022,47.42268333,63.05753333,60,Less lead rope (20-30 fathoms) between chains; popup and cage)
-SBE5608361,Seabird,Cape Breton,Avalon Voyager II,2022,46.63198333,61.2118,84,"No cage; chain-25 fathoms lead rope with 1x 8"" float and 1 star odd-popup with 1 sbe and
+5608360,Seabird,East of Miscou,CCGS Perley,2022,48.04613333,63.93791667,80,anchor- 50 fathoms lead rope with 2 floats- trap with probe-50 fathoms-popup-25 fathoms-big anchor
+5608357,Seabird,Bradelle Bank,Avalon Voyager II,2022,47.42268333,63.05753333,60,Less lead rope (20-30 fathoms) between chains; popup and cage)
+5608362,Seabird,Bradelle Bank,Avalon Voyager II,2022,47.42268333,63.05753333,60,Less lead rope (20-30 fathoms) between chains; popup and cage)
+5608361,Seabird,Cape Breton,Avalon Voyager II,2022,46.63198333,61.2118,84,"No cage; chain-25 fathoms lead rope with 1x 8"" float and 1 star odd-popup with 1 sbe and
  1 star oddi attached to buoy-25 fathoms lead rope with 1 float 8""- chain"
-C11544,,Cape Breton,Avalon Voyager II,2022,46.63198333,61.2118,84,"No cage; chain-25 fathoms lead rope with 1x 8"" float and 1 star odd-popup with 1 sbe and
+C11544,Star Oddi,Cape Breton,Avalon Voyager II,2022,46.63198333,61.2118,84,"No cage; chain-25 fathoms lead rope with 1x 8"" float and 1 star odd-popup with 1 sbe and
  1 star oddi attached to buoy-25 fathoms lead rope with 1 float 8""- chain"
-C10969,,Cape Breton,Avalon Voyager II,2022,46.63198333,61.2118,84,"No cage; chain-25 fathoms lead rope with 1x 8"" float and 1 star odd-popup with 1 sbe and
+C10969,Star Oddi,Cape Breton,Avalon Voyager II,2022,46.63198333,61.2118,84,"No cage; chain-25 fathoms lead rope with 1x 8"" float and 1 star odd-popup with 1 sbe and
  1 star oddi attached to buoy-25 fathoms lead rope with 1 float 8""- chain"
-C8370,,Baie des Chaleurs,,2015,48.33621667,64.4935,75,
-C8373,,Baie des Chaleurs,,2015,48.33621667,64.4935,75,
-C8372,,Bradelle Bank,,2015,47.43615,63.12673333,69,
-C8375,,Bradelle Bank,,2015,47.43615,63.12673333,69,
-C8374,,Cape Breton,,2015,46.63315,61.24268333,84,
-C8371,,Cape Breton,,2015,46.63315,61.24268333,84,
-C8372,,Cape Breton,,2016,46.64938333,61.24155,84,Retrieved in 2018; no reimmersion
-C8375,,Cape Breton,,2016,46.64938333,61.24155,84,Retrieved in 2018; no reimmersion
-C8373,,Bradelle Bank,,2016,47.4285,63.07161667,60,Not able to retrieve in 2017;  line will be attempted to be picked up during 2018 survey; Not able to retrieve in 2018
-C8370,,Bradelle Bank,,2016,47.4285,63.07161667,60,Not able to retrieve in 2017;  line will be attempted to be picked up during 2018 survey; Not able to retrieve in 2018
+C8370,Star Oddi,Baie des Chaleurs,,2015,48.33621667,64.4935,75,
+C8373,Star Oddi,Baie des Chaleurs,,2015,48.33621667,64.4935,75,
+C8372,Star Oddi,Bradelle Bank,,2015,47.43615,63.12673333,69,
+C8375,Star Oddi,Bradelle Bank,,2015,47.43615,63.12673333,69,
+C8374,Star Oddi,Cape Breton,,2015,46.63315,61.24268333,84,
+C8371,Star Oddi,Cape Breton,,2015,46.63315,61.24268333,84,
+C8372,Star Oddi,Cape Breton,,2016,46.64938333,61.24155,84,Retrieved in 2018; no reimmersion
+C8375,Star Oddi,Cape Breton,,2016,46.64938333,61.24155,84,Retrieved in 2018; no reimmersion
+C8373,Star Oddi,Bradelle Bank,,2016,47.4285,63.07161667,60,Not able to retrieve in 2017;  line will be attempted to be picked up during 2018 survey; Not able to retrieve in 2018
+C8370,Star Oddi,Bradelle Bank,,2016,47.4285,63.07161667,60,Not able to retrieve in 2017;  line will be attempted to be picked up during 2018 survey; Not able to retrieve in 2018
 357906,,Baie des Chaleurs,,2017,48.335,64.49381667,75,(new line 2017); line will be attempted to be picked up during 2018 survey; Not able to retrieve in 2018
 5607475?,,Bradelle Bank,,2017,47.42776667,63.07365,69,(New line for 2017); Retrieved in 2018; no reimmersion
 357903,,Cape Breton,,2017,47.03408333,61.3775,46,(New line for 2017); Retrieved in 2018; no reimmersion; second line
