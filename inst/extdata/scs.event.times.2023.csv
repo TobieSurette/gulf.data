@@ -89,8 +89,6 @@ date,probe,location,position,event,tow.id,time
 2023-07-16,Star Oddi DST-TD,footrope,center,touchdown,GP134F,09:20:49
 2023-07-16,Star Oddi DST-TD,footrope,center,liftoff,GP134F,09:26:14
 2023-07-19,Star Oddi DST-TD,footrope,center,liftoff,GP227F,13:07:34
-2023-07-19,Star Oddi DST-TD,footrope,center,touchdown,GP230F,13:52:00
-2023-07-19,Star Oddi DST-TD,footrope,center,liftoff,GP230F,13:57:05
 2023-07-19,Star Oddi DST-TD,footrope,center,touchdown,GP249FR1,19:16:48
 2023-07-19,Star Oddi DST-TD,footrope,center,liftoff,GP249FR1,19:22:02
 2023-07-24,Star Oddi DST-TD,footrope,center,touchdown,GP265F,17:41:21

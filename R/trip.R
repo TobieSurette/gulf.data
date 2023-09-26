@@ -26,11 +26,16 @@ trip.scsset <- function(x){
    v <- rep(FALSE, nrow(x))
    v[c(1, which(diff(gulf.utils::julian(base::sort(gulf.utils::date(x)))) > 2)+1)] <- TRUE
    v <- cumsum(v)
-   
+
    # Corrections for SCS 2022:
-   v[(as.POSIXct(x$date) >= as.POSIXct("2022-08-10")) & (as.POSIXct(x$date) <= as.POSIXct("2022-08-17"))] <- 3
+   v[which((as.POSIXct(x$date) >= as.POSIXct("2022-08-10")) & (as.POSIXct(x$date) <= as.POSIXct("2022-08-17")))] <- 3
    v[(as.POSIXct(x$date) >= as.POSIXct("2022-08-23")) & (as.POSIXct(x$date) <= as.POSIXct("2022-08-26"))] <- 4
-   v[as.POSIXct(x$date) >= as.POSIXct("2022-09-01")] <- 5
+   v[(year(x) == 2022) & (as.POSIXct(x$date) >= as.POSIXct("2022-09-01"))] <- 5
+   
+   # Corrections for SCS 2023:
+   v[which((year(x) == 2023) & (v == 4))] <- 3
+   v[which((year(x) == 2023) & (v == 5))] <- 4
+   v[which((year(x) == 2023) & (v == 6))] <- 5
    
    return(v)
 }
