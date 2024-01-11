@@ -12,7 +12,16 @@ read.scsset(x, file, survey, ...)
 
 read.scscat(x, file, survey, species, ...)
 
-read.scsbio(x, file, survey, category, drop = TRUE, echo = FALSE, ...)
+read.scsbio(
+  x,
+  file,
+  survey,
+  species = 2526,
+  category,
+  drop = TRUE,
+  echo = FALSE,
+  ...
+)
 
 read.scslen(x, file, survey, species, ...)
 }

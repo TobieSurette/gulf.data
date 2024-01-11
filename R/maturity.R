@@ -55,6 +55,10 @@ is.mature.scsbio <- function(x, probability = FALSE, ...){
    ix <- which(!is.na(x$sex) & !is.na(x$carapace.width) & !is.na(x$chela.height) & (x$sex == 1))
    if (length(ix) > 0) mat[ix] <- (-0.7889259*log(x$carapace.width[ix]) + 0.6144883*log(x$chela.height[ix]) + 1.7605142) >= 0
    
+   # New correction for chela heights that are too large:
+   #iy <- which(log(x$chela.height[ix]) > (-2.88 + 1.35 * log(x$carapace.width[ix])))
+   #mat[ix[iy]] <- NA
+   
    # Small males:
    mat[(x$sex == 1) & (x$carapace.width < 40)] <- FALSE
    # Large males:

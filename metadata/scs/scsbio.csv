@@ -1,0 +1,23 @@
+variable	format	units	precision	measurement	description english	description français
+date	yyyy-mm-dd				Date when the crab was measured.	Date de mesure du crabe.
+time	hh:mm:ss				Time of crab measurement.	Heure de mesure du crabe.
+tow.id	text				Tow identification number.	Numéro identifiant du trait.
+tow.number	integer				Tow numbering used on survey.	Numéro du trait de chalut utilisé sur le relevé.
+species	integer				Species code.	Code espèce.
+crab.number	integer				Crab numbering used on board the fishing vessel.	Numéro de crabe utilisée à bord du navire de recherche.
+sex	integer			visual	Sex code (0 = 'unknown'; 1 = 'male' and 2 = 'female')	Code indiquant le sex du crabe (0 = 'inconnu'; 1 = 'male' and 2 = 'femelle')
+carapace.width	numeric	millimeters	1 or 0.1 mm	Vernier caliper	Width of the crab carapace.	Largeur de la carapace du crabe.
+chela.height	numeric	millimeters		Vernier caliper	"Height of male crab claw, used to determine maturity."	Hauteur de la pince du crabe mâle.
+abdomen.width	numeric	millimeters		Vernier caliper	Width of 5th abdominal segment.	Largeur du 5e segment de l'abdomen.
+durometer	integer	percentage		Durometer	Crab hardness.	Dureté de la carapace.
+weight	numeric	grams	5 grams	Scale	Crab weight.	Poids du crabe.
+shell.condition	integer			visual	Crab shell or carapace condition.	Condition de carapace.
+shell.condition.mossy	text			visual	Whether crab had moss (e.g. bryozoans) growing on the carapace.	Indicteur de mousse qui pousse sur la carapace.
+missing.legs	text			visual	Missing leg indicator string (10 characters-one for each leg).	Code de pattes manquantes de crabe (10 caractères-une pour chacune des pattes).
+gonad.colour	integer			visual	Colour of gonads for immature or pubescent females.	Couleur de gonades pour femelles immatures ou pubescentes.
+egg.colour	integer			visual	Colour of eggs.	Couleur des œufs.
+eggs.remaining	integer			visual	Percentage of eggs remaining category.	Catégorie de pourcentage des œufs restants.
+samplers	text				Names of crab samplers.	Noms des échantillonneurs mesurant le crabe.
+tag.number	integer				Crab tag number.	Numéro d'étiquette de crabe.
+trap.code	integer				Crab trap code.	Code identifiant la trappe dont provient l'échantillon.
+comment	text				Comments.	Commentaires.

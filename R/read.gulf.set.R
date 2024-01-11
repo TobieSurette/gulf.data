@@ -93,4 +93,3 @@ read.gulf.set <- function(year, survey = "rv",
    
    return(x) 
 }
-

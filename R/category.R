@@ -305,7 +305,7 @@ parse.category <- function(x){
          stop("Gonad colour character must be either 'w' (white), 'b' (beige) or 'o' (orange).")
       if (gc == "w") gc <- 1
       if (gc == "b") gc <- 2
-      if (gc == "o") gc <- 3
+      if (gc == "o") gc <- c(3,4)
       x <- gsub(substr(x, index, index+2), "", x)
    }
    
@@ -536,12 +536,12 @@ describe.category <- function(x, language = "english", symbols = TRUE, simplify 
          if (language == "english"){
             if (r$gonad.colour == 1) str <- paste(str, "white gonads,")
             if (r$gonad.colour == 2) str <- paste(str, "beige gonads,")
-            if (r$gonad.colour == 3) str <- paste(str, "orange gonads,")
+            if (any(r$gonad.colour %in% c(3,4))) str <- paste(str, "orange gonads,")
          }
          if (language == "french"){
             if (r$gonad.colour == 1) str <- paste(str, "gonade blanche,")
             if (r$gonad.colour == 2) str <- paste(str, "gonade beige,")
-            if (r$gonad.colour == 3) str <- paste(str, "gonade orange,")
+            if (any(r$gonad.colour %in% c(3,4))) str <- paste(str, "gonade orange,")
          }
       }
 
@@ -632,7 +632,7 @@ is.category.scsbio <- function(x, category, drop = TRUE, ...){
 
       if (!is.null(t$shell.condition)) index <- index & (x$shell.condition %in% t$shell.condition)
       if (!is.null(t$missing.legs)) if (t$missing.legs) index <- index & is.missing.legs(x)
-      if (!is.null(t$gonad.colour)) index <- index & (x$gonad.colour == t$gonad.colour)
+      if (!is.null(t$gonad.colour)) index <- index & (x$gonad.colour %in% t$gonad.colour)
       if (!is.null(t$eggs.remaining)){
          if (!any(is.na(t$eggs.remaining))) index <- index & (x$eggs.remaining %in% t$eggs.remaining)
       }

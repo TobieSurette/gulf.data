@@ -1,0 +1,37 @@
+﻿variable,format,units,description english,description français
+date,yyyy-mm-dd,,Date when the tow was performed.,Date du trait de chalut.
+tow.id,text,,Tow identification number.,Numéro identifiant du trait.
+tow.number,integer,,Tow numbering used on survey.,Numéro du trait de chalut utilisé sur le relevé.
+valid,integer,,Whether a tow was successful and suitable for analysis.,Identifiant qui indique si le trait était réussi fiable pour inclusion dans les analyses.
+station.type,text,,Identified the type of survey sampling station (e.g. 'fixed' or 'free').,Type de station d'échantillonnage (e.g. station fixe ou libre).
+zone,text,,Crab fishing area.,Zone de pêche.
+start.time.logbook,hh:mm:ss,,Recorded time of the start of active trawling aboard fishing vessel.,
+stop.time.logbook,hh:mm:ss,,Recorded time of the end of active trawling aboard fishing vessel.,
+start.time,hh:mm:ss,,Official time of the start of active trawling (i.e. trawl touchdown).,Heure du début du chalutage.
+stop.time,hh:mm:ss,,Official time of the end of active trawling (i.e. stop signal and hauling of the net).,Heure de la fin du chalutage.
+haul.time,hh:mm:ss,,Time when the trawl net appears at water's surface.,
+liftoff.time,hh:mm:ss,,Time when the trawl footrope leaves the sea bottom.,
+touchdown.time,hh:mm:ss,,Time when the trawl initially touches bottom.,
+end.time,hh:mm:ss,,Official time of the end of active trawling.,
+end.time.logbook,hh:mm:ss,,Recorded time of the end of active trawling aboard fishing vessel.,
+longitude,DMM;degrees,,Calculated or recorded tow longitude mid point.,
+longitude.start,DMM;degrees,,Official longitude at the start of active trawling.,
+longitude.stop,DMM;degrees,,Official longitude at the end of active trawling.,
+longitude.start.logbook,DMM;degrees,,Recorded longitude at the start of active trawling.,
+longitude.stop.logbook,DMM;degrees,,Recorded longitude at the end of active trawling.,
+longitude.end.logbook,DMM;degrees,,Recorded longitude at the end of active trawling.,
+latitude,DMM;degrees,,Calculated or recorded tow latitude mid point.,
+latitude.start,DMM;degrees,,Official latitude at the start of active trawling.,
+latitude.stop,DMM;degrees,,Official latitude at the end of active trawling.,
+latitude.start.logbook,DMM;degrees,,Recorded latitude at the start of active trawling.,
+latitude.stop.logbook,DMM;degrees,,Recorded latitude at the end of active trawling.,
+latitude.end.logbook,DMM;degrees,,Recorded latitude at the end of active trawling.,
+captain,text,,Captain aboard research or chartered fishing vessel.,
+depth,numeric,fathoms,Water depth according to vessel's acoustic sounders.,
+bottom.temperature,numeric,degrees Celcius,Observed water temperaturewhen the trawl is actively trawling.,
+warp,numeric,fathoms,Length of cables used by the trawl.,Longueur des câbles attachées au chalut.
+swept.area,numeric,square meters,Estimate of trawl swept area.,Estimé de l'aire balayé par le trait de chalut.
+swept.area.method,text,,Method used to estimate swept area.,Méthode utilisée pour estimé l'aire balayée.
+groundfish.sample,integer,,Whether size measurements were made for fish and invertebrate by-catches.,
+water.sample,integer,,Whether an oceanographic water sample was taken.,
+comment,text,,Tow comments (e.g. vessel speed or issues).,Commentaires portant sur le trait (e.g. vitesse du navire or problèmes).

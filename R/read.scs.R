@@ -190,10 +190,16 @@ read.scscat <- function(x, file, survey, species, ...){
 
 #' @describeIn read.scs Read southern Gulf of Saint Lawrence snow crab survey biological data.
 #' @export read.scsbio
-read.scsbio <- function(x, file, survey, category, drop = TRUE, echo = FALSE, ...){
+read.scsbio <- function(x, file, survey, species = 2526, category, drop = TRUE, echo = FALSE, ...){
    # Define file(s) to be read:
    if (!missing(x) & missing(file)) if (is.character(x)) file = x 
-   if (missing(file)) file <- locate.scsbio(x, ...)
+   if (missing(file)){
+      file <- locate.scsbio(x, ...)
+      if (species == 2526){
+         ix <- grep("hyas", file)
+         if (length(ix) > 0) file <- file[-ix]
+      } 
+   } 
    if (length(file) == 0) return(NULL)
 
    # Read multiple files:
@@ -202,7 +208,7 @@ read.scsbio <- function(x, file, survey, category, drop = TRUE, echo = FALSE, ..
       for (i in 1:length(file)){
          if (echo) cat(paste0("Reading: '", file[i], "'\n"))
             
-         # Append data:
+         # Read data:
          tmp <- read.scsbio(file = file[i], drop = drop, ...)
          
          # Make previous and current data tables uniform: 
@@ -265,6 +271,9 @@ read.scsbio <- function(x, file, survey, category, drop = TRUE, echo = FALSE, ..
       
       # Read comma-delimited file:
       if (ext == "csv") v <- read.csv(file, header = TRUE, stringsAsFactors = FALSE)
+
+      # Add species column if none exists:
+      if (!("species" %in% names(v))) v$species <- 2526
       
       # Compress date variables:
       if (all(c("year", "month", "day") %in% names(v))){
@@ -293,6 +302,9 @@ read.scsbio <- function(x, file, survey, category, drop = TRUE, echo = FALSE, ..
    
    # Subset by survey type:
    if (!missing(survey)) v <- v[survey(v) %in% survey, ]
+   
+   # Subset by survey type:
+   if (!missing(species) & ("species" %in% names(v))) if (!is.null(species)) v <- v[v$species %in% species, ]
    
    return(v)
 }

@@ -16,6 +16,10 @@ observer <- function(x){
    cx <- gsub(" - ", "-", cx)
 
    # Observer name corrections:
+   cx <- gsub("JEAN-FRANCOIS COUTURE-BLA", "JEAN-FRANCOIS COUTURE", cx)
+   cx <- gsub("FINEAS CARAGHER" , "FINEAS CARRAGHER", cx)
+   cx <- gsub("SYLVIE ST COEUR", "SYLVIE ST-COEUR", cx)
+   
    cx <- gsub("ALEXANDRA MORIAS", "ALEXANDRA MORAIS", cx)
    cx <- gsub("AALEXANDRE KENNY", "ALEXANDRE KENNY", cx)
    cx <- gsub("ANDRE LAROCQUE", "AUDRE LAROCQUE", cx)

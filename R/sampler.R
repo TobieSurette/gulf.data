@@ -478,5 +478,3 @@ sampler.sco <- function(x){
    
    return(x)
 }
-
-
