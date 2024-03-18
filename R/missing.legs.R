@@ -23,6 +23,9 @@
 #' # Convert to standard format:
 #' missing.legs(str)
 #' 
+#' # Convert standard format to matrix format:
+#' missing.legs(c("*111***12*", "**211*1***", "**********"))
+#' 
 #' # Read 2010 crab data:
 #' x <- read.scsbio(year = 2010)
 #'    
@@ -57,7 +60,8 @@
 #'                                        \sQuote{"R23 L12R3R"}, which specifies that the 2nd and 3rd legs on the
 #'                                        right-hand side is missing, and the first leg on the left-hand side is
 #'                                        missing, while the 2nd and 3rd ones are regenerated. This string translates
-#'                                        to \sQuote{122***11**} in the standard format.}
+#'                                        to \sQuote{122***11**} in the standard format. If entries are already in the standard 
+#'                                        format, then a numerical matrix version of the missing leg pattern is returned.}
 #'                                        
 #'   \item{\code{is.missing.legs}}{Generic \code{is.missing.legs} function.}
 #'   
@@ -98,6 +102,20 @@ missing.legs.numeric <- function(x){
 #' @rdname missing.legs
 #' @export
 missing.legs.character <- function(x){
+   # Check whether missing leg entries are already in the standard format:
+   if (all(unique(unlist(strsplit(x,""))) %in% c("*", as.character(0:9)))){
+      if (all((nchar(x) == 10) | (nchar(x) == 0))){
+         # Convert strings to matrix format:
+         x[nchar(x) == 0] <- "**********"
+         x <- gsub("[*]", "0", x)
+         res <- matrix(NA, nrow = length(x), ncol = 10)
+         for (i in 1:ncol(res)) res[, i] <- as.numeric(substr(x, i, i))
+         colnames(res) <- c(paste0("L", 1:5), paste0("R", 1:5))
+         return(res)
+      }
+   }
+   
+   # Parse character strings to extract missing leg information:
    x <- toupper(x)
 
    # Replace commas with spaces:
