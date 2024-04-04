@@ -6,13 +6,15 @@
 \alias{is.mature.scsbio}
 \alias{is.pubescent}
 \alias{is.pubescent.scsbio}
+\alias{is.adolescent}
+\alias{is.adolescent.scsbio}
 \alias{is.primiparous}
 \alias{is.primiparous.scsbio}
 \alias{is.multiparous}
 \alias{is.multiparous.scsbio}
 \alias{is.senile}
 \alias{is.senile.scsbio}
-\alias{maturity.default}
+\alias{maturity.scsbio}
 \alias{maturity.numeric}
 \title{Sexual Maturity Functions}
 \usage{
@@ -23,6 +25,10 @@ is.mature(x, ...)
 is.pubescent(x, ...)
 
 \method{is.pubescent}{scsbio}(x, ...)
+
+is.adolescent(x, ...)
+
+\method{is.adolescent}{scsbio}(x, ...)
 
 is.primiparous(x, ...)
 
@@ -38,7 +44,7 @@ is.senile(x, ...)
 
 maturity(x, ...)
 
-\method{maturity}{default}(x, ...)
+\method{maturity}{scsbio}(x, ...)
 
 \method{maturity}{numeric}(x, year, species, ...)
 }

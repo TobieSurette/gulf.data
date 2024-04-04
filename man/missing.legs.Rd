@@ -67,7 +67,8 @@ while the 2nd leg on the right-hand side is missing.
                                        \sQuote{"R23 L12R3R"}, which specifies that the 2nd and 3rd legs on the
                                        right-hand side is missing, and the first leg on the left-hand side is
                                        missing, while the 2nd and 3rd ones are regenerated. This string translates
-                                       to \sQuote{122***11**} in the standard format.}
+                                       to \sQuote{122***11**} in the standard format. If entries are already in the standard 
+                                       format, then a numerical matrix version of the missing leg pattern is returned.}
                                        
   \item{\code{is.missing.legs}}{Generic \code{is.missing.legs} function.}
   
@@ -92,6 +93,9 @@ str <- c("11 L234 R34R", "15 R2M L3R L4M L5", "  ", "", "56", "r3",
 
 # Convert to standard format:
 missing.legs(str)
+
+# Convert standard format to matrix format:
+missing.legs(c("*111***12*", "**211*1***", "**********"))
 
 # Read 2010 crab data:
 x <- read.scsbio(year = 2010)

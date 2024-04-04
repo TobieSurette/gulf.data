@@ -191,7 +191,7 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
    x$longitude[which(x$longitude < -67 | x$longitude > -59)] <- NA
    x$latitude[which(x$latitude < 45 | x$latitude > 49.5)] <- NA
 
-   # Fix slip:
+   # Fix slip mumber:
    x$slip.number <- gsub(" ", "", x$slip.number)
    
    # Define date formatting function:
@@ -282,6 +282,14 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
    delete <- c('sequence.jf')
    x <- x[, setdiff(names(x), delete)]
    x <- gulf.utils::compress(x)
+   
+   # Clean up Excel codes:
+   for (i in 1:ncol(x)){
+      if (is.character(x[,i])){
+         x[,i] <- gsub("#VALUE!", "", x[,i])
+         x[,i] <- gsub("#DIV/0!", "", x[,i])
+      }
+   }
    
    return(x)
 }

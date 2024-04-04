@@ -71,21 +71,8 @@ read.minilog.default <- function(x, file, offset = 0, echo = FALSE, ...){
    # Read and parse header info:
    y <- read.table(file = file, nrow = 30, colClasses = "character", sep = "\n")
    y <- y[, 1]
+   y <- iconv(y, from = "ISO-8859-1", to = "UTF-8")
 
-   # Fix odd characters:
-   y <- gsub('\xeb', " ", y)  
-   y <- gsub('\xf8C', " ", y)
-   y <- gsub('\xb0C', " ", y)
-   y <- gsub('\xee', "i", y)  
-   y <- gsub('\xfb', "u", y)  
-   y <- gsub('\xce', "I", y) 
-   y <- gsub('\xc9', "E", y) 
-   y <- gsub('\xf4', "a", y) 
-   y <- gsub('\xe0', "a", y) 
-   y <- gsub('\xe9', "e", y)
-   y <- gsub('\xe8', "e", y)  
-   y <- gsub('\"+', " ", y)
-   
    # Define location of field names :
    k <- grep("^[*]*[ ]*date", tolower(y)) 
    if (length(k) == 0) k <- (length(y) + 1)

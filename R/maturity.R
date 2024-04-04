@@ -1,4 +1,4 @@
-#' Sexual Maturity Functions
+#' @title Sexual Maturity Functions
 #'
 #' @name maturity
 #' 
@@ -45,8 +45,7 @@
 is.mature <- function(x, ...) UseMethod("is.mature")
 
 #' @rdname maturity
-#' @export is.mature.scsbio
-#' @export
+#' @rawNamespace S3method(is.mature,scsbio)
 is.mature.scsbio <- function(x, probability = FALSE, ...){
    # Initialize result vector:
    mat <- as.logical(rep(NA, dim(x)[1]))
@@ -70,6 +69,7 @@ is.mature.scsbio <- function(x, probability = FALSE, ...){
       mat[ix] <- (16.422757 * log(x$carapace.width[ix]) - 14.756163 * log(x$abdomen.width[ix]) - 14.898721) < 0
       mat[is.na(mat) & !is.na(x$sex) & (x$sex == 2) & !is.na(x$gonad.colour) & (x$gonad.colour >= 1)] <- FALSE
       mat[is.na(mat) & !is.na(x$sex) & (x$sex == 2) & (!is.na(x$egg.colour) | !is.na(x$eggs.remaining))] <- TRUE
+      mat[which(mat & (x$sex == 2) &  (x$carapace.width <= 30))] <- FALSE
    }
 
    # Perform GAM regressions for individuals with NA maturity values:
@@ -96,7 +96,7 @@ is.mature.scsbio <- function(x, probability = FALSE, ...){
 is.pubescent <- function(x, ...) UseMethod("is.pubescent")
 
 #' @rdname maturity
-#' @export is.pubescent.scsbio
+#' @rawNamespace S3method(is.pubescent,scsbio)
 is.pubescent.scsbio <- function(x, ...){
    v <- rep(NA, nrow(x))
    x$year <- year(x)
@@ -140,11 +140,19 @@ is.pubescent.scsbio <- function(x, ...){
 }
 
 #' @rdname maturity
+#' @export is.adolescent
+is.adolescent <- is.pubescent
+
+#' @rdname maturity
+#' @rawNamespace S3method(is.adolescent,scsbio)
+is.adolescent.scsbio <- is.pubescent.scsbio
+
+#' @rdname maturity
 #' @export is.primiparous
 is.primiparous <- function(x, ...) UseMethod("is.primiparous")
 
 #' @rdname maturity
-#' @export is.primiparous.scsbio
+#' @rawNamespace S3method(is.primiparous,scsbio)
 is.primiparous.scsbio <- function(x, ...){
    # Returns whether a crab is newly moulted.
 
@@ -167,7 +175,7 @@ is.primiparous.scsbio <- function(x, ...){
 is.multiparous <- function(x, ...) UseMethod("is.multiparous")
 
 #' @rdname maturity
-#' @export is.multiparous.scsbio
+#' @rawNamespace S3method(is.multiparous,scsbio)
 is.multiparous.scsbio <- function(x, ...){
    # Returns whether a crab is newly moulted.
 
@@ -189,7 +197,7 @@ is.multiparous.scsbio <- function(x, ...){
 is.senile <- function(x, ...) UseMethod("is.senile")
 
 #' @rdname maturity
-#' @export is.senile.scsbio
+#' @rawNamespace S3method(is.senile,scsbio)
 is.senile.scsbio <- function(x, ...){
    # Construct logical vector:
    ix <- rep(TRUE, dim(x)[1])
@@ -216,11 +224,14 @@ maturity <- function(x, ...) UseMethod("maturity")
 
 #' @rdname maturity
 #' @export
-maturity.default <- function(x, ...){
+maturity.scsbio <- function(x, ...){
    ix <- is.mature(x)
    v <- rep("", length(ix))
    v[ix] <- "mature"
    v[!ix] <- "immature"
+   ix <- which(is.pubescent(x))
+   if (length(ix) > 0) v[ix] <- "pubescent"
+   
    return(v)
 }
 
