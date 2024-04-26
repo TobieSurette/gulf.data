@@ -68,6 +68,7 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
 
    # Load file and format variable names:
    x <- read.csv(file, skip = 1, header = FALSE)
+   x <- gulf.utils::recode(x)
 
    # Field name fixes:
    fields <- readLines(file, n = 1)
@@ -102,12 +103,27 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
    fields <- gsub("date.debarquement", "date.landed", fields)
    fields <- gsub("date.capture", "date.caught", fields)
    fields <- gsub("nom.intervenant", "licence.holder", fields) 
+   fields <- gsub("vessel.name", "vessel", fields)
+   fields <- gsub("boat.name", "vessel", fields)
+   fields <- gsub("boat$", "vessel", fields)
+   fields <- gsub("slip.qty.day.kg", "slip.prop.day", fields)
+   fields <- gsub("slip.qty.day", "slip.prop.day", fields)
+   fields <- gsub("effort.trip", "trap.trip", fields)
+   fields <- gsub("effort.day", "trap.day", fields)
+   fields <- gsub("slip.num$", "slip.number", fields)
+   fields <- gsub("dale.landed", "date.landed", fields)
+   fields <- gsub("area", "zone", fields)
+   fields <- gsub("long.dec", "longitude", fields)
+   fields <- gsub("t.i", "ti", fields)
    names(x) <- fields
    
    # Convert numeric variables:
    vars <- c("longitude", "latitude")
    for (i in 1:length(vars)) x[, vars[i]] <- as.numeric(x[, vars[i]])
 
+   # Fix fishing zone:
+   x$zone[x$zone == "12.00"] <- "12"
+   
    # Coordinate range checks:
    x$longitude <- -abs(x$longitude)
    x$longitude[which(x$longitude < -67 | x$longitude > -59)] <- NA
@@ -118,7 +134,7 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
    ix <- (x$depth < 40) | (x$depth > 200)
    x$longitude[ix] <- NA
    x$latitude[ix] <- NA
-
+   
    # Effort corrections:
    x$trap.day <- as.numeric(gsub(",", "", x$trap.day))
    x$slip.prop.day[grep("VALUE", x$slip.prop.day)] <- ""
@@ -150,6 +166,7 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
    }
 
    # Fix grid names:
+   if (!("grid.calc" %in% names(x))) x$grid.calc <- x$grid
    x$grid.calc[grep("VALUE", x$grid.calc)] <- ""
    if (is.null(x$grid) & !is.null(x$grid.calc)) x$grid <- x$grid.calc
    x$grid <- gsub(" ", "", x$grid)
@@ -237,9 +254,11 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
    }
    
    # Province correction:
+   x$province[grep("bec", tolower(x$province))] <- "QC"
    x$province[grep("que", tolower(x$province))] <- "QC"
    
    # Soak time:
+   x$ti <- gsub("n/a", "", x$ti)
    if ("ti" %in% names(x)) x$t1 <- x$ti
    
    if (is.character(x$t1)){
@@ -256,24 +275,33 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
    } 
    
    # Fix date fields:
+   if (year == 1999){
+      x$date.landed <- gsub("/99$", "/1999", x$date.landed)
+      x$date.caught <- gsub("/99$", "/1999", x$date.caught)
+      x$date.sailed <- gsub("/99$", "/1999", x$date.sailed)
+   }
    if (!is.null(x$date.landed)) x$date.landed <- format.date(x$date.landed)
    if (!is.null(x$date.caught)) x$date.caught <- format.date(x$date.caught)
    if (!is.null(x$date.sailed)) x$date.sailed <- format.date(x$date.sailed)
    
-   x$licence.holder <- gsub("[.]", " ", x$licence.holder)
-   x$licence.holder <- gsub(" +", " ", x$licence.holder)
-   x$licence.holder <- deblank(x$licence.holder)
-   x$licence.holder <- gsub("P\\?CH", "PECH", x$licence.holder)
-   x$licence.holder <- gsub("QU\\?BEC", "QUEBEC", x$licence.holder)
-   x$licence.holder <- gsub("GASP\\?SIE", "GASPESIE", x$licence.holder)
-   
-   x$vessel.name <- gsub(" +", " ", x$vessel.name)
-   x$vessel.name <- deblank(x$vessel.name)
+   if ("x$licence.holder" %in% names(x)){
+      x$licence.holder <- gsub("[.]", " ", x$licence.holder)
+      x$licence.holder <- gsub(" +", " ", x$licence.holder)
+      x$licence.holder <- deblank(x$licence.holder)
+      x$licence.holder <- gsub("P\\?CH", "PECH", x$licence.holder)
+      x$licence.holder <- gsub("QU\\?BEC", "QUEBEC", x$licence.holder)
+      x$licence.holder <- gsub("GASP\\?SIE", "GASPESIE", x$licence.holder)
+   }
+
+   # Clean-up vessel name:
+   x$vessel <- gsub(" +", " ", x$vessel)
+   x$vessel <- deblank(x$vessel)
    
    # Re-order variables:
    vars <- c("cfvn", "vessel.name", "zone", "province", "fleet", "licence.holder", "licence.id", "allocation.code", "slip.number", "trip.id",
              "date.caught", "date.landed", "date.sailed", "longitude", "latitude", "grid", "grid.calc", "amt.landed.kg", 
              "trap.day", "trap.trip", "soak.time")
+   vars <- vars[vars %in% names(x)]
    x <- gulf.utils::compress(x)
    vars <- intersect(vars, names(x))
    x <- x[, c(vars, setdiff(names(x), vars))]
@@ -289,6 +317,18 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
          x[,i] <- gsub("#VALUE!", "", x[,i])
          x[,i] <- gsub("#DIV/0!", "", x[,i])
       }
+   }
+   
+   #$ Clean-up licence status:
+   if ("status" %in% names(x)){
+      x$status <- tolower(x$status)
+      x$status <- gsub("temp$", "temporary", x$status)
+      x$status <- gsub("temp.$", "temporary", x$status)
+      x$status <- gsub("perm$", "permanent", x$status)
+      x$status <- gsub("perm.$", "permanent", x$status)
+      x$status <- gsub("permament", "permanent", x$status)
+      x$status <- gsub("tempoary", "temporary", x$status)
+      x$status <- gsub("temporaire", "temporary", x$status)      
    }
    
    return(x)
@@ -348,6 +388,7 @@ read.ziff.ascii <- function(x, convert = TRUE, as.character = FALSE, ...){
    
    # Read file: 
    y <- utils::read.fortran(file = x, format = fmt[seq(2,length(fmt),2)], comment.char = "") 
+   y <- gulf.utils::recode(y)
    names(y) <- fmt[seq(1,length(fmt),2)]
    
    # Remove dots from empty integer data fields:

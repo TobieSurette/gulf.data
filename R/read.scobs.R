@@ -17,19 +17,15 @@
 
 # READ.SCOBS - Read snow crab observer data.
 #' @export read.scobs
-read.scobs <- function(x, year, type = "sea", source = "R", ...){
-   # Parse 'year':
-   if (missing(year) & !missing(x)) if (is.numeric(x)) year <- x
-   if (missing(year)) stop("'year' must be specified.")
-   
+read.scobs <- function(source = "R", ...){
    # Parse 'source' argument:
    source <- match.arg(tolower(source), c("r", "ascii", "csv", "oracle"))
 
    # Read R or csv file:
-   if (source == "r")      x <- read.rdata.scobs(year = year, type = type, ...)
-   if (source == "csv")    x <- read.csv.scobs(year = year, type = type, ...) 
-   if (source == "ascii")  x <- read.ascii.scobs(year = year, type = type, ...)
-   if (source == "oracle") x <- read.oracle.scobs(year = year, type = type, ...)
+   if (source == "r")      x <- read.rdata.scobs(...)
+   if (source == "csv")    x <- read.csv.scobs(...) 
+   if (source == "ascii")  x <- read.ascii.scobs(...)
+   if (source == "oracle") x <- read.oracle.scobs(...)
 
    # Convert to 'scbio' object:
    x <- scobs(x)
@@ -224,6 +220,7 @@ read.csv.scobs <- function(x, year, zone, type, path = options("gulf.path")[[1]]
       for (i in 1:length(files)){
          if (echo) cat(paste0("Reading : '", files[i], "'\n"))
          x <- read.table(files[i], header = TRUE, sep = ",", colClasses = "character", stringsAsFactors = FALSE)
+         x <- gulf.utils::recode(x)
          if (!is.null(res)){
             vars <- intersect(names(res), names(x))
             res <- res[vars]
@@ -255,6 +252,7 @@ read.rdata.scobs <- function(x, year, zone, type, path = options("gulf.path")[[1
       for (i in 1:length(files)){
          if (echo) cat(paste0("Reading : '", files[i], "'\n"))
          load(files[i])
+         x <- gulf.utils::recode(x)
          if (!is.null(res)){
             vars <- intersect(names(res), names(x))
             res <- res[vars]
@@ -267,110 +265,31 @@ read.rdata.scobs <- function(x, year, zone, type, path = options("gulf.path")[[1
 }
 
 # Read ASCII files:
-read.ascii.scobs <- function(x, year, zone, path, ...){
+read.ascii.scobs <- function(x, ...){
+   # Get file format:
+   f <- fmt.scobs(x, ...)  
+   
    # Define file format:
-   #           variable name                   format  fill.char  description
-   fmt.str = c("blank1",                        "A1",     " ",    "Blank.",
-               "day",                           "A2",     " ",    "Day.",
-               "month",                         "A2",     " ",    "Month.",
-               "year",                          "A4",     " ",    "Year.",
-               "blank2",                        "A1",     " ",    "Blank.",
-               "trap.type",                     "A2",     " ",    "Trap type.",
-               "blank3",                        "A1",     " ",    "Blank.",
-               "trip.number",                   "A9",     " ",    "Trip.number",
-               "crab.number",                   "A3",     " ",    "Crab number",
-               "blank4",                        "A1",     " ",    "Blank.",
-               "sex",                           "A1",     "*",    "Sex.",
-               "blank5",                        "A1",     " ",    "Blank.",
-               "carapace.width",                "A3",     " ",    "Carapace width(mm).",
-               "blank6",                        "A1",     " ",    "Blank.",
-               "soak.time",                     "A4",     " ",    "Soak time for traps(days).",
-               "trap.number",                   "A2",     " ",    "Trap number.",
-               "chela.height.right",            "A4",     " ",    "Chela height right(mm).",
-               "chela.height.left",             "A4",     " ",    "Chela height left(mm).",
-               "shell.condition",               "A1",     "*",    "Shell condition.",
-               "shell.condition.mossy",         "A1",     " ",    "Mossy shell condition.",
-               "durometer",                     "A2",     "*",    "Durometer measurement.",
-               "blank7",                        "A1",     " ",    "Blank.",
-               "cfvn",                          "A6",     " ",    "Canadian fishing vessel number.",
-               "blank8",                        "A1",     " ",    "Blank.",
-               "comments",                      "A14",    " ",    "Comments.",
-               "blank9",                        "A1",     " ",    "Blank.",
-               "position.type",                 "A2",     " ",    "Position type.",
-               "blank10",                       "A3",     " ",    "Blank.",
-               "latitude",                      "A6",     " ",    "Latitude coordinate.",
-               "blank11",                       "A3",     " ",    "Blank.",
-               "longitude",                     "A6",     " ",    "Longitude coordinate.",
-               "depth",                         "A4",     " ",    "Depth(fathoms).",
-               "chela.length",                  "A2",     " ",    "Chela length(mm).",
-               "weight",                        "A6",     " ",    "Total weight(kg).",
-               "blank12",                       "A1",     " ",    "Blank.",
-               "zone",                          "A2",     " ",    "Fishing zone.",
-               "blank13",                       "A1",     " ",    "Blank.",
-               "data.type",                     "A1",     " ",    "Port sample(=1), sea sample(=2) or trawl(=3).",
-               "blank14",                       "A1",     " ",    "Blank.",
-               "missing.legs",                  "A10",    " ",    "Missing leg codification.",
-               "blank15",                       "A5",     " ",    "Blank.",
-               "observer",                      "A23",    " ",    "Sampler names.",
-               "blank16",                       "A8",     " ",    "Blank.",
-               "vessel",                        "A18",    " ",    "Vessel name.",
-               "blank17",                       "A1",     " ",    "Blank.",
-               "egg.maturity",                  "A1",     "*",    "Egg maturity code.",
-               "blank18",                       "A1",     " ",    "Blank.",
-               "egg.development",               "A1",     "*",    "Egg maturity code.",
-               "blank19",                       "A1",     " ",    "Blank.",
-               "egg.clutch",                    "A1",     "*",    "Egg maturity code.",
-               "blank20",                       "A8",     " ",    "Blank.",
-               "male.total",                    "A3",     " ",    "Total number of males in trap.",
-               "blank21",                       "A1",     " ",    "Blank.",
-               "fishing.grid",                  "A4",     " ",    "Snow crab fishing grid.",
-               "blank22",                       "A1",     " ",    "Blank.",
-               "female.total",                  "A3",     " ",    "Total number of females in trap.",
-               "blank23",                       "A1",     " ",    "Blank.",
-               "logbook",                       "A7",     " ",    "Logbook ID number.",
-               "blank24",                       "A1",     " ",    "Blank.",
-               "abdomen.width",                 "A4",     " ",    "Abdomen width(mm).",
-               "blank25",                       "A1",     " ",    "Blank.",
-               "maillageC",                     "A3",     " ",    "Net measure C.",
-               "blank26",                       "A1",     " ",    "Blank.",
-               "maillage1",                     "A3",     " ",    "Net measure 1.",
-               "blank27",                       "A1",     " ",    "Blank.",
-               "maillage2",                     "A3",     " ",    "Net measure 2.",
-               "blank28",                       "A1",     " ",    "Blank.",
-               "maillage3",                     "A3",     " ",    "Net measure 3.",
-               "blank29",                       "A1",     " ",    "Blank.",
-               "maillageC1",                    "A2",     " ",    "Net measure C1.",
-               "blank30",                       "A1",     " ",    "Blank.",
-               "maillageC2",                    "A2",     " ",    "Net measure C2.",
-               "blank31",                       "A1",     " ",    "Blank.",
-               "maillageC3",                    "A2",     " ",    "Net measure C3.")
-   
-   # Recast file.info as a 'fmt' (format) object:
-   n <- length(fmt.str) # Total number of fields.
-   k <- 4 # Number of columns to be parsed.
-   f <- data.frame(name = fmt.str[seq(1,n,k)], format = fmt.str[seq(2,n,k)],
-                   fill.char = fmt.str[seq(3,n,k)], description = fmt.str[seq(4,n,k)])
-   
-   if (is.character(x)){
-      files <- x
+   if (!missing(x)){
+      if (is.character(x)){
+         files <- x
+      }else{
+         # Locate files:
+         files <- locate.scobs(x, ...)
+         if (length(files) == 0) return(NULL)
+      } 
    }else{
-      # Locate files:
-      path <- paste0(path, "Fishing Year ", year, "/Observer Data")
-      files <- locate(path = path, file = "*.txt")
-      remove <- "intermediaire"
-      files <- files[-grep(remove, files)]
-      
-      # Target file subset:
-      if (!missing(type)) files <- files[grep(paste0(type, " sample"), tolower(files))]
-      if (!missing(zone)) files <- files[grep(paste0("zone ", tolower(zone)), tolower(files))]
-      if (length(files) == 0) return(NULL)
-   } 
+      files <- locate.scobs(...)
+   }
    
    # Read files: 
    x <- NULL
    for (i in 1:length(files)){
-      print(files[i])
-      x <- rbind(x, read.fortran(file = files[i], format = f$format))
+      cat(paste0(i, " of ", length(files), ") ", files[i], "\n"))
+      tmp <- utils::read.fwf(file = files[i], 
+                             widths = f$width,
+                             comment.char = "", fileEncoding = "ISO-8859-1")
+      x <- rbind(x, tmp)
    }
    names(x) <- f$name
    
@@ -383,6 +302,8 @@ read.ascii.scobs <- function(x, year, zone, path, ...){
              "maillage1", "maillage2", "maillage3", "maillageC1", "maillageC2",
              "maillageC3")
    
+   vars <- vars[vars %in% names(x)]
+   
    # Remove "*" characters and convert to numeric:
    for (i in 1:length(vars)){
       x[, vars[i]] <- gsub("*", " ", x[, vars[i]], fixed = TRUE)
@@ -392,16 +313,16 @@ read.ascii.scobs <- function(x, year, zone, path, ...){
    # Fix for coordinate offset problem in earlier years:
    x$latitude <- gsub(" ", "", paste0(x$blank10, x$latitude))
    x$longitude <- gsub(" ", "", paste0(x$blank11, x$longitude))
+   x$latitude[which(gsub("9", "", x$latitude) == "")] <- ""
+   x$longitude[which(gsub("9", "", x$longitude) == "")] <- ""
    
    # Remove blank columns:
-   x <- x[, setdiff(names(x), names(x)[grep("blank", variables)])]
+   x <- x[, setdiff(names(x), names(x)[grep("blank", names(x))])]
    
    # Convert coordinates:
-   x$latitude <- as.numeric(x$latitude)
-   x$latitude[x$latitude == 9999] <- NA
+   x$latitude  <- as.numeric(x$latitude)
    x$longitude <- as.numeric(x$longitude)
-   x$longitude[x$longitude == 9999] <- NA
-   
+
    # Clean-up 'zone' variable:
    x$zone <- gsub(" ", "", x$zone)
    x$zone[x$zone %in% c("2F", "12F")] <- "F"
@@ -419,12 +340,26 @@ read.ascii.scobs <- function(x, year, zone, path, ...){
    
    # Remove blank records:
    ix <- is.na(x$sex) & is.na(x$carapace.width) & is.na(x$abdomen.width) &
-      is.na(x$chela.height.right) & is.na(x$chela.height.left) & is.na(x$shell.condition)
+         is.na(x$chela.height.right) & is.na(x$chela.height.left) & is.na(x$shell.condition)
    x <- x[!ix, ]
+   
+   # Remove empty columns:
+   x$fishing.grid <- gsub(" ", "", x$fishing.grid)
+   ix <- which(unlist(lapply(x, function(x) return(all(is.na(x) | all(x == "") | all(x == "*"))))))
+   x <- x[, -ix]
+   
+   # Add trap number if it was removed:
+   if (!("trap.number" %in% names(x))) x$trap.number <- 1
    
    # Add species code:
    x$species <- 2526   
    
+   # Remove duplicate records:
+   ix <- !duplicated(x[c("trip.number", "crab.number", "trap.number", "carapace.width")])
+   if (sum(!ix) > 0){
+      cat(paste0("Removed ", sum(!ix) ," duplicate records from ", length(unique(x$trip.number[!ix])), " trip(s).\n"))
+      x <- x[ix, ]
+   }
+
    return(x)
 }
-

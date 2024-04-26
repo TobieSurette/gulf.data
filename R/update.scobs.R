@@ -13,7 +13,7 @@
 #' 
 
 #' @export update.scobs
-update.scobs <- function(year, zone, path = options("gulf.path")[[1]]$snow.crab$observer, type = c("sea", "port"), Rfile = TRUE, csv = TRUE, ...){
+update.scobs <- function(year, zone, path = options("gulf.path")[[1]]$snow.crab$observer, type = c("sea", "port"), source = "oracle", Rfile = TRUE, csv = TRUE, ...){
    # Check input argument:
    if (!is.numeric(year) | (length(year) == 0)) stop("'year' must be a numeric vector.")
    if (any((year %% 1) != 0 )) stop("'year' must be an integer.")
@@ -29,7 +29,7 @@ update.scobs <- function(year, zone, path = options("gulf.path")[[1]]$snow.crab$
       for (j in 1:length(zone)){
          for (k in 1:length(type)){
             # Upload data:
-            x <- read.scobs(year = year[i], zone = zone[j], type = type[k], source = "oracle", ...)
+            x <- read.scobs(year = year[i], zone = zone[j], type = type[k], source = source, ...)
             
             # Create target directory:
             if (!file.exists(paste0(path, year[i])))         dir.create(paste0(path, year[i]))
