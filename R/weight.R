@@ -1,4 +1,4 @@
-#' Individual or Catch Weight
+#' @title Individual or Catch Weight
 #' 
 #' @description Returns an estimate of the weight of individual organisms for a specified length. 
 #'              Estimated weights of sample subsets can also be calculated.
@@ -28,8 +28,6 @@
 #'              
 #' @param year Survey years to use as data when calculating the length-weight coefficients. 
 #'             If left unspecified, a table of default values are used.
-#'             
-#' @param ... Futher arguments.
 #' 
 #' @param category A character string specifying a snow crab or crustacean category for syntax.
 #' 
@@ -38,6 +36,10 @@
 #' @param probability Logical value specifying whether maturity values are to be filled in with 
 #'                    probabilities when morphometric values are unavailable. In this case, the 
 #'                    numbers returned may be non-integer values.
+#' 
+#' @param as.hard.shelled Logical value specifying whether crustaceans are to assumed to be hard-shelled. Deafault is \code{FALSE}.
+#' 
+#' @param ... Further arguments.
 #' 
 #' @return Returns a numerical vector the same size as \code{length} containing the expected weight 
 #'         of an organism for a given length measurement.
@@ -210,7 +212,7 @@ weight.default <- function(x, species, sex, coefficients, units = "kg",  ...){
 
 #' @describeIn weight Weight function for \code{scsbio} objects.
 #' @export
-weight.scsbio <- function(x, category, by, as.hard.shelled, units = "g", ...){
+weight.scsbio <- function(x, category, by, as.hard.shelled = FALSE, units = "g", ...){
    # Parse input arguments:
    units <- match.arg(tolower(units), c("g", "kg", "grams", "kilograms", "tons", "tonnes", "mt", "t"))
    if (units %in% c("tons", "tonnes", "mt")) units <- "t"

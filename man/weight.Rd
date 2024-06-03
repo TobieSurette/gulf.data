@@ -11,7 +11,7 @@ weight(x, ...)
 
 \method{weight}{default}(x, species, sex, coefficients, units = "kg", ...)
 
-\method{weight}{scsbio}(x, category, by, as.hard.shelled, units = "g", ...)
+\method{weight}{scsbio}(x, category, by, as.hard.shelled = FALSE, units = "g", ...)
 
 \method{weight}{scobs}(x, ...)
 }
@@ -21,7 +21,7 @@ data frame of length-frequencies as produced by \code{\link{freq}}. The presence
 of \sQuote{species}, \sQuote{sex} or \sQuote{year} fields in the data frame will 
 be passed onto the corresponding function arguments.}
 
-\item{...}{Futher arguments.}
+\item{...}{Further arguments.}
 
 \item{species}{Species code.}
 
@@ -37,6 +37,8 @@ to be on the log-10 scale and the units in grams.}
 \item{category}{A character string specifying a snow crab or crustacean category for syntax.}
 
 \item{by}{Character string(s) specifying the fields by which to group the estimated weights.}
+
+\item{as.hard.shelled}{Logical value specifying whether crustaceans are to assumed to be hard-shelled. Deafault is \code{FALSE}.}
 
 \item{year}{Survey years to use as data when calculating the length-weight coefficients. 
 If left unspecified, a table of default values are used.}

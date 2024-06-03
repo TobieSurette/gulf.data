@@ -1,6 +1,9 @@
 #' @title Depth
 #' 
 #' @description Return or calculate depth
+#' 
+#' @param x Data object.
+#' @param method Character string specifying which method to be used when determining water depth. 
 
 #' @export
 depth <- function(x, ...) UseMethod("depth")
@@ -45,7 +48,7 @@ depth.esonar <- function(x, ...){
 }
 
 #' @rawNamespace S3method(depth,star.oddi)
-depth.star.oddi <- function(x, method = "esonar"){
+depth.star.oddi <- function(x, method = "esonar", ...){
    tow.id <- tow.id(x)
    year <- unique(year(x))
    s <- read.scsset(tow.id = tow.id, year = year)

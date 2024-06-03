@@ -1,4 +1,5 @@
 #' @title Load Fishery Logbook Data
+#' 
 #' @rdname read.logbook
 #' 
 #' @description Function to load logbook and slip landings data from the southern Gulf of Saint Lawrence fisheries.
@@ -59,11 +60,14 @@ read.ziff <- function(x, file, echo = TRUE, ...){
 
 #' @rdname read.logbook
 #' @export read.sc.logbook
-read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow.crab$logbook, ...){
+read.sc.logbook <- function(x, year, file, ...){
    if (!missing(x)){
       if (is.numeric(x) & missing(file))   year <- x
       if (is.character(x) & missing(file)) file <- x
    }
+   
+   # Define data path for 'csv' files:
+   path <- options("gulf.path")[[1]]$snow.crab$logbook
    if (!missing(year) & missing(file)) file <- paste0(path, "logbook ", year, ".csv")
 
    # Load file and format variable names:
@@ -91,6 +95,7 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
    fields[fields == "slip"] <- "slip.number"
    fields[fields == "no.de.formulaire"] <- "slip.number"
    fields <- gsub("^cfv$", "cfvn", fields) 
+   fields <- gsub("^vrn$", "cfvn", fields) 
    if (!("zone" %in% fields) & ("zone.corrected" %in% fields)) fields <- gsub("zone.corrected", "zone", fields)
    fields <- gsub("list[.]sub[.]fleet", "fleet", fields)
    fields <- gsub("list[.]quota", "allocation.code", fields) 
@@ -114,15 +119,37 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
    fields <- gsub("dale.landed", "date.landed", fields)
    fields <- gsub("area", "zone", fields)
    fields <- gsub("long.dec", "longitude", fields)
-   fields <- gsub("t.i", "ti", fields)
+   fields <- gsub("t[.]i", "ti", fields)
+   fields <- gsub("[.][(]h[])]", "", fields)
+   fields <- gsub("[.]/[.]", ".", fields)
+   fields <- gsub("-[.]", ".", fields) 
+   fields <- gsub("^landed.day", "slip.prop.day", fields) 
+   
+   fields <- gsub("^estimate.kg", "estimate.trip.kg", fields) 
+   fields <- gsub("^est.trip.kg", "estimate.trip.kg", fields) 
+   fields <- gsub("^est.trip$", "estimate.trip.kg", fields) 
+   fields <- gsub("^qty.est.trip$", "estimate.trip.kg", fields)
+   fields <- gsub("^amt.landed", "landed.trip.kg", fields)
+   fields <- gsub("^landed.trip$", "landed.trip.kg", fields)
+   fields <- gsub("^slip.qty.trip$", "landed.trip.kg", fields)                  
+   fields <- gsub("^slip.qty.trip.kg$", "landed.trip.kg", fields)
+   
    names(x) <- fields
    
+   if (length(which(is.na(names(x)))) > 0) x <- x[, -which(is.na(names(x)))]
+         
    # Convert numeric variables:
+   if (!"latitude" %in% names(x))  names(x) <- gsub("declat", "latitude", names(x))
+   if (!"longitude" %in% names(x)) names(x) <- gsub("declon", "longitude", names(x))
    vars <- c("longitude", "latitude")
    for (i in 1:length(vars)) x[, vars[i]] <- as.numeric(x[, vars[i]])
 
    # Fix fishing zone:
    x$zone[x$zone == "12.00"] <- "12"
+   x$zone <- gsub("*", "", x$zone, fixed = TRUE) 
+   x$zone <- toupper(x$zone)
+   x$zone[x$zone == "E"] <- "12E"
+   x$zone[x$zone == "F"] <- "12F"
    
    # Coordinate range checks:
    x$longitude <- -abs(x$longitude)
@@ -134,6 +161,10 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
    ix <- (x$depth < 40) | (x$depth > 200)
    x$longitude[ix] <- NA
    x$latitude[ix] <- NA
+   
+   # Trip landings variables:
+   x$estimate.trip.kg <- as.numeric(x$estimate.trip.kg)
+   x$landed.trip.kg   <- as.numeric(x$landed.trip.kg) 
    
    # Effort corrections:
    x$trap.day <- as.numeric(gsub(",", "", x$trap.day))
@@ -209,6 +240,7 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
    x$latitude[which(x$latitude < 45 | x$latitude > 49.5)] <- NA
 
    # Fix slip mumber:
+   if ((year == 2001) & ("index" %in% names(x))) x$slip.number <- x$index
    x$slip.number <- gsub(" ", "", x$slip.number)
    
    # Define date formatting function:
@@ -258,9 +290,11 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
    x$province[grep("que", tolower(x$province))] <- "QC"
    
    # Soak time:
-   x$ti <- gsub("n/a", "", x$ti)
-   if ("ti" %in% names(x)) x$t1 <- x$ti
-   
+   if ("ti" %in% names(x)){
+      x$ti <- gsub("n/a", "", x$ti)
+      if ("ti" %in% names(x)) x$t1 <- x$ti
+   }
+
    if (is.character(x$t1)){
       x$t1[x$t1 == "4,080"] <- 48
       x$t1 <- round(as.numeric(x$t1))
@@ -280,6 +314,10 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
       x$date.caught <- gsub("/99$", "/1999", x$date.caught)
       x$date.sailed <- gsub("/99$", "/1999", x$date.sailed)
    }
+   x$date.sailed <- gsub("n/a", "", x$date.sailed)
+   x$date.landed <- gsub("#VALUE!", "", x$date.landed)
+   x$date.caught <- gsub("#VALUE!", "", x$date.caught)
+   x$date.sailed <- gsub("#VALUE!", "", x$date.sailed)
    if (!is.null(x$date.landed)) x$date.landed <- format.date(x$date.landed)
    if (!is.null(x$date.caught)) x$date.caught <- format.date(x$date.caught)
    if (!is.null(x$date.sailed)) x$date.sailed <- format.date(x$date.sailed)
@@ -293,6 +331,9 @@ read.sc.logbook <- function(x, year, file, path = options("gulf.path")[[1]]$snow
       x$licence.holder <- gsub("GASP\\?SIE", "GASPESIE", x$licence.holder)
    }
 
+   # Clean-up allocation code:
+   if (year < 2011) if (!("allocation.code" %in% names(x))) x$allocation.code <- x$status.number
+      
    # Clean-up vessel name:
    x$vessel <- gsub(" +", " ", x$vessel)
    x$vessel <- deblank(x$vessel)

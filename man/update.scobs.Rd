@@ -9,6 +9,7 @@
   zone,
   path = options("gulf.path")[[1]]$snow.crab$observer,
   type = c("sea", "port"),
+  source = "oracle",
   Rfile = TRUE,
   csv = TRUE,
   ...

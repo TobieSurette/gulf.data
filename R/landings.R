@@ -8,54 +8,34 @@
 #' 
 
 #' @export 
-landings <- function(year, by, date.start, date.end){
+landings <- function(year, by){
+   # Load official landings table:
+   res <- read.csv(file = locate(package = "gulf.data", keywords = c("fishery", "statistics")))
+   if (!missing(year)) res <- res[res$year %in% sort(unique(year)), ]
    
-   # Check input arguments:
-   if (missing(year)) stop("'year' must be specified.")
-   
-   # Read data:
-   x <- gulf.data::read.sc.logbook(year)
-
-   # Parse 'by' argument:
-   if (missing(by)) by <- NULL
-   vars <- c(by)
-   var <- vars[vars %in% names(x)]
-   
-   if (length(vars) == 0){
-      res <- sum(x$slip.prop.day)
+   if (missing(by)){
+      res <- aggregate(res["landings"], by = res["year"], sum)      
+      return(res)
    }else{
-      if (!missing(date.start) | !missing(date.end)) vars <- unique(c(vars, "date.landed"))
-      vars <- vars[vars %in% names(x)]
+      # Add 'year' to 'by' groupings"
+      by <- tolower(unique(c("year", by)))
+     
+      # Grouping variables are all in statistics table:
+      if (all (by %in% names(res))){
+         res <- aggregate(res["landings"], by = res[by], sum)
+         return(res)
+      }
+         
+      # Read logbook data:
+      x <- gulf.data::read.logbook(year)
+         
+      # Extract fishing year:
+      x$year <- year(x$date.caught)
+      
+      res <- aggregate(list(landings = x$slip.prop.day), by = x[by], sum, na.rm = TRUE)
 
-      res <- aggregate(list(landings = x[, "slip.prop.day"]), by = x[vars], sum, na.rm = TRUE)
-      res$effort <- aggregate(list(effort = x[, "trap.day"]), by = x[vars], sum, na.rm = TRUE)$effort
-      res$cpue <- res$landings / res$effort
+      return(res)   
    } 
-   
-   # Calculate grid statistics:
-   
-
-   
-   # Aggregate by start and end dates:
-   if (!missing(date.start)){
-      date.start <- as.POSIXct(date.start)
-      if (length(date.start) == 1){
-         res <- res[which(as.POSIXct(res$date.landed) >= date.start), ]
-      }else{
-         stop("'date.start' must be a single value.")  
-      }
-   }
-   if (!missing(date.end)){
-      date.end <- as.POSIXct(date.end)
-      if (length(date.end) == 1){
-         res <- res[which(as.POSIXct(res$date.landed) <= date.end), ]
-      }else{
-         stop("'date.end' must be a single value.")  
-      }
-   }
-   
-   
-   return(res)   
 }
 
 

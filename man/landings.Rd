@@ -4,7 +4,7 @@
 \alias{landings}
 \title{Fishery Landings}
 \usage{
-landings(year, by, date.start, date.end)
+landings(year, by)
 }
 \arguments{
 \item{year}{Fishery year.}

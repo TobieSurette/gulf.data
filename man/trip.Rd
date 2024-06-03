@@ -3,11 +3,19 @@
 \name{trip}
 \alias{trip}
 \alias{trip.scsset}
+\alias{trip.scobs}
+\alias{trip.logbook}
 \title{Trip Identifiers}
 \usage{
 trip(x)
 
 \method{trip}{scsset}(x)
+
+\method{trip}{scsset}(x)
+
+\method{trip}{scobs}(x)
+
+\method{trip}{logbook}(x)
 }
 \arguments{
 \item{x}{Object containing trip information.}

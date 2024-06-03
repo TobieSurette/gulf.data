@@ -11,13 +11,7 @@ read.logbook(x, species = "snow crab", source = "r", ...)
 
 read.ziff(x, file, echo = TRUE, ...)
 
-read.sc.logbook(
-  x,
-  year,
-  file,
-  path = options("gulf.path")[[1]]$snow.crab$logbook,
-  ...
-)
+read.sc.logbook(x, year, file, ...)
 
 read.ziff.ascii(x, convert = TRUE, as.character = FALSE, ...)
 }

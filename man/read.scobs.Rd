@@ -4,20 +4,20 @@
 \alias{read.scobs}
 \title{Read Observer Data}
 \usage{
-read.scobs(x, year, type = "sea", source = "R", ...)
+read.scobs(source = "R", ...)
 }
 \arguments{
-\item{year}{Year.}
-
-\item{type}{Sampling type ('sea' or 'port').}
-
 \item{source}{Data source ('r', 'ascii', 'csv', or 'oracle').}
+
+\item{year}{Year.}
 
 \item{file}{File name(s).}
 
 \item{path}{Data file path.}
 
 \item{cfvn}{Canadian Fishing Vessel Number(s).}
+
+\item{type}{Sampling type ('sea' or 'port').}
 
 \item{trip.number}{Trip number identifier.}
 

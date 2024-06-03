@@ -6,6 +6,11 @@
 \usage{
 depth(x, ...)
 }
+\arguments{
+\item{x}{Data object.}
+
+\item{method}{Character string specifying which method to be used when determining water depth.}
+}
 \description{
 Return or calculate depth
 }
