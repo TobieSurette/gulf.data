@@ -22,11 +22,11 @@ read.ctd <- function(year, survey = c("rvs", "scs", "nss"), table = "ctd", dsn =
    # Start timer:
    start_time <- Sys.time()
    
-   # Check that passwoird is specified:
+   # Check that password is specified:
+   if (missing(password)) stop("'password' must be specified.")
    
    # Parse 'year' argument:
    if (missing(year)) stop("'year' must be specified.")
-   if ((length(year) != 1) | !is.numeric(year)) stop("A single 'year' value must be specified.")
    
    # Parse 'table' argument:
    table <- match.arg(tolower(table), c("ctd", "bottle", "bouteille", "metadata"))
@@ -106,9 +106,9 @@ read.ctd <- function(year, survey = c("rvs", "scs", "nss"), table = "ctd", dsn =
    
    # Return the whole list if year is unspecified:
    missions <- NULL
-   if ("rvs" %in% survey) missions <- c(missions, unlist(rvs.missions[year == names(rvs.missions)]))
-   if ("scs" %in% survey) missions <- c(missions, unlist(scs.missions[year == names(scs.missions)]))
-   if ("nss" %in% survey) missions <- c(missions, unlist(nss.missions[year == names(nss.missions)]))
+   if ("rvs" %in% survey) missions <- c(missions, unlist(rvs.missions[names(rvs.missions) %in% year]))
+   if ("scs" %in% survey) missions <- c(missions, unlist(scs.missions[names(scs.missions) %in% year]))
+   if ("nss" %in% survey) missions <- c(missions, unlist(nss.missions[names(nss.missions) %in% year]))
    names(missions) <- NULL
    missions <- unique(missions)
    
