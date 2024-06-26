@@ -77,7 +77,12 @@ missing.legs <- function(x, ...) UseMethod("missing.legs")
 
 #' @rdname missing.legs
 #' @export
+missing.legs.data.frame <- function(x) if ("missing.legs" %in% x$missing.legs) return(x$missing.legs)
+   
+#' @rdname missing.legs
+#' @export
 missing.legs.default <- function(x){
+   if ("missing.legs" %in% x$missing.legs) return(x$missing.legs)
    if (missing(x)){ 
       v <- missing.legs.numeric()
       names(v) <- 1:length(v)

@@ -13,7 +13,7 @@
 #'                  and the Northumberland Strait survey (\code{nss}). The default returns data from all available surveys.
 #' @param table     Name of data table (\code{ctd}, \code{bottle} or \code{metadata}).
 #' @param dsn       Oracle data source name (= \code{SGDOP}). 
-#' @param username  Oracle user name. 
+#' @param username  Oracle user name (= \code{SGDO_lecture}). 
 #' @param password  Oracle password. 
 #' @param echo      Logical value specifying whether to return messages during data retrieval.
 
@@ -126,7 +126,7 @@ read.ctd <- function(year, survey = c("rvs", "scs", "nss"), table = "ctd", dsn =
 
    # Perform query:
    res <- read.oracle(query, dsn = dsn, uid = username, password = password, believeNRows = FALSE)  
-   if (echo) cat(paste0(nrow(res), " records were returned.\n"))
+   if (echo) cat(paste0(nrow(res), " records were read.\n"))
    
    # Rename and reformat variables:
    names(res) <- tolower(names(res))
