@@ -2,6 +2,7 @@
 % Please edit documentation in R/missing.legs.R
 \name{missing.legs}
 \alias{missing.legs}
+\alias{missing.legs.data.frame}
 \alias{missing.legs.default}
 \alias{missing.legs.numeric}
 \alias{missing.legs.character}
@@ -12,6 +13,8 @@
 \title{Missing Legs}
 \usage{
 missing.legs(x, ...)
+
+\method{missing.legs}{data.frame}(x)
 
 \method{missing.legs}{default}(x)
 
