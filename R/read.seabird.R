@@ -77,7 +77,9 @@ read.seabird.default <- function(x, file, offset = 0, repeats = FALSE, verbose =
    x <- readLines(file)
    x <- x[(max(grep("[%]", x)) + 1):length(x)]
    fields <- tolower(unlist(strsplit(x[1], ",")))
+   fields <- gsub('"', "", fields)
    x <- x[-1]
+   x <- gsub('"', "", x)
    
    # Parse data:
    x <- strsplit(x, ",")
