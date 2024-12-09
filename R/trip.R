@@ -71,7 +71,7 @@ trip.logbook <- function(x){
    v <- rep("", nrow(x))
    
    # Define logbook date field as landed date:
-   x$date <- date(x$date.landed)
+   x$date <- gulf.utils::date(x$date.landed)
    
    # Load observer data for corresponding year:
    year <- as.numeric(unique(substr(x$date, 1, 4)))
@@ -86,7 +86,7 @@ trip.logbook <- function(x){
    for (i in 1:nrow(trips)){
       ix <- which(x$cfvn == trips$cfvn[i])
       if (length(ix) > 0){
-         dates <- sort(unique(date(x$date[ix])))
+         dates <- sort(unique(gulf.utils::date(x$date[ix])))
          iy <- which(trips$date[i] <= dates)
          if (length(iy) > 0){
             iy <- min(iy)
