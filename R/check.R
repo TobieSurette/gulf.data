@@ -65,3 +65,76 @@ check.logbook <- function(x, ...){
    ix <- which(is.na(x$date.sailed) | nchar(x$date.sailed) != 10)
    if (length(ix) > 0) cat(paste0("            Records with missing date sailed : ", length(ix), " (", round(100 * sum(x$slip.prop.day[ix], na.rm = TRUE) / sum(x$slip.prop.day, na.rm = TRUE), 1), "% of landings)\n"))
 }
+
+#' @export
+check.scsbio <- function(x, ...){
+   
+   # Initialize result variable:
+   res <- rbind(res, data.frame(index = ix, msg))
+   
+   # Check that biological records have corresponding 
+   x$tow.id <- tow.id(x)
+   vars <- c("date", "tow.id")
+   years <- sort(unique(year(unique(x$date))))
+   for (i in 1:length(years)){
+      ix <- which(year(x) == years[i])
+      s <- read.scsset(years[i], valid = 1)
+      iy <- match(x[ix, vars], s[vars])
+      if (any(is.na(iy))){
+         tmp <- unique(x[ix[which(is.na(iy))], vars])
+         msg <- NULL
+         for (j in 1:nrow(tmp)){
+            msg[j] <- paste0("Biological record with date ", tmp$date[j], ", tow ID '", tmp$tow.id[j], "' has no corresponding snow crab tow.")
+            cat(paste0(msg[i], "\n"))
+         }
+      }
+   }
+   
+   # Males with female gonad colour measurements:
+   ix <- which((b$sex == 1) & !is.na(b$gonad.colour))
+   if (length(ix) > 0){
+      msg <- NULL
+      for (i in 1:length(ix)){
+         msg[i] <- paste0("Crab with ", x$date[ix[i]], ", and tow ID '", x$tow.id[ix[i]], "' is a male with gonad colour ", x$gonad.colour[ix[i]], ".")
+         cat(paste0(msg[i], "\n"))
+      }
+      res <- rbind(res, data.frame(index = ix, msg))
+   }
+   
+   # Males with female egg colour measurements:
+   ix <- which((b$sex == 1) & !is.na(b$egg.colour))
+   if (length(ix) > 0){
+      msg <- NULL
+      for (i in 1:length(ix)){
+         msg[i] <- paste0("Crab with ", x$date[ix[i]], ", and tow ID '", x$tow.id[ix[i]], "' is a male with egg colour ", x$egg.colour[ix[i]], ".")
+         cat(paste0(msg[i], "\n"))
+      }
+      res <- rbind(res, data.frame(index = ix, msg))
+   }
+   
+   # Males with female egg remaining measurements:
+   x$eggs.remaining[x$eggs.remaining == "*"] <- ""
+   x$eggs.remaining <- as.numeric(x$eggs.remaining)
+   ix <- which((x$sex == 1) & !is.na(x$egg.remaining))
+   if (length(ix) > 0){
+      msg <- NULL
+      for (i in 1:length(ix)){
+         msg[i] <- paste0("Crab with ", x$date[ix[i]], ", and tow ID '", x$tow.id[ix[i]], "' is a male with eggs remaining ", x$egg.remaining[ix[i]], ".")
+         cat(paste0(msg[i], "\n"))
+      }
+      res <- rbind(res, data.frame(index = ix, msg))
+   }
+   
+   # Females with chela height measurements:
+   ix <- which((x$sex == 2) & !is.na(x$chela.height))
+   if (length(ix) > 0){
+      msg <- NULL
+      for (i in 1:length(ix)){
+         msg[i] <- paste0("Crab with ", x$date[ix[i]], ", and tow ID '", x$tow.id[ix[i]], "' is a female with chela height ", x$chela.height[ix[i]], ".")
+         cat(paste0(msg[i], "\n"))
+      }
+      res <- rbind(res, data.frame(index = ix, msg))
+   }
+   
+   invisible(res)
+}
