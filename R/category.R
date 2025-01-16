@@ -534,13 +534,13 @@ describe.category <- function(x, language = "english", symbols = TRUE, simplify 
       # Gonad colour:
       if (!is.null(r$gonad.colour)){
          if (language == "english"){
-            if (r$gonad.colour == 1) str <- paste(str, "white gonads,")
-            if (r$gonad.colour == 2) str <- paste(str, "beige gonads,")
+            if (any(r$gonad.colour %in% c(1)))   str <- paste(str, "white gonads,")
+            if (any(r$gonad.colour %in% c(2)))   str <- paste(str, "beige gonads,")
             if (any(r$gonad.colour %in% c(3,4))) str <- paste(str, "orange gonads,")
          }
          if (language == "french"){
-            if (r$gonad.colour == 1) str <- paste(str, "gonade blanche,")
-            if (r$gonad.colour == 2) str <- paste(str, "gonade beige,")
+            if (any(r$gonad.colour %in% c(1)))   str <- paste(str, "gonade blanche,")
+            if (any(r$gonad.colour %in% c(2)))   str <- paste(str, "gonade beige,")
             if (any(r$gonad.colour %in% c(3,4))) str <- paste(str, "gonade orange,")
          }
       }
@@ -554,14 +554,18 @@ describe.category <- function(x, language = "english", symbols = TRUE, simplify 
       # Egg colour:
       if (!is.null(r$egg.colour)){
          if (language == "english"){
-            if (r$egg.colour == 1) str <- paste(str, " light orange eggs,", sep = "")
-            if (r$egg.colour == 2) str <- paste(str, " dark orange eggs,", sep = "")
-            if (r$egg.colour == 3)  str <- paste(str, " brown eggs,", sep = "")
+            if (any(r$egg.colour %in% c(1))) str <- paste(str, " light orange eggs,", sep = "")
+            if (any(r$egg.colour %in% c(2))) str <- paste(str, " dark orange eggs,", sep = "")
+            if (any(r$egg.colour %in% c(3))) str <- paste(str, " brown eggs,", sep = "")
+            if (any(r$egg.colour %in% c(4))) str <- paste(str, " cocoons,", sep = "")
+            if (any(r$egg.colour %in% c(5))) str <- paste(str, " orange eggs,", sep = "")
          }
          if (language == "french"){
-            if (r$egg.colour == 1) str <- paste(str, " oeufs orange clairs,", sep = "")
-            if (r$egg.colour == 2) str <- paste(str, " oeufs orange foncés,", sep = "")
-            if (r$egg.colour == 3)  str <- paste(str, " oeufs bruns,", sep = "")
+            if (any(r$egg.colour %in% c(1))) str <- paste(str, " oeufs oranges clairs,", sep = "")
+            if (any(r$egg.colour %in% c(2))) str <- paste(str, " oeufs oranges foncés,", sep = "")
+            if (any(r$egg.colour %in% c(3))) str <- paste(str, " oeufs bruns,", sep = "")
+            if (any(r$egg.colour %in% c(4))) str <- paste(str, " cocons,", sep = "")
+            if (any(r$egg.colour %in% c(5))) str <- paste(str, " oeufs oranges,", sep = "")
          }
       }
 
